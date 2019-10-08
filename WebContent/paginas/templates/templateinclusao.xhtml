@@ -1,0 +1,43 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<!-- CONTEUDO TESTE -->
+<div class="container" style="width: inherit">
+	<div class="row-fluid main">
+		<div class="span12 content">
+				<div class="titulo clearfix">
+						<div class="span6"><h1 class="sys-default-title"><ui:insert name="titulo" /></h1></div>
+				</div>
+				<ui:insert name="orientacoes-uso" />
+				<div id="msgObs">
+					<p:outputPanel id="msgGlobal">
+
+						<p:messages id="messages" globalOnly="true" />
+
+						<ui:insert name="msgCamposObrigatorios" />
+					</p:outputPanel>
+				</div>
+
+				<p:ajaxStatus id="commonstatus" style="position: absolute;">
+					<f:facet name="start">
+						<h:graphicImage value="/resources/img/progress.gif" />
+					</f:facet>
+					<f:facet name="complete">
+						<h:outputText value="" />
+					</f:facet>
+				</p:ajaxStatus>
+				<ui:insert name="formulario" />
+			</div>
+
+		</div>
+	</div>
+	<!-- FIM CONTEUDO -->
+
+	<h:outputScript library="js" name="mascaras.js" target="head" />
+	<h:outputScript library="ui" name="jquery.maskedinput-1.3.min.js" target="head" />
+	<h:outputScript library="ui" name="jquery.price_format.1.7.js" target="head" />
+</ui:composition>

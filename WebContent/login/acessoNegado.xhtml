@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/facelets/tags"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <ui:composition template="templateArce.xhtml">
+        <ui:define name="conteudo">
+            <center>
+                <p:panel header=" Falta de permissão " style="width: 50%;font-size: 10px;"> 
+                    <p align="justify">Caro servidor,
+                        <br />     <br />
+                        Você não possui permmissão para acesar o Sistema de Guedes.
+                        Por favor, entre em contato com o responsavél.</p>
+                    <br />
+                    <a href="javascript:history.go(-1)">Voltar</a>
+                </p:panel>
+            </center>
+        </ui:define>
+        <ui:define name="rodape">
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

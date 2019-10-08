@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Meta" pageWidth="800" pageHeight="300" whenNoDataType="AllSectionsNoDetail" columnWidth="800" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cd5fafb6-6858-4b1e-b45e-7c045e5ff138">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="competencia.metaServidor.servidor.nomeServidor" class="java.lang.String"/>
+	<field name="competencia.metaServidor.servidor.setor.nome" class="java.lang.String"/>
+	<field name="competencia.metaServidor.servidor.cargoComissionado.nome" class="java.lang.String"/>
+	<field name="competencia.metaServidor.servidor.nu_matricula" class="java.lang.String"/>
+	<field name="tipoIndicacao.descricao" class="java.lang.String"/>
+	<field name="competencia.servidorIndicadoPeloSuperior.nomeServidor" class="java.lang.String"/>
+	<pageHeader>
+		<band height="176">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="141" width="137" height="35" backcolor="#C4C4C4" uuid="b5da7c55-4900-47d7-95e4-7a977a95dee2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servidor Avaliado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="141" width="75" height="35" backcolor="#C4C4C4" uuid="86be4a55-9bf4-4c29-9c8d-1a6f736360b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="137" y="141" width="75" height="35" backcolor="#C4C4C4" uuid="04beaaf0-5e66-40cc-a191-ea81b26b8c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="212" y="141" width="80" height="35" backcolor="#C4C4C4" uuid="146e26bf-1bb5-488b-9f7a-ac0beccb2b1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="367" y="141" width="75" height="35" backcolor="#C4C4C4" uuid="29377d07-c085-4c83-9ab1-74f876f254fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Indicação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="442" y="141" width="94" height="35" backcolor="#C4C4C4" uuid="7526b2e1-db24-463a-a0d4-87f81111c41a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Superior]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="141" width="137" height="35" uuid="474bedf6-1cac-463c-bca0-ebdc0e97bf57"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="442" y="141" width="94" height="35" uuid="268b522b-4459-4125-b4fa-6142de640142"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="292" y="141" width="75" height="35" uuid="85c9a2be-d547-4989-9656-49855839632a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="212" y="141" width="80" height="35" uuid="33645009-39c4-4b95-9e82-4cde5a7a3d99"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="137" y="141" width="75" height="35" uuid="3b6418a2-c39b-4db4-87d3-5a41b35fe44c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="367" y="141" width="75" height="35" uuid="bd8cd513-eaaf-4bab-9d37-bdfc767d4e01"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<image vAlign="Top">
+				<reportElement x="0" y="0" width="122" height="58" uuid="77d2a5cb-abc7-4604-85b3-5a4497fe0b89"/>
+				<imageExpression><![CDATA["img/logo-login-arce.png"]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="123" y="2" width="614" height="20" uuid="55fe21b4-6a7b-4ae0-b1ef-77762b186983"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SAD - Sistema de Avaliação de Desempenho"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="123" y="22" width="614" height="20" uuid="8106556f-579e-4533-bddc-a77a2b038024"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório de Indicação de Pares"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="64" width="800" height="38" uuid="5f2c7495-283a-4875-90da-1dca9c8a79be"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="73" width="28" height="20" uuid="7a72afcf-5654-4e87-b418-065353df2ad9"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAD:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="737" y="42" width="63" height="20" uuid="2fc486b2-78b1-469a-925a-f287cf3efc60"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="686" y="42" width="51" height="20" uuid="573f2ed1-d471-4cff-ac14-999c8c69fef2"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Data: ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="28">
+			<frame>
+				<reportElement x="0" y="0" width="137" height="28" uuid="31db0a7c-d882-435e-9873-c84c1a742d54"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="137" height="28" uuid="965af2b1-0d6f-409e-ad5e-432c09177480"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.nomeServidor}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="137" y="0" width="75" height="28" uuid="624a3a24-9432-4201-890d-c9bfc2d9ee58"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="212" y="0" width="80" height="28" uuid="ae5fc529-aa9f-4419-a5da-fdcada02fb0f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="80" height="28" uuid="4863b4b7-0ab5-4e4e-a061-bc8ec1f624f6"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.cargoComissionado.nome}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="292" y="0" width="75" height="28" uuid="d2ba185c-dc1b-4307-bf46-1d47efbfb444"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="75" height="28" uuid="e16b232d-50c8-4319-9e33-89020a900ea5"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.nu_matricula}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="367" y="0" width="75" height="28" uuid="cb501122-f710-4d25-8611-39ef399630fb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="75" height="28" uuid="35006426-325e-4be3-84db-c6a4443e3508"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{tipoIndicacao.descricao} == null ? "-" : $F{tipoIndicacao.descricao})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="442" y="0" width="94" height="28" uuid="34d36fb7-96fc-47bc-b0ea-06931e979e9d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="94" height="28" uuid="93a7808b-7286-44ef-81e4-2e255def45c8"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{competencia.servidorIndicadoPeloSuperior.nomeServidor}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="137" y="0" width="75" height="28" uuid="956c6f81-9827-4ace-8803-abc5c22c9dc6"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.setor.nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36">
+			<textField>
+				<reportElement x="339" y="8" width="80" height="20" uuid="babdb381-648e-43ac-93bc-3ed2d3e8ea81"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+($V{PAGE_NUMBER}+1)+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="419" y="8" width="40" height="20" uuid="bcec697c-8ffa-42db-b718-cd14bbb42fd0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + ($V{PAGE_NUMBER}+1)]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

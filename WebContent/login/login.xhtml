@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xml:lang="pt-br">
+
+<head>
+<title>Agrega::Tela de login</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet"
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" />
+</head>
+
+<body style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/img/imagFundoLogin.jpg');">
+ 	<div class="barra-top access"></div>
+		<div class="container" id="slogan-login">
+			<div class="header" id="header-login">
+				<p class="logo">#{msgs['label.nome.sistema']}</p>  
+				<p>	
+					<small>#{msgs['label.versao.sistema']}</small>
+				</p>
+		</div>
+
+		<div class="login-box transition" id="content-login" role="main" style="max-width: 450px !important;">		
+			<form class="form-horizontal form-login" action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check"
+				method="post" id="frmLogin">
+				<table id="form-login" cellpadding="10" cellspacing="1" width="100%">
+				<h1>
+					<img src="#{facesContext.externalContext.requestContextPath}/resources/img/logo_topo3.png" alt="" />
+				</h1>
+				<br/>
+					<tfoot>
+						<tr>
+							<td width="10%"></td>
+							<td colspan="2">
+								<span id="acao-login">
+									<button Style="width: 100%;padding: 12px; background: darkgreen;font-size:20px; padding: 12px;" id="botaoEntrar" class="btn btn-primary" tabindex="3">Login</button>
+								
+								</span>
+							</td>
+							<td width="10%"></td>
+						</tr>
+						<tr>
+							<td width="10%"></td>
+							<td colspan="2">
+								<span id="acao-login">
+									<p class="muted text-center">
+									<!--	Sistema Integra 1.1 - build 67 - Disponibilizado no dia 27/02/2019 - © Agrega Consultores-->
+									 		Sistema Integra 1.1 - build 68 - Homologação do dia 28/02/2019 - © Agrega Consultores 
+									</p>
+								</span>
+							</td>
+							<td width="10%"></td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<tr>
+							<td width="10%"></td>
+							<td width="60%">
+								<input placeholder="USUÁRIO" type="text" tabindex="1" value="" title="Digite seu login de Rede" autofocus="autofocus"
+									id="j_username" name="j_username" class="input-block-level" />
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input placeholder="SENHA" type="password" tabindex="2" value="" title="Digite sua senha de Rede" 
+							style="padding: 12px;"
+								id="j_password" name="j_password" class="input-block-level" /></td>
+						</tr>
+					
+					</tbody>
+				</table>
+ 				<h:outputText value="Usuário ou senha incorreto(s)!" rendered="#{param.erro}" style="color: black"/>
+			</form>
+		</div>
+
+		
+		 <p class="text-info text-center"><small><em></em></small></p>
+	</div>
+
+
+
+
+
+</body>
+</html>

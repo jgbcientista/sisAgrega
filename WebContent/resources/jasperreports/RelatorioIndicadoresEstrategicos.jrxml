@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioCronogramaTarefa" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="711a084e-c682-48b5-bc4e-b549f671258c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="e066c416-bf20-4b55-ad52-254e67fbc71a"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataAtual" class="java.lang.String"/>
+	<parameter name="dataInicial" class="java.lang.String"/>
+	<parameter name="dataFinal" class="java.lang.String"/>
+	<parameter name="totalServidor" class="java.lang.Integer"/>
+	<parameter name="mediaCargaHoraria" class="java.lang.String"/>
+	<parameter name="percentualNaturezaTecnica" class="java.lang.String"/>
+	<parameter name="percentualNaturezaGestao" class="java.lang.String"/>
+	<parameter name="percentualNaturezaComportamental" class="java.lang.String"/>
+	<parameter name="percentualServidor" class="java.lang.String"/>
+	<parameter name="percMedioServidorCapacitado" class="java.lang.String"/>
+	<parameter name="totalInvMedioServidorCapacitado" class="java.lang.String"/>
+	<field name="tipoItem" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Double"/>
+	<field name="registroRelatorio.dataAtual" class="java.lang.String"/>
+	<field name="registroRelatorio.dataInicial" class="java.lang.String"/>
+	<field name="registroRelatorio.dataFinal" class="java.lang.String"/>
+	<field name="registroRelatorio.totalServidor" class="java.lang.String"/>
+	<field name="registroRelatorio.mediaCargaHoraria" class="java.lang.String"/>
+	<field name="registroRelatorio.percentualNaturezaTecnica" class="java.lang.String"/>
+	<field name="registroRelatorio.percentualNaturezaGestao" class="java.lang.String"/>
+	<field name="registroRelatorio.percentualNaturezaComportamental" class="java.lang.String"/>
+	<field name="registroRelatorio.percentualServidor" class="java.lang.String"/>
+	<field name="registroRelatorio.percMedioServidorCapacitado" class="java.lang.String"/>
+	<field name="registroRelatorio.totalInvMedioServidorCapacitado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="19" width="163" height="60" uuid="58663676-e89e-41bc-8422-4b927ba08f1c"/>
+				<imageExpression><![CDATA["img/logo-login-arce.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="179" y="19" width="329" height="20" uuid="316c3c9a-1698-40ec-960e-5fcf3b6196bc"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SisGAF – Sistema de Gerência Administrativo-Financeira]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="39" width="301" height="20" uuid="f31b47a1-867a-41b6-8751-5e0756f9ac4d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Indicadores Estratégicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="669" y="59" width="33" height="20" uuid="08af937b-3d8c-4143-b9a4-0cbef6bf4821"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="151" height="20" uuid="228393f9-45d0-4abb-8a58-2dd04015c614"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Capacitação: Acumulado ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="90" width="24" height="20" uuid="75a99a26-3dd3-4abf-b6fc-a06dcec9f869"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[até]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="701" y="59" width="100" height="20" uuid="f62399c5-e7c7-45f1-b4b0-1195cd373617"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.dataAtual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="90" width="64" height="20" uuid="cc505fbc-dac5-470b-8446-b50cb38fef03"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.dataInicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="90" width="100" height="20" uuid="e2ea74d1-818f-45b5-8dbf-dab07707203e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.dataFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="46">
+			<textField>
+				<reportElement x="363" y="0" width="73" height="20" uuid="8b2f1c00-9b3a-4c81-b20e-a7c5d4e7290f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de" +$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="367">
+			<staticText>
+				<reportElement x="542" y="3" width="259" height="20" uuid="c42132e2-3a59-4247-99a0-59dd3e5d6635"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indicadores Estratégicos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="23" width="253" height="20" uuid="0355c6e5-cc2c-42a8-8c46-21e4ef3528f7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Servidores:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="72" width="253" height="20" uuid="a7ed8619-3795-4ff5-99ef-1e3f9885828d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carga Horária Média:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="121" width="253" height="20" uuid="a550e8d6-a4bf-461d-aa6a-c648aee2a1aa"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pencentual (h/a) quanto à natureza da capacitação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="558" y="143" width="53" height="20" uuid="4de299a4-1231-4d48-9f98-b8b918204a01"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[-Técnica:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="558" y="164" width="47" height="20" uuid="e0504794-af00-4eef-9370-250d381484ed"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[-Gestão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="559" y="185" width="92" height="20" uuid="6b2b0b80-4294-4712-959c-41876d52ffb4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[-Comportamental:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="207" width="253" height="20" uuid="c7b75fcc-d163-4ae9-b586-84c373a161c5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servidores Capacitados / Total de Servidores:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="252" width="253" height="20" uuid="3d240e72-0139-4570-9847-436271f95342"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Investimento Médio por Servidor Capacitado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="548" y="299" width="253" height="20" uuid="f3f4bbe3-fa17-48c4-ae4d-ad0bf075b3b5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Investimento Total Acumulado:]]></text>
+			</staticText>
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement isPrintRepeatedValues="false" x="2" y="2" width="528" height="360" uuid="60a376c5-f111-408c-be49-001149ace2a2"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Top"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{tipoItem}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tipoItem}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{valor}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="false">
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="false"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat verticalTickLabels="false"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<textField>
+				<reportElement x="558" y="45" width="243" height="20" uuid="3520b41b-1259-4ab6-9a86-4c5160f59bcf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.totalServidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="559" y="94" width="242" height="20" uuid="23f95ba0-7749-49c5-a970-619885dca4b2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.mediaCargaHoraria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="611" y="143" width="190" height="20" uuid="ba06439a-13d3-404a-aa11-86580146f6a4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.percentualNaturezaTecnica}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="606" y="164" width="195" height="20" uuid="c074fda4-d39e-45b0-8a5d-5bc596a73c73"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.percentualNaturezaGestao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="651" y="185" width="150" height="20" uuid="a3dacfea-6af9-4e7b-96ee-06de516c65ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.percentualNaturezaComportamental}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="558" y="228" width="243" height="20" uuid="1ea920b6-41d4-4fc7-83cd-139fd99e15cb"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.percentualServidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="559" y="273" width="242" height="20" uuid="6dbf59fa-4a2f-4a54-be6e-526769c5bb12"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.percMedioServidorCapacitado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="559" y="320" width="242" height="20" uuid="af9fba81-b028-40a6-ab5e-5d1ded0b8b3f"/>
+				<textFieldExpression><![CDATA[$F{registroRelatorio.totalInvMedioServidorCapacitado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

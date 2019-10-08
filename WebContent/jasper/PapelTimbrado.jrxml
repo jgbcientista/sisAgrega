@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioPropostaFinanceira" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.5000000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="970"/>
+	<subDataset name="dataset1" uuid="7af184e8-d2c6-445b-8141-506c883c5741"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_proposta.`numeroProposta` AS numeroProposta,
+     tb_proposta.`objeto` AS objeto,
+     tb_proposta.`dataEnvioAoCliente` AS dataEnvioAoCliente,
+     tb_proposta.`dataInclusao` AS dataInclusao,
+     tb_proposta.`cliente` AS cliente,
+     tb_proposta.`dataContratacao` AS dataContratacao,
+     tb_proposta.`contato` AS contato,
+     tb_proposta.`tipoProposta` AS tipoProposta,
+     tb_proposta.`nomeProjeto` AS nomeProjeto,
+     tb_proposta.`ID_UF` AS estado,
+     tb_proposta.`ID_CIDADE` AS cidade,
+     tb_proposta.`statusContratada` AS statusContratada,
+     tb_proposta.`status` AS status,
+     tb_proposta.`valorTotalComBdiComissao` AS valorTotalComBdiComissao,
+     tb_proposta.`valorTotalCustosAdministrativos` AS valorTotalCustosAdministrativos,
+     tb_proposta.`valorTotalCustosBdiComissoes` AS valorTotalCustosBdiComissoes,
+     tb_proposta.`valorTotalCustosDesclocamento` AS valorTotalCustosDesclocamento,
+     tb_proposta.`valorTotalCustosExecucao` AS valorTotalCustosExecucao,
+     tb_proposta.`valorTotalCustosOperacionais` AS valorTotalCustosOperacionais,
+     tb_proposta.`valorTotalCustosSeguranca` AS valorTotalCustosSeguranca,
+     tb_proposta.`valorTotalDaProposta` AS valorTotalDaProposta,
+     tb_proposta.`valorTotalImpostos` AS valorTotalImpostos,
+     tb_proposta.`valorTotalPrecificacao` AS valorTotalPrecificacao,
+     tb_proposta.`valorTotalSemBdiComissao` AS valorTotalSemBdiComissao,
+     tb_proposta.`id` AS id
+FROM
+     `tb_proposta` tb_proposta
+WHERE
+     id = 1]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.textPropostaGenerica" class="java.lang.String"/>
+	<title>
+		<band height="773">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<staticText>
+				<reportElement x="1" y="47" width="553" height="20" forecolor="#009900" uuid="85085b35-7fb9-4483-8048-f92e07e13149"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Financeira]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="70" width="543" height="1" forecolor="#009900" uuid="e3b291b3-8218-445f-a952-6f317e3ac64f"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="63" width="78" height="5" forecolor="#FFFFFF" uuid="2aba6879-d204-4ed8-a2e8-e36ddc264055"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image>
+				<reportElement x="28" y="3" width="78" height="65" uuid="f6cb1e06-6928-4233-90ff-b0084c4cf8a5"/>
+				<imageExpression><![CDATA["img/cabecalho.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="97" y="2" width="11" height="63" forecolor="#FFFFFF" uuid="1c26620b-a02d-4ba6-9795-e12e3bcd6dbc"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="64" width="95" height="4" forecolor="#FFFFFF" uuid="427eebe2-235a-4dcf-af54-fa7e6063ddc8"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="8" y="82" width="530" height="675" uuid="fd6fd0ce-c7a4-4899-a779-d4de585dc694"/>
+				<textElement markup="html">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.textPropostaGenerica}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="18" width="554" height="11" forecolor="#000000" uuid="a027adf7-8c37-433e-a9e2-2ceda7498cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="29" width="554" height="11" forecolor="#3333FF" uuid="97cfce9d-a0c4-4702-ba81-be6389a8e99d"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="43" width="554" height="13" forecolor="#000000" uuid="3e4463ad-624a-4fde-88a8-4a202b0d00d0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág."+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="6" width="555" height="13" forecolor="#000000" uuid="9a3768e3-9c7e-4f93-856c-23ba2712287e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="4" width="554" height="1" forecolor="#009900" uuid="fd2f1f12-1942-4084-97ec-81615d5d302d"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

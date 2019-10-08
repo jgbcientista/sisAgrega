@@ -1,0 +1,38 @@
+<ui:composition template="/pages/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="principal">
+		<div class="container">
+
+			<div class="container">
+				<div class="row">
+					<div class="span4 offset4">
+
+						<div class="alert alert-warning text-center">
+							<p>
+								<strong>#{msgs['label.nao.implementado']}</strong>
+							</p>
+							<p>#{msgs['label.funcionalidade.nao.disponivel']}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row text-center">
+					<div class="span4 offset4">
+						<h:form>
+							<h:commandLink action="home" value="Voltar"
+								styleClass="btn btn-default" />
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>	
+			<!-- .container -->
+	</ui:define>
+</ui:composition>

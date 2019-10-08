@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GenericoP1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4bf7f14e-f9db-48f3-9dc0-7c789b6d154d">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="388"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50"/>
+	</title>
+	<detail>
+		<band height="515" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="19" width="50" height="14" uuid="9e8d88c2-7af8-4ca3-9e80-0312a4b9b676"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="20" width="26" height="13" uuid="ba45fd6f-e577-4a19-afa8-fa9e02945736"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="109" width="45" height="15" uuid="fc230a87-c10c-4762-990d-8a01123b3841"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Atenção:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="173" width="26" height="15" uuid="b8db1ed9-28b1-49ad-8689-6fc916f2f1de"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ref.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="220" width="163" height="14" uuid="bf16c915-6d1e-4aa8-97fb-e93dd7609753"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Técnica Comercial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="290" width="553" height="14" uuid="26d4faa6-4d75-4209-8b6f-6b83b87bf630"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Colocamo-nos a sua disposição para eventuais esclarecimentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="385" width="111" height="14" uuid="f5d232b3-9803-4115-9642-389a19f3f143"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Cordialmente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="420" width="187" height="13" uuid="79209ff9-ccd9-46c9-a175-b9a0200a24e4"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia da Silva Guimarães]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="434" width="187" height="14" uuid="2d1a0680-e789-4e32-94e6-62a587a7c448"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diretora Técnica Executiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="497" width="45" height="14" uuid="3cb68fb3-5ef7-4313-ab9e-06ccab2277ea"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anexos:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

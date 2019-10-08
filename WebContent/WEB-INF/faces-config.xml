@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	<!-- Configurando navegação das telas -->
+
+	<!-- Login -->
+	<navigation-rule>
+		<from-view-id>/paginas/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>pag_principal</from-outcome>
+			<to-view-id>/paginas/home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- ### Inicio das telas de controle de acesso ###-->
+	<!-- Cadastro usuario -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>controle_acesso_usuario</from-outcome>
+			<to-view-id>/paginas/controle_acesso/controle_acesso_usuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- Cadastro perfil -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>controle_acesso_perfil</from-outcome>
+			<to-view-id>/paginas/controle_acesso/controle_acesso_perfil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- Cadastro associacao -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>controle_acesso_associacao</from-outcome>
+			<to-view-id>/paginas/controle_acesso/controle_acesso_associacao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_usuario</from-outcome>
+			<to-view-id>/paginas/controle_acesso/usuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar usuario -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_usuario</from-outcome>
+			<to-view-id>/paginas/controle_acesso/usuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar usuario -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_usuario</from-outcome>
+			<to-view-id>/paginas/controle_acesso/ConsultarUsuario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- Editar perfil -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_perfil</from-outcome>
+			<to-view-id>/paginas/controle_acesso/perfil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>associar_usuario_perfil</from-outcome>
+			<to-view-id>/paginas/controle_acesso/consultarAssociarUsuarioXPerfil.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- ### Fim das telas de usuario ### -->
+	
+	
+	
+	<!-- ### Inicio das telas de Servico ###-->
+	<!-- Cadastro servico -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>negocio</from-outcome>
+			<to-view-id>/paginas/servico/manter_servico.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_servico</from-outcome>
+			<to-view-id>/paginas/servico/Servico.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar servico -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_servico</from-outcome>
+			<to-view-id>/paginas/servico/Servico.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar servico -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_servico</from-outcome>
+			<to-view-id>/paginas/servico/ConsultarServico.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- ### Fim das telas de servico ### -->
+	
+	 
+	<!-- ### Inicio das telas de recurso ###-->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>recurso</from-outcome>
+			<to-view-id>/paginas/recurso/manter_recurso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Cadastro recurso -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_recurso</from-outcome>
+			<to-view-id>/paginas/recurso/Recurso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar recurso -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_recurso</from-outcome>
+			<to-view-id>/paginas/recurso/Recurso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar recurso -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_recurso</from-outcome>
+			<to-view-id>/paginas/recurso/ConsultarRecurso.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- ### Fim das telas de recurso ### -->
+	
+
+	<!-- ### Inicio das telas de profissional ###-->
+	<!-- Cadastro Profissional -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>profissional</from-outcome>
+			<to-view-id>/paginas/profissional/manter_profissional.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_profissional</from-outcome>
+			<to-view-id>/paginas/profissional/Profissional.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar Profissional -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_profissional</from-outcome>
+			<to-view-id>/paginas/profissional/Profissional.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar Profissional -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_profissional</from-outcome>
+			<to-view-id>/paginas/profissional/ConsultarProfissional.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- ### Fim das telas de profissional ### -->
+
+	<!-- Retorno para tela Home -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/paginas/home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- ### Fim Retorno para tela Home ### -->
+
+	<!-- ### Inicio das telas de cliente ### -->
+	<!-- Cadastro Cliente -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cliente</from-outcome>
+			<to-view-id>/paginas/cliente/manter_cliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_cliente</from-outcome>
+			<to-view-id>/paginas/cliente/Cliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar Cliente -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_cliente</from-outcome>
+			<to-view-id>/paginas/cliente/Cliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar Cliente -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_cliente</from-outcome>
+			<to-view-id>/paginas/cliente/ConsultarCliente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- ### Fim das telas de cliente ### -->
+	
+		<!-- Inicio das telas de fornecedor -->
+	<!-- Cadastro fornecedor -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>fornecedor</from-outcome>
+			<to-view-id>/paginas/fornecedor/manter_fornecedor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_fornecedor</from-outcome>
+			<to-view-id>/paginas/fornecedor/Fornecedor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar Fornecedor -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_fornecedor</from-outcome>
+			<to-view-id>/paginas/fornecedor/Fornecedor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar Fornecedor -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_fornecedor</from-outcome>
+			<to-view-id>/paginas/fornecedor/ConsultarFornecedor.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- Fim das telas de fornecedor -->
+	
+	<!-- ### Inicio das telas de proposta ### -->
+	<!-- Cadastro Proposta -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>proposta</from-outcome>
+			<to-view-id>/paginas/proposta/manter_proposta.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_proposta</from-outcome>
+			<to-view-id>/paginas/proposta/Proposta.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_precificacao</from-outcome>
+			<to-view-id>/paginas/proposta/Precificacao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar Proposta -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_proposta</from-outcome>
+			<to-view-id>/paginas/proposta/Proposta.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar Proposta -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_proposta</from-outcome>
+			<to-view-id>/paginas/proposta/ConsultarProposta.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Em contrução -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>construcao</from-outcome>
+			<to-view-id>/paginas/construcao/Construcao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- Em manutenção -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>manutencao</from-outcome>
+			<to-view-id>/paginas/construcao/Manutencao.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Histórico Proposta -->
+
+	<!-- ### Fim das telas de proposta ### -->
+	
+	<!-- Inicio das telas de contrato -->
+	
+	<!-- Cadastro Contrato -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>contrato</from-outcome>
+			<to-view-id>/paginas/contrato/manter_contrato.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Editar Contrato -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>editar_contrato</from-outcome>
+			<to-view-id>/paginas/contrato/Contrato.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Consultar Contrato -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_contrato</from-outcome>
+			<to-view-id>/paginas/contrato/ConsultarContrato.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+		<!-- Ordem de Servico -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_projeto</from-outcome>
+			<to-view-id>/paginas/projeto/manter_projeto.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		
+	 	<!-- Cadastro Projeto -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cadastro_projeto</from-outcome>
+			<to-view-id>/paginas/projeto/projeto.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	 	<!-- Relatorios de Projetos -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>relatorio_projeto</from-outcome>
+			<to-view-id>/paginas/projeto/relatorio/manter_relatorio.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	
+	
+			<!-- Plano -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_plano</from-outcome>
+			<to-view-id>/paginas/plano/manter_plano.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		
+			<!-- Financeiro e contabilidade -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>consultar_financeiro</from-outcome>
+			<to-view-id>/paginas/financeiro_contabilidade/manter_financeiro.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>graficoProposta</from-outcome>
+			<to-view-id>paginas/proposta/grafico/manterGraficoProposta.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>relatorioProposta</from-outcome>
+			<to-view-id>paginas/proposta/relatorio/manteRelatorioPropostas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- ### Fim das telas de contrato ### -->
+	
+	
+	<!-- ### Inicio das telas de mensagem ###-->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>mensagem_usuario</from-outcome>
+			<to-view-id>/paginas/mensagem/manter_mensagem.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>celetistaMensalista</from-outcome>
+			<to-view-id>/paginas/parametrizacao/manter_CeletistaMensalista.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+
+	<!-- Configurando leitura do arquivo properties -->
+	<application>
+		<resource-bundle>
+			<base-name>mensagens</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+
+	<factory>
+		<exception-handler-factory>br.com.sysagrega.util.jsf.JsfExceptionHandlerFactory</exception-handler-factory>
+	</factory>
+</faces-config>

@@ -1,0 +1,135 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+   	  <p:fieldset legend="Anexo de Documentos" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova" >
+		<div class="borda-retirar borda-retira-tabela-anexos" style="border: 0px solid #a8a8a8; width: 100%; margin-bottom:-25px;">
+			<p:growl id="messages" showDetail="true" sticky="false" life="7000" autoUpdate="true" />  
+			<p:panelGrid id="pAnexo" style="width:100%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:10%;">
+						<p:fileUpload styleClass="class-upload" process="@form"
+							auto="true" 
+							label="Anexar" 
+							fileLimit="5"
+							disabled="#{projetoBean.visualizarProjeto}"
+							fileUploadListener="#{projetoBean.arquivoUpload2}" 
+							mode="advanced" 
+							dragDropSupport="false"
+							multiple="true"
+							update="@this, tabelaListaAnexoSelecionado">
+						</p:fileUpload>
+					</p:column>
+					<p:column></p:column>
+				</p:row>
+			</p:panelGrid>
+		</div>
+		<p:dataTable 
+			id="tabelaListaAnexoSelecionado" 
+			lazy="true"
+			var="resulteAnexo" 
+			widgetVar="tabelaListaAnexoSelecionado"
+			styleClass="header-tabelas"
+			value="#{projetoBean.listAnexos}"
+			emptyMessage="Nenhum arquivo anexado"
+			rows="5" 
+			style="width:100%" rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true" paginatorPosition="bottom"
+			paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}" sortOrder="DESCENDING" >
+			<p:column>
+				<p:commandLink id="idAnexarAcompanhamento" 
+					immediate="true" 
+					title="Excluir arquivo"
+					disabled="#{projetoBean.visualizarProjeto}"
+					actionListener="#{projetoBean.setExcluirAnexo(resulteAnexo)}"
+					onclick="PF('dialoConfirmExclusaoAnexo').show()">
+					<i class="icon-remove position-icon"></i>
+				</p:commandLink>
+				<h:outputText value="#{resulteAnexo.descricao}"></h:outputText>
+			</p:column>
+		
+			<p:column style="width:10%;">
+				<p:commandLink title="Fazer download do arquivo"
+							id="downloadLink" 
+							immediate="true" 
+							ajax="false">
+							<i class="fa fa-download"></i>
+					<p:fileDownload value="#{projetoBean.downloadAnexo(resulteAnexo.descricao, 1)}" />
+				</p:commandLink>
+			</p:column>
+			
+			
+		</p:dataTable>
+		
+	</p:fieldset>
+<p:panelGrid styleClass="ui-noborder"  style="width:95%; margin-left: 5px;">
+	<p:row>
+		<p:column colspan="34" style="text-align: right;">
+		<hr />
+		<div>
+			<p:commandButton 
+				value="Voltar"
+				actionListener="#{projetoBean.cancelar()}" 
+				update="@form"
+				styleClass="btn btn-red"
+				icon="fa fa-reply-all">
+			</p:commandButton>
+			
+		</div>
+		</p:column>
+	</p:row>
+</p:panelGrid>
+ 
+ <!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+<p:confirmDialog id="dialoConfirmExclusaoAnexo"
+	widgetVar="dialoConfirmExclusaoAnexo" 
+	closeOnEscape="true"
+	severity="alert" 
+	header="Excluir Anexo"
+	message="Exclusão de anexo">
+	<center>
+		<p:commandButton 
+			id="btnConfirmExclusaoAnexo" 
+			update="@form"
+			process="@this, tabelaListaAnexoSelecionado"
+			value="Ok"
+			title="Salvar OK" 
+			styleClass="btn btn-red"
+			oncomplete="PF('dialoConfirmExclusaoAnexo').hide()"
+			actionListener="#{projetoBean.excluirAnexo(1)}" />
+		<p:commandButton 
+			id="btnCancelarExclusaoAnexo"
+			styleClass="btn btn-blue" 
+			value="Cancelar"
+			title="Cancelar excluir" 
+			type="button"
+			onclick="PF('dialoConfirmExclusaoAnexo').hide()" />
+</center>
+	</p:confirmDialog>
+	<style>
+.ui-growl{
+  position:fixed;
+  top:22%;
+  right:17%;
+  width:25%;
+}
+.ui-growl-message {
+    padding: 0 0 5px 0;
+    width: 90%;
+    float: right;
+   }
+   
+   .ui-button .ui-button-text {
+    display: block;
+}
+
+
+</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</ui:composition>

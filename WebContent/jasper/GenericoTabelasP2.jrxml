@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="457"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#7FFFD4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFFFEA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="8f9a432c-8ae8-4d27-974a-56784578ccdb"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.dataInclusao" class="java.util.Date"/>
+	<field name="proposta.nomeProjeto" class="java.lang.String"/>
+	<field name="proposta.cliente.nome" class="java.lang.String"/>
+	<field name="proposta.numeroProposta" class="java.lang.String"/>
+	<field name="proposta.numeroRevisao" class="java.lang.String"/>
+	<field name="proposta.respProjeto" class="java.lang.String"/>
+	<field name="proposta.dadosDestinatarioEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.dptoEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.descricaoFinanceira" class="java.lang.String"/>
+	<field name="proposta.genrObjetivo" class="java.lang.String"/>
+	<field name="proposta.genrEscopo" class="java.lang.String"/>
+	<field name="proposta.genrEntregas" class="java.lang.String"/>
+	<field name="proposta.genrPrazoExecucao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="598" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="20" width="443" height="15" uuid="37ce9d52-a970-41b2-931d-82cea66461b6"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DADOS E INFORMAÇÕES SOBRE A EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="12" y="50" width="76" height="15" backcolor="#CCFFCC" uuid="a7d759ff-d211-4d72-b0aa-c5287eb6e15d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Emissor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="88" y="50" width="78" height="15" backcolor="#CCFFCC" uuid="cbd8b274-5c5d-491b-b7b4-0f2322d24699"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo - Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="215" y="50" width="319" height="15" backcolor="#CCFFCC" uuid="eef0f1bb-cbbc-4078-9ac9-4be3b160f949"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título ou Assunto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="166" y="50" width="49" height="15" backcolor="#CCFFCC" uuid="a21692a8-6407-4ce6-ba67-b8ac26f7625c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="65" width="49" height="15" uuid="fd9ec6de-6531-45ad-a79d-b66bb5c93fe7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1965]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="65" width="76" height="15" uuid="da208307-9cd9-4a36-ab80-005d40ee2b53"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="65" width="78" height="15" uuid="5ed0132f-ac11-4e0f-ba59-db1ebae63887"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 4.771]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="65" width="319" height="15" uuid="006e6253-6b68-4f01-8d2c-d59fc984559b"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Novo Código Florestal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="80" width="76" height="15" uuid="1101a7a5-eb02-4dcb-9b43-365d82dcd2f2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="80" width="319" height="15" uuid="acb551c7-8d42-49c8-bd0e-da07fa3c6fc8"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Proteção da fauna e dá outras providências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="80" width="78" height="15" uuid="7d4bfa02-11f6-4008-a359-dc92f58a1ff5"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 5.197]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="80" width="49" height="15" uuid="7c48cc87-5497-40ed-92e8-0ac5388bf30f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1967]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="95" width="76" height="15" uuid="8995ef38-5f55-4f65-853c-4d5f6c552065"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="95" width="319" height="15" uuid="70a144bd-040d-4d30-b763-d2c9440309cb"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Proteção das florestas existentes nas nascentes de rios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="95" width="78" height="15" uuid="562d6e63-6f43-491b-932f-4569da918231"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 7.754]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="95" width="49" height="15" uuid="b3089d86-cb64-4c57-8954-37595d919e1d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1989]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="110" width="319" height="15" uuid="b6dc5ca8-0b2d-4989-bd15-76f60b5495c4"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Fundo nacional de Meio ambiente e outras providências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="110" width="49" height="15" uuid="2db3fabe-3e3a-4482-a5f4-3e2bbc5462aa"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1989]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="110" width="76" height="15" uuid="f273a8cf-48a8-46c1-9d98-06a637cc7776"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="110" width="78" height="15" uuid="dda46bc2-4605-4f00-9cd2-2e2f8611cefc"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 7.797]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="125" width="319" height="15" uuid="659a0fca-138d-4858-be08-3abb1c44453d"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei de crimes ambientais (sanções penais e administrativas)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="125" width="49" height="15" uuid="7f33538e-a14c-4fd1-9db6-8947cadc7919"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1998]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="125" width="76" height="15" uuid="a0817e58-5831-450c-9ce7-9228dfaedf08"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="125" width="78" height="15" uuid="3040e809-7a4a-4cb7-9e29-4cb4218a900a"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 9.605]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="140" width="78" height="15" uuid="820fc9b9-02b1-48ae-9564-1946db64664f"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 9.985]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="140" width="319" height="15" uuid="3aaa59d5-1164-4bfd-8523-16a30693d7c8"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sistema nacional de unidade de conservação da natureza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="140" width="76" height="15" uuid="f3af719b-b830-4067-b5e8-00244dee223b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="140" width="49" height="15" uuid="e4fcf8a2-06ee-4265-8dae-43f523ff5df9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="155" width="78" height="15" uuid="37f0897b-63a6-4bb5-935b-4153be9a703e"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 11.284 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="155" width="319" height="15" uuid="8a770316-d08a-40a4-b300-359ca81d694a"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Gestão de florestas públicas para produção sustentável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="155" width="76" height="15" uuid="ffb783ea-d1d7-43b9-a6ee-30ea81a041ac"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="155" width="49" height="15" uuid="0c32b8ee-cf77-457d-95c6-ad946627453a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2006]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="170" width="319" height="15" uuid="6f033d86-0e2c-445c-b861-9febfd3dd12c"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Utilização e proteção da vegetação nativa bioma Mata Atlântica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="170" width="76" height="15" uuid="5b6e62c9-a36c-433f-960b-fbb01d215f35"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="170" width="78" height="15" uuid="2b7cc1bb-1436-4d58-8e6a-e8725616454c"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 11.428]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="170" width="49" height="15" uuid="25b3afbe-2fd1-4e7b-b263-a180877271a0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2006]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="185" width="49" height="25" uuid="1d3efb53-0406-4039-b9cb-df3a2875fae6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2009]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="185" width="78" height="25" uuid="2b8ba4b6-c22b-4be3-af4b-4b24efba9d44"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Lei 11.934]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="185" width="76" height="25" uuid="fc56ec05-9e9c-43c3-a46c-be9a6fc070bd"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="185" width="319" height="25" uuid="c4c4de7c-11bd-4c13-890f-27ebe9810921"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dispões sobre limites à exposição humana a campos elétricos, magnéticos e eletromagnéticos e altera a Lei 4.771/1965.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="12" y="210" width="522" height="15" backcolor="#CCFFCC" uuid="455a085d-044c-4b8b-96f7-f501d2dd7d15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DECRETO FEDERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="225" width="49" height="15" uuid="4e6414db-1fd5-4558-aca3-e105e421477e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1999]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="225" width="78" height="15" uuid="ead14e5a-7405-439a-8780-78f50427aff4"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 3.179]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="225" width="76" height="15" uuid="4db9244d-b5c6-48ee-b46c-6a3c65bcff5b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="225" width="319" height="15" uuid="697e6c15-0ede-4555-af8e-6d0b6d9f7fd8"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sanções aplicáveis às condutas e atividades lesivas ao M. Ambiente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="240" width="49" height="40" uuid="c7223eb0-ceef-4bdc-8bd5-23585300ea7a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2004]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="240" width="78" height="40" uuid="9c6204b9-18b6-4430-9449-4e0937601277"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 5.092]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="240" width="76" height="40" uuid="ac1dc431-61d7-44f2-9cb1-8995af0595b0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="240" width="319" height="40" uuid="d498e0a2-dcbf-4b59-b08c-143dcd1f4224"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Regras p/identificação áreas prioritárias para a conservação, utilização sustentável e repartição dos benefícios da biodiversidade, no âmbito das atribuições do Ministério do Meio Ambiente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="280" width="49" height="15" uuid="75bd3a8c-703d-4a67-bae0-f75468ae620e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2004]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="280" width="78" height="15" uuid="65399344-ae66-4bf0-9c89-0eb238ca3c65"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 5.163]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="280" width="76" height="15" uuid="3ea6f9b5-f6a4-4719-9683-88282187bbb7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="280" width="319" height="15" uuid="fc12f219-916c-454f-ad2f-57781dfc9460"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Regulamenta comercialização Energia Elétrica e dá outras providências]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="295" width="49" height="15" uuid="362c6692-ee94-4c35-bf6b-8242afe10785"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2005]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="295" width="78" height="15" uuid="00a51e22-62f6-4802-9fea-3c4b6b68e63d"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 5.523]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="295" width="76" height="15" uuid="ae5e9455-17db-4871-904f-0c1d516fdf6c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="295" width="319" height="15" uuid="9d1f2723-5335-4150-947d-2844f235928d"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Altera e acresce dispositivos ao Dec. 3179:1999]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="310" width="78" height="15" uuid="f0c46392-1fd6-470d-9738-fbaed4a3f611"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 5.577]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="310" width="49" height="15" uuid="c7c7a7c3-f2b6-472d-81ee-b383058ddf74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2005]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="310" width="76" height="15" uuid="2fc8a64a-0795-463c-a20d-5976714f7d26"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="310" width="319" height="15" uuid="5dd217e3-9440-4763-8e56-2a1c316912fe"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Programa Nacional conservação e uso sustentável bioma cerrado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="325" width="319" height="26" uuid="df878cc4-5ea0-4d24-818e-d522186c687f"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Regulamenta o Art. 21, da Lei 9.985/2006, que dispõe sobre vegetação nativa do Bioma Mata Atlântica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="325" width="78" height="26" uuid="f93b5ae3-3a9c-4432-9959-b8e5c27b6d02"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 5.746]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="351" width="78" height="23" uuid="9cc85fc5-d747-4eec-bbfa-a0a0ecb83bf3"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 6.514]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="351" width="49" height="23" uuid="88947295-7b08-46ef-9ffb-a61ff6786043"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2008]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="325" width="76" height="26" uuid="96f3aa41-4a7c-47ee-a693-7277fa6754cc"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="351" width="76" height="23" uuid="6abd76bb-6160-4cfc-bd61-e5d633c0d769"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="325" width="49" height="26" uuid="fd5bd76e-7f95-4195-8660-c93821ae75af"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2006]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="351" width="319" height="23" uuid="a89f026c-b147-4675-ac04-45bb2c6968c0"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Infrações e sanções administrativas ao meio ambiente e estabelece o processo administrativo federal para apuração dessas infrações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="374" width="319" height="15" uuid="ca850250-3027-4b01-83cc-769e8dd28656"/>
+				<box leftPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Utilização e proteção da vegetação nativa bioma Mata Atlântica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="374" width="78" height="15" uuid="260b326b-9485-4903-9c40-9df64e02329a"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Dec. 6.660]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="374" width="49" height="15" uuid="b239c1b7-ac0d-4f08-8633-36ace4d2c2d5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[2008]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="374" width="76" height="15" uuid="a55a37ca-455f-4da9-8fea-063b519c91fa"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[G. Federal]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="403" width="523" height="37" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="fc7c0659-fc5e-4d4d-8830-971548823e96">
+					<printWhenExpression><![CDATA[($F{titulo}.equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(1).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(2).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(3).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(4).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(5).equalsIgnoreCase("Planilha Financeira") ? true : false)]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{proposta.listarCustoPlanilhaFinanceira}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ResumoPlanilhaFinanceira.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

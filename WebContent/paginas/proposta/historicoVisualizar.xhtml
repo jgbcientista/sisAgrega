@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel id="idPanelHistorico" style=" border: none;" align="left" rendered="#{propostaBean.acaoVisualHistorico and !propostaBean.visualizarHistorico}" >
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;">
+			<p:fieldset legend="Histórico da Precificação" style=" margin-bottom:20px">
+				 	<p:panelGrid columns="2" style="width: 47%; " styleClass="ui-noborder">
+								<p:outputLabel value="Nº da Precificação:" style=" font-size:17px !important;"/>
+								<p:outputLabel style="width:261px; font-weight:bold !important; font-size: 17px !important;"
+										value="#{propostaBean.propostaHistorico.numeroProposta}" disabled="true" >
+									</p:outputLabel>
+					</p:panelGrid>
+				
+			</p:fieldset>
+			<p:fieldset legend="Planilha de Cálculo da Precificação" style=" margin-bottom:20px">
+			
+				<p:dataTable styleClass="header-tabelas" id="tabHistoricoExec" 
+						widgetVar="widAtivo"
+						rendered="#{propostaBean.listCustoExecucaoHistory.size()>0}"
+						value="#{propostaBean.listCustoExecucaoHistory}" 
+						var="resulte"
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+					 	emptyMessage="Nenhum registro encontrado."
+					 	scrollable="true" scrollHeight="150"
+					 	pageLinks="4">
+					 	
+					 	<p:column headerText="Descrição Despesa de Execução" width="50%" sortBy="#{resulte.observacoes}">
+							<p:outputLabel value="#{resulte.observacoes == null? '-' : resulte.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{resulte.tpUnidadeMedida}">
+							<p:outputLabel value="#{resulte.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{resulte.quantidade}">
+							<p:outputLabel value="#{resulte.quantidade}" />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{resulte.valorUnitario}">
+							<p:outputLabel 
+								value="#{resulte.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{resulte.valorTotal}">
+							<p:outputLabel 
+								value="#{resulte.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+							
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesa de Execução R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									disabled="true"
+									value="#{propostaBean.propostaHistorico.valorTotalCustosExecucao}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+					
+					<p:dataTable styleClass="header-tabelas"  id="tabCustoHistoricoDesl" 
+						rendered="#{propostaBean.listDeslocamentoHistory.size()>0}"
+						value="#{propostaBean.listDeslocamentoHistory}"
+						var="despesasDeslocamento"
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhum custo cadastrado" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Descrição Despesa de Deslocamento" width="50%" sortBy="#{despesasDeslocamento.observacoes}">
+							<p:outputLabel value="#{despesasDeslocamento.observacoes == null? '-' : despesasDeslocamento.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{despesasDeslocamento.tpUnidadeMedida}">
+							<p:outputLabel value="#{despesasDeslocamento.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{despesasDeslocamento.quantidade}">
+							<p:outputLabel value="#{despesasDeslocamento.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário (R$)" width="15%" sortBy="#{despesasDeslocamento.valorUnitario}">
+							<p:outputLabel 
+								value="#{despesasDeslocamento.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{despesasDeslocamento.valorTotal}">
+							<p:outputLabel 
+								value="#{despesasDeslocamento.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesas de Deslocamento R$ " />
+								<p:outputLabel style="margin-left: 948px; margin-top: -25px;"
+									disabled="true"
+									value="#{propostaBean.propostaHistorico.valorTotalCustosDesclocamento}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+					
+					<p:dataTable styleClass="header-tabelas" id="tabHistoricoCustoOper" 
+						rendered="#{propostaBean.listOperacionalHistory.size()>0}"
+						value="#{propostaBean.listOperacionalHistory}"
+						var="operacional" 
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhuma Desepesa Operacioanl cadastrada" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Descrição despesa Operacional" width="50%" sortBy="#{operacional.observacoes}">
+							<p:outputLabel value="#{operacional.observacoes == null? '-' : operacional.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{operacional.tpUnidadeMedida}">
+							<p:outputLabel value="#{operacional.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{operacional.quantidade}">
+							<p:outputLabel value="#{operacional.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário (R$)" width="15%" sortBy="#{operacional.valorUnitario}">
+							<p:outputLabel 
+								value="#{operacional.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{operacional.valorTotal}">
+							<p:outputLabel 
+								value="#{operacional.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+	
+						<f:facet name="footer">
+							<div align="left">
+							<p:outputLabel value="Total Despesas Operacionais R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									disabled="true"
+									value="#{propostaBean.propostaHistorico.valorTotalCustosOperacionais}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+					
+					<p:dataTable styleClass="header-tabelas" id="tabHistoricoSeg"
+						rendered="#{propostaBean.listCustoSegurancaHistory.size()>0}"
+						value="#{propostaBean.listCustoSegurancaHistory}"
+						var="seguranca" 
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhuma Desepesa com segurança cadastrada" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Descrição Despesa com Segurança" width="50%" sortBy="#{seguranca.observacoes}">
+							<p:outputLabel value="#{seguranca.observacoes == null? '-' : seguranca.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{seguranca.tpUnidadeMedida}">
+							<p:outputLabel value="#{seguranca.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{seguranca.quantidade}">
+							<p:outputLabel value="#{seguranca.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{seguranca.valorUnitario}">
+							<p:outputLabel 
+								value="#{seguranca.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total(R$)" width="12%" sortBy="#{seguranca.valorTotal}">
+							<p:outputLabel 
+								value="#{seguranca.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesas com Segurança R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									disabled="true"
+									value="#{propostaBean.propostaHistorico.valorTotalCustosSeguranca}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+				
+				<p:dataTable styleClass="header-tabelas" id="tabHistoricoCustoAdm"
+					rendered="#{propostaBean.listCustoAdmHistory.size()>0}"
+					value="#{propostaBean.listCustoAdmHistory}"
+					var="adm" 
+					style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+					emptyMessage="Nenhuma Desepesa administrativa cadastrada" 
+					scrollable="true" scrollHeight="150">
+					
+					<p:column headerText="Descrição Despesas Administrativas" width="50%" sortBy="#{adm.observacoes}">
+						<p:outputLabel value="#{adm.observacoes == null? '-' : adm.observacoes}" />
+					</p:column>
+					
+					<p:column headerText="Tipo" width="7%" sortBy="#{adm.tpUnidadeMedida}">
+						<p:outputLabel value="#{adm.tpUnidadeMedida}" style="text-align: center;" />
+					</p:column>
+					
+					<p:column headerText="Quantidade" width="8%" sortBy="#{adm.quantidade}">
+						<p:outputLabel value="#{adm.quantidade}"  />
+					</p:column>
+					
+					<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{adm.valorUnitario}">
+						<p:outputLabel 
+							value="#{adm.valorUnitario}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+					
+					<p:column headerText="Vlr Total(R$)" width="12%" sortBy="#{adm.valorTotal}">
+						<p:outputLabel 
+							value="#{adm.valorTotal}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+					
+					<f:facet name="footer">
+						<div align="left">
+							<p:outputLabel value="Total Despesas Administrativas R$ " />
+							<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+								disabled="true"
+								value="#{propostaBean.propostaHistorico.valorTotalCustosAdministrativos}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel >
+						</div>
+					</f:facet>
+				</p:dataTable><br></br>
+				<p:outputLabel value="Total Geral das Despesas R$ " style="font-size:15px;"/>
+				<p:outputLabel style="font-size:15px !important; margin-left: 220px; margin-top: -25px; "
+						value="#{propostaBean.propostaHistorico.valorTotalSemBdiComissao}">
+						<f:convertNumber pattern="#,##0.00"/>	
+				</p:outputLabel>	
+					
+				 </p:fieldset>
+					<p:fieldset legend="BDI e Comissão" style=" margin-bottom:20px">	
+					 	<p:panelGrid columns="5" id="pidBDIcomissaoHis" style="width: 34%; " styleClass="ui-noborder" >
+						<p:outputLabel value="Percentual BDI:" style="width: 100px;" disabled="#{propostaBean.viewProposta}" />
+							<p:inputText id="idBdiHis" 
+								process="@this" 
+								maxlength="5" 
+								style="width:65px !important; opacity:.80 !important;"
+								slotChar=" "
+								value="#{propostaBean.propostaHistorico.percentualBDI}"
+								disabled="true">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								<p:ajax event="change" update="vrTotalAposBdiComissoesHis, idCadaBDIHis " listener="#{propostaBean.calcularBDIComissao}"/>
+							</p:inputText>
+							<p:outputLabel value="%" style="width: 10px; margin-left:-15px;"  />
+							<p:outputLabel value="R$" style="width: -95px;"  />
+							<p:outputLabel id="idCadaBDIHis"  style="margin-left:-50px;"
+								value="#{propostaBean.propostaHistorico.valorTotalSemBdiComissao * propostaBean.propostaHistorico.percentualBDI/100}" disabled="true" >
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+							
+						<p:outputLabel value="Percentula de Comissão:" />
+							<p:inputText 
+								process="@this" 
+								maxlength="5" 
+								slotChar=" "
+								style="width:65px !important;  opacity:.80 !important;"
+								value="#{propostaBean.propostaHistorico.percentualComissao}"
+								required="false"
+								requiredMessage="Campo BDI obrigatório."
+								disabled="true">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								<p:ajax event="change" update="vrTotalAposBdiComissoesHis, idCadaComissaoHis" listener="#{propostaBean.calcularBDIComissao}"/>
+							</p:inputText>
+							<p:outputLabel value="%" style="width: 10px; margin-left:-15px;"  />
+							<p:outputLabel value="R$" style="width: 58px;"  />
+							<p:outputLabel id="idCadaComissaoHis" style="margin-left:-50px;"
+								value="#{propostaBean.propostaHistorico.valorTotalDaProposta * propostaBean.propostaHistorico.percentualComissao/100}" disabled="true">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+
+							<p:outputLabel value="Total Após BDI/Comissões R$ " style="width:205px; font-weight:bold !important; margin-top:4px;"/>
+							<p:outputLabel id="vrTotalAposBdiComissoesHis" style="font-weight:bold !important; margin-top:4px;"
+								value="#{propostaBean.propostaHistorico.valorTotalComBdiComissao}" disabled="true" >
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+							<p:outputLabel value=" "></p:outputLabel>
+							
+					</p:panelGrid>
+					 
+					</p:fieldset>
+				<p:fieldset legend="Impostos" style=" margin-bottom:20px">	
+					<p:panelGrid columns="2" style="width: 35%; " styleClass="ui-noborder">
+								<p:outputLabel value="Total Impostos R$" style=" font-size:17px !important;"/>
+								<p:outputLabel style="width:183px; font-weight:bold !important; font-size: 17px !important; margin-left:-60px"
+										value="#{propostaBean.propostaHistorico.valorTotalImpostos}" disabled="true" >
+										<f:convertNumber pattern="#,##0.00"/>
+									</p:outputLabel>
+					</p:panelGrid>
+				</p:fieldset>
+				<p:fieldset legend="Desconto" style="margin-bottom:20px" >	
+					<p:panelGrid columns="2" style="width: 35%; " styleClass="ui-noborder" >
+						<p:outputLabel value="Total Desconto R$:" style=" font-size:17px !important;"/>
+							<p:outputLabel style="width:183px; font-weight:bold !important; font-size: 17px !important; margin-left:-60px"
+							value="#{propostaBean.propostaHistorico.desconto}"
+							disabled="true" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+						
+					</p:panelGrid>
+				</p:fieldset>
+			 	<p:fieldset legend="Valor total da Precificação/Proposta" style="margin-bottom:20px" >	
+					<p:panelGrid columns="2" style="width: 35%; " styleClass="ui-noborder" >
+						<p:outputLabel value="Total Proposta R$:" style=" font-size:17px !important;"/>
+							<p:outputLabel style="width:183px; font-weight:bold !important; font-size: 17px !important; margin-left:-60px"
+							value="#{propostaBean.propostaHistorico.valorTotalDaProposta}"
+							disabled="true" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:panelGrid>
+				</p:fieldset>
+		<center>
+			<div align="right">
+				<p:commandButton 
+					value="Sair histórico"
+					action="#{propostaBean.sairVizualizaHistorico()}" 
+					immediate="true" update="@form" 
+					styleClass="btn btn-red"
+					>
+				</p:commandButton>
+			</div>
+		</center>
+			<p:blockUI block="idPanelPrecificacao" trigger=" saveProposta">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</div>
+	</p:panel>
+	
+</html>

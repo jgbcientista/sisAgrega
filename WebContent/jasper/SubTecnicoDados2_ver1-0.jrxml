@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="79"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="style1">
+		<conditionalStyle>
+			<style/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.numeroProposta" class="java.lang.String"/>
+	<field name="proposta.numeroRevisao" class="java.lang.String"/>
+	<field name="proposta.listarCustoPlanilhaFinanceira" class="java.util.Collection"/>
+	<field name="proposta.validadeTec" class="java.lang.String"/>
+	<field name="proposta.listarTipoItemPropostaFinanceira" class="java.util.Collection"/>
+	<field name="proposta.listarTipoItemPropostaTecnica" class="java.util.Collection"/>
+	<field name="proposta.assinaturaTec" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<detail>
+		<band height="112" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="125">
+			<staticText>
+				<reportElement positionType="Float" x="324" y="48" width="198" height="17" uuid="dd0e3ebe-0690-4c26-b4aa-a26b3a8b1535"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Carlos Fernando Pina Caires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="65" width="198" height="22" uuid="f0cf1460-5b55-4e85-ba2c-4459d8d41751"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Diretora Técnica Executiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="324" y="64" width="198" height="22" uuid="b6749541-fb26-43a1-8e0b-90a5df0251b5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Diretor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="49" width="198" height="17" uuid="f391cf38-9975-44af-9b7e-915d49416f75"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia da Silva Guimarães]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="9" width="283" height="14" uuid="d2a21188-da6b-4cb5-8f10-d37133462c01"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+ new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

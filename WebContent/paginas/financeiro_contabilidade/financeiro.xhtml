@@ -1,0 +1,504 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
+ 
+        droppedCar.fadeOut('fast');
+    }
+</script>
+	
+	<p:panel id="idPanelCadastro" style="border: none;" rendered="#{financeiroBean.novo}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+
+		<hr />
+		<center>
+		<p:fieldset id="fieldInfoOSCLI" legend="Informações da Ordem de Serviço e Cliente" rendered="#{financeiroBean.passo1}">
+			<br />
+			<p:panelGrid 
+				columns="4" 
+				id="painelCadastro" 
+				style="margin-top:-15px" 
+				columnClasses="rotulo, campo" 
+				styleClass="ui-noborder">
+				
+				<p:outputLabel value="Número Ordem de Serviço: " for="ordemServico" />
+				<p:inputText id="ordemServico" 
+					style="width:170px;" 
+					value="#{financeiroBean.ordemServico.numero}"
+					disabled="true" >
+				</p:inputText> 
+				
+			<p:outputLabel value="Cliente: " style="width: 55px; !important;"/>
+			<p:selectOneMenu  
+				id="idcliente" 
+				placeholder="Selecione o Cliente"  
+				style="width:400px !important;"
+				value="#{financeiroBean.cliente.id}"  >
+				<f:selectItem itemLabel="- Selecione -" itemValue="" />
+				<f:selectItems value="#{financeiroBean.clientes}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+			</p:selectOneMenu>
+			
+			<p:outputLabel value="Número Projeto Agrega: " for="nmProjetoAgrega" />
+				<p:inputText id="nmProjetoAgrega" 
+					style="width:200px;"
+					disabled="true"
+					value="#{financeiroBean.projeto.numeroProjetoAgrega}" >
+				</p:inputText> 
+				
+	 		<p:outputLabel value="Tipo Projeto:" for="tipoProjeto" />
+				<p:inputText id="tipoProjeto" 
+					style="width:400px !important;;"
+					disabled="true"
+					value="#{financeiroBean.projeto.tipoProjeto}" >
+				</p:inputText> 
+			
+			</p:panelGrid>
+			
+		</p:fieldset>
+			
+<br />
+
+
+	 
+<p:outputLabel rendered="#{financeiroBean.passo1}">
+ 
+<p:fieldset id="fieldInfoProjeto" legend="Informações do Projeto">
+			
+<p:outputLabel rendered="#{financeiroBean.passo1}"> 
+		
+		<br />
+		<p:panelGrid 
+				columns="4" 
+				id="painelPasso4" 
+				rendered="#{financeiroBean.passo1}"
+				style="margin-top:-15px" 
+				columnClasses="rotulo, campo" 
+				styleClass="ui-noborder">
+				
+			<p:outputLabel value="" />
+			<p:outputLabel value="" />
+			<p:outputLabel value="" />
+			<p:outputLabel value="" />
+			
+			
+			<p:outputLabel value="Nome Projeto: " for="nomeProjeto" />
+			<p:inputText 
+				id="nomeProjeto" 
+				style="width:200px;"
+				disabled="true"
+				value="#{financeiroBean.projeto.nomeProjeto}" >
+			</p:inputText> 
+			
+			<p:outputLabel value="Número Projeto Cliente: " for="nmProjeto" />
+			<p:inputText id="nmProjeto" 
+				style="width:200px;"
+				disabled="true"
+				value="#{financeiroBean.projeto.numeroProjetoCliente}" >
+			</p:inputText> 
+			
+			
+				
+			<p:outputLabel value="1ª Parcela %:" for="primra"/>
+				<p:inputText id="primra"
+					placeholder="% da 1ª parcela." 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.primeiraPorcentagem}" >
+				<p:ajax event="change" update="valorPrimeira" listener="#{financeiroBean.calcularValor(financeiroBean.primeiraPorcentagem, 1)}"/>
+			</p:inputText>
+			
+	 		<p:outputLabel value="R$:" for="valorPrimeira" />
+				<p:inputText id="valorPrimeira"
+					placeholder="0,00." 
+					style="width:160px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.primeiroValor}" >
+			</p:inputText>
+			
+			
+			<p:outputLabel value="Data de Pagamento 1º Parcela:" for="dataPrimeiroParcela" />
+				<p:inputMask  
+					id="dataPrimeiroParcela" mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Informe a data"  
+					value="#{financeiroBean.projeto.dataPrimeiroParcela}" 
+					disabled="#{financeiroBean.view}">
+				</p:inputMask>
+				
+			<p:outputLabel value="Número Recibo 1º Parcela:" for="numeroPrimeiroParcela" />
+				<p:inputText id="numeroPrimeiroParcela" 
+					style="width:200px;"
+					placeholder="Informe o nº 1º parcela" 
+					value="#{financeiroBean.projeto.numeroPrimeiroParcela}"
+					disabled="#{financeiroBean.view}">
+				</p:inputText>
+				
+					
+				
+			<p:outputLabel value="Data de Saída (entrega): " for="dtEntregaSaida" />
+				<p:inputMask  
+					id="dtEntregaSaida" 
+					mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Data de entrega."  
+					value="#{financeiroBean.dataSaidaEntrega}" 
+					disabled="#{financeiroBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			
+			
+			<p:outputLabel value="2º Parcela %: " for="faturamentoParcSeg" />
+				<p:inputText id="faturamentoParcSeg"
+					placeholder="2ª parcela."
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.segundaPorcentagem}" >
+					<p:ajax event="change" update="valorSegundo" listener="#{financeiroBean.calcularValor(financeiroBean.segundaPorcentagem, 2)}"/>
+				</p:inputText>
+				
+			<p:outputLabel value="R$:" for="valorSegundo" />
+				<p:inputText id="valorSegundo"
+					placeholder="0,00." 
+					style="width:160px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.segundoValor}" >
+				</p:inputText>
+				
+			<p:outputLabel value="Data de Pagamento 2º Parcela:" for="dataSegundaParcela" />
+				<p:inputMask  
+					id="dataSegundaParcela" mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Informe a data"  
+					value="#{financeiroBean.projeto.dataSegundaParcela}" 
+					disabled="#{financeiroBean.view}">
+				</p:inputMask>
+				
+			<p:outputLabel value="Número Recibo  2º Parcela:" for="numeroSegundaParcela" />
+				<p:inputText id="numeroSegundaParcela" 
+					style="width:160px;"
+					placeholder="Informe o nº 2º parcela" 
+					value="#{financeiroBean.projeto.numeroSegundaParcela}"
+					disabled="#{financeiroBean.view}">
+				</p:inputText>
+				
+				
+				
+				
+			<p:outputLabel value="Data retorno Cadastro Orgão: " for="dataRetor" />
+			<p:inputMask  
+					id="dataRetor" 
+					mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Data retorno"  
+					value="#{financeiroBean.dataRetornoCadastroOrgao}" 
+					disabled="#{financeiroBean.view}" />
+			
+			<p:outputLabel value="Número Notificação: " for="numeroNoti" />
+				<p:inputText 
+					id="numeroNoti"
+					placeholder="Número notificação." style="width:160px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.numeroNotificacao}" >
+				</p:inputText>
+				
+			<p:outputLabel value="Responsável Not/Reclamação de Cliente: " for="respoNot" />
+				<p:inputText 
+					id="respoNot"
+					placeholder="Responsável." 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.responsavelNotificacao}" >
+				</p:inputText>
+				
+				
+			<p:outputLabel value="Responsável Resposta Correção: " for="respoRespCorrecao" />
+				<p:inputText 
+					id="respoRespCorrecao"
+					placeholder="Responsável" 
+					style="width:160px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.responsavelRespostaNotificacao}" >
+				</p:inputText>
+			
+			</p:panelGrid>
+			<hr/>
+			
+		<p:panelGrid 
+				columns="4" 
+				id="painelPasso40" 
+				rendered="#{financeiroBean.passo1}"
+				style="margin-top:-15px" 
+				columnClasses="rotulo, campo" 
+				styleClass="ui-noborder">	
+				
+			<p:outputLabel value="Data cadastro Cadastro Orgão: " for="dataCadastroOrgao" />
+			<p:inputMask  
+				id="dataCadastroOrgao" 
+				mask="99/99/9999"
+				style="width:200px;"
+				placeholder="Data cadastro"  
+				value="#{financeiroBean.dataCadastroOrgao}" 
+				disabled="#{financeiroBean.view}" />
+				
+			<p:outputLabel value="Número Notificação Respondida Cliente: " for="numeroNotificacaoClienteRespoCliente" />
+			<p:inputText 
+				id="numeroNotificacaoClienteRespoCliente"
+				placeholder="Responsável resposta" 
+				style="width:200px;"
+				disabled="#{financeiroBean.view}" 
+				value="#{financeiroBean.numeroNotificacaoRespondida}" >
+			</p:inputText>	
+			
+			
+			<p:outputLabel value="Responsável Resposta Correção: " for="numeroNotificacaoClienteRespo" />
+			<p:inputText 
+				id="numeroNotificacaoClienteRespo"
+				placeholder="Responsável correção" 
+				style="width:200px;"
+				disabled="#{financeiroBean.view}" 
+				value="#{financeiroBean.responsavelRespostaCorrecao}" >
+			</p:inputText>	
+			
+						
+			<p:outputLabel value="Protocolo Orgão - Número Requerimento: " for="numeroRequerimento" />
+			<p:inputText 
+					id="numeroRequerimento"
+					placeholder="Número requerimento" 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.protocoloOrgaoNumeroRequerimento}" >
+			</p:inputText>	
+			
+			
+			<p:outputLabel value="Protocolo Orgão - Número Processo Formado:" for="numeroRequerimentoFormado" />
+			<p:inputText 
+					id="numeroRequerimentoFormado"
+					placeholder="Nº requerimento formado" 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.protocoloOrgaoNumeroProcessoFormado}" >
+			</p:inputText>
+			
+			
+		<p:outputLabel value="Data Pagamento DAE: " for="dataPagDAE" />
+			<p:inputMask  
+					id="dataPagDAE" 
+					mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Data pagamento DAE"  
+					value="#{financeiroBean.dataPagamentoDAE}" 
+					disabled="#{financeiroBean.view}" />	
+					
+		<p:outputLabel value="Data retorno do campo: " for="dtRetornoCampo" />
+				<p:inputText 
+					id="dtRetornoCampo"
+					placeholder="Data retorno campo" 
+					style="width:160px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.dataRetornoCampo}" >
+				</p:inputText>
+					
+					
+					
+		<p:outputLabel value="Valor DAE R$: " for="valorDAE" />
+			<p:inputText id="valorDAE"
+					placeholder="Valor DAE R$" style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.valorDAE}" >
+			</p:inputText>
+		 
+			
+			<p:outputLabel value="3º Parcela %: " for="faturamentoParcTer" />
+				<p:inputText 
+					id="faturamentoParcTer"
+					placeholder="% da 3ª parcela." 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.terceiraPorcentagem}" >
+				<p:ajax event="change" update="valorTerceiro" listener="#{financeiroBean.calcularValor(financeiroBean.terceiraPorcentagem, 3)}"/>
+				</p:inputText>
+				
+			<p:outputLabel value="R$:" for="valorTerceiro" />
+				<p:inputText id="valorTerceiro"
+					placeholder="0,00." 
+					style="width:200px;"
+					disabled="#{financeiroBean.view}" 
+					value="#{financeiroBean.terceiroValor}" >
+				</p:inputText>
+				
+			<p:outputLabel value="Data de Pagamento 3º Parcela:" for="dataTerceiraParcela" />
+				<p:inputMask  
+					id="dataTerceiraParcela" mask="99/99/9999" 
+					style="width:200px;"
+					placeholder="Informe a data"  
+					value="#{financeiroBean.projeto.dataTerceiraParcela}" 
+					disabled="#{financeiroBean.view}">
+				</p:inputMask>
+				
+			<p:outputLabel value="Número Recibo  3º Parcela:" for="numeroTerceiraParcela" />
+				<p:inputText id="numeroTerceiraParcela" 
+					style="width:200px;"
+					placeholder="Informe o nº 3º parcela" 
+					value="#{financeiroBean.projeto.numeroTerceiraParcela}"
+					disabled="#{financeiroBean.view}">
+				</p:inputText>
+				
+				
+				
+		
+		</p:panelGrid>
+			
+	</p:outputLabel>
+	
+		
+</p:fieldset>
+		<br />
+			<p:commandButton 
+				id="btSalvar" 
+				value="#{financeiroBean.projeto.id==null?'Salvar Projeto':'Atualizar Projeto'}"
+				actionListener="#{financeiroBean.salvar()}" 
+				update="@form"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			
+			<p:commandButton 
+				id="btNovo" 
+				value="Novo Projeto"
+				actionListener="#{financeiroBean.novoProjeto()}" 
+				update="@form"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			
+			<br />
+			
+			<!-- LISTA OS PROJETOS ASSOCIADOS -->
+			<hr />
+			</p:outputLabel>
+		
+			<p:outputLabel rendered="#{financeiroBean.passo1 || financeiroBean.passo2}"> 
+				<p:fieldset id="fieldProjetos" legend="Projetos" >
+					<p:dataTable 
+						styleClass="header-tabelas" 
+						var="result"
+						summary="true"
+						rowKey="#{result.id}"
+						value="#{financeiroBean.projetos}" 
+					 	emptyMessage="Nenhum projeto adicionado."
+					 	rows="10"
+					 	paginator="false"
+					 	pageLinks="4"
+					 	paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+						currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+						rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+					 	sortOrder="DESCENDING">
+					 	
+						
+						<p:column headerText="Nº Proj. Agrega" width="10%">
+							<center>
+								<p:outputLabel value="#{result.numeroProjetoAgrega}" />
+							</center>
+						</p:column>
+						
+					 	<p:column headerText="Nº Proj. Cliente" width="10%">
+							<center>
+								<p:outputLabel value="#{result.numeroProjetoCliente}" style="text-align: center;"/>
+							</center>
+						</p:column>
+						
+						<p:column headerText="Cliente" width="390%">
+							<center>
+								<p:outputLabel value="#{result.ordemServico.cliente.nome}" />
+							</center>
+						</p:column>
+						
+					 	<p:column headerText="Nº OS" width="10%">
+					 		<center>
+								<p:outputLabel value="#{result.ordemServico.numero}" />
+							</center>
+						</p:column>
+						
+						 <p:column headerText="Estado" width="10%">
+					 		<center>
+								<p:outputLabel value="#{result.estado}" />
+							</center>
+						</p:column>
+						
+						<p:column headerText="Município" width="20%">
+					 		<center>
+								<p:outputLabel value="#{result.cidade}" />
+							</center>
+						</p:column>
+	
+						<p:column headerText="Excluir" width="13%" rendered="#{financeiroBean.passo1}">
+							<p:commandLink 
+							 	id="remover" 
+							 	immediate="true"
+							 	ajax="false"
+							 	value="Excluir"
+							 	update="@form:listrProjeots"
+							 	disabled="#{financeiroBean.view}"
+							 	process="tablePropostas"
+							 	action="#{financeiroBean.preExcluir(result)}"
+								title="Excluir"
+								style="text-decoration:underline; 
+								text-align:center;" >
+							</p:commandLink>
+							
+							 <p:commandButton 
+								id="edit" 
+								immediate="#{financeiroBean.requerido}"
+								ajax="false"
+								value="Editar"
+								process="@form"
+								actionListener="#{financeiroBean.edit(result)}" 
+								update="@form" >
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+			</p:fieldset>
+			<br />
+			
+		</p:outputLabel>
+			<p:outputLabel rendered="#{financeiroBean.passo1}">
+				<br />
+				<br />
+			</p:outputLabel>
+			
+			<p:commandButton 
+				id="BtVoltar" 
+				value="Cancelar"
+				immediate="true"
+				rendered="#{financeiroBean.passo1}"
+				styleClass="btn btn-yellow"
+				action="#{financeiroBean.voltar()}" 
+				update="@form">
+			</p:commandButton>
+			
+		<p:outputLabel rendered="#{financeiroBean.passo1}">
+			<br />
+			<br />
+		</p:outputLabel>
+			
+			
+		<hr/>
+			
+			<br />
+			<p:blockUI block="idPanelCadastro" trigger="btSalvar">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+			</center>
+		</div>
+	</p:panel>
+	
+
+</html>

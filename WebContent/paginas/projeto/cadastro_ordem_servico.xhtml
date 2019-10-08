@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="idCadastroPanelOS" style="border: none;" rendered="#{projetoBean.cadastrarOS}">
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" >
+	<hr />
+	<p:fieldset id="field-cadstro-OS" legend="Nova Ordem de Serviço" >
+		<p:panelGrid id="painelCadastro"  styleClass="ui-noborder">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nº de contrato: "/>
+					<p:selectOneMenu id="numCadascontrato"
+						value="#{projetoBean.ordemServico.contrato.id}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboContrato}" var="item" itemLabel="#{item.nrContrato}" itemValue="#{item.id}" />
+						<p:ajax event="change" listener="#{projetoBean.verificarSeOSCOntrato()}" update="numOSNova,idClienteOS, idFormaPagto,btSalvarOS" />
+					</p:selectOneMenu>
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Nº da OS: " />
+					<p:inputText id="numOSNova" style="width:80px; !important; opacity:.80 !important;"
+						update="@form"
+						value="#{projetoBean.ordemServico.numeroOS}" >
+						<p:ajax event="change"/>
+					</p:inputText>
+				</p:column>
+			
+			<p:column>
+				<p:outputLabel value="Nome do Cliente: " />
+				<p:inputText id="idClienteOS" style="width:370px; !important; opacity:.80 !important;"
+					disabled="true" update="@form"
+					value="#{projetoBean.cliente}" >
+				</p:inputText>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="Forma de Pagamento: " />
+				<p:inputText 
+					id="idFormaPagto" 
+					style="width:150px; !important; opacity:.80 !important;"
+					disabled="true" 
+					update="@form"
+					value="#{projetoBean.formaDePagamentocontrato}" >
+				</p:inputText>
+			</p:column>
+		</p:row>
+	</p:panelGrid><br/>
+	<div align="right">		 
+		<p:commandButton 
+			id="idBtCancelOS" 
+			styleClass="btn btn-yellow"
+			value="Cancelar"
+			immediate="false"
+			actionListener="#{projetoBean.cancelarNovaOS()}" 
+			update="@form">
+		</p:commandButton>
+		
+		<p:commandButton 
+			id="btSalvarOS" 
+			styleClass="btn btn-blue"
+			disabled="#{projetoBean.ordemServico.contrato.id == null? 'true' : false}"
+			value="Salvar O.S"
+			actionListener="#{projetoBean.salvarNovaOS()}"
+			update="@form">
+		</p:commandButton>
+	</div>	
+		<br></br>
+		</p:fieldset>
+		<center>
+			<p:blockUI block="idCadastroPanelOS" trigger="btSalvarOS">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</center>
+	</div>
+</p:panel>
+	<p:confirmDialog 
+		id="dialogExcluirProjeto" 
+		widgetVar="dialogExcluirProjeto"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir o item selecionado?">
+	 
+		<center>
+			<p:commandButton 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				action="#{projetoBean.excluirProjeto()}"
+				styleClass="btn btn-red"
+				 />
+			<p:commandButton 
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluirProjeto').hide()"  />
+		</center>
+</p:confirmDialog>
+</html>

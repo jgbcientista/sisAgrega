@@ -1,0 +1,245 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+ <p:panelGrid styleClass="ui-noborder">
+	<p:row>
+		<p:column colspan="3">
+		   	<p:row><h4 style="margin-left: 10px;">Confirmação de pagamentos</h4></p:row>
+			<p:outputLabel style="margin-left: 10px;" value="Informações de liberação de pagamentos e faturamentos."/>
+		</p:column>
+	</p:row>
+	<p:row>
+		<p:column>
+			<p:panelGrid styleClass="ui-noborder" style="width:68%;">
+				<p:row>
+					<p:column style="width: 34%;">
+						<p:outputLabel style="font-weight:bold !important; " id="Labelsaldocontrato"
+							value="Saldo Restante do Contrato: R$" 
+							disabled="#{projetoBean.visualizarProjeto}">
+						</p:outputLabel>
+					</p:column>
+					<p:column>
+						<p:outputLabel style="font-weight:bold !important;margin-left:-31px;" id="saldocontrato"
+							value="#{projetoBean.projeto.contrato.saldoContrato}" 
+							disabled="#{projetoBean.visualizarProjeto}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column>
+	</p:row>
+	<p:row>
+		<p:column>
+			<p:panelGrid styleClass="ui-noborder" style="width:68%;">
+				<p:row>
+					<p:column style="width: 34%;">
+						<p:outputLabel style="font-weight:bold !important;" 
+							value="Valor Total Faturado: R$ "  
+							disabled="#{projetoBean.visualizarProjeto}">
+						</p:outputLabel>
+					</p:column>
+					<p:column>
+						<p:outputLabel style="font-weight:bold !important; margin-left:-82px;" 
+							value="#{projetoBean.obterValorFaturadoByProjeto(projetoBean.projeto)}"  
+							disabled="#{projetoBean.visualizarProjeto}">
+						<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:column>		
+	</p:row>
+	<p:row>
+		<p:column>
+			<p:panelGrid styleClass="ui-noborder" style="width:68%;">
+				<p:row>
+					<p:column style="width: 34%;">
+						<p:outputLabel style="font-weight:bold !important;" id="labelIdvlrProjeto"
+							value="Valor Total do Projeto: R$ " 
+							disabled="#{projetoBean.visualizarProjeto}">
+						</p:outputLabel>
+					</p:column>
+					<p:column>
+						<p:outputLabel style="font-weight:bold !important; margin-left:-72px;" id="idvlrProjeto"
+							value="#{projetoBean.projeto.valorProjeto}" 
+							disabled="#{projetoBean.visualizarProjeto}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+				</p:row>
+			</p:panelGrid>	
+		</p:column>
+	</p:row>
+	
+	</p:panelGrid>
+	<hr></hr>
+	<p:panelGrid styleClass="ui-noborder" rendered="#{projetoBean.quitacaoTotal}">
+		<p:row>
+			<p:column>
+				<p:outputLabel value="Pagamento de projeto quitado com sucesso!" />
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+	<ui:remove>
+	 
+	</ui:remove>
+	<p:panelGrid columns="1" style="width: 100%; margin-left:0px;" styleClass="ui-noborder">
+         	<!-- <p:growl id="msgs" showDetail="true"/> -->
+			<h5>Lista de pagamentos do Projeto: #{projetoBean.projeto.nomeProjeto}</h5> 
+			<p:dataTable
+				styleClass="header-tabelas" 
+				value="#{projetoBean.listarFaturamentosByProjeto}"
+				id="tabelaParcelaPagamento"
+				widgetVar="tabelaParcelaPagamento"
+				rows="5" 
+				var="resulte"
+				style="width: 100%; margin-top:-0px;"
+				editable="true" 
+				emptyMessage="Nenhum pagamento cadastrado." >
+			 
+				<p:column
+					style="text-align: center; white-space: normal !important; width:20% !important; word-wrap: break-word; max-width: 35%;">
+					<f:facet name="header">
+						<h:outputText value="Nº NF" />
+					</f:facet>
+					<h:outputText value="#{resulte.numeroNF}" />
+				</p:column>
+		
+		
+				<p:column
+					style="text-align: center; white-space: normal !important; width:20% !important; word-wrap: break-word; max-width: 35%;">
+					<f:facet name="header">
+						<h:outputText value="Data NF" />
+					</f:facet>
+					<h:outputText value="#{resulte.dataNF}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText> 
+				</p:column>
+			
+				<p:column
+					style="text-align: center; white-space: normal !important; width:20% !important; word-wrap: break-word; max-width: 35%;">
+					<f:facet name="header">
+						<h:outputText value="Nº Parcela" />
+					</f:facet>
+					<h:outputText value="#{resulte.parcela}ª" />
+				</p:column>
+				
+				
+				 <p:column>
+				 	<f:facet name="header">
+						<h:outputText value="Situação" />
+					</f:facet>
+					  <h:outputText value="#{resulte.situacao.nome}">
+						<f:convertNumber pattern="#,##0.00"/>
+					 </h:outputText> 
+				</p:column>	
+				
+				 <p:column>
+				 	<f:facet name="header">
+						<h:outputText value="Valor R$" />
+					</f:facet>
+					  <h:outputText value="#{resulte.getObterValorByParcela(resulte.parcela)}">
+						<f:convertNumber pattern="#,##0.00"/>
+					 </h:outputText> 
+				</p:column>	
+				
+				<p:column>
+				 	<f:facet name="header">
+						<h:outputText value="Ação" />
+					</f:facet>
+					<p:commandButton 
+						id="btConfirmar" 
+						value="Confirmar"
+						actionListener="#{projetoBean.preConfirmarPagamento(resulte)}" 
+						update="@form"
+						disabled="#{projetoBean.visualizarProjeto}"
+						immediate="true"
+						rendered="#{resulte.dataNF==null}"
+						styleClass="btn btn-green">
+					</p:commandButton>
+				</p:column>
+							
+							   		
+		   </p:dataTable>
+		</p:panelGrid>
+
+<br />
+
+<div align="right">
+    <p:commandButton 
+		value="Voltar"
+		actionListener="#{projetoBean.cancelar()}" 
+		update="@form"
+		styleClass="btn btn-yellow">
+	</p:commandButton>
+	
+</div>
+		
+		
+	<p:dialog id="dialogInformeNNfDataNF" 
+		showEffect="fade"
+		hideEffect="fade" 
+		header="Informação" 
+		widgetVar="dialogInformeNNfDataNF" 
+		style="overflow:hidden"
+		resizable="false" 
+		closeOnEscape="true" 
+		severity="alert" 
+		modal="true" 
+		width="50%">
+	
+	<p:panelGrid id="painel-pagamento" styleClass="ui-noborder">
+	<p:message for="combPagamento"/> 
+	
+		<p:row>
+			<p:column>
+				<p:outputLabel value="Nº da Nota Fiscal"  for="nNF"/>
+				<p:inputText style="width:130px !important;" value="#{projetoBean.faturamento.numeroNF}" id="nNF" > 
+					<p:ajax event="change" />
+				</p:inputText> 
+			</p:column>
+				<p:column>	
+					<p:outputLabel value="Data de Pagamento" for="dtPagamento"/>
+					<p:calendar 
+						id="dtPagamento" 
+						value="#{projetoBean.faturamento.dataNF}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+					
+				</p:column>
+				
+			<p:column style="width:33%;"> 
+				<p:outputLabel value="Situação"/>
+				<p:selectOneMenu 
+					disabled="#{projetoBean.visualizarProjeto}" 
+					styleClass="ui-altera-selectMenu" 
+					style="width:150px;"
+					id="combPagamento"
+					value="#{projetoBean.filtroSituacaoFaturar}">
+				 	<f:selectItems value="#{projetoBean.comboSituacoesConfirmarPagamento}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+				 	<p:ajax event="change" />
+        		</p:selectOneMenu>
+			</p:column>
+				
+	</p:row>
+	</p:panelGrid>
+	<br />
+	<p:commandButton 
+		id="btConfirmar" 
+		value="Confirmar"
+		actionListener="#{projetoBean.confirmarPagamento()}" 
+		update="@form"
+		styleClass="btn btn-green">
+	 </p:commandButton>	
+
+<br />
+<br />
+	</p:dialog>
+	
+		 
+</ui:composition>

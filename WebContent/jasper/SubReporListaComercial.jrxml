@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<group name="TITULO_HEADER">
+		<groupExpression><![CDATA[$F{titulo}]]></groupExpression>
+		<groupHeader>
+			<band height="68">
+				<textField>
+					<reportElement positionType="Float" x="11" y="8" width="527" height="20" uuid="fc5366d1-21ef-435b-a6be-f0762ca28164"/>
+					<textElement>
+						<font fontName="Arial" size="12" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="11" y="36" width="527" height="27" uuid="90378d8f-ff33-4568-a33c-f7995a8912c4"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

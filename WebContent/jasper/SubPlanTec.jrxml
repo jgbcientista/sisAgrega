@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="INSERIR_EQUIPAMENTO" class="java.lang.Boolean"/>
+	<parameter name="PLAN_EQUIPAMENTO" class="java.util.Collection"/>
+	<parameter name="DESCRICAO_EQUIPAMENTO" class="java.lang.String"/>
+	<parameter name="TITULO_EQUIPAMENTO" class="java.lang.String"/>
+	<parameter name="FUNCAO" class="java.lang.String"/>
+	<parameter name="ASSINATURA" class="java.lang.String"/>
+	<parameter name="DESCRICAO_TECNICA" class="java.lang.String"/>
+	<parameter name="TITULO_PLAN_TEC" class="java.lang.String"/>
+	<parameter name="RENDER" class="java.lang.Boolean"/>
+	<parameter name="PLAN_EQUIPE_TECNICA" class="java.util.Collection"/>
+	<parameter name="RENDER2" class="java.lang.Boolean"/>
+	<parameter name="DATA_EMISSAO" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.assinaturaTec" class="java.lang.String"/>
+	<field name="proposta.funcaoCargoTec" class="java.lang.String"/>
+	<field name="proposta.inserirPlanFinan" class="java.lang.Boolean"/>
+	<field name="proposta.listarCustoEquipeTecnica" class="java.util.Collection"/>
+	<field name="proposta.inserirPlanTec" class="java.lang.Boolean"/>
+	<field name="proposta.descricaPlanTecnica" class="java.lang.String"/>
+	<field name="proposta.tituloPlanTecnica" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band height="72" splitType="Immediate">
+			<printWhenExpression><![CDATA[($P{RENDER}.booleanValue() == true? false: true) ||
+($P{RENDER2}.booleanValue() == true? false: true)]]></printWhenExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="6" y="10" width="316" height="15" uuid="cc200019-8c9b-45fd-962c-a12cb89df856"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format($P{DATA_EMISSAO})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="6" y="42" width="316" height="15" uuid="2345c886-bdea-4078-8060-b456ee036f92"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASSINATURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="6" y="57" width="316" height="15" uuid="22e5f0af-fbec-44bf-afc5-b346d9ece71b"/>
+				<textElement>
+					<font fontName="Arial" size="11" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FUNCAO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="120" splitType="Immediate">
+			<printWhenExpression><![CDATA[($P{RENDER}.booleanValue() == true? true: false) ||
+($P{RENDER2}.booleanValue() == true? true: false)]]></printWhenExpression>
+			<textField>
+				<reportElement positionType="Float" x="6" y="91" width="316" height="15" uuid="933ee583-30d4-4e73-acba-5fad98566db7"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASSINATURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="6" y="105" width="316" height="15" uuid="25c4b7ea-8921-4249-84ba-dfac8bbaa9f0"/>
+				<textElement>
+					<font fontName="Arial" size="11" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FUNCAO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="6" y="65" width="316" height="15" uuid="191099fd-7836-4438-a3e7-0314df90069d"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format($P{DATA_EMISSAO})]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="6" y="10" width="538" height="19" uuid="a1d38fe4-5c64-4a33-9df2-af7061adb7cc">
+					<printWhenExpression><![CDATA[($P{RENDER}.booleanValue() == true? true: false)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="TITULO_PLAN_TEC">
+					<subreportParameterExpression><![CDATA[$P{TITULO_PLAN_TEC}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DESCRICAO_TECNICA">
+					<subreportParameterExpression><![CDATA[$P{DESCRICAO_TECNICA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PLAN_EQUIPE_TECNICA">
+					<subreportParameterExpression><![CDATA[$F{proposta.listarCustoEquipeTecnica}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{PLAN_EQUIPE_TECNICA},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubTecnicaEquipeLista_ver1-0_Planilha.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="6" y="42" width="538" height="19" uuid="c3ded3d9-7400-4b6d-ad54-52a831e26c08">
+					<printWhenExpression><![CDATA[($P{RENDER2}.booleanValue() == true? true: false)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="TITULO_EQUIPAMENTO">
+					<subreportParameterExpression><![CDATA[$P{TITULO_EQUIPAMENTO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DESCRICAO_EQUIPAMENTO">
+					<subreportParameterExpression><![CDATA[$P{DESCRICAO_EQUIPAMENTO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{PLAN_EQUIPAMENTO},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubTecnicaEquipamento.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

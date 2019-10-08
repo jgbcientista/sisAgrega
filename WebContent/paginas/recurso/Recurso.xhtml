@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	 <script type="text/javascript">
+
+                function mascara(o, f) {
+                    v_obj = o;
+                    v_fun = f;
+                    setTimeout("execmascara()", 1);
+                }
+
+                function execmascara() {
+                    v_obj.value = v_fun(v_obj.value);
+                }
+
+                function valor(v) {
+                    v = v.replace(/\D/g, "");
+                    v = v.replace(/[0-9]{15}/, "invaEu nlido");
+                    v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos ultimos 11 digitos
+                    v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos ultimos 8 digitos
+                    v = v.replace(/(\d{1})(\d{3})$/, "$1.$2"); // coloca ponto antes dos ultimos 5 digitos
+                    return v;
+                }
+
+
+            </script>
+
+	<p:panel id="idPanelRecurso" style="border: none;" rendered="#{!recursoBean.pesquisar}">
+	<p:messages  />
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+
+		<hr />
+		<center>
+		
+			<p:fieldset legend="Dados do Negócio" style="width: 97%;text-align: left;"  >
+			 	<br />
+			 <p:panelGrid columns="4" id="painelCadastro" style="margin-top:-15px" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				
+						
+			<p:outputLabel value="Aplicação" for="aplicacao"/>
+			<p:selectOneMenu  id="aplicacao"  style="width:120px !important; opacity:1.8 !important;" 
+						
+						value="#{recursoBean.recurso.aplicacao.id}"
+						disabled="#{recursoBean.viewRecurso}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{recursoBean.comboAplicacaoRecurso}"
+						var="item" itemLabel="#{item.descricao}" itemValue="#{item.id}" />
+					</p:selectOneMenu>
+					
+					
+		<p:outputLabel value="Tipo de Recurso" for="tipoRecurso"/>
+			<p:selectOneMenu  id="tipoRecurso"  style="width:120px !important; opacity:1.8 !important;" 
+						required="true" requiredMessage="Campo Tipo de Recurso obrigatório."
+						value="#{recursoBean.recurso.tipoRecurso.id}"
+						disabled="#{recursoBean.viewRecurso}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{recursoBean.comboTipoRecurso}"
+						var="item" itemLabel="#{item.descricao}" itemValue="#{item.id}" />
+					</p:selectOneMenu>	
+					
+		<p:outputLabel value="Classificação" for="classificacao"/>
+			<p:selectOneMenu  id="classificacao"  style="width:120px !important; opacity:1.8 !important;" 
+						
+						value="#{recursoBean.recurso.classificacaoRecurso.id}"
+						disabled="#{recursoBean.viewRecurso}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{recursoBean.comboClassificacaoRecurso}"
+						var="item" itemLabel="#{item.descricao}" itemValue="#{item.id}" />
+					</p:selectOneMenu>		
+				
+				
+				<p:outputLabel value="Nome do Recurso:" for="nomeRecurso" />
+				<p:inputText id="nomeRecurso" required="true" 
+						requiredMessage="Campo nome do recurso obrigatório" 
+						style="width:300px;" 
+						placeholder="Informe o nome do recurso"
+						disabled="#{recursoBean.viewRecurso}" 
+						value="#{recursoBean.recurso.nome}" />
+				
+				<p:outputLabel value="Fabricante:" for="fabricante"/>
+				<p:inputText id="fabricante" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nome do fabricante"
+						required="true" requiredMessage="Campo Fabricante obrigatório."
+						value="#{recursoBean.recurso.fabricante}" />
+	
+				<p:outputLabel value="Data de Validade:" style="width:140px;"/>
+					
+					<p:calendar 
+						
+						value="#{recursoBean.recurso.validade}" 
+						disabled="#{recursoBean.viewRecurso}" />
+				
+							
+				<p:outputLabel value="Venc da Garantia:" style="width:140px;"/>
+					
+					<p:calendar 
+						
+						value="#{recursoBean.recurso.garantia}" 
+						disabled="#{recursoBean.viewRecurso}" />
+					
+					
+			<p:outputLabel value="Quantidade:" for="qtd"/>
+				<p:inputText id="qtd" style="width:100px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe a qauntidade"
+						value="#{recursoBean.recurso.quantidade}" />	
+						
+			<p:outputLabel value="Fornecedor" for="fornecedor"/>
+				<p:inputText id="fornecedor" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nome do fornecedor"
+						value="#{recursoBean.recurso.fornecedor}" />
+						
+			<p:outputLabel value="Marca" for="marca"/>
+				<p:inputText id="marca" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nome da marca"
+						value="#{recursoBean.recurso.marca}" />	
+						
+						
+			<p:outputLabel value="Nº Série:" for="nSerie"/>
+				<p:inputText id="nSerie" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nº de série"
+						value="#{recursoBean.recurso.numeroSerie}" />	
+						
+			<p:outputLabel value="Data de Aquisição:" for="dataAqui"/>
+				<p:calendar 
+						id="dataAqui"
+						value="#{recursoBean.recurso.dataAquisicao}" 
+						disabled="#{recursoBean.viewRecurso}" />
+				
+				
+				
+						
+			<p:outputLabel value="Custo:" for="custo"/>
+			<p:inputText 
+				id="custo" 
+				style="width:300px;" 
+				value="#{recursoBean.recurso.custo}" 
+				placeholder="Informe o custo"
+				disabled="#{recursoBean.viewRecurso}" 
+				onkeypress="mascara(this, valor);">
+		    	<f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2" />
+			</p:inputText>			
+						
+						
+			<p:outputLabel value="Armazenamento:" for="armazenamento"/>
+				<p:inputText id="armazenamento" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nome do armazenamento"
+						value="#{recursoBean.recurso.armazenamento}" />	
+						
+			
+			<p:outputLabel value="Depreciação:" for="depreciacao"/>
+				<p:inputText id="depreciacao" style="width:300px;" 
+						disabled="#{recursoBean.viewRecurso}" 
+						placeholder="Informe o nome da Ddepreciação:"
+						value="#{recursoBean.recurso.depreciacao}" />	
+						
+ 
+				<p:outputLabel value="Usuário:" for="usuarioUtiliza"/>
+					<p:selectOneMenu  id="usuarioUtiliza"  style="width:120px !important; opacity:1.8 !important;" 
+						value="#{recursoBean.recurso.profissional.id}"
+						disabled="#{recursoBean.viewRecurso}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{recursoBean.comboProfissional}"
+						var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+					</p:selectOneMenu>		
+					
+				<p:outputLabel value="Status:" for="status"/>
+					<p:selectOneMenu  id="status"  style="width:120px !important; opacity:1.8 !important;" 
+						value="#{recursoBean.recurso.status}"
+						required="true" requiredMessage="Campo Status obrigatório."
+						disabled="#{recursoBean.viewRecurso}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{recursoBean.comboStatus}"
+						var="item" itemLabel="#{item}" itemValue="#{item}" />
+					</p:selectOneMenu>					
+					
+			</p:panelGrid>
+					<br></br>
+			<p:panelGrid columns="1" id="idPanelGriDescricao" style="width: 86%; margin-top: -15px" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:outputLabel value="Descrição: (máximo 500 caracteres)" style="position:center;"/>
+				<p:inputTextarea  
+					id="idDescricao" 
+					disabled="#{recursoBean.viewRecurso}" 
+					maxlength="500"
+					placeholder="Informe o comentário. Texto opcional"
+					autoResize="false"
+					style="width:1140px !important;"
+					value="#{recursoBean.recurso.descricao}"/>
+			</p:panelGrid>
+				<br />
+
+			</p:fieldset>	
+			<br></br>	
+		</center>
+		</div>
+		<center>
+				<p:commandButton 
+					id="btSalvar" 
+					value="Salvar"
+					actionListener="#{recursoBean.salvarRecurso()}" 
+					update="@form"
+					styleClass="btn btn-green" 
+					rendered="#{recursoBean.isNewRecurso()}" />
+				<p:commandButton 
+					id="btAtualizar" 
+					value="Atualizar"
+					actionListener="#{recursoBean.atualizarRecurso()}"
+					styleClass="btn btn-green"
+					update="@form"
+					rendered="#{recursoBean.isEditRecurso()}" />
+				<p:commandButton 
+					id="BtVoltar" 
+					value="Voltar"
+					immediate="true"
+					styleClass="btn btn-yellow"
+					action="#{recursoBean.voltar()}" 
+					update="@form" />
+			</center>
+				<p:blockUI block="idPanelRecurso" trigger="btSalvar">
+				 	<p:graphicImage name="img/ajaxloadingbar.gif" />
+				</p:blockUI>
+		</p:panel>
+	
+
+</html>

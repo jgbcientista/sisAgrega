@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+  
+
+	<sec:http auto-config="true" use-expressions="true">
+		   <sec:form-login login-page="/login/login.jsf" authentication-failure-url="/login/login.jsf?erro=true"  />
+		  <sec:intercept-url pattern="/paginas/**" access="isAuthenticated()" />
+		   <sec:intercept-url pattern="/login*" access="isAnonymous()" />
+    </sec:http>	
+     
+	<sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:jdbc-user-service data-source-ref="dataSource"
+                                   users-by-username-query="SELECT login as username, senha as password, 'true' as enable FROM agrega.tb_usuario usua inner join agrega.tb_perfil perf ON usua.perfil_id = perf.id WHERE usua.login ilike ?"
+                                   authorities-by-username-query="SELECT usua.login, perf.nome FROM agrega.tb_usuario usua inner join agrega.tb_perfil perf ON usua.perfil_id = perf.id WHERE usua.login=?" />
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+	
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--  <beans:property name="url" value="jdbc:postgresql://localhost:5432/agregahomo" />   -->
+      <beans:property name="url" value="jdbc:postgresql://localhost:5432/agregahomo" /> 
+        <beans:property name="driverClassName" value="org.postgresql.Driver" />
+        <beans:property name="username" value="adm_agrega" />
+        <beans:property name="password" value="123456" />
+    </beans:bean>
+	
+        
+     
+</beans:beans>

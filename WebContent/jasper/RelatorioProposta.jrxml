@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProposta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.331000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<subDataset name="dataset1" uuid="7af184e8-d2c6-445b-8141-506c883c5741"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_proposta.`numeroProposta` AS numeroProposta,
+     tb_proposta.`objeto` AS objeto,
+     tb_proposta.`dataEnvioAoCliente` AS dataEnvioAoCliente,
+     tb_proposta.`dataInclusao` AS dataInclusao,
+     tb_proposta.`cliente` AS cliente,
+     tb_proposta.`dataContratacao` AS dataContratacao,
+     tb_proposta.`contato` AS contato,
+     tb_proposta.`tipoProposta` AS tipoProposta,
+     tb_proposta.`nomeProjeto` AS nomeProjeto,
+     tb_proposta.`ID_UF` AS estado,
+     tb_proposta.`ID_CIDADE` AS cidade,
+     tb_proposta.`statusContratada` AS statusContratada,
+     tb_proposta.`status` AS status,
+     tb_proposta.`valorTotalComBdiComissao` AS valorTotalComBdiComissao,
+     tb_proposta.`valorTotalCustosAdministrativos` AS valorTotalCustosAdministrativos,
+     tb_proposta.`valorTotalCustosBdiComissoes` AS valorTotalCustosBdiComissoes,
+     tb_proposta.`valorTotalCustosDesclocamento` AS valorTotalCustosDesclocamento,
+     tb_proposta.`valorTotalCustosExecucao` AS valorTotalCustosExecucao,
+     tb_proposta.`valorTotalCustosOperacionais` AS valorTotalCustosOperacionais,
+     tb_proposta.`valorTotalCustosSeguranca` AS valorTotalCustosSeguranca,
+     tb_proposta.`valorTotalDaProposta` AS valorTotalDaProposta,
+     tb_proposta.`valorTotalImpostos` AS valorTotalImpostos,
+     tb_proposta.`valorTotalPrecificacao` AS valorTotalPrecificacao,
+     tb_proposta.`valorTotalSemBdiComissao` AS valorTotalSemBdiComissao,
+     tb_proposta.`id` AS id
+FROM
+     `tb_proposta` tb_proposta
+WHERE
+     id = 1]]>
+	</queryString>
+	<field name="numeroProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="objeto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dataEnvioAoCliente" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dataInclusao" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente.nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dataContratacao" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contato" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeProjeto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="statusContratada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalComBdiComissao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosAdministrativos" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosBdiComissoes" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosDesclocamento" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosExecucao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosOperacionais" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalCustosSeguranca" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalDaProposta" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalImpostos" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalPrecificacao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valorTotalSemBdiComissao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="custos" class="java.util.Collection"/>
+	<field name="despesasDeslocamentos" class="java.util.Collection"/>
+	<field name="despesasOperacionais" class="java.util.Collection"/>
+	<field name="despesasSeguranca" class="java.util.Collection"/>
+	<field name="despesasAdministrativas" class="java.util.Collection"/>
+	<field name="despesasBdiComissao" class="java.util.Collection"/>
+	<field name="listarTipoItemProposta" class="java.util.Collection"/>
+	<title>
+		<band height="69" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="68" uuid="67415d78-960a-4e08-b12b-5ef34a407752"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="101" y="3" width="453" height="56" forecolor="#000000" uuid="e81efb96-2a25-4045-819c-82efa5b86668"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta	]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="101" height="60" uuid="268258da-1236-44ae-a87a-3f923c5c4861"/>
+				<imageExpression><![CDATA["img/cabecalho.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="135" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="0" y="1" width="555" height="134" uuid="2bbfcb1a-ac75-4685-933d-c598a2a0f753"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="24" width="131" height="20" uuid="9a784623-01b0-40ee-9a06-b2fdda2158f1"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Inclusão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="1" width="81" height="20" uuid="f9f2435d-d097-41da-a46f-b60d89fe1429"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="131" y="24" width="80" height="20" uuid="b6b82074-7bc1-4a55-8336-bdd334285e92"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataInclusao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="131" height="20" uuid="aeddf57c-a7b3-4c05-a6f3-4ceb669cf8c3"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Proposta:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="131" y="0" width="95" height="20" uuid="24773d79-fe3b-4d4b-aad3-9751d96ae3ef"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numeroProposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="48" width="131" height="20" uuid="41d09fd0-5762-4bb0-9ab4-ef5c52f76a47"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Envio ao Cliente:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="131" y="48" width="80" height="20" uuid="1e56bd85-1d71-4d4d-986e-ab2ebc6fd47f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataEnvioAoCliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="131" y="72" width="80" height="20" uuid="75f43493-3391-4b48-97b2-56399b433c57"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataContratacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="72" width="131" height="20" uuid="e1b1b3df-d4b8-4fca-b092-4151a2ea0249"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de Contratação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="131" height="20" uuid="85085b35-7fb9-4483-8048-f92e07e13149"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Proposta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="97" width="80" height="20" uuid="2c870b05-9ffc-43c8-b1b0-b566101481ca"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipoProposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="97" width="81" height="20" uuid="b32dd547-71cc-4f13-a6d1-a7a9451250f4"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contratada:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="352" y="97" width="80" height="20" uuid="6697981a-f0e5-46a1-a453-e0ba9a34b3fc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{statusContratada}==null? '-': $F{statusContratada})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="25" width="81" height="20" uuid="6f967a80-acce-4378-a12e-4c1e9191a390"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do Projeto:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="49" width="81" height="20" uuid="1e73e286-d1bd-4708-a20b-fec5b75b72b3"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="72" width="81" height="20" uuid="450ce621-8030-483e-99b2-f8967a9a97a0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="353" y="1" width="202" height="20" uuid="1bda8465-a107-44a2-8192-ec469111e727"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="25" width="202" height="20" uuid="5a1a5087-a440-4ad5-acfe-a48a1a424116"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomeProjeto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="49" width="100" height="20" uuid="7832422a-bf1e-4568-a700-1c4381a997a0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="72" width="203" height="20" uuid="600e3fdc-d90a-4fb5-9850-4be42589ede3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contato}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="174" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="19" width="555" height="19" isRemoveLineWhenBlank="true" uuid="607f5e4e-01ee-4535-8708-308772603d29">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{valorTotalCustosExecucao}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoExecucao.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="0" width="131" height="19" isRemoveLineWhenBlank="true" uuid="751fc748-6d97-4317-8336-c76e2c84f4f8"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" pdfEncoding="Cp1252"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objeto}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="38" width="555" height="19" isRemoveLineWhenBlank="true" uuid="76adb44a-a76d-4859-8cb9-b2bd29af36c7">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{despesasDeslocamentos}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoDeslocamento.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="57" width="555" height="19" isRemoveLineWhenBlank="true" uuid="b49bdfd0-dd6e-4953-8af2-bf6ca3e25b32">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{despesasOperacionais}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoOperacional.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="76" width="555" height="19" uuid="cc7131f8-5a44-435a-b690-369e367621f4">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{despesasSeguranca}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoSeguranca.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="95" width="555" height="19" uuid="d4cf7187-89ac-4de5-b22b-9dac20ba749f">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{despesasAdministrativas}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoAdm.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="114" width="555" height="19" uuid="6a29cc48-9ec9-43ec-ae42-bd5e968b2644">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{despesasBdiComissao}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioPropostaCustoBdiComissao.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="133" width="555" height="19" isRemoveLineWhenBlank="true" uuid="f6b6f706-42d6-4da5-9f23-a086d9f1d927">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemProposta}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RelatorioTipoItemProposta.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="61" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="61" backcolor="#CCCCCC" uuid="dc3260f4-362a-4348-9454-e694892b8189"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="-25" y="15" width="555" height="15" forecolor="#000000" uuid="a027adf7-8c37-433e-a9e2-2ceda7498cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980/ 99161-0802 - email: contato@agregaconsultores.com.br  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="30" width="554" height="15" forecolor="#000000" uuid="97cfce9d-a0c4-4702-ba81-be6389a8e99d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[- www.agregaconsultores.com.br -]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="393" y="45" width="161" height="15" forecolor="#000000" uuid="3e4463ad-624a-4fde-88a8-4a202b0d00d0"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="15" forecolor="#000000" uuid="9a3768e3-9c7e-4f93-856c-23ba2712287e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="235" splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean(!$F{tipoProposta}.equalsIgnoreCase("Técnica"))]]></printWhenExpression>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="169" height="20" backcolor="#CCCCCC" uuid="442e8578-efdc-449e-92d9-aa32ce5ac51b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Custo Total Sem BDI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="22" width="169" height="20" backcolor="#CCCCCC" uuid="8a1c45f2-7373-4411-a54c-a96138945339"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Custo Total Apos BDI / Comissões:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="169" y="22" width="80" height="20" backcolor="#CCCCCC" uuid="ea3ca743-449d-42c2-9614-b4a96a047039"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorTotalComBdiComissao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="169" y="2" width="80" height="20" backcolor="#CCCCCC" uuid="70368021-4e8d-4c47-ad72-363e6b022771"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorTotalSemBdiComissao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="42" width="554" height="21" forecolor="#000000" backcolor="#CCCCCC" uuid="b13855c3-0761-4f56-b529-6693351ca319"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPOSTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="65" width="169" height="20" backcolor="#CCCCCC" uuid="214e0563-1b52-4340-8153-b038164e17f2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ISS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="100" width="169" height="20" backcolor="#A8A3A3" uuid="7a24c9b2-0e34-4c02-a010-bf5ee175a249"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFINS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="85" width="169" height="20" backcolor="#CCCCCC" uuid="4f352ee6-dcf8-4c9d-87bc-4be127356287"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFINS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="105" width="169" height="20" backcolor="#CCCCCC" uuid="02a9b05c-a3b4-4ae1-bc3e-0ec4b0398588"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PIS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="125" width="169" height="20" backcolor="#CCCCCC" uuid="02d552d4-f49d-4d7b-9a41-f6aa59e7e260"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CSLL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="145" width="169" height="20" backcolor="#CCCCCC" uuid="41e9c26c-461f-4ab6-bc71-a9f30a6b7bdb"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPOSTOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="65" width="80" height="20" backcolor="#CCCCCC" uuid="e37c6e91-8654-4177-90c3-6ad6e5a9ef5e"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.0%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="85" width="80" height="20" backcolor="#CCCCCC" uuid="a7639d13-3349-451f-9962-3280fbbdeb41"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[3.0%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="105" width="80" height="20" backcolor="#CCCCCC" uuid="90c39582-0c65-4701-a279-735b5177a9db"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[2.88%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="125" width="80" height="20" backcolor="#CCCCCC" uuid="6da2422b-5059-4c40-9cd0-48562b514927"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.8%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="145" width="80" height="20" backcolor="#CCCCCC" uuid="f5a34f60-0520-4b7f-a9a6-1c2adc79e30b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[0.1633%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="165" width="169" height="20" backcolor="#CCCCCC" uuid="8635a0f3-1052-48a6-aca7-632c8ad93edf"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Valor Total com Impostos:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="169" y="165" width="80" height="20" backcolor="#CCCCCC" uuid="dd896075-2b6d-4b2b-9cdd-17bb116bbfa9"/>
+				<textFieldExpression><![CDATA[$F{valorTotalImpostos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="186" width="555" height="21" forecolor="#000000" backcolor="#CCCCCC" uuid="633a2d6f-5d83-48bb-9fd2-2e0631b5295f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL DA PROPOSTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="208" width="169" height="20" backcolor="#CCCCCC" uuid="21e72d18-719d-40b4-ac6e-09f76137b367"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Proposta:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement mode="Opaque" x="169" y="208" width="80" height="20" backcolor="#CCCCCC" uuid="ec6055fd-c569-450f-a5d1-d3c42edb7515"/>
+				<textFieldExpression><![CDATA[$F{valorTotalDaProposta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

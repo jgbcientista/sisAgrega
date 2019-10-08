@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelProfissionalBusca" style="border: none;" rendered="#{propostaBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPanelProfissionalConsulta" style="border: none;">
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>	
+				<p:panelGrid id="painelProposta" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:40% !important;">
+							<p:outputLabel value="Cliente: " style="width: 55px; !important;"/>
+							<p:selectOneMenu id="idcliente" title="Pesquisar por cliente" 
+								style="width:390px !important;" 
+								value="#{propostaBean.filtroIdCliente}"
+								disabled="#{clienteBean.viewCliente}" 
+								onkeypress="return event.keyCode != 13;"
+								panelStyle="width:500px;"
+								effect="fade" 
+								filter="true" filterMatchMode="startsWith">
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{propostaBean.clientes}" var="item"
+									itemLabel="#{item.nome}" itemValue="#{item.id}"/>
+							</p:selectOneMenu>
+					
+						</p:column>
+						<p:column style="width:29% !important;">
+							<p:outputLabel value="Nº Proposta: " />
+							<p:selectOneMenu  title="Pesquisar por número de proposta"
+								id="proposta" 
+								style="width:250px !important;"
+								value="#{propostaBean.filtroNumeroProposta}"  >
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{propostaBean.comboNumeroPropostas}" var="item" itemLabel="#{item.numeroProposta}" itemValue="#{item.numeroProposta}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column style="width:14% !important;">
+							<p:outputLabel value="Inicio" title=" Pesquisar por data de inclusão da proposta"/>
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data incial"
+								pattern="dd/MM/yyyy"
+								value="#{propostaBean.filtroDataInicial}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>	
+						
+						<p:column style="width:15% !important;">	
+							<p:outputLabel value="Fim" />
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data final"
+								pattern="dd/MM/yyyy"
+								value="#{propostaBean.filtroDataFinal}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>
+						<p:column>
+						<p:commandLink 
+						 	id="idAjuda" style="margin-bottom:-17px !important;"
+						 	title="Ajuda módulo Precificação/Proposta"
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form">
+							<b class="icone-splash ico-ajuda"></b>
+						</p:commandLink>
+						
+						</p:column>
+						
+						
+					</p:row>
+				</p:panelGrid>
+			</p:fieldset><br/>	
+			<div align="right">		
+				<p:commandButton title="Pesquisa precificação / proposta"
+					id="idBtPesquisar" 
+					value="Pesquisar"
+					styleClass="btn btn-green"
+					action="#{propostaBean.pesquisarPropostas()}" 
+					update="@form"
+					icon="fa fa-search" >
+				</p:commandButton>
+				<p:commandButton title="Cria uma nova precificação"
+					resetValues="true"
+					id="btNovoProposta" 
+					value="Nova Precificação"
+					styleClass="btn btn-blue"
+					action="#{propostaBean.novaProposta()}" 
+					update="@form"
+					icon="fa fa-plus">
+				</p:commandButton>
+				
+				
+			</div>
+			<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" rendered="#{propostaBean.propostas.size()>0}"/>
+			<p:dataTable id="tablePropostas" styleClass="header-tabelas"
+				var="proposta" 
+				lazy="true"
+				value="#{propostaBean.propostas}"
+				emptyMessage="Nenhuma proposta cadastrada." 
+				rows="10" 
+				rendered="#{propostaBean.propostas.size()>0}"
+				rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" paginator="true"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				>
+			
+				<p:column headerText="Nº Proposta" width="22%" >
+					<h:outputText value="#{proposta.numeroProposta}" />
+				</p:column>
+				
+				<p:column headerText="Cliente" width="19%" >
+					<h:outputText value="#{propostaBean.concatNome(proposta.cliente.nome)}"
+						title="#{proposta.cliente.nome}"/>
+				</p:column>
+				
+				<p:column headerText="Projeto" width="24%">
+					<h:outputText value="#{propostaBean.concatProjeto(proposta.nomeProjeto)}"
+					title="#{proposta.nomeProjeto}" />
+				</p:column>
+				
+				<p:column headerText="Status" width="10%" >
+					<h:outputText value="#{proposta.statusProposta}"/>
+						
+				</p:column>
+							
+				<p:column headerText="Atualizado" width="8%">
+					<h:outputText value="#{proposta.dataAtualizacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				 
+				<!-- <p:column headerText="Valor" width="10%">
+					<h:outputText value="#{propostaBean.proposta.valorTotalComBdiComissao+((propostaBean.proposta.valorTotalComBdiComissao) / (1 - propostaBean.proposta.impostos)  - (propostaBean.proposta.valorTotalComBdiComissao))}">
+						<f:convertNumber currencySymbol="R$" type="currency" />
+					</h:outputText>
+				</p:column> -->
+				<p:column headerText="Ação" width="18%">
+					<p:commandLink 
+					 	id="ver" title="Visualiza precificação e proposta"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas"
+					 	action="#{propostaBean.visualizarProposta(proposta)}"
+					 	rendered="#{proposta.statusProposta == 'Cancelado'? false: true}">
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+					<p:commandLink 
+					 	id="edit" title="Edita precificação e proposta"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas, @form"
+					 	action="#{propostaBean.preEditarProposta(proposta)}"
+					 	rendered="#{proposta.statusProposta == 'Contratada'? false: proposta.statusProposta == 'Não aprovada'? false: proposta.statusProposta == 'Cancelada'? false: true}">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					<p:commandLink 
+					 	id="verHistorico" title="Visualiza o histórico de revisão da precificação"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas"
+					 	rendered="#{proposta.statusProposta == 'Cancelada'? false: true}"
+					 	action="#{propostaBean.consultarHistoricoProposta(proposta)}">
+						<b class="icone-splash ico-relatorio"></b>
+					</p:commandLink>
+					<p:commandLink 
+					 	id="idExcluir"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas"
+					 	rendered="#{proposta.statusProposta == 'Cancelada'? false : proposta.statusProposta == 'Contratada'? false: proposta.statusProposta == 'Não aprovada'? false: true}"
+					 	action="#{propostaBean.preExcluir(proposta)}"
+						title="Exclui uma precificação e proposta">
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+					<p:commandLink 
+					 	id="status" title="#{propostaBean.populaTitulo(proposta.statusProposta)}"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas"
+					 	action="#{propostaBean.preAprovar(proposta)}"
+					 	rendered="#{proposta.statusProposta == 'Emitida'? true: proposta.statusProposta == 'Contratada'? true: proposta.statusProposta == 'Não aprovada'? true: false}">
+						<b class="#{propostaBean.verificarClasseIconeAtivo(proposta.statusProposta)}"></b>
+						
+					</p:commandLink>
+					<p:commandLink 
+					 	id="idMotivo"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tablePropostas"
+					 	rendered="#{proposta.statusProposta == 'Cancelada'? true: false}"
+					 	action="#{propostaBean.vizualizarMotivo(proposta)}"
+						title="Visualiza motivo do cancelamento">
+						<b class="icone-splash ico-info"></b>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			<p:blockUI block="tablePropostas" trigger="idBtPesquisar">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</p:panel>
+	</div>
+</p:panel>
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluir" 
+		widgetVar="dialogExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir? Essa ação não poderá ser revertida!">
+		<center>
+			<p:commandButton 
+				id="bfOK" 
+				update="@form" 
+				process="@this"
+				style="width:110px"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.modalExcluirProposta()}" />
+			<p:commandButton 
+				id="btCancelar"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluir').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<p:dialog id="dialogMotivoExclusao" showEffect="fade"
+		hideEffect="fade" header="Motivo Exclusão"
+		closable="false"
+		widgetVar="dialogMotivoExclusao" style="overflow:hidden"
+		resizable="false" closeOnEscape="true" severity="alert" modal="true" width="25%">
+		<p:ajax event="close" update="painel-motivo-exclusao" listener="#{propostaBean.fecharModalExlusao()}" />
+		<ui:include src="motivo_exclusao.xhtml"/>
+	</p:dialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE NÃO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogNaoExcluir" 
+		widgetVar="dialogNaoExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Essa proposta não pode ser excluida porque já foi finalizada ou está em revisão">
+		<center>
+			<p:commandButton 
+				id="btNaoExcluir"
+				styleClass="btn btn-red"
+				value="OK" 
+				type="button"
+				onclick="PF('dialogNaoExcluir').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE NÃO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogFinalizada" 
+		widgetVar="dialogFinalizada"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Essa proposta já não pode ser mais alterada, pois já está como Contratada ou Não aprovada">
+		<center>
+			<p:commandButton 
+				id="btNaodialogFinalizada"
+				styleClass="btn btn-red"
+				value="OK" 
+				type="button"
+				onclick="PF('dialogFinalizada').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogPreEditar" 
+		widgetVar="dialogPreEditar"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Essa proposta já foi finalizada.Deseja criar uma nova Revisão?">
+		<center>
+			<p:commandButton 
+				id="idConfirma" 
+				update="@form" 
+				process="@this"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.criarNovaRevisao()}"	 />
+			<p:commandButton 
+				id="btCancelarEdicao"
+				update="@form" 
+				process="@this"
+				value="Nao" 
+				styleClass="btn btn-blue"
+				action="#{propostaBean.editProposta()}"  />
+		</center>
+	</p:confirmDialog>
+	
+	<p:confirmDialog 
+		id="dialogEmissao" 
+		widgetVar="dialogEmissao"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="A proposta já foi emitida e não pode ser editada. Deseja criar uma nova Revisão?">
+		<center>
+			<p:commandButton 
+				id="idConfirmaNovaRev" 
+				update="@form" 
+				process="@this"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.criarNovaRevisao()}"	 />
+			<p:commandButton 
+				id="btCancelarVisua"
+				update="@form" 
+				process="@this"
+				value="Nao" 
+				styleClass="btn btn-blue"
+				onclick="PF('dialogEmissao').hide()"   />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE NÃO EDITAR-->
+	<p:confirmDialog 
+		id="dialogNaoPreEditar" 
+		widgetVar="dialogNaoPreEditar"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Essa proposta não pode ser mais revisada, pois já foi aprovada e está sendo usada por um contrato">
+		<center>
+			<p:commandButton 
+				id="btNaoEditar"
+				styleClass="btn btn-red"
+				value="OK" 
+				type="button"
+				onclick="PF('dialogNaoPreEditar').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogAprovar" 
+		widgetVar="dialogAprovar"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Proposta em análise! O que deseja fazer?">
+		<center>
+			<p:commandButton 
+				id="idContrata" title="Aprova e contrata a proposta"
+				update="@form" 
+				style="width: 120px;"
+				process="@this"
+				value="Aprovar" 
+				styleClass="btn btn-green"
+				action="#{propostaBean.aprovarContrato()}" />
+			<p:commandButton 
+				id="idNaoContrata" title="Não aprova a proposta"
+				update="@form" 
+				style="width: 132px;"
+				process="@this"
+				value="Não aprovar" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.naoAprovarProposta()}"
+				onclick="PF('dialogAprovar').hide()" />
+			<p:commandButton 
+				id="idSairAprov" title="Sai e continua em análise"
+				styleClass="btn btn-blue"
+				style="width: 125px;"
+				value="Em analise" 
+				type="button"
+				onclick="PF('dialogAprovar').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+		
+	<p:dialog id="dialogContrato" showEffect="fade"
+		hideEffect="fade" header="Cadastro de Contrato"
+		closable="false"
+		widgetVar="dialogContrato" style="overflow:hidden"
+		resizable="false" closeOnEscape="true" severity="alert" modal="true" width="75%">
+		<p:ajax event="close" update="idPanelCriaContrato"  listener="#{propostaBean.fecharModalContrato()}"/>
+		<ui:include src="criar_contrato.xhtml"/>
+	</p:dialog>
+	
+<style>
+	.ui-fieldset-content td .input-block-level {
+	    width: 123px !important;
+	}
+	
+	.icone-teste{background-image: url('../img/alerta.png'); width: 26px; height: 27px; margin:1px 4px; background-repeat: no-repeat; float: left; vertical-align: middle; }
+	
+	.ui-selectonemenu-panel .ui-selectonemenu-filter {width: 200px !important; padding-right: 150px;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>	
+</html>

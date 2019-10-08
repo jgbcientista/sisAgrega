@@ -1,0 +1,1066 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel id="idPanelPrecificacao" style=" border: none;" align="left" rendered="#{propostaBean.novaPrecificacao}">
+		<div align="right" style="margin-right: 16px !important;">
+		<p:commandButton 
+			title="Sai da precificação"
+			id="btVoltarTela" 
+			style="width: 127px;"
+			value="Sair"
+			action="#{propostaBean.voltar()}" 
+			immediate="true"
+			update="@form" 
+			styleClass="btn btn-red">
+		</p:commandButton>
+		<p:commandButton
+			title="Finaliza a precificação"
+			id="BtFinalizar2" 
+			rendered="#{propostaBean.proposta.statusProposta=='Emitida'? 'false': propostaBean.proposta.statusProposta=='Não aprovada'? 'false': propostaBean.proposta.statusProposta=='Contratada'? 'false': propostaBean.proposta.statusProposta=='Finalizada'? 'false': propostaBean.proposta.getId()==null? 'false':'true'}"
+			value="Finalizar"
+			disabled="#{propostaBean.viewProposta}"
+			immediate="true"
+			styleClass="btn btn-red"
+			action="#{propostaBean.preFinalizar()}" 
+			update="@form">
+		</p:commandButton>
+		<p:commandButton 
+			id="btProximo" 
+			title="Atualiza a precificação"
+			value="#{propostaBean.labelBotaoSalvarPrecificacao}"
+			immediate="false"
+			action="#{propostaBean.salvarPrecificacao()}" 
+			update="@form" 
+			styleClass="btn btn-green"
+			rendered="#{propostaBean.proposta.getId()==null? 'false':'true' and !propostaBean.viewProposta}">
+		</p:commandButton>
+		<p:commandButton 
+			title="Para ir para proposta a precificação deve está finalizada"
+			id="btIrParaProposta" 
+			value="Proposta"
+			rendered="#{propostaBean.proposta.statusProposta=='Emitida'? 'true': propostaBean.proposta.statusProposta=='Não aprovada'? 'true': propostaBean.proposta.statusProposta=='Contratada'? 'true': propostaBean.proposta.statusProposta=='Finalizada'? 'true':'false'}"
+			immediate="true"
+			action="#{propostaBean.irProposta()}" 
+			update="@form" 
+			styleClass="btn btn-green"
+			>
+		</p:commandButton>
+	</div>
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;">
+		<p:outputLabel rendered="#{propostaBean.voltar}" id="idVoltar" >
+		
+	<br></br>
+		<p:fieldset legend="Informações da Precificação" style=" margin-bottom:20px">
+			 <p:panelGrid  id="idPanelGridProposta1" styleClass="ui-noborder">
+			 	<p:row>
+			 		<p:column>
+					 	<p:outputLabel value="Nº da Precificação:" rendered="#{propostaBean.proposta.getId()==null? 'false':'true'}"/>
+			 		</p:column>
+			 		<p:column>
+					 	<p:outputLabel value="#{propostaBean.proposta.numeroProposta}" 
+							style="font-size:16px !important; font-weight:bold !important;"
+							rendered="#{propostaBean.proposta.getId()==null? 'false':'true'}">
+						</p:outputLabel>
+			 		</p:column>
+			 		<p:column>
+						<p:outputLabel value="Data Atualização:" 
+							style="font-size:14px !important; font-weight:bold !important;"
+							title="Essa data é atualizada toda vez que atualiza a precicação/Proposta" />
+			 		</p:column>
+			 		<p:column>
+						<h:outputText value="#{propostaBean.proposta.dataAtualizacao}"
+						style="font-size:16px !important; font-weight:bold !important;">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+				</p:column>
+			 	</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Nome do Cliente:"  for="cliente" />
+					</p:column>
+					<p:column>
+						
+						<p:selectOneMenu id="cliente" required="true" 
+							requiredMessage="Campo cliente é obrigatório"
+							rendered="#{propostaBean.proposta.id==null?'true':'false'}"
+							style="width:390px !important;" panelStyle="width:500px;"
+							value="#{propostaBean.idCliente}"  
+							effect="fade" 
+							filter="true" filterMatchMode="startsWith">
+						 	<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						 	<f:selectItems value="#{propostaBean.clientes}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+						</p:selectOneMenu>
+						<p:inputText disabled="true"
+							rendered="#{propostaBean.proposta.id==null?'false':'true'}" 
+							value="#{propostaBean.proposta.cliente.nome}" 
+							title="#{propostaBean.proposta.cliente.nome}"
+							style="width:406px !important;opacity:1.8 !important; text-overflow: ellipsis; font-size:16px !important; font-weight:bold !important;">
+						</p:inputText>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Responsável:" for="responsavel" />
+					</p:column>
+					<p:column>
+						<p:inputText id="responsavel" disabled="#{propostaBean.viewProposta}" 
+							requiredMessage="Campo responsável é obrigatório." 
+							placeholder="Digite o nome do responsável." 
+							style="width:323px !important; margin-right: -8px;" 
+							value="#{propostaBean.proposta.respProjeto}" required="true">
+						</p:inputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Tipo de Negócio: " for="tpNegocio"/>
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="tpNegocio"  
+								style="width:389px;" disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.proposta.idServicoNegocio}"
+								effect="fade" 
+								filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{propostaBean.tipoServicos}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}">
+							</f:selectItems>
+							<p:ajax event="change" update="descricaoNegocio" listener="#{propostaBean.filtrarServico}"/>
+						</p:selectOneMenu>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Área de negócio:" for="tArea"/>
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="tArea"  style="width:307px;" 
+							 value="#{propostaBean.proposta.idArea}" disabled="#{propostaBean.viewProposta}"
+							 effect="fade" 
+							filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{propostaBean.areas}" var="area" itemLabel="#{area.descricao}" itemValue="#{area.id}" />
+							<p:ajax event="change" update="descricaoNegocio" listener="#{propostaBean.filtrarServico}"/>
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Nome do Projeto:" for="projeto" style="width:132px !important;"/>
+					</p:column>
+					<p:column>
+						<p:inputText id="projeto" disabled="#{propostaBean.viewProposta}" 
+							required="true" placeholder="Digite o nome do projeto." 
+							value="#{propostaBean.proposta.nomeProjeto}" 
+							style="width:96% !important; " 
+							requiredMessage="Campo projeto é obrigatório">
+						</p:inputText>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Nome da Proposta:" for="descrProposta" style="width:150px !important;"/>
+					</p:column>
+					<p:column>
+						<p:inputText id="descrProposta" 
+							disabled="#{propostaBean.viewProposta}" 
+							required="true" value="#{propostaBean.proposta.nomeProposta}" 
+							placeholder="Digite o nome do proposta." 
+							style="width:95% !important; " 
+							requiredMessage="Campo nome da proposta é obrigatório">
+						</p:inputText>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+							<p:outputLabel value="Descrição do serviço:" />
+					</p:column>
+					<p:column colspan="3">
+						<p:selectOneMenu  styleClass="ui-altera-selectMenu" id="descricaoNegocio"
+								style="width:926px;" disabled="#{propostaBean.viewProposta}"
+								 value="#{propostaBean.proposta.idNegocio}"
+								 effect="fade" 
+								filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{propostaBean.servicos}" var="servico" itemLabel="#{servico.descricao}" itemValue="#{servico.id}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				
+			</p:panelGrid>
+				<br />
+			<div align="right" style="margin-right: 16px !important;">
+				<p:outputLabel  rendered="#{propostaBean.proposta.getId()==null? 'true':'false'}"
+				value="Se preferir, escolha um modelo existente para criar uma nova precificação: " style="margin-left: 171px;"/>
+				<p:selectOneMenu  title="número de proposta"
+						rendered="#{propostaBean.proposta.getId()==null? 'true':'false'}"
+						style="width:250px !important; border-bottom:1px solid darkgrey !important;"
+						value="#{propostaBean.propostaModelo}"  >
+						<f:selectItem itemLabel="- Nenhuma -" itemValue="" />
+						<f:selectItems value="#{propostaBean.comboNumeroPropostas}" var="item" itemLabel="#{item.numeroProposta}" itemValue="#{item}" />
+					</p:selectOneMenu><br/><br/>
+					
+				<p:commandButton 
+					id="btVoltarPesquisa" 
+					value="Cancelar"
+					action="#{propostaBean.voltar()}" 
+					immediate="true"
+					update="@form" 
+					styleClass="btn btn-red"
+					rendered="#{propostaBean.proposta.getId()==null? 'true':'false'}">
+				</p:commandButton>
+					<p:commandButton 
+						id="saveProposta" 
+						value="Criar Precificação"
+						immediate="false"
+						action="#{propostaBean.preSalvarProposta()}" 
+						update="@form" 
+						styleClass="btn btn-green"
+						rendered="#{propostaBean.proposta.getId()==null? 'true':'false'}">
+					</p:commandButton>
+				</div>
+				<br />
+			</p:fieldset>
+			<p:fieldset legend="Adicionar despesas da Precificação" style=" margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' and !propostaBean.viewProposta}">
+				<p:panelGrid id="addDesepesasPanel1" style="width: 100%; " styleClass="ui-noborder" rendered="#{!propostaBean.viewProposta}">
+					<p:row>
+						<p:column style="width:143px !important;">
+							<p:outputLabel value="Tipo de Despesa:" for="tipoDespesa" />
+						</p:column>
+						<p:column style="width:270px !important;">
+							<p:selectOneMenu  id="tipoDespesa" style="width:200px !important;" 
+								value="#{propostaBean.tipoItemValor.tipoDespesa}"  >
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{propostaBean.tipoDespesas}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column style="width:110px !important;">
+							<p:outputLabel value="Tipo de Item:" for="tipoUnidade" />
+						</p:column>
+						<p:column>
+							<p:selectOneMenu  id="tipoUnidade" styleClass="ui-altera-selectMenu" 
+								style="width:90px !important; " 
+								value="#{propostaBean.tipoItemValor.tpUnidadeMedida}"  >
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{propostaBean.tiposUnidades}" var="unidade" itemLabel="#{unidade}" itemValue="#{unidade}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column style="width:86px !important;">
+							<p:outputLabel value="Tipo tabela:" for="tipotb" />
+						</p:column>
+						<p:column  style="width:261px !important;">
+							<p:selectOneMenu  id="tipotb" styleClass="ui-altera-selectMenu" 
+								style="width:90px !important; " 
+								value="#{propostaBean.tipoItemValor.tpUnidadeMedida}"  >
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{propostaBean.tiposUnidades}" var="unidade" itemLabel="#{unidade}" itemValue="#{unidade}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>	
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Quantidade:" />
+						</p:column>
+						<p:column>
+							<p:inputMask id="quantiImpt" process="@this" mask="9?9999" maxlength="5" 
+								style="width:121px !important;"
+								slotChar=" "
+								value="#{propostaBean.tipoItemValor.quantidade}"
+								placeholder="Quantidade."
+								disabled="#{propostaBean.viewProposta}">
+							</p:inputMask>
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Vlr.Unitário R$:" />
+						</p:column>
+						<p:column>
+							<p:inputText 	
+								id="vlCustoExecucao" 
+								style="width:110px !important; "
+								placeholder="Valor unitário"
+								disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.tipoItemValor.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+							</p:inputText>
+						</p:column>
+					</p:row>	
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Despesa descrição:"/>
+						</p:column>
+						<p:column colspan="5">
+							<p:inputText id="obs" 
+								style="width:744px !important; "
+								placeholder="Digite a descrição."
+								disabled="#{propostaBean.viewProposta}"
+								maxlength="200"
+								value="#{propostaBean.tipoItemValor.observacao}">
+								<f:ajax event="change"/>
+							</p:inputText>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<div align="right">
+					<p:commandButton 
+						id="addCustoExecucao" 
+						disabled="#{propostaBean.viewProposta}"
+						immediate="false"
+						update="@form, tabelaListaExecucao"
+						value="#{propostaBean.labelBotaoAdicionar}"
+						styleClass="btn btn-green"
+						action="#{propostaBean.adicionarTipoItem()}" >
+					</p:commandButton>
+				</div>
+				</p:fieldset>	
+					
+				<p:fieldset legend="Planilha de Cálculo da Precificação" style=" margin-bottom:20px" 
+				rendered="#{propostaBean.listExecucaoTemp.size()>0 || propostaBean.listDeslocamentoTemp.size()>0 || propostaBean.listOperacionalTemp.size()>0
+				|| propostaBean.listSegurancaTemp.size()>0 || propostaBean.listAdministrativoTemp.size()>0}">
+					<p:dataTable styleClass="header-tabelas" id="tabelaListaExecucao" 
+						widgetVar="widAtivo"
+						rendered="#{propostaBean.listExecucaoTemp.size()>0}"
+						value="#{propostaBean.listExecucaoTemp}" 
+						var="resulte"
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+					 	emptyMessage="Nenhum registro encontrado."
+					 	scrollable="true" scrollHeight="150"
+					 	pageLinks="4">
+					 	
+					 	<p:column headerText="Editar" width="5%">
+							<p:commandLink 
+							 	id="editExecuca" 
+							 	ajax="false"
+							 	update="addDesepesasPanel1"
+							 	action="#{propostaBean.editarCustoExecucao(resulte)}"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+						</p:column>
+					 	
+					 	<p:column headerText="Descrição Despesa de Execução" width="50%" sortBy="#{resulte.observacoes}">
+							<p:outputLabel value="#{resulte.observacoes == null? '-' : resulte.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{resulte.tpUnidadeMedida}">
+							<p:outputLabel value="#{resulte.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{resulte.quantidade}">
+							<p:outputLabel value="#{resulte.quantidade}" />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{resulte.valorUnitario}">
+							<p:outputLabel 
+								value="#{resulte.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{resulte.valorTotal}">
+							<p:outputLabel 
+								value="#{resulte.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+	
+						<p:column headerText="Excluir" width="5%">
+							<p:commandLink 
+							 	id="removerCusto" 
+							 	immediate="true"
+							 	ajax="false"
+							 	update="@form:tabelaListaExecucao"
+							 	disabled="#{propostaBean.viewProposta || propostaBean.btAtivo}"
+							 	process="tablePropostas"
+							 	action="#{propostaBean.preExcluirDespesaExcecucao(resulte, 1)}"
+								title="Excluir"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+						</p:column>
+						
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesa de Execução R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									id="vlTotalExecucao" 
+									disabled="true"
+									value="#{propostaBean.proposta.valorTotalCustosExecucao}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+				<!-- </p:fieldset> -->
+				<!-- <p:fieldset legend="Despesas de Deslocamento" style="margin-bottom:20px" rendered="#{propostaBean.proposta.despesasDeslocamentos.size()>0}"> -->	
+					<p:dataTable styleClass="header-tabelas"  id="tableCustoDeslocamento" 
+						rendered="#{propostaBean.listDeslocamentoTemp.size()>0}"
+						value="#{propostaBean.listDeslocamentoTemp}"
+						var="despesasDeslocamento"
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhum custo cadastrado" 
+						scrollable="true" scrollHeight="150">
+					
+						<p:column headerText="Editar" width="5%">
+							<p:commandLink 
+							 	id="editDesloc" 
+							 	ajax="false"
+							 	update="addDesepesasPanel1"
+							 	action="#{propostaBean.editarCustoDeslocamento(despesasDeslocamento)}"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column headerText="Descrição Despesa de Deslocamento" width="50%" sortBy="#{despesasDeslocamento.observacoes}">
+							<p:outputLabel value="#{despesasDeslocamento.observacoes == null? '-' : despesasDeslocamento.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{despesasDeslocamento.tpUnidadeMedida}">
+							<p:outputLabel value="#{despesasDeslocamento.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{despesasDeslocamento.quantidade}">
+							<p:outputLabel value="#{despesasDeslocamento.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário (R$)" width="15%" sortBy="#{despesasDeslocamento.valorUnitario}">
+							<p:outputLabel 
+								value="#{despesasDeslocamento.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{despesasDeslocamento.valorTotal}">
+							<p:outputLabel 
+								value="#{despesasDeslocamento.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Excluir" width="5%">
+							 <p:commandLink 
+							 	id="removerDeslocamento" 
+							 	immediate="true"
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta || propostaBean.btAtivo}"
+							 	process="tablePropostas"
+							 	action="#{propostaBean.preExcluirDespesaDeslocamento(despesasDeslocamento, 2)}"
+								title="Excluir"
+								style="text-decoration:underline;" >
+									<p:collector unique="true" value="#{despesasDeslocamento}"
+											removeFrom="#{propostaBean.proposta.despesasDeslocamentos}" />
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+						</p:column>
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesas de Deslocamento R$ " />
+								<p:outputLabel style="margin-left: 948px; margin-top: -25px;"
+									id="vlTotalDeslocamento" 
+									disabled="true"
+									value="#{propostaBean.proposta.valorTotalCustosDesclocamento}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+				<!-- </p:fieldset> -->
+				<!-- <p:fieldset legend="Despesas Operacionais" style="margin-bottom:20px" rendered="#{propostaBean.proposta.despesasOperacionais.size()>0}"> -->
+					<p:dataTable styleClass="header-tabelas" id="tableCustoOperacional" 
+						rendered="#{propostaBean.listOperacionalTemp.size()>0}"
+						value="#{propostaBean.listOperacionalTemp}"
+						var="operacional" 
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhuma Desepesa Operacioanl cadastrada" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Editar" width="5%">
+							<p:commandLink 
+							 	id="editOperacional" 
+							 	ajax="false"
+							 	update="addDesepesasPanel1"
+							 	action="#{propostaBean.editarCustoOperacional(operacional)}"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+						</p:column>
+	
+						<p:column headerText="Descrição despesa Operacional" width="50%" sortBy="#{operacional.observacoes}">
+							<p:outputLabel value="#{operacional.observacoes == null? '-' : operacional.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{operacional.tpUnidadeMedida}">
+							<p:outputLabel value="#{operacional.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{operacional.quantidade}">
+							<p:outputLabel value="#{operacional.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário (R$)" width="15%" sortBy="#{operacional.valorUnitario}">
+							<p:outputLabel 
+								value="#{operacional.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total (R$)" width="12%" sortBy="#{operacional.valorTotal}">
+							<p:outputLabel 
+								value="#{operacional.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+	
+						<p:column headerText="Excluir" width="5%">
+							 <p:commandLink 
+							 	immediate="true"
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta || propostaBean.btAtivo}"
+							 	process="tablePropostas"
+							 	action="#{propostaBean.preExcluirDespesaOperacional(operacional, 3)}"
+								title="Excluir"
+								style="text-decoration:underline;" >
+									<p:collector unique="true" value="#{operacional}"
+											removeFrom="#{propostaBean.proposta.despesasOperacionais}" />
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+						</p:column>
+						<f:facet name="footer">
+							<div align="left">
+							<p:outputLabel value="Total Despesas Operacionais R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									id="vlTotalOperacional" 
+									disabled="true"
+									value="#{propostaBean.proposta.valorTotalCustosOperacionais}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+				<!-- </p:fieldset> -->
+				<!-- <p:fieldset legend="Despesas com Segurança" style="margin-bottom:20px" rendered="#{propostaBean.proposta.despesasSeguranca.size()>0}"> -->
+					<p:dataTable styleClass="header-tabelas" id="tableCustoSeguranca"
+						rendered="#{propostaBean.listSegurancaTemp.size()>0}"
+						value="#{propostaBean.listSegurancaTemp}"
+						var="seguranca" 
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhuma Desepesa com segurança cadastrada" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Editar" width="5%">
+							<p:commandLink 
+							 	id="editSeguranca" 
+							 	ajax="false"
+							 	update="addDesepesasPanel1"
+							 	action="#{propostaBean.editarCustoSeguranca(seguranca)}"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column headerText="Descrição Despesa com Segurança" width="50%" sortBy="#{seguranca.observacoes}">
+							<p:outputLabel value="#{seguranca.observacoes == null? '-' : seguranca.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{seguranca.tpUnidadeMedida}">
+							<p:outputLabel value="#{seguranca.tpUnidadeMedida}" style="text-align: center;"/>
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{seguranca.quantidade}">
+							<p:outputLabel value="#{seguranca.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{seguranca.valorUnitario}">
+							<p:outputLabel 
+								value="#{seguranca.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total(R$)" width="12%" sortBy="#{seguranca.valorTotal}">
+							<p:outputLabel 
+								value="#{seguranca.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Excluir" width="5%">
+							 <p:commandLink 
+							 	immediate="true"
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta || propostaBean.btAtivo}"
+							 	process="tablePropostas"
+							 	action="#{propostaBean.preExcluirDespesaSeguranca(seguranca, 4)}"
+								title="Excluir"
+								style="text-decoration:underline;" >
+								<p:collector unique="true" 
+									value="#{seguranca}"
+									removeFrom="#{propostaBean.proposta.despesasSeguranca}" />
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+						</p:column>
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesas com Segurança R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									id="vlTotalSeguranca" 
+									disabled="true"
+									value="#{propostaBean.proposta.valorTotalCustosSeguranca}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable>
+				<!-- </p:fieldset> -->
+				<!-- <p:fieldset legend="Despesas Administrativas" style="margin-bottom:20px" rendered="#{propostaBean.proposta.despesasAdministrativas.size()>0}"> -->
+					<p:dataTable styleClass="header-tabelas" id="tableCustoAdm"
+						rendered="#{propostaBean.listAdministrativoTemp.size()>0}"
+						value="#{propostaBean.listAdministrativoTemp}"
+						var="adm" 
+						style="width: 100%; border-left-style:groove; border-right-style: groove;  border-width: thin;"
+						emptyMessage="Nenhuma Desepesa administrativa cadastrada" 
+						scrollable="true" scrollHeight="150">
+						
+						<p:column headerText="Editar" width="5%">
+							<p:commandLink 
+							 	id="editAdm" 
+							 	ajax="false"
+							 	update="addDesepesasPanel1"
+							 	action="#{propostaBean.editarCustoAdministrativo(adm)}"
+								style="text-decoration:underline; text-align:center;" >
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+						</p:column>
+						
+						<p:column headerText="Descrição Despesas Administrativas" width="50%" sortBy="#{adm.observacoes}">
+							<p:outputLabel value="#{adm.observacoes == null? '-' : adm.observacoes}" />
+						</p:column>
+						
+						<p:column headerText="Tipo" width="7%" sortBy="#{adm.tpUnidadeMedida}">
+							<p:outputLabel value="#{adm.tpUnidadeMedida}" style="text-align: center;" />
+						</p:column>
+						
+						<p:column headerText="Quantidade" width="8%" sortBy="#{adm.quantidade}">
+							<p:outputLabel value="#{adm.quantidade}"  />
+						</p:column>
+						
+						<p:column headerText="Vlr Unitário(R$)" width="15%" sortBy="#{adm.valorUnitario}">
+							<p:outputLabel 
+								value="#{adm.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Vlr Total(R$)" width="12%" sortBy="#{adm.valorTotal}">
+							<p:outputLabel 
+								value="#{adm.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+						</p:column>
+						
+						<p:column headerText="Excluir" width="5%">
+							 <p:commandLink 
+							 	immediate="true"
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta || propostaBean.btAtivo}"
+							 	process="tablePropostas"
+							 	action="#{propostaBean.preExcluirDespesaAdministrativa(adm, 5)}"
+								title="Excluir"
+								style="text-decoration:underline;" >
+								<p:collector unique="true" 
+									value="#{adm}"
+									removeFrom="#{propostaBean.proposta.despesasAdministrativas}" />
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+						</p:column>
+						<f:facet name="footer">
+							<div align="left">
+								<p:outputLabel value="Total Despesas Administrativas R$ " />
+								<p:outputLabel style="margin-left: 949px; margin-top: -25px;"
+									id="vlTotalAdministrativo" 
+									disabled="true"
+									value="#{propostaBean.proposta.valorTotalCustosAdministrativos}">
+									<f:convertNumber pattern="#,##0.00"/>
+								</p:outputLabel >
+							</div>
+						</f:facet>
+					</p:dataTable><br></br>
+					<p:outputLabel value="Total Geral das Despesas R$ " style="font-size:15px;"/>
+					<p:outputLabel style="font-size:15px !important; margin-left: 220px; margin-top: -25px; "
+						value="#{propostaBean.proposta.valorTotalSemBdiComissao}">
+						<f:convertNumber pattern="#,##0.00"/>
+					</p:outputLabel>
+				 </p:fieldset>
+				<div>
+				<p:fieldset legend="BDI e Comissão" style=" margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}">	
+					<p:panelGrid columns="5" id="pidBDIcomissao" style="width: 34%; " styleClass="ui-noborder" >
+						<p:outputLabel value="Percentual BDI:" style="width: 100px;" disabled="#{propostaBean.viewProposta}" />
+							<p:inputText id="idBdi" 
+								process="@this" 
+								maxlength="5" 
+								style="width:65px !important;"
+								slotChar=" "
+								value="#{propostaBean.proposta.percentualBDI}"
+								placeholder="BDI %"
+								required="false"
+								requiredMessage="Campo BDI obrigatório."
+								disabled="#{propostaBean.viewProposta}">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								<p:ajax event="change" update="vrTotalAposBdiComissoes, idCadaBDI,idImpostos,valorTotalProp" listener="#{propostaBean.calcularBDIComissao}"/>
+							</p:inputText>
+							<p:outputLabel value="%" style="width: 10px; margin-left:-15px;"  />
+							<p:outputLabel value="R$" style="width: -95px;"  />
+							<p:outputLabel id="idCadaBDI"  style="margin-left:-50px;"
+								value="#{propostaBean.proposta.valorTotalSemBdiComissao * propostaBean.proposta.percentualBDI/100}" disabled="true" >
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+							
+						<p:outputLabel value="Percentula de Comissão:" />
+							<p:inputText id="comissao"  
+								process="@this" 
+								maxlength="5" 
+								slotChar=" "
+								style="width:65px !important;"
+								value="#{propostaBean.proposta.percentualComissao}"
+								placeholder="comissão%"
+								required="false"
+								requiredMessage="Campo BDI obrigatório."
+								disabled="#{propostaBean.viewProposta}">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+								<p:ajax event="change" update="vrTotalAposBdiComissoes,idCadaComissao,idImpostos,valorTotalProp" listener="#{propostaBean.calcularBDIComissao}"/>
+							</p:inputText>
+							<p:outputLabel value="%" style="width: 10px; margin-left:-15px;"  />
+							<p:outputLabel value="R$" style="width: 58px;"  />
+							<p:outputLabel id="idCadaComissao" style="margin-left:-50px;"
+								value="#{propostaBean.proposta.valorTotalDaProposta * propostaBean.proposta.percentualComissao/100}" disabled="true">
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+
+							<p:outputLabel value="Total Após BDI/Comissões R$ " style="width:205px; font-weight:bold !important; margin-top:4px;"/>
+							<p:outputLabel id="vrTotalAposBdiComissoes" style="font-weight:bold !important; margin-top:4px;"
+								value="#{propostaBean.proposta.valorTotalComBdiComissao}" disabled="true" >
+								<f:convertNumber pattern="#,##0.00"/>
+							</p:outputLabel>
+							<p:outputLabel value=" "></p:outputLabel>
+							
+					</p:panelGrid>
+				</p:fieldset>
+				</div>
+		 					
+				<p:fieldset legend="Impostos" style=" margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}">	
+					<p:panelGrid columns="3" id="idImpostos" style="width: 50%; " columnClasses="rotulo, campo">
+						
+						<p:outputLabel value="Imposto" />
+						<p:outputLabel value="Percentual" />
+						<p:outputLabel value="Valor(R$)" />
+						
+						<p:outputLabel value="ISS:" />
+						<h:outputLabel id="iss" style="width:80px;" value="#{propostaBean.proposta.iss}%" />
+						<h:outputFormat id="issValor" value="#{((propostaBean.proposta.valorTotalComBdiComissao / (1 - propostaBean.proposta.impostos)-propostaBean.proposta.valorTotalComBdiComissao)+ propostaBean.proposta.valorTotalComBdiComissao) * (propostaBean.proposta.iss/100)}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+
+						<p:outputLabel value="Cofins:" />
+						<h:outputLabel id="cofins" style="width:80px;" value="#{propostaBean.proposta.cofins}%" />
+						<h:outputFormat id="cofinsValor" value="#{((propostaBean.proposta.valorTotalComBdiComissao / (1 - propostaBean.proposta.impostos)-propostaBean.proposta.valorTotalComBdiComissao)+ propostaBean.proposta.valorTotalComBdiComissao) * (propostaBean.proposta.cofins/100)}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+
+						<p:outputLabel value="PIS:" />
+						<h:outputLabel id="pis" style="width:100px;" value="#{propostaBean.proposta.pis}%" />
+						<h:outputFormat id="pisValor"  value="#{((propostaBean.proposta.valorTotalComBdiComissao / (1 - propostaBean.proposta.impostos)-propostaBean.proposta.valorTotalComBdiComissao)+ propostaBean.proposta.valorTotalComBdiComissao) * (propostaBean.proposta.pis/100)}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+
+						<p:outputLabel value="CSLL:" />
+						<h:outputLabel id="csll" style="width:100px;" value="#{propostaBean.proposta.csll}%" />
+						<h:outputFormat id="csllValor" value="#{((propostaBean.proposta.valorTotalComBdiComissao / (1 - propostaBean.proposta.impostos)-propostaBean.proposta.valorTotalComBdiComissao)+ propostaBean.proposta.valorTotalComBdiComissao) * (propostaBean.proposta.csll/100)}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+
+						<p:outputLabel value="IR:" />
+						<h:outputLabel id="ir" style="width:100px;" value="#{propostaBean.proposta.ir}%" />
+						<h:outputFormat id="irValor" value="#{((propostaBean.proposta.valorTotalComBdiComissao / (1 - propostaBean.proposta.impostos)-propostaBean.proposta.valorTotalComBdiComissao)+ propostaBean.proposta.valorTotalComBdiComissao) * (propostaBean.proposta.ir/100)}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+
+						<p:outputLabel value="Total Impostos:" />
+						<h:outputLabel id="impostos" style="width:100px;" value="16.33%" />
+						<h:outputFormat id="impostosValor"  value="#{((propostaBean.proposta.valorTotalComBdiComissao) / (1 - propostaBean.proposta.impostos)  - (propostaBean.proposta.valorTotalComBdiComissao))}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</h:outputFormat>
+						
+					</p:panelGrid>
+				</p:fieldset>
+			
+			<p:fieldset legend="Desconto" style="margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}">	
+				<p:panelGrid columns="2" id="isDesconto" style="width: 35%; " styleClass="ui-noborder" >
+					<p:outputLabel value="Total de Desconto R$:" style=" font-size:17px !important;"/>
+					<p:inputText id="desconto"  
+						process="@this" 
+						maxlength="10" 
+						slotChar=" "
+						style="width:160px !important; margin-left:-50px"
+						value="#{propostaBean.proposta.desconto}"
+						placeholder="Informe o desconto"
+						disabled="#{propostaBean.viewProposta}">
+						<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+						<p:ajax event="change" update="valorTotalProp"/>
+					</p:inputText>
+				
+				</p:panelGrid>
+			</p:fieldset>
+							 	
+			 <p:fieldset legend="Valor total da Precificação/Proposta" style="margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}">	
+				<p:panelGrid columns="2" id="isTotolProposta" style="width: 35%; " styleClass="ui-noborder" >
+					<p:outputLabel value="Total Proposta R$:" style=" font-size:17px !important;"/>
+					<p:outputLabel id="valorTotalProp" 
+						style="width:183px; font-weight:bold !important; font-size: 17px !important; margin-left:-60px"
+						value="#{propostaBean.proposta.valorTotalComBdiComissao+((propostaBean.proposta.valorTotalComBdiComissao) / (1 - propostaBean.proposta.impostos)  - (propostaBean.proposta.valorTotalComBdiComissao))-(propostaBean.proposta.desconto)}"
+						disabled="true" >
+						<f:convertNumber pattern="#,##0.00"/>
+					</p:outputLabel>
+				</p:panelGrid>
+			</p:fieldset>
+			<br />
+			<p:fieldset legend="Itens da Planilha Financeira" style=" margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}"> 
+				<p:growl id="msgs"/>
+				<p:panelGrid id="idPlanilha" style="width: 98%; " styleClass="ui-noborder" rendered="#{!propostaBean.viewProposta}">
+					<p:row>
+						<p:column style="width: 130px !important;">
+							<p:outputLabel value="Descrição do Item:"/>
+						</p:column>
+						<p:column colspan="7">
+							<p:inputText id="descPlaFin" 
+								style="width:98% !important;"
+								placeholder="Digite a descrição da planilha financeira."
+								disabled="#{propostaBean.viewProposta}"
+								maxlength="200"
+								value="#{propostaBean.custoPlanilhaFinanceira.descricao}">
+							</p:inputText>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel value="H x h" />
+						</p:column>
+						<p:column style="width:100px !important;">
+							<p:inputMask id="qtHH" process="@this" mask="9?9999" maxlength="5" 
+								style="width:100px !important;"
+								slotChar=" "
+								value="#{propostaBean.custoPlanilhaFinanceira.quantidade}"
+								disabled="#{propostaBean.viewProposta}">
+							</p:inputMask>
+						</p:column>
+					
+						<p:column style="width:110px !important;">
+							<p:outputLabel value="Valor H x h R$:" style="width:110px !important;"/>
+						</p:column>
+						<p:column style="width:110px !important;">
+							<p:inputText id="vlCustoHora" 
+								style="width:110px !important;"
+								disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.custoPlanilhaFinanceira.valorUnitario}">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+							</p:inputText>
+						</p:column>
+				
+						<p:column style="width:94px !important;">
+							<p:outputLabel value="Valor Total R$:" style="width:94px !important;"/>
+						</p:column>
+						<p:column style="width:110px !important;">
+							<p:inputText id="vlTotal" 
+								style="width:92px !important;"
+								disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.custoPlanilhaFinanceira.valorTotal}">
+								<f:convertNumber pattern="#,##0.00"></f:convertNumber>
+							</p:inputText>
+						</p:column>
+						<p:column>
+							<p:commandButton 
+								id="addCustoHH" 
+								disabled="#{propostaBean.viewProposta}"
+								immediate="false"
+								update="@form"
+								value="Adicionar"
+								styleClass="btn btn-green"
+								action="#{propostaBean.adicionarTipoItemHH()}" >
+							</p:commandButton>
+						</p:column>
+						<p:column ></p:column>
+					</p:row>
+					
+				</p:panelGrid>
+			<br />	
+			<p:fieldset legend="Planilha Financeira" style="margin-bottom:20px" rendered="#{propostaBean.listCustoPlanFinanceiraTemp.size()>0}"> 		
+				<p:dataTable 
+					styleClass="header-tabelas" 
+					id="tabelaPlanilhaFinanceira"
+					widgetVar="tabelaPlanilhaFinanceira"
+					rendered="#{propostaBean.listCustoPlanFinanceiraTemp.size()>0}"
+					value="#{propostaBean.listCustoPlanFinanceiraTemp}" 
+					var="resulte"
+					style="width: 100%;"
+				 	emptyMessage="Nenhum registro encontrado."
+				 	rows="100"
+				 	pageLinks="4">
+				 	
+					<p:column headerText="ITENS" style="width: 53%;">
+						<p:outputLabel value="#{resulte.descricao}" />
+					</p:column>
+
+					<p:column headerText="H X h" style="width: 8%;">
+						<p:outputLabel value="#{resulte.quantidade}" />
+					</p:column>
+					<p:column headerText="VALOR DO H X h" style="width: 13%;">
+						<p:outputLabel 
+							value="#{resulte.valorUnitario}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+					<p:column headerText="VALOR (R$)" style="width: 13%;">
+						<p:outputLabel value="#{resulte.valorTotal}" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel>
+					</p:column>
+				 
+					<p:column headerText="Ação" style="width: 8%;">
+						 <p:commandLink 
+							id="editarItemPropostaTec" 
+							ajax="false"
+						 	disabled="#{propostaBean.viewProposta}"
+						 	update="idPlanilha"
+						 	action="#{propostaBean.editarPlanilhaFinan(resulte)}"
+							title="Editar"
+							style="text-decoration:underline; text-align:center;" >
+							<b class="icone-splash ico-editar"></b>
+						</p:commandLink>
+						 <p:commandLink 
+						 	id="removerPlanilhaFinanceira" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form:tabelaPlanilhaFinanceira"
+						 	disabled="#{propostaBean.viewProposta}"
+						 	process="tablePropostas"
+						 	action="#{propostaBean.preExcluirPlanFinanceira(resulte, 6)}"
+							title="Excluir"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-excluir"></b>
+						</p:commandLink>
+					</p:column>
+					<p:column rendered="false" >
+						<p:outputLabel 
+							value="#{propostaBean.proposta.valorTotalCustoPlanilhaFinanceira}">
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:outputLabel >
+					</p:column>
+              </p:dataTable>
+              <p:panelGrid>
+	              <p:row style="background: linear-gradient(to bottom, rgba(221,235,229,1) 0%, rgba(167,200,187,1) 100%) !important;">
+	              	<p:column style="width: 78%;">TOTAL GERAL</p:column>
+	              	<p:column>
+	              		<p:outputLabel 
+							id="vlTotalPlaFin" disabled="true"
+							value="#{propostaBean.proposta.valorTotalCustoPlanilhaFinanceira}">
+							<f:convertNumber type="currency" currencySymbol="R$" />
+						</p:outputLabel >
+	               	</p:column>
+	              </p:row>
+	              <p:row>
+	              	<p:column style="width: 78%;">DESCONTO</p:column>
+	               	<p:column>
+	               		<p:inputText id="vlDesconto" 
+								style="width:100px !important;"
+								disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.proposta.descPlanFin}">
+								<f:convertNumber pattern="#,##0.00"/>
+								<p:ajax event="change" update="vlrNegociado, btIrParaProposta" listener="#{propostaBean.habilitaDesabilitaIrPara()}"/>	
+							</p:inputText>
+	               	</p:column>
+	              </p:row>
+	              <p:row style="background: linear-gradient(to bottom, rgba(221,235,229,1) 0%, rgba(167,200,187,1) 100%) !important;">
+	              	<p:column >TOTAL NEGOCIADO</p:column>
+	               	<p:column>
+	               		<p:outputLabel id="vlrNegociado" disabled="true"
+							value="#{propostaBean.calculoDesconto()}">
+							<f:convertNumber type="currency" currencySymbol="R$" />
+						</p:outputLabel >
+					</p:column>
+	              </p:row>
+              </p:panelGrid>
+		</p:fieldset>
+		</p:fieldset>
+		<p:fieldset legend="Considerações Finais" style="margin-bottom:20px" rendered="#{propostaBean.proposta.getId()==null? 'false':'true' || !propostaBean.viewProposta}" > 		
+			<p:panelGrid columns="1" id="idPanelGridConsideracoes" style="width: 100%; margin-top: 0px" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<h:inputTextarea id="consideracoes" 
+					style="width:100% !important; height:100px !important;"
+					value="#{propostaBean.proposta.consideracoesFinais}" 
+					maxlength="3400"
+					disabled="#{propostaBean.viewProposta}"
+					placeholder="Considerações finais da precificação"
+					cols="6"/>	
+			</p:panelGrid>
+		</p:fieldset>			
+			 <br />
+			<div align="right">
+		<p:commandButton 
+			title="Sai da precificação"
+			id="btsair" 
+			value="Sair"
+			action="#{propostaBean.voltar()}" 
+			immediate="true"
+			style="width: 127px;"
+			update="@form" 
+			styleClass="btn btn-red"
+			rendered="#{propostaBean.proposta.getId()==null? 'false':'true'}">
+		</p:commandButton>
+		</div>
+ 		</p:outputLabel>
+			<p:blockUI block="idPanelPrecificacao" trigger=" saveProposta">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+		</div>
+	</p:panel>
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluirDespesa" 
+		widgetVar="dialogExcluirDespesa"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir esse desepesa?">
+		<center>
+			<p:commandButton 
+				id="bfOK1" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.excluirDespesas()}" />
+			<p:commandButton 
+				id="btCancelar1"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluirDespesa').hide()"  />
+		</center>
+	</p:confirmDialog>
+<style>
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled, 
+		.ui-widget-header .ui-state-disabled {
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger, 
+		.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-label{
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	
+	.ui-selectonemenu label.ui-selectonemenu-label{
+	border-bottom: 1px solid seashell;
+	}
+}
+</style>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:o="http://omnifaces.org/ui" 
+	lang="pt-br">
+  <f:view>
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-language" content="pt_BR" />
+	<link rel="shotcut icon"
+		href="#{facesContext.externalContext.requestContextPath}/resources/img/ddd.png" />
+	<ui:insert name="header-css" />
+	<ui:insert name="metadata" />
+	
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	</f:facet>
+<!--  <title>SISTEMA INTEGRA</title> -->
+  <title>SISTEMA INTEGRA - HOMOLOGACAO E TESTE</title> 
+   
+	<link
+		href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" />
+	<f:facet name="last">
+		<link
+			href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css"
+			rel="stylesheet" type="text/css" />
+	</f:facet>
+</h:head>
+
+<h:body styleClass="dashboard">
+
+	<div class="barra-top"></div>
+
+	<div class="access">
+		<div class="collapse" id="access-icons">
+			<div class="container">
+				<div class="row">
+					<div class="span6">
+						<ul class="inline">
+							<li><a tabindex="2" href="#nav"
+								title="#{msgs['label.navegacao']}">Acessibilidade</a></li>
+						</ul>
+					</div>
+					<div class="span6">
+						<ul class="inline text-right regular-font-page">
+							<li><a tabindex="3" class="font-more" href="javascript:;"
+								title="Aumentar Fonte"> <img
+									src="#{facesContext.externalContext.requestContextPath}/resources/img/font-more.png"
+									alt="Aumentar Fonte" /></a></li>
+							<li><a tabindex="4" class="font-reset" href="javascript:;"
+								title="Fonte Padrão"><img
+									src="#{facesContext.externalContext.requestContextPath}/resources/img/font-default.png"
+									alt="Fonte Padrão" /></a></li>
+							<li><a tabindex="5" class="font-min" href="javascript:;"
+								title="Diminuir Fonte"><img
+									src="#{facesContext.externalContext.requestContextPath}/resources/img/font-dec.png"
+									alt="Diminuir Fonte" /></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- .access -->
+	<div class="container text-right back-top">
+		<a accesskey="0" title="#{msgs['alt.icone.acessibilidade']}"
+			tabindex="1" class="access-icon" data-toggle="collapse"
+			href="#access-icons"><img
+			src="#{facesContext.externalContext.requestContextPath}/resources/img/access-icon.png"
+			alt="#{msgs['alt.icone.acessibilidade']}" /> </a>
+	</div>
+
+	<div class="header-main">
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span3 ">
+					<h:link outcome="home" title="#{msgs['label.titulo.portal']}"
+						class="hidden-phone tj-logo">
+						<img id="log-top" style=" position:inherit; left: 170px; top: 46px;"
+							src="#{facesContext.externalContext.requestContextPath}/resources/img/logo_template4.png"
+							alt="" />
+					</h:link>
+				</div>
+
+				<div class="span9 logo" style="margin-top: 4px; border:none; ">
+	  		        <!-- <h1 style="margin-left: 0px; margin-top: 41px;">INTEGRA - INTELIGÊNCIA NO GERENCIAMENTO RÁPIDO AGREGA</h1> --> 
+	  		       <h1 style="margin-left: 0px; margin-top: 41px; color:red;">INTEGRA - VERSÃO DE HOMOLOGAÇÃO E TESTES</h1>                                            
+					<h2 style="text-align:right !important; margin-top:15px;">
+						<strong ><h:outputText value=" Seja bem-vindo, " /></strong>
+						<h:outputText value="#{menuBean.usuario.nome}. " />
+						<h:outputText value="Você possui " />
+						<h:link outcome="mensagem_usuario" title="Mensagens" accesskey="m">
+							<u> #{mensagemBean.listaMensagesByUsuario.size()} mensagens </u>
+						</h:link>
+					</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- inicio div tooltip -->
+	<div id="navtxt" class="navtext"
+		style="position: absolute; top: 0px; left: 0px; visibility: hidden; z-index: 200"></div>
+	<!-- final div tooltipe -->
+
+	<div class="nav-menu" >
+		<div class="shadow-top"></div>
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<a class="btn btn-navbar" data-toggle="collapse"
+						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+					</a>
+					<div class="nav-collapse collapse">
+						<ul class="nav" id="nav">
+							<ui:fragment>
+							<!-- PLANEJAR - INICIO -->
+							
+								<p:column rendered="#{(menuBean.profissional !=null ? 'true' : 'false') and menuBean.diretor || menuBean.adm}"> 
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" id="idAdministrador"
+										style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+										title="Planejar"
+										href="javascript:;" accesskey="p"><u>P</u>lanejar <b class="caret"></b> </a>
+									<ul class="dropdown-menu" style="min-width:208px !important; ">
+										<li class="dropdown"><a data-toggle="dropdown"
+											class="dropdown-toggle" id="idAdministrador"
+											style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+											title="Cadastrar"
+											href="javascript:;" accesskey="m"><u>C</u>adastrar
+											<b class="caret"></b> </a>
+											<ul class="dropdown-menu" style="min-width:208px !important; ">
+												<li>
+													<h:link outcome="cliente" title="Cliente" accesskey="c">
+														<u>C</u>liente
+													</h:link>
+												</li>
+												
+											 	<li>
+													<h:link outcome="fornecedor" title="Fornecedor" accesskey="f">
+													<u>F</u>ornecedor
+													</h:link>
+												</li>
+												
+												<li>
+													<h:link outcome="profissional" title="Profissional" accesskey="p">
+														<u>P</u>rofissional
+													</h:link>
+												</li>
+												
+												<li>
+													<h:link outcome="recurso" title="Recurso" accesskey="r">
+													<u>R</u>ecurso
+													</h:link>
+												</li>			
+												
+												<li>
+													<h:link outcome="negocio" title="Negócio" accesskey="n">
+													<u>N</u>egócio
+													</h:link>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<h:link outcome="construcao" title="construcao" accesskey="e">
+												Plan.<u>E</u>stratégico
+											</h:link>
+										</li>
+										<!-- <li>
+											<h:link outcome="consultar_plano" title="Planejar Projetos" accesskey="e">
+												<u>P</u>lano
+											</h:link>
+										</li> -->
+										<li>
+											<h:link outcome="construcao" title="construcao" accesskey="e">
+												Pro<u>g</u>ramar
+											</h:link>
+										</li>
+										
+										
+									</ul>
+								</li>
+								</p:column>
+							<!-- PLANEJAR - FIM -->
+								
+							<!-- VENDER - INICIO -->
+							<p:column rendered="#{(menuBean.profissional !=null ? 'true' : 'false') and menuBean.diretor || menuBean.adm}"> 
+								<li class="dropdown"><a data-toggle="dropdown"
+									class="dropdown-toggle" id="idAdministrador"
+									style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+									title="Módulo Vender"
+									href="javascript:;" accesskey="v"><u>V</u>ender
+									<b class="caret"></b> </a>
+									<ul class="dropdown-menu" style="min-width:208px !important; ">
+										<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" id="relatoriosId"
+											style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+											title="Precificação e Proposta"
+											href="javascript:" accesskey="p">Precificação e Proposta
+											<b class="caret"></b> </a>
+											<ul class="dropdown-menu" style="min-width:208px !important; ">
+												<li>
+													<h:link outcome="proposta" title="Proposta" accesskey="p">
+													Criar e consultar <u>P</u>recificação/Proposta
+													</h:link>
+												</li>
+												<li>
+													<h:link outcome="graficoProposta" title="Gráficos Propostas" accesskey="c">
+														Gerar <u>G</u>ráficos
+													</h:link>
+												</li>
+												<li>
+													<h:link outcome="relatorioProposta" title="relatórios" accesskey="f">
+														Gerar <u>R</u>elatórios
+													</h:link>
+												</li>
+											</ul>
+										</li>
+										
+										<li>
+											<h:link outcome="contrato" title="Contrato" accesskey="c">
+											<u>C</u>ontrato
+											</h:link>
+										</li>
+									 
+									</ul>
+								</li>
+								</p:column>
+						<!-- VENDER - FIM -->
+								
+						<!-- MENU RECURSOS HUMANOS - INICIO -->		
+						<p:column rendered="#{(menuBean.profissional !=null ? 'true' : 'false') and menuBean.diretor || menuBean.operacional || menuBean.adm}"> 
+							<li class="dropdown"><a data-toggle="dropdown"
+									class="dropdown-toggle" id="idAdministrador"
+									style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+									title="Consultas e Cadastros"
+									href="javascript:;" accesskey="o"><u>O</u>perar
+									<b class="caret"></b> </a>
+									<ul class="dropdown-menu" style="min-width:208px !important; ">
+										<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle" id="relatoriosId"
+										style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+										title="Propostas"
+										href="javascript:;" accesskey="p"><u>C</u>onsultoria e Asseessoria
+										<b class="caret"></b> </a>
+										<ul class="dropdown-menu" style="min-width:208px !important; ">
+											<li>
+												<h:link outcome="consultar_projeto" title="Consultoria e Assessoria" accesskey="e">
+													Operar <u>C</u>onsultoria e Assessoria
+												</h:link>
+											</li>
+											<li>
+												<h:link outcome="construcao" title="relatórios" accesskey="f">
+													Gerar <u>R</u>elatórios
+												</h:link>
+											</li>
+										</ul>
+									</li>
+									<li>
+										
+									
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											<u>G</u>estão e Processos
+										</h:link>
+									</li>
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											<u>T</u>reinamento e Capacitação
+										</h:link>
+									</li>
+								</ul>
+					</li>
+									
+					</p:column>	
+					
+					<!-- MENU Operar - FIM -->
+					<!-- MENU Organizar e Controlar - INICIO -->		
+						<p:column rendered="#{(menuBean.profissional !=null ? 'true' : 'false') and menuBean.diretor || menuBean.operacional}"> 
+							<li class="dropdown"><a data-toggle="dropdown"
+									class="dropdown-toggle" id="idAdministrador"
+									style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+									title="Consultas e Cadastros"
+									href="javascript:;" accesskey="o">Organizar e <u>C</u>ontrolar
+									<b class="caret"></b> </a>
+									<ul class="dropdown-menu" style="min-width:208px !important; ">
+									
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											<u>R</u>H
+										</h:link>
+									</li>
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											<u>C</u>omunicação e TI
+										</h:link>
+									</li>
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											Ca<u>p</u>acitar
+										</h:link>
+									</li>
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											Compra<u>r</u>
+										</h:link>
+									</li>
+									<li>
+										<h:link outcome="construcao" title="construcao" accesskey="e">
+											Documento<u></u>
+										</h:link>
+									</li>
+									<li class="dropdown"><a data-toggle="dropdown"
+											class="dropdown-toggle" id="idAdministrador"
+											style="position:initial; left: -60px; background: url(../img/top-shadow.png) top repeat-x; !important;"
+											title="Financeiro e contabilidade"
+											href="javascript:;" accesskey="m">Financeiro e Conta<u>b</u>ilidade
+											<b class="caret"></b> </a>
+											<ul class="dropdown-menu" style="min-width:208px !important; ">
+												<li>
+													<h:link outcome="construcao" title="Fornecedor" accesskey="f">
+													<u>F</u>aturamento
+													</h:link>
+												</li>
+											</ul>
+										</li>
+						 			<li>
+									<h:link outcome="controle_acesso_perfil"
+										title="Cadastro de Perfil"
+										accesskey="a">
+										<f:param name="verPerfil" value="true" />
+									<u></u>Perfil</h:link>
+								</li>	
+									
+																		
+								<li>
+									<h:link outcome="controle_acesso_usuario"
+										title="Cadastro de Usuário"
+										accesskey="a">
+										<f:param name="verUsuario" value="true" />
+									<u></u>Usuário</h:link>
+								</li>
+									
+									
+								<li>
+									<h:link outcome="controle_acesso_associacao"
+										title="Associação"
+										accesskey="a">
+										<f:param name="verAssociacao" value="true" />
+									<u></u>Atribuir Perfil</h:link>
+								</li>
+									</ul>
+									
+					</li>
+						
+									
+					</p:column>		
+					<!-- MENU RECURSOS HUMANOS - FIM -->
+					
+							
+				</ui:fragment>
+						</ul>
+						<h:form>
+						
+							<ul class="pull-right nav-icons">
+							
+															
+								<li><p:hotkey oncomplete="PF('modalAlterarSenha').show()" /> 
+										<p:commandLink
+										rendered="#{menuBean.profissional !=null}"
+										id="linkAlterar" 
+										onclick="PF('modalAlterarSenha').show()"
+										title="Alterar Senha">
+										<b class="icone-splash ico-editar" style="margin-top: -12px;"></b>
+									</p:commandLink>
+								</li>
+
+
+								<li><p:hotkey bind="alt+shift+d" action="construcao" />
+									<b class="icone-splash ico-ajuda"></b>
+<!-- 								 <h:commandLink -->
+<!-- 										action="construcao" title="#{msgs['tooltip.menu.ajuda']}"> -->
+<!-- 									</h:commandLink> -->
+									
+									</li>
+
+								<li><p:hotkey bind="alt+shift+b" action="construcao" /> 
+								<b class="icone-splash ico-info"></b>
+									<!-- <h:commandLink
+										action="construcao"
+										title="#{msgs['tooltip.menu.sobre.sistema']}">
+										
+									</h:commandLink>
+									 -->
+									</li>
+
+								<li><p:hotkey bind="alt+shift+s"
+										oncomplete="PF('confirmLogout').show()" /> <p:commandLink
+										id="linkLogout" onclick="PF('confirmLogout').show()"
+										title="Sair do sistema">
+										<b class="icone-splash ico-sair" style="margin-top: -12px;"></b>
+									</p:commandLink>
+								</li>
+									
+									
+							</ul>
+								
+ <!-- Alterar senha -->
+		 <p:dialog id="modalAlterarSenha" 
+				showEffect="fade" 
+				hideEffect="fade"
+				header="Cadastrar nova senha" 
+				widgetVar="modalAlterarSenha"
+				style="overflow:hidden" 
+				closeOnEscape="true"  
+				closable="false" 
+				severity="alert"
+				modal="true" 
+				width="500px">
+				
+		<p:panelGrid columns="2" id="painelSenha" style="margin-top:15px; margin-right:0px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+		
+			<p:outputLabel value="Usuário: " />
+			<p:outputLabel value="#{menuBean.usuario.nome}" />
+			
+			<p:outputLabel value="Perfil:" />
+				<p:outputLabel value="#{menuBean.usuario.perfil.nome}" />
+				
+			<p:outputLabel value="Senha Atual:" />
+				<p:password value="#{menuBean.senhaAtual}" placeholder="Digite a senha atual."/>
+			
+			<p:outputLabel value="Nova Senha: " />
+				<p:password value="#{menuBean.senhaNova}" placeholder="Digite a nova senha."/>
+			
+		</p:panelGrid>
+			
+			<br />
+				<p:commandButton 
+					id="btnSalvarAL"
+					value="Ok"
+					title="confirmar"
+					styleClass="btn btn-green" 
+					immediate="false"
+					style="color:#FFF; 
+					margin-left:10px; 
+					margin-top: 24px;"
+					update="@form" 
+					process="@form"
+					actionListener="#{menuBean.alterarSenha()}">
+				</p:commandButton>
+				
+				<p:commandButton 
+					id="btACancelarAL"
+					styleClass="btn btn-yellow" 
+					value="Cancelar"
+					title="Cancelar" 
+					type="button"
+					style="margin-top: 24px;"
+					update="@form" 
+					process="@form"
+					onclick="PF('modalAlterarSenha').hide()" />
+			<br />
+		</p:dialog>
+		 
+					<p:confirmDialog 
+							id="dialoConfirmLogout" 
+							showEffect="fade"
+							hideEffect="fade" 
+							widgetVar="confirmLogout" 
+							closeOnEscape="true"
+							severity="alert"
+							width="300px;" 
+							header="Sair do sistema"
+							message="Fazer logoff">		
+						<center>
+							 <h:outputLink 
+								value="/agregawebapp/j_spring_security_logout"
+								title="Ok" 
+								style="width: 90px; background: red; color: white;  position: relative; margin-top: -1px; !important;"
+								update="@form"
+								id="btnConfirmLogout" 
+								styleClass="btn btn-red">OK</h:outputLink>
+							<p:commandButton 
+								id="btnCancelarLogout"
+								value="Cancelar"
+								styleClass="btn btn-blue" 
+								onclick="PF('confirmLogout').hide()"
+								title="Cancelar" />
+						</center>
+ 					</p:confirmDialog>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="shadow-bottom"></div>
+	</div>
+	<!-- .nav-menu -->
+	<div class="espacamento" />
+
+	<ui:insert name="principal" />
+
+	<ui:insert name="popup" />
+
+	<h:outputScript target="head">
+	    $ = jQuery;
+
+		function abreJanelaImpressao(pagina) {
+			window.open(pagina);
+	    }
+	</h:outputScript>
+	<script type="text/javascript">
+			var tempo = 2 * 60 * 60; // duas horas.
+
+			function contar() {
+				if (tempo > 0) {
+					tempo = tempo - 1;
+				}
+
+				if (document.all('tempo')) {
+					restoHora = tempo % 3600;
+					restoMinuto = restoHora % 60;
+
+					document.all('tempo').innerHTML = parseInt(tempo / 3600)
+							+ ':' + ('0' + parseInt(restoHora / 60)).slice(-2)
+							+ ':' + ('0' + restoMinuto).slice(-2);
+					setTimeout('contar()', 1000);
+				}
+			}
+		</script>
+	<div class="footer" style="">
+		<div class="container">
+			<div class="row-fluid">
+
+				<div class="span8 text-right-rodape"><b>&#174; Todos os direitos reservados a Agrega Consultores Ltda.</b></div>
+
+
+				<div class="span4 text-left-rodape">
+					<strong> Sessão: </strong> <span style="color:black; font-size: 12px;" id="tempo">2:00:00</span>
+					<script type="text/javascript">
+							contar();
+						</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- .footer -->
+
+	<h:outputScript library="js" name="bootstrap.min.js" target="head" />
+	<h:outputScript library="js" name="js.js" target="head" />
+	<h:outputScript library="js" name="geral.js" target="head" />
+	<h:outputScript library="js" name="transforma_txt.js" target="head" />
+	<h:outputScript library="js" name="locale-primefaces.js" target="head" />
+	<ui:insert name="javascript" />
+
+	<o:form id="formPrincipal">
+			<ui:insert name="corpo"/>
+	</o:form>
+</h:body>
+</f:view>
+
+</html>

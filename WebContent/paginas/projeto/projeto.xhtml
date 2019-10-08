@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="painel-geral-projeto" style="border: none;" rendered="#{projetoBean.cadastrarProjeto}">
+	<div>
+	<p:panel id="idProjeto" style="border: none;" >
+		<p:tabView tabChangeListener="#{projetoBean.onTabChange}" activeIndex="#{projetoBean.currentTab}">
+			<p:tab title="Cadastro" id="tab0">
+				<ui:include src="/paginas/projeto/includes/include_cadastro.xhtml" />
+		    </p:tab>
+		    
+		    <p:tab title="Planejamento" disabled="#{projetoBean.disablePlanejamento}" id="tab1">
+		     	<ui:include src="/paginas/projeto/includes/include_planejamento.xhtml" />
+		    </p:tab>
+		     
+	        <p:tab title="Dados de Campo" disabled="#{projetoBean.disablePlanejamento}" id="tab2">
+	      		 <ui:include src="/paginas/projeto/includes/include_dados_campo.xhtml" />
+		    </p:tab>
+		    
+		    <p:tab title="Caractéristicas" disabled="#{projetoBean.disablePlanejamento}" id="tab3">
+		       	<ui:include src="/paginas/projeto/includes/include_caracteristicas.xhtml" />
+		    </p:tab>
+		     
+		     <p:tab title="Registro SEIA" disabled="#{projetoBean.disablePlanejamento}" id="tab4">
+		     	<ui:include src="/paginas/projeto/includes/include_registro_sea_inema.xhtml" /> 
+		    </p:tab>
+		       
+		    <p:tab title="Pagamentos" disabled="#{projetoBean.disablePlanejamento}" rendered="false" id="tab5">
+		     	<ui:include src="/paginas/projeto/includes/include_pagamento.xhtml" /> 
+		    </p:tab>
+		      <p:tab title="Conclusão" disabled="#{projetoBean.disablePlanejamento}" id="tab6">
+		     	<ui:include src="/paginas/projeto/includes/include_conclusao.xhtml" />
+		     </p:tab> 
+		     <p:tab title="Anexos" disabled="#{projetoBean.disablePlanejamento}" id="tab7">
+		     	<ui:include src="/paginas/projeto/includes/include_Anexo.xhtml" />
+		     </p:tab>
+		 </p:tabView>
+	</p:panel>
+	</div>
+	
+	<p:dialog id="dialogRetificacao" showEffect="fade"
+		hideEffect="fade" header="Cadastro de Retificação"
+		closable="false"
+		widgetVar="dialogRetificacao" style="overflow:hidden"
+		resizable="false" closeOnEscape="true" severity="alert" modal="true" width="52%">
+		<p:ajax event="close" update="painel-cadastro-parcela" listener="#{projetoBean.voltarProjeto(retificacao)}" />
+		<ui:include src="projeto_cadastrar_retificacao.xhtml"/>
+	</p:dialog>
+	
+</p:panel>
+
+<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+	<p:confirmDialog id="dialoTelContato"
+		widgetVar="dialoTelContato" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Aviso"
+		message="Telefone digitado está inválido!">
+		<center>
+			<p:commandButton id="btncancelaTel"
+				styleClass="btn btn-red"
+				value="OK"
+				title="cancela a ação" 
+				type="button"
+				onclick="PF('dialoTelContato').hide()" />
+		</center>
+	</p:confirmDialog>
+	
+<style>
+	.ui-fieldset-content td .input-block-level {
+	    width: 123px !important;
+	}
+		
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+		background-color: whitesmoke !important;
+		opacity: 0.85 !important;
+	}
+	.ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
+		border-bottom: 0;
+		background: white !important;
+	}
+</style>
+</html>

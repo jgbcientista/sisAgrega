@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="idPanelOS" style="border: none;" rendered="#{projetoBean.abrirEditarOS}">
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" >
+	<p:fieldset id="teste" legend="Dados da Ordem de Serviço" >
+	<p:panelGrid columns="4" style="margin-top:-2px" columnClasses="rotulo, campo" styleClass="ui-noborder" >
+		<p:column styleClass="caixa-disabled">
+			<p:outputLabel value="Nome do Cliente" />
+				<p:inputText
+					value="#{projetoBean.ordemServico.contrato.proposta.cliente.nome}"
+					style="width:99% !important;" 
+					disabled="true">
+				</p:inputText>
+		</p:column>
+		<p:column style="width:150px !important; ">
+			<p:outputLabel value="Nome da Proposta" />
+			<p:inputText id="proposta" 
+				style="width:99% !important;" 
+				value="#{projetoBean.ordemServico.contrato.proposta.numeroProposta}"
+				disabled="true">
+			</p:inputText>
+		</p:column>
+			
+		<p:column style="width:150px !important; ">
+			<p:outputLabel value="Contrato" />
+			<p:inputText id="contrato" 
+				style="width:99% !important;" 
+				value="#{projetoBean.ordemServico.contrato.nrContrato}"
+				disabled="true">
+			</p:inputText>
+		</p:column>
+		<p:column style="width:150px !important; " styleClass="caixa-disabled">
+			<p:outputLabel value="Número O.S " />
+			<p:inputText id="nrContratoCad" 
+				style="width:140px !important; opacity:.80 !important;"
+				value="#{projetoBean.ordemServico.numeroOS}"
+				disabled="#{projetoBean.visualizarOrdemServico}">
+			</p:inputText>
+		</p:column>
+	</p:panelGrid>
+	</p:fieldset>
+	<br />
+		<div align="right">	
+			<p:commandButton style="margin-left:20px"
+				id="btSair" 
+				value="Voltar"
+				update="@form"
+				action="#{projetoBean.voltarPesquisa()}"
+				styleClass="btn btn-yellow">
+			</p:commandButton>	 
+			<p:commandButton 
+				rendered="#{!projetoBean.visualizarOrdemServico}"
+				value="Alterar nº O.S"
+				update="@form"
+				action="#{projetoBean.atualizarNovaOS()}"
+				styleClass="btn btn-blue">
+			</p:commandButton>
+		</div>
+		<br/>
+	
+	</div>
+</p:panel>
+</html>

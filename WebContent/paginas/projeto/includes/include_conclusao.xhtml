@@ -1,0 +1,214 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	 
+	<p:panelGrid styleClass="ui-noborder" style="width:80% !important;">
+         	<p:row><h4 style="margin-left: 10px;">Conclusão do projeto realizado</h4></p:row>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Profisional de Mapas: " for="realizadoProMaps" />
+					<p:selectOneMenu  
+						id="realizadoProMaps" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:210px !important;"
+						  value="#{projetoBean.idProMapConclusao}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Profisional de EPI: " for="realizadoProEPI" />
+					<p:selectOneMenu  
+						id="realizadoProEPI" 
+						style="width:210px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.idProfEPIConclusao}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+	 
+				<p:column >
+					<p:outputLabel value="Profisional de EV/CTGAL: " for="realizadoProEvctGal" />
+					<p:selectOneMenu  
+						id="realizadoProEvctGal" 
+						style="width:210px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.idProCtgalConclusao}" >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+				
+				
+				<p:column >
+					<p:outputLabel value="Profisional de Verificação: " for="realizadoProVerificacao" />
+					<p:selectOneMenu id="realizadoProVerificacao" 
+						style="width:210px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						 value="#{projetoBean.idProfVerificacaoConclusao}" >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+		
+		<p:panelGrid styleClass="ui-noborder" style="width:30% !important;">
+			<p:row>
+			<p:column>
+				<p:outputLabel value="Entrada do Projeto"  for="dataEntradaConclusao"/>
+				<p:calendar styleClass="componente-data-nova"
+				pattern="dd/MM/yyyy"
+					id="dataEntradaConclusao" 
+					style="width: 50px !important;"
+					value="#{projetoBean.projeto.dataEntrada}"  
+					disabled="#{projetoBean.visualizarProjeto}">
+				 <p:ajax event="dateSelect"/>
+				</p:calendar>
+			</p:column>
+			
+			<p:column>
+				<p:outputLabel value="Status do Projeto" for="StatusProjeto" />
+				<p:inputText 
+					id="StatusProjeto" 
+					disabled="true"
+					style="width:160px !important;" 
+					value="#{projetoBean.projeto.status.id == null ? 'Sem status' : projetoBean.projeto.status.nome}">
+				</p:inputText>
+			</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid styleClass="ui-noborder" style="width:100%; !important;">
+			<p:row>
+			
+			<p:column colspan="2" style="width:2% !important;">
+				<p:outputLabel style="font-weight:bold !important;" 
+				value="Data de Planejamento"/>
+			</p:column>
+				
+			<p:column colspan="2" style="width:2% !important;">
+				<p:outputLabel style="font-weight: bold !important;" 
+				value="Data de Campo"/>
+			</p:column>
+			
+			<p:column colspan="1" style="width:35% !important;">
+				<p:outputLabel style="font-weight: bold !important;"
+				value="Data de Entrega Final"/>
+			</p:column>
+				
+			</p:row>
+			<p:row>
+			
+			<p:column >
+				<p:outputLabel value="Data Início" for="idDtInicioRealizadoCampo"/>
+				<p:calendar styleClass="componente-data-nova"
+				pattern="dd/MM/yyyy"
+					id="idDtInicioRealizadoCampo" 
+					value="#{projetoBean.verificacaoSalvar.dtInicioPlanejamento}" 
+					disabled="#{projetoBean.visualizarProjeto}">
+				<p:ajax event="dateSelect"/>
+					</p:calendar>
+			</p:column>
+				<p:column>
+					<p:outputLabel value="Data Fim" for="idDtFimRealizadoCampo" />
+					<p:calendar styleClass="componente-data-nova"
+						id="idDtFimRealizadoCampo"
+						pattern="dd/MM/yyyy"
+						value="#{projetoBean.verificacaoSalvar.dtFimPlanejamento}"  
+						  disabled="#{projetoBean.visualizarProjeto}">
+					<p:ajax event="dateSelect"/>
+					</p:calendar>
+				</p:column>
+				<p:column >
+					<p:outputLabel value="Data Início"  for="dataInicioampo"/>
+					<p:calendar styleClass="componente-data-nova"
+						id="dataInicioampo" 
+						pattern="dd/MM/yyyy"
+						value="#{projetoBean.verificacaoSalvar.dtInicioCampo}"  
+						disabled="#{projetoBean.visualizarProjeto}">
+					 <p:ajax event="dateSelect"/>
+					</p:calendar>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Data Fim"  for="dataFimCampo"/>
+					<p:calendar styleClass="componente-data-nova"
+						id="dataFimCampo" 
+						pattern="dd/MM/yyyy"
+						value="#{projetoBean.verificacaoSalvar.dtFimCampo}"  
+						disabled="#{projetoBean.visualizarProjeto}">
+					 <p:ajax event="dateSelect"/>
+					</p:calendar>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Data de Realização"  for="dataEntregaFinal"/>
+					<p:calendar styleClass="componente-data-nova"
+						id="dataEntregaFinal" 
+						pattern="dd/MM/yyyy"
+						value="#{projetoBean.verificacaoSalvar.dataEntrega}"  
+						disabled="#{projetoBean.visualizarProjeto}">
+					 <p:ajax event="dateSelect"/>
+					</p:calendar>
+				</p:column>	
+			</p:row>
+			</p:panelGrid>
+			
+		</p:panelGrid>
+		<hr style="margin:5px;"></hr>
+		<br/>
+      
+		<hr style="margin:5px;"></hr>
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="3">
+				<p:outputLabel value="Observações Gerais" for="ObsRealizado" />
+				<h:inputTextarea id="ObsRealizado" 
+					disabled="#{projetoBean.visualizarProjeto}"
+					style="width:98% !important; height:100px !important;"
+					value="#{projetoBean.verificacaoSalvar.observacaoPlanejamento}"
+					maxlength="3400"
+					cols="6">
+					<p:ajax event="change"/>				
+					</h:inputTextarea>	
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="34" style="text-align: right;">
+				<hr />
+				<div>
+					<p:commandButton 
+						value="Voltar"
+						actionListener="#{projetoBean.cancelar()}" 
+						update="@form"
+						styleClass="btn btn-red"
+						icon="fa fa-reply-all">
+					</p:commandButton>
+					<p:commandButton 
+						id="btSalvarRealizado" 
+						value="Salvar"
+						disabled="#{projetoBean.visualizarProjeto}"
+						ajax="false"
+						actionListener="#{projetoBean.salvarConclusao()}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-floppy-o">
+					</p:commandButton>
+				</div>
+				</p:column>
+			</p:row>
+         </p:panelGrid>
+         <br />
+         
+         
+         
+         </ui:composition>

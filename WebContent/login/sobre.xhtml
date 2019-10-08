@@ -1,0 +1,84 @@
+<ui:composition template="/pages/templates/templatesemmenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="principal">
+		
+		<p:fieldset legend="Sobre">
+			<p:panelGrid styleClass="semBorda">
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Arquitetura Version" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfArquiteturaVersion" value="#{sobreFaces.arquiteturaVersion}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Implementation Title" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfImplementationTitleLabel" value="#{sobreFaces.jsfImplementationTitle}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Implementation Vendor" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfImplementationVendorLabel" value="#{sobreFaces.jsfImplementationVendor}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Implementation Version" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfImplementationVersionLabel" value="#{sobreFaces.jsfImplementationVersion}" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Specification Title" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfSpecificationTitleLabel" value="#{sobreFaces.jsfSpecificationTitle}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Specification Vendor" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfSpecificationVendorLabel" value="#{sobreFaces.jsfSpecificationVendor}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputLabel value="JSF Specification Version" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfSpecificationVersionLabel" value="#{sobreFaces.jsfSpecificationVersion}" />
+					</p:column>
+				</p:row>
+				
+				<p:row>
+					<p:column>
+						<h:outputLabel value="Primefaces Version" />
+					</p:column>
+					<p:column>
+						<p:outputLabel id="jsfPrimefacesVersionLabel" value="#{sobreFaces.primefacesVersion}" />
+					</p:column>
+				</p:row>
+				
+			</p:panelGrid>
+		</p:fieldset>
+
+	</ui:define>
+
+</ui:composition>

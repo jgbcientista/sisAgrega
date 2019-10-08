@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xml:lang="pt-br">
+<head>
+<link rel="stylesheet"
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css" />
+<link
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+	<div class="container">
+		<div class="header">
+			<h1>
+				<img
+					src="#{facesContext.externalContext.requestContextPath}/resources/img/logo-login.png"
+					alt="#{msgs['label.home.titulo.arce']}" />
+			</h1>
+			<p>#{msgs['label.home.titulo.arce']}</p>
+			<p class="logo">#{msgs['label.nome.sistema']}</p>
+			<p>
+				<small>#{msgs['label.versao.sistema']}</small>
+			</p>
+		</div>
+		<!-- .header -->
+	</div>
+	<!-- .container  -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="span4 offset4">
+
+				<div class="alert alert-warning text-center">
+					<p><strong>#{msgs['label.nao.implementado']}</strong></p>
+					<p>#{msgs['label.funcionalidade.nao.disponivel']}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row text-center">
+			<div class="span4 offset4">
+				<h:form>
+					<h:commandLink action="home" value="Voltar" styleClass="btn btn-default" />
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

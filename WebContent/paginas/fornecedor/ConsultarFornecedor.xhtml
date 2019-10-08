@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="painelFornecedorBusca" style="border: none;" rendered="#{fornecedorBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPaneFornecedor" style="border: none;">
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>	
+				<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:40% !important;">
+							<p:outputLabel value="Nome do Fornecedor:" />
+							<p:inputMask 
+								value="#{fornecedorBean.filtroNomeFantasia}" 
+								style="width:390px !important;">
+							</p:inputMask>
+						</p:column>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Atividade Principal:" for="atividadeFor" />
+							<p:selectOneMenu id="atividadeFor" 
+								style="width:120px;" 
+								value="#{fornecedorBean.filtroPrincipalAtividade}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{fornecedorBean.tipoPrincipalAtividade}" var="tipoPrincipalAtividade" itemLabel="#{tipoPrincipalAtividade}"
+										itemValue="#{tipoPrincipalAtividade}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Ramo de Atividade:"/>
+							<p:selectOneMenu id="tpFornecedor" style="width:120px;"
+								value="#{fornecedorBean.filtroRamoAtividade}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{fornecedorBean.tipoRamoAtividade}" var="tipoRamo" itemLabel="#{tipoRamo}"
+										itemValue="#{tipoRamo}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+				</p:panelGrid><br />
+			</p:fieldset><br/>
+			<div align="right">		 
+				<p:commandButton id="idBtPesquisar" 
+					styleClass="btn btn-yellow"
+					value="Pesquisar"
+					action="#{fornecedorBean.filtrarFornecedores()}" 
+					update="@form">
+				</p:commandButton>
+				<p:commandButton id="novoFornecedor" 
+					value="Cadastrar"
+					styleClass="btn btn-blue"
+					action="#{fornecedorBean.novoFornecedor()}" 
+					update="@form">
+				</p:commandButton>
+			</div>
+			<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" rendered="#{fornecedorBean.fornecedores.size()>0}"/>
+				<p:dataTable id="tableFornecedores" styleClass="header-tabelas" 
+					var="fornecedor" 
+					value="#{fornecedorBean.fornecedores}"
+					rendered="#{fornecedorBean.fornecedores.size()>0}"
+					emptyMessage="Nenhum Registro encontrado" 
+					rows="5" 
+					rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+					paginatorPosition="bottom" paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+					sortBy="#{fornecedor.nomeFantasia}" sortOrder="ASCENDING" >
+		
+					<p:column headerText="Fornecedor" width="40%" sortOrder="ASCENDING">
+						<h:outputText value="#{fornecedor.nomeFantasia}" />
+					</p:column>
+					
+					<p:column headerText="CNPJ/CPF" width="15%">
+						<h:outputText value="#{fornecedor.cnpjCPF}" />
+					</p:column>
+					
+					<p:column headerText="Ramo" width="15%">
+						<h:outputText value="#{fornecedor.ramoAtividade == 'Outro'? fornecedor.ramoAtividade : fornecedor.ramoAtividade}" />
+					</p:column>
+					
+					<p:column headerText="Principal Atividade" width="15%">
+						<h:outputText value="#{fornecedor.principalAtividade}" />
+					</p:column>
+					
+					<p:column headerText="Ação" width="12%">
+						<p:commandLink id="ver" 
+							immediate="true"
+							ajax="false"
+							update="@form"
+							process="tableFornecedores"
+							action="#{fornecedorBean.visualizar(fornecedor)}"
+							style="text-decoration:underline;">
+							<b class="icone-splash ico-visualisar"></b>
+						</p:commandLink>
+						
+						<p:commandLink id="edit" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form"
+						 	process="tableFornecedores"
+						 	action="#{fornecedorBean.redirectEdit(fornecedor)}"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-editar"></b>
+						</p:commandLink>
+						<p:commandLink id="idExcluir" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form"
+						 	process="tableFornecedores"
+						 	action="#{fornecedorBean.preExcluir(fornecedor)}"
+							title="#{msgs['label.button.excluir']}"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-excluir"></b>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+		<p:blockUI block="tableFornecedores" trigger="idBtPesquisar" >
+			 <p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+	</p:panel>
+	</div>
+</p:panel>
+		
+<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog id="dialogExcluir" 
+		widgetVar="dialogExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir esse registro?">
+		<center>
+			<p:commandButton id="bfOK" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{fornecedorBean.excluirFornecedor()}">
+			</p:commandButton>
+			<p:commandButton 
+				id="btCancelar"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluir').hide()">
+			</p:commandButton>
+		</center>
+	</p:confirmDialog>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<script type="text/javascript">
+    function handleDrop(event, ui) {
+        var droppedCar = ui.draggable;
+ 
+        droppedCar.fadeOut('fast');
+    }
+</script>
+	
+	<p:panel id="idPanelCadastro" style="border: none;" rendered="#{planoBean.novo}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+
+		<hr />
+		<center>
+		
+		<p:fieldset id="fieldProjetosPl" legend="Projetos">
+		<p:panelGrid 
+				columns="4" 
+				styleClass="ui-noborder">
+				
+			<p:outputLabel value="Projetos: " />	
+			<p:selectCheckboxMenu 
+				id="selProjeto" 
+				value="#{planoBean.idProjetosSelecionados}" 
+				label="-Selecione os projetos-"
+               	filter="true" 
+               	style="width:800px !important;"
+               	filterMatchMode="startsWith" 
+               	panelStyle="width:750px">
+            <f:selectItems value="#{planoBean.comboProjetos}" var="item" itemLabel="#{item.nomeProjeto}" itemValue="#{item.id}"/>
+        	</p:selectCheckboxMenu>	
+        	
+        	<p:panelGrid 
+				columns="1" 
+				styleClass="ui-noborder">
+				<p:commandButton 
+					id="addEquiPro" 
+					style="float:left !important;"
+					disabled="#{planoBean.view}"
+					immediate="false"
+					update="fieldProjetosPl"
+					value="Adicionar Projeto"
+					styleClass="btn btn-green"
+					action="#{planoBean.adicionarProjeto()}" >
+				</p:commandButton>
+			</p:panelGrid>
+		</p:panelGrid>
+	
+	<br />
+	<br />
+	
+				<p:dataTable 
+					styleClass="header-tabelas" 
+					var="result"
+					summary="true"
+					rowKey="#{result.id}"
+					rendered="#{planoBean.projetosSelecionados.size()>0}" 
+					value="#{planoBean.projetosSelecionados}" 
+				 	emptyMessage="Nenhum projeto adicionado."
+				 	rows="10"
+				 	paginator="true"
+				 	pageLinks="4"
+				 	paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				 	sortOrder="DESCENDING">
+				 	  	<f:facet name="header">
+				       		Projetos selecionados
+				    	</f:facet>
+					 	
+						<p:column headerText="Nº Proj. Agrega" width="10%">
+							<center>
+								<p:outputLabel value="#{result.numeroProjetoAgrega}" />
+							</center>
+						</p:column>
+						
+					 	<p:column headerText="Nº Proj. Cliente" width="10%">
+							<center>
+								<p:outputLabel value="#{result.numeroProjetoCliente}" style="text-align: center;"/>
+							</center>
+						</p:column>
+						
+						<p:column headerText="Cliente" width="390%">
+							<center>
+								<p:outputLabel value="#{result.ordemServico.cliente.nome}" />
+							</center>
+						</p:column>
+						
+					 	<p:column headerText="Nº OS" width="10%">
+					 		<center>
+								<p:outputLabel value="#{result.ordemServico.numero}" />
+							</center>
+						</p:column>
+						
+						 <p:column headerText="Estado" width="10%">
+					 		<center>
+								<p:outputLabel value="#{result.estado}" />
+							</center>
+						</p:column>
+						
+						<p:column headerText="Município" width="20%">
+					 		<center>
+								<p:outputLabel value="#{result.cidade}" />
+							</center>
+						</p:column>
+	
+						<p:column headerText="Remover" width="13%" >
+							<p:commandLink 
+							 	id="remover" 
+							 	immediate="true"
+							 	ajax="false"
+							 	value="Excluir"
+							 	update="@form:listrProjeots"
+							 	disabled="#{planoBean.view}"
+							 	process="@form"
+							 	action="#{planoBean.excluirLista(result)}"
+								title="Excluir"
+								style="text-decoration:underline; 
+								text-align:center;" >
+							</p:commandLink>
+							
+						</p:column>
+					</p:dataTable>
+			
+			<br />
+		
+		</p:fieldset>
+		
+		<br />
+	<p:fieldset id="fieldPlan" legend="Planejamento" >
+		
+		<p:panelGrid 
+			columns="4" 
+			columnClasses="rotulo, campo" 
+			styleClass="ui-noborder">
+				
+			<p:outputLabel value="Profisional MF/SE: " for="proMFSE" />
+			<p:selectOneMenu  
+					id="proMFSE" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalMFSE}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>
+				
+			<p:outputLabel value="Profisional Dados de Campo: " for="proDadosCampo" />
+			<p:selectOneMenu  
+					id="proDadosCampo" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalDadosCampo}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>
+			
+			
+<p:outputLabel value="Profisional de Mapas: " for="proMaps" />
+			<p:selectOneMenu  
+					id="proMaps" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalMapas}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>
+			
+ 
+				
+<p:outputLabel value="Profisional de EPI: " for="proEPI" />
+			<p:selectOneMenu  
+					id="proEPI" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalEPI}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>		
+			
+			
+<p:outputLabel value="Profisional de EV/CTGAL: " for="proEvctGal" />
+			<p:selectOneMenu  
+					id="proEvctGal" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalEVCTGAL}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>	
+
+
+<p:outputLabel value="Profisional de RO: " for="proRo" />
+			<p:selectOneMenu  
+					id="proRo" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalRO}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>			
+
+
+
+<p:outputLabel value="Profisional de Verificação: " for="proVerificacao" />
+			<p:selectOneMenu  
+					id="proVerificacao" 
+					style="width:210px !important;"
+					disabled="#{projetoBean.view}" 
+					value="#{projetoBean.idProfissionalVerificacao}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.profisssionaisBanco}" 
+						var="prof"
+					 	itemLabel="#{prof.nome}" 
+					 	itemValue="#{prof.id}" />
+			</p:selectOneMenu>	
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			
+		</p:panelGrid>
+		
+		<hr />
+		
+		
+		<p:panelGrid 
+			columns="4" 
+			columnClasses="rotulo, campo" 
+			styleClass="ui-noborder">	
+			
+		
+		<p:outputLabel value="Período de Trab. Campo:" />
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			<p:outputLabel />
+			
+			<p:outputLabel value="Data Início:" for="dataIniTrabCampo" />
+				<p:inputMask 
+					id="dataIniTrabCampo" 
+					mask="99/99/9999" 
+					
+					style="width:160px;" 
+					placeholder="Data Início."  
+					value="#{planoBean.dataInicioTrabalhoCampo}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel value="Data Fim:" for="dataFimTrabalhoCampo" />
+			<p:inputMask  
+					id="dataFimTrabalhoCampo" 
+					mask="99/99/9999" 
+					
+					style="width:190px;"
+					placeholder="Data Fim."  
+					value="#{planoBean.dataFimTrabalhoCampo}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+	</p:panelGrid>	
+
+	<hr />	
+	
+	<p:panelGrid 
+			columns="4" 
+			columnClasses="rotulo, campo" 
+			styleClass="ui-noborder">
+		
+		<p:outputLabel value="Planejamento de Campo: " />
+			<p:outputLabel />
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			
+			<p:outputLabel value="Data Início:" for="dataInicioPlaCampo" />
+				<p:inputMask 
+					id="dataInicioPlaCampo" 
+					mask="99/99/9999" 
+					style="width:160px;"
+					 
+					placeholder="Data Início."  
+					value="#{planoBean.planejamentoDataInicioCampo}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel value="Data Fim:" for="dataFimPlaCampo" />
+			<p:inputMask  
+					id="dataFimPlaCampo" 
+					mask="99/99/9999" 
+					style="width:190px;"
+					placeholder="Data Fim."  
+					value="#{planoBean.planejamentoDataFimCampo}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+		</p:panelGrid>
+		
+		<hr />
+		<p:panelGrid 
+				columns="4" 
+				styleClass="ui-noborder">
+				
+			
+			<p:outputLabel value="Planejamento de Entrega: " />
+				<p:outputLabel />
+				<p:outputLabel />
+				<p:outputLabel />
+			
+			<p:outputLabel value="Data Início:" for="dataInicioEntr" />
+				<p:inputMask 
+					id="dataInicioEntr" 
+					mask="99/99/9999" 
+					style="width:160px;" 
+					placeholder="Data Início."  
+					value="#{planoBean.planejamentoEntregaDataInicio}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel value="Data Fim:" for="dataFimPlaEntreCampo" />
+			<p:inputMask  
+				id="dataFimPlaEntreCampo" 
+				mask="99/99/9999" 
+				style="width:200px;"
+				placeholder="Data Fim."  
+				value="#{planoBean.planejamentoEntregadataFim}" 
+				disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			<p:outputLabel />
+			<p:outputLabel />
+			
+		<p:outputLabel value="Data Realizado:" for="dataEntregaRealizado" />
+			<p:inputMask  
+					id="dataEntregaRealizado" 
+					mask="99/99/9999" 
+					style="width:200px !important;"
+					placeholder="Data realizado."  
+					value="#{planoBean.dataEntregaRealizado}" 
+					disabled="#{planoBean.view}">
+			</p:inputMask>
+			
+			<p:outputLabel />
+			<p:outputLabel />
+			
+		</p:panelGrid>
+	
+	<br />
+		<hr />
+	 <br />
+			<p:commandButton 
+				id="btFinalizar" 
+				value="Planejar"
+				actionListener="#{planoBean.planejar()}" 
+				update="@form"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			
+			<p:commandButton 
+				value="Gerar Relatório da OS"
+				styleClass="btn btn-blue"
+				actionListener="#{planoBean.gerarReltorioProjetosSelecionados()}" 
+				ajax="false">
+			</p:commandButton>
+			
+			<p:commandButton 
+				id="BtVoltar" 
+				value="Cancelar"
+				immediate="true"
+				rendered="#{planoBean.passo1}"
+				styleClass="btn btn-yellow"
+				action="#{planoBean.voltar()}" 
+				update="@form">
+			</p:commandButton>	
+		 <br />
+		 <br />
+	</p:fieldset>
+	 
+		<hr/>
+			
+			<br />
+			<p:blockUI block="idPanelCadastro" trigger="BtVoltar">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+			</center>
+		</div>
+	</p:panel>
+	
+
+</html>

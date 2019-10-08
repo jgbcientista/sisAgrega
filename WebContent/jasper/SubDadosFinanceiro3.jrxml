@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.genrObjetivo" class="java.lang.String"/>
+	<field name="proposta.genrPrazoExecucao" class="java.lang.String"/>
+	<field name="proposta.genrCusto" class="java.lang.String"/>
+	<field name="proposta.genrFormaPagamento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="535" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="12" y="125" width="528" height="92" uuid="ac663af1-22e2-4047-9865-6669c8ed22bf"/>
+				<box leftPadding="1" rightPadding="2"/>
+				<textElement markup="none">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[a ser depositado em C/C (conta corrente) da Agrega Consultores Ltda.
+
+Dados Bancários:
+      BANCO: Brasil			BANCO: Caixa Econômica Federal
+      Agência: 2971-8			Agência: 1018   OP:003
+      C/C: 26647-7			C/C: 00001125-3
+      CNPJ: 09.220.626/0001-88		CNPJ: 09.220.626/0001-88
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="10" width="244" height="15" uuid="615e602a-aea3-412f-a649-951ab798e47a"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[CUSTOS E FORMA DE PAGAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="29" width="244" height="15" uuid="dfa73b4c-da93-491e-8821-b8cf8c2bd6b1"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[5.1 - CUSTOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="11" y="50" width="528" height="30" uuid="878367cc-29f1-4ecb-9766-12b8010b9bf7"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pela execução dos serviços objeto desta proposta, a CONTRATANTE pagará à CONTRATADA, a importância de " + $F{proposta.genrCusto}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" mode="Opaque" x="303" y="51" width="85" height="20" forecolor="#FFFFFF" uuid="e6ab5c42-ff40-47f1-96ab-61afe8bf591e"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="307" y="50" width="82" height="15" uuid="97321e7b-09d4-44c2-803f-bb7a178113c2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[CONTRATADA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" mode="Opaque" x="443" y="46" width="82" height="20" forecolor="#FFFFFF" uuid="e86ddba2-0290-4eb3-9ea5-c7068cfe3b80"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="443" y="50" width="90" height="15" uuid="1c3c4d29-07f1-436a-a65d-3b8bfc1d5487"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[CONTRATANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="248" width="244" height="15" uuid="335aaddd-2182-4473-8a29-87142ac67f01"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[6.1- Da Agrega Consultores Ltda.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="229" width="244" height="15" uuid="d1b4b934-0009-42cb-bfa6-b33e45498c97"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[6- OBRIGAÇÕES DAS PARTES ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="270" width="528" height="29" uuid="6e4b8c87-ea61-43f7-b8e7-8e6d2bafbbf9"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[a) Executar o objeto contratado de acordo com as especificações técnicas aplicáveis, segundo os mais elevados padrões de qualidade e confiabilidade, nos termos apresentados nesta proposta;
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="379" width="528" height="53" uuid="e3ba96e8-846b-4430-8235-eae0948711f8"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[d) Franquear a fiscalização pela <b>CONTRATANTE</b>, em relação aos serviços objeto desta proposta atendendo prontamente às observações e exigências apresentadas. Independentemente da fiscalização realizada pela <b>CONTRATANTE</b>, a <b>AGREGA Consultores Ltda.</b> continuará como a única e exclusiva responsável pela execução regular dos serviços objeto desta proposta;
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="304" width="528" height="28" uuid="520775ff-9c1c-46e3-a71b-bbf2c6600e3c"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[b) Selecionar e manter em seu quadro de pessoal profissionais devidamente habilitados para o adequado cumprimento do objeto desta proposta;
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="339" width="528" height="40" uuid="3a7ceb04-2415-4194-bfbb-fab1bcc70a1d"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[c) Diligenciar, durante a execução dos trabalhos técnicos, a substituição de qualquer empregado ou preposto, cuja permanência esteja causando ou possa causar prejuízos à prestação dos serviços objeto desta proposta;
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="87" width="244" height="15" uuid="26d01067-d659-459d-9cfc-68ca24128a78"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[5.2 - FORMA DE PAGAMENTO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="12" y="106" width="528" height="15" uuid="2aeda789-985c-42ed-b9e6-788ba08d0330"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.genrFormaPagamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="440" width="528" height="41" uuid="cf940323-86c5-4cc1-89ce-1610190843b6"/>
+				<box rightPadding="1"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[e) Manusear cuidadosamente os materiais, documentos e desenhos técnicos eventualmente fornecidos pela CONTRATANTE para a execução dos serviços, obrigando-se a repor, por sua conta exclusiva e sem prejuízo dos prazos estipulados, todos os materiais que, sob sua guarda, forem danificados ou extraviados.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="487" width="528" height="30" uuid="88ad860f-c004-4ec8-aa39-79ead3f903be"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[f) Garantir que seus empregados ou prepostos não danifiquem ou façam mau uso dos bens ou instalações da <b>CONTRATANTE</b>   durante a execução dos serviços objeto desta proposta.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

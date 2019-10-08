@@ -1,0 +1,587 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:fieldset legend="Dados do projeto. Contrato de nº #{projetoBean.ordemServico.contrato.nrContrato}" id="idContratoLabel" style="margin-bottom:20px" styleClass="ui-fildset-nova"> 
+		<p:panelGrid id="painelCadastroProje" styleClass="ui-noborder">
+			<p:row>
+				<p:column >
+					<p:outputLabel value="Contrato *" for="ControtoProj" />
+					<p:selectOneMenu id="ControtoProj"
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:150px !important;"
+						value="#{projetoBean.idContratoNovoProjeto}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboContrato}" var="item" itemLabel="#{item.nrContrato}" itemValue="#{item.id}" />
+						<p:ajax event="change" update="osProjeto" listener="#{projetoBean.obterOSNovoProjeto(projetoBean.idContratoNovoProjeto)}"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column colspan="2" >
+					<p:outputLabel value="Ordem de Serviço *" for="osProjeto" />
+					<p:selectOneMenu id="osProjeto"
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:150px !important;"
+						value="#{projetoBean.ordemServico.id}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.listOSNovoProjeto}" var="item" itemLabel="#{item.numeroOS}" itemValue="#{item.id}" />
+						<p:ajax event="change" listener="#{projetoBean.tualizarContratoByOS(projetoBean.ordemServico.id)}" update="idContratoLabel"/>
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+		
+			<p:row>
+				<p:column >
+						<p:outputLabel value="Tipo de Modalidade *" for="tipoModalidade" />
+						<p:selectOneMenu id="tipoModalidade"
+							disabled="#{projetoBean.visualizarProjeto}"
+							style="width:150px !important;"
+							value="#{projetoBean.projeto.modalidade}"  >
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItem itemLabel="Antiga modalidade" itemValue="1" />
+							<f:selectItem itemLabel="Nova modalidade" itemValue="2" />
+							<p:ajax event="change" listener="#{projetoBean.verificarModalidade(projetoBean.projeto.modalidade)}" update="@form"/>
+						</p:selectOneMenu>
+					</p:column>
+				
+				<p:column style="width:5%;">	
+						<p:outputLabel value="Data de Entrada *" for="dataEntradaInclusao" />
+					<p:calendar 
+						id="dataEntradaInclusao" 
+						value="#{projetoBean.dataEntradaLocal}"  
+						disabled="#{projetoBean.visualizarProjeto}">
+					 <p:ajax event="dateSelect"/>
+					 <p:ajax event="change"/>
+					</p:calendar>
+				</p:column>	
+				
+			
+				<p:column >
+			 		<p:outputLabel value="Tipo Projeto *" for="tpProjetoCad" />
+					<p:selectOneMenu id="tpProjetoCad" disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.tipoProjeto}" >
+						<f:selectItem itemLabel="- Selecione -" itemValue="vazio" />
+						<f:selectItems value="#{projetoBean.comboTipoProjeto}" var="item" itemLabel="#{item}" itemValue="#{item}" />
+						<p:ajax event="change" listener="#{projetoBean.carregarSubTipoPorjetoPorTipoPorjeto()}" update="subProjetoCad" />
+					</p:selectOneMenu>
+				</p:column>	
+
+				<p:column >
+					<p:outputLabel value="Produto / Serviço *"  for="subProjetoCad"/>
+					<p:selectOneMenu  
+						id="subProjetoCad" 
+						style="width:150px !important;"
+						value="#{projetoBean.projeto.subTipoProjeto}"
+						 disabled="#{projetoBean.visualizarProjeto}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboSubTipoProjeto}" var="item" itemLabel="#{item.descricao}" itemValue="#{item}" />
+						<p:ajax update="sigla, numeroProjAgregaVer, numeroProjetoAgrega, numeroAnoRef, @this" listener="#{projetoBean.obterNumeracaoProjeto()}"/>
+					</p:selectOneMenu>
+				</p:column>	
+			
+			<p:column>	
+					<p:outputLabel value="Nº Projeto" for="nmProjetoCliente" />
+					<p:inputText id="nmProjetoCliente" 
+						style="width:70px !important;"
+						maxlength="12"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.numeroProjetoCliente}" >
+					<p:ajax event="change" update="idNrProjCoelba" />	
+					</p:inputText> 
+				</p:column>
+				
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+			
+			<p:column id="numeroProjAgrega" >
+					<p:outputLabel value="Nº Agrega *"  />
+					<p:inputText  
+						id="sigla"
+						style="width:100px !important;"
+						disabled="true"
+						value="#{projetoBean.projeto.subTipoProjeto}" >
+					<p:ajax event="change" />	
+					</p:inputText>
+					<p:inputText 
+						style="width:50px !important;"
+						maxlength="3"
+						id="numeroProjetoAgrega"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.numeroProjetoAgrega}" >
+						<p:ajax event="change" />	
+					</p:inputText> 
+					
+					<p:inputText 
+						style="width:48px !important;"
+						maxlength="4"
+						id="numeroAnoRef"
+						disabled="true"
+						value=".#{projetoBean.projeto.anoReferencia}" >
+						<p:ajax event="change" />	
+					</p:inputText> 
+				</p:column>
+			
+			
+				
+				<p:column >			
+					<p:outputLabel value="Nome Projeto * " for="nomeProjeto" />
+					<p:inputText id="nomeProjeto" 
+						style="width:280px !important;"
+						maxlength="50"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.nomeProjeto}" >
+					<p:ajax event="change" update="painelDadosCampo" />	
+					</p:inputText> 
+				</p:column>
+			
+			
+				
+				<p:column>	
+					<p:outputLabel value="Nº ART: " for="numArt" />
+					<p:inputText id="numArt" maxlength="240"
+						style="width:200px !important;" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.numeroArt}" >
+						<p:ajax event="change"/>
+					</p:inputText>
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Tipo de Programa:" />
+		        	<p:selectOneMenu  
+						id="tipoPrograma" 
+						style="width:200px !important;"
+						value="#{projetoBean.projeto.tipoPrograma.id}"
+						 disabled="#{projetoBean.visualizarProjeto}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboTipoPrograma}" var="item" itemLabel="#{item.descricao}" itemValue="#{item.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>
+			        
+			        
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Empresa responsável do Projeto Elétrico: " for="idEmpresaExecutora" />
+					<p:inputText id="idEmpresaExecutora" maxlength="250"
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:400px !important;" 
+						value="#{projetoBean.projeto.empresaProjetoEletrico}" >
+						<p:ajax event="change"/>
+					</p:inputText>
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="Tel responsável" for="idTelEmpresaExecutora" />
+					<p:inputText id="idTelEmpresaExecutora"  style="width:120px;" maxlength="15" 
+						value="#{projetoBean.projeto.telResponsavelEletrico}"
+						disabled="#{projetoBean.visualizarProjeto}"
+						process="@this" > 
+						<p:ajax event="change"/>
+				</p:inputText>
+				</p:column>
+					
+				<p:column>
+					<p:outputLabel value="Observação " for="idObservacaoEmpresa" />
+					<p:inputText id="idObservacaoEmpresa" maxlength="254"
+						style="width:420px !important;" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.obsEmpresaExecutora}" >
+					</p:inputText>
+				</p:column>
+			</p:row>
+			
+		</p:panelGrid>
+		  <hr style="margin:5px;"></hr>
+		 <p:panelGrid styleClass="ui-noborder">
+		 	<p:row>
+		 		<p:column  style="width: 20%;">
+					<p:outputLabel value="Possui Meio Físico?" />
+					<p:selectOneRadio disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.meioFisico}">
+		            	<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+		        	</p:selectOneRadio>
+				</p:column>
+				<p:column  style="width: 10%;">
+					<p:outputLabel ></p:outputLabel>
+				</p:column>
+				<p:column  style="width: 24%;">
+					<p:outputLabel value="Meio Sócio-Econômico?" />
+					<p:selectOneRadio disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.meioSocioEconomico}">
+		            	<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+		        	</p:selectOneRadio>
+				</p:column>
+				<p:column  style="width: 10%;">
+					<p:outputLabel ></p:outputLabel>
+				</p:column>
+				<p:column  style="width: 18%;">
+					<p:outputLabel value="Possui EV?" />
+					<p:selectOneRadio disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.ep}">
+		            	<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+						<p:ajax event="change" listener="#{projetoBean.calculaValorProjeto}" update="idvlrProjeto, valorProjetoCalculo" />
+		        	</p:selectOneRadio>
+				</p:column>
+				
+				
+	 			<p:column>
+					<p:outputLabel value="Gestor/Coordenador do Projeto: " for="idGestorProjeto" />
+					<p:selectOneMenu id="idGestorProjeto" 
+						style="width:210px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.idProfissionalGestor}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems 
+						value="#{projetoBean.comboProfisssional}" 
+						var="var" 
+						itemLabel="#{var.nome}"
+						itemValue="#{var.id}" />
+					<p:ajax event="change" update="@this"/>					
+					</p:selectOneMenu>
+				</p:column>
+	 
+		
+				
+				<p:column style="width:38%"></p:column>
+			</p:row>
+		 </p:panelGrid>
+	</p:fieldset>
+	<p:fieldset legend="Dados Técnicos" style="margin-bottom:20px" rendered="true" styleClass="ui-fildset-nova"> 
+		   <hr style="margin:5px;"></hr>
+		
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				
+				<p:column>
+					<p:outputLabel value="Primária(KM)" for="idPrimaria" />
+					<p:inputText id="idPrimaria" maxlength="15"
+						style="width:90px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.primariaKmString}" >
+					<p:ajax event="change" listener="#{projetoBean.calcularExtensaoTotal()}" update="idTotalKM, idArea,idTamProjeto" />
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Secundária(KM)" for="idSecundaria" />
+					<p:inputText id="idSecundaria" maxlength="15"
+						style="width:110px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.secundariaKmString}">
+					<p:ajax event="change" listener="#{projetoBean.calcularExtensaoTotal()}" update="idTotalKM, idArea, idTamProjeto " />
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Conjugada(KM)" for="idConjugada" />
+					<p:inputText id="idConjugada" maxlength="15"
+						style="width:110px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.conjugadaKmString}" >
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Extensão Total (KM)" for="idTotalKM" />
+					<p:inputText id="idTotalKM" disabled="true" maxlength="15"
+						style="width:133px !important; opacity:.90 !important;" 
+						value="#{projetoBean.retornarString(projetoBean.projeto.extensaoTotalKm)}">
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Área(ha)" for="idArea" />
+					<p:inputText id="idArea" disabled="true" maxlength="15"
+						style="width:66px !important; opacity:.90 !important;"
+						value="#{projetoBean.retornarString(projetoBean.projeto.areaHa)}" >
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Postes Primários" for="idPostePrimario" />
+					<p:inputText id="idPostePrimario" maxlength="15"
+						style="width:110px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.postesPrimario}" >
+						<p:ajax event="change" listener="#{projetoBean.calcularTotalPostes}" update="idPosteTotal" />
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Postes Secundários" for="idPosteSecundarios" />
+					<p:inputText id="idPosteSecundarios" 
+						style="width:120px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.postesSecundario}" >
+						<p:ajax event="change" listener="#{projetoBean.calcularTotalPostes}" update="idPosteTotal" />
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Postes Total" for="idPosteTotal" />
+					<p:inputText id="idPosteTotal" disabled="true"
+						style="width:90px !important;"
+						value="#{projetoBean.projeto.postesTotal}" >
+					</p:inputText> 
+				</p:column>
+			</p:row>
+			</p:panelGrid>
+			<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Consumidores" for="idConsumidoresa" />
+					<p:inputText id="idConsumidoresa" maxlength="15"
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:90px !important;"
+						value="#{projetoBean.projeto.consumidores}">
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Tensão primária(kV)" for="idkV" />
+					<p:inputText id="idkV" 
+					disabled="#{projetoBean.visualizarProjeto}"
+						style="width:126px !important;"
+						value="#{projetoBean.tensaoPrimariaKvString}" >
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Tensão secundaria(V)" for="idV" />
+					<p:inputText id="idV" 
+					disabled="#{projetoBean.visualizarProjeto}"
+						style="width:138px !important;"
+						value="#{projetoBean.tensaoSecundariaKVString}" >
+					</p:inputText> 
+				</p:column>
+				<p:column >
+					<p:outputLabel value="Cabos" for="idCabos" />
+					<p:inputText id="idCabos" maxlength="255"
+					disabled="#{projetoBean.visualizarProjeto}"
+						style="width:440px !important;"
+						value="#{projetoBean.projeto.cabos}" >
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Faixa de Servidão(M)" for="idServidao" />
+					<p:inputText id="idServidao" maxlength="200"
+					disabled="#{projetoBean.visualizarProjeto}"
+						style="width:120px !important;"
+						value="#{projetoBean.projeto.faixaServidaoM}" >
+					</p:inputText> 
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		
+		<p:panelGrid styleClass="ui-noborder">
+        	
+			<p:row>
+				<p:column style="width:200px !important;">
+			 		<p:outputLabel value="Estado" for="idEstado" />
+					<p:selectOneMenu id="idEstado"  disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.estadoDadosTecnico.id}"
+						effect="fade" filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboEstado}" var="item" itemLabel="#{item.uf}" itemValue="#{item.id}" />
+						<p:ajax event="change" listener="#{projetoBean.carregarCidadeByEstado()}" update="idMunicipio" />
+						<p:ajax event="change" />
+					</p:selectOneMenu>
+				</p:column>	
+				
+				<p:column style="width:200px !important;">
+			 		<p:outputLabel value="Município" for="idMunicipio" />
+					<p:selectOneMenu id="idMunicipio" 
+						value="#{projetoBean.projeto.municipio.id}"  
+						effect="fade" filter="true"
+						disabled="#{projetoBean.visualizarProjeto}"
+						filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboMunicipio}" disabled="#{projetoBean.visualizarProjeto}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+						<p:ajax event="change" update="idMacroRegiao"  listener="#{projetoBean.carregarMacroRegiao()}"/>
+						<p:ajax event="change" update="valorProjetoNovo" listener="#{projetoBean.novoCalculoValorProjeto()}"/>	
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Observação de projeto em fronteira" for="idObservacaoFronteira" />
+					<p:inputText 
+						id="idObservacaoFronteira" maxlength="100"
+						style="width:100% !important;" 
+						placeholder="Digite a observação, caso exista projeto(s) em frontera(s)"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.obsDadosFronteira}" >
+						<p:ajax event="change"/>
+					</p:inputText>
+				</p:column>
+				
+				<p:column style="width:120px !important;">
+					<p:outputLabel value="Tam do Projeto(km) " for="idTamProjeto" />
+					<p:inputText id="idTamProjeto" maxlength="20"
+						disabled="true"
+						style="width:135px !important; opacity:.90 !important;" 
+						value="#{projetoBean.retornarString(projetoBean.projeto.tamanhoProjeto)}">
+					</p:inputText>
+				</p:column>
+				
+			</p:row>
+			<p:row>
+				<p:column colspan="3">
+			 		<p:outputLabel value="" for="idMacroRegiao" />
+			 		<p:outputLabel style="font-size:15px !important; color:red;" id="idMacroRegiao" value="Macro Região: #{projetoBean.projeto.municipio.regiao.nome} - Distancia: #{projetoBean.projeto.municipio.regiao.km} Km"  />
+				</p:column>	
+			
+				
+			</p:row>
+		</p:panelGrid>
+		
+		
+
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row  rendered="#{!projetoBean.oculparCampos}">
+				<p:column>
+					<p:outputLabel style="font-weight:bold !important;" 
+						value="Projeto"/>
+				</p:column>
+				
+				<p:column colspan="2" style="width:26%">
+					<p:outputLabel style="font-weight:bold !important;" 
+						value="Distâncias da Sede para o Município"/>
+				</p:column>
+				
+				<p:column colspan="4" >
+					<p:outputLabel style="font-weight: bold !important;" 
+					value="Distâncias do Municípoio para o Local do Projeto"/>
+				</p:column>
+			</p:row>
+			<p:row rendered="#{!projetoBean.oculparCampos}">
+				
+				<p:column>
+					<p:outputLabel value="Pavimentada" for="idPavimenSedexMunicipio" />
+					<p:inputText 
+						id="idPavimenSedexMunicipio"
+						disabled="#{projetoBean.visualizarProjeto}" 
+						style="width:95px !important;" 
+						value="#{projetoBean.distanciaSedeMunPavString}">
+						<p:ajax event="change" listener="#{projetoBean.calculaValorProjeto}" update="idvlrProjeto" />
+					</p:inputText>
+				</p:column>	
+				
+				<p:column>
+					<p:outputLabel value="Não Pavimentada" for="idNaoPavimenSedexMunicipio" />
+					<p:inputText 
+						id="idNaoPavimenSedexMunicipio" 
+						style="width:120px !important;"
+						disabled="#{projetoBean.visualizarProjeto}" 
+						value="#{projetoBean.distanciaSedeMunNaoPavString}">
+						<p:ajax event="change" listener="#{projetoBean.calculaValorProjeto}" update="idvlrProjeto" />
+					</p:inputText>
+				</p:column>	
+				
+				<p:column >
+					<p:outputLabel value="Pavimentada" for="idPavimenLocalxProjeto" />
+					<p:inputText 
+						id="idPavimenLocalxProjeto" 
+						style="width:95px !important;" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.distanciaMunLocalProjPavString}">
+						<p:ajax event="change" listener="#{projetoBean.calculaValorProjeto}" update="idvlrProjeto" />
+					</p:inputText>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Não Pavimentada" for="idNaoPavimenLocalxProjeto" />
+					<p:inputText 
+						id="idNaoPavimenLocalxProjeto" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:110px !important;" 
+						value="#{projetoBean.distanciaMunLocalProjNaoPavString}">
+						<p:ajax event="change" listener="#{projetoBean.calculaValorProjeto}" update="idvlrProjeto, valorProjetoCalculo" />
+					</p:inputText>
+				</p:column>
+			<p:column rendered="false">
+				<p:outputLabel value="Proj anti Vlr" for="valorProjetoCalculo" />
+				<p:outputLabel 
+					id="valorProjetoCalculo" 
+					disabled="true"
+					style="width:50px !important;" 
+					value="#{projetoBean.calculaValorProjeto()}">
+					<f:convertNumber pattern="#,##0.00"/>
+				</p:outputLabel>
+			</p:column>
+			<p:column rendered="false">
+				<p:outputLabel value="Proj Novo Vlr:" />
+				<p:outputLabel 
+					id="valorProjetoNovo" 
+					disabled="true"
+					style="width:50px !important;" 
+					value="#{projetoBean.novoCalculoValorProjeto()}">
+					<f:convertNumber pattern="#,##0.00"/>
+				</p:outputLabel>
+			</p:column>
+			
+			</p:row>
+			<p:row>
+				<p:column colspan="8">
+					<p:outputLabel value="Observações Gerais"  />
+					<p:inputTextarea id="idObsGeralDados" style="width:98% !important; margin-left:-5px; height: 100px !important" 
+						counter="displayClausula" maxlength="3400" counterTemplate="{0} Caracteres restantes." autoResize="false"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.obsDadosTecnico}" cols="6" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="6">
+					<h:outputText id="displayClausula" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+	</p:fieldset>
+			<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="5" style="text-align: right;">
+				<hr />
+				<div>
+					<p:commandButton 
+						id="btCancelarCadastro" 
+						value="#{projetoBean.btProjetos}"
+						actionListener="#{projetoBean.cancelar()}" 
+						update="@form"
+						styleClass="btn btn-red"
+						icon="fa fa-reply-all">
+					</p:commandButton>
+					
+					<p:commandButton 	
+						styleClass="btn btn-green"
+						value="Novo Projeto"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						actionListener="#{projetoBean.adicionarProjeto()}"
+						update="@form"
+						icon="fa fa-plus">
+					</p:commandButton>
+					
+					<p:commandButton 
+						id="btSalvarCadastro" 
+						value="Salvar"
+						ajax="true"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						actionListener="#{projetoBean.salvarProjeto()}" 
+						update="@form, valorProjetoCalculo"
+						styleClass="btn btn-green"
+						icon="fa fa-floppy-o">
+					</p:commandButton>
+					
+					
+				</div>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+</ui:composition>

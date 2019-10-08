@@ -1,0 +1,44 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:panelGrid id="painel-motivo-exclusao" styleClass="ui-noborder">
+		<p:row>
+			<p:column colspan="4">
+				<p:outputLabel value="Motivo Cancelamento"  />
+				<h:inputTextarea id="idmotivoExcusao" required="true"
+					style="width:98% !important; height:60px !important;"
+					counter="display" maxlength="300" counterTemplate="{0} Caracteres restantes." autoResize="false"
+					value="#{propostaBean.motivoExclusao}"
+					disabled="#{!propostaBean.vizualizaModalMotivo}"
+					cols="3">
+					<p:ajax event="change" />
+				</h:inputTextarea>	
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+	<h:outputText id="display" />
+		<div align="right">
+			<p:commandButton 
+				id="btConfirmaExcluir" 
+				value="Confirmar"
+				ajax="true"
+				immediate="true"
+				update="@form"
+				rendered="#{propostaBean.vizualizaModalMotivo}"
+				actionListener="#{propostaBean.excluirProposta()}"
+				onclick="PF('dialogMotivoExclusao').hide();"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			<p:commandButton 
+				id="btCancelarExclusao" 
+				value="Cancelar"
+				immediate="true"
+				onclick="PF('dialogMotivoExclusao').hide();"
+				styleClass="btn btn-red">
+			</p:commandButton>
+		</div>
+</ui:composition>

@@ -1,0 +1,864 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	
+<p:panel id="painelBusca" style="border: none;" rendered="#{projetoBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+	<p:panel id="idPanel" style="border: none;" >
+		<p:messages for="idOperacao" />
+		<div align="right">
+			<p:commandButton  rendered="#{projetoBean.checkPlanejarFaturar}"
+				styleClass="btn btn-green"
+				title="Cria novo projeto"
+				value="Novo Projeto"
+				actionListener="#{projetoBean.adicionarProjeto()}"
+				update="@form"
+				icon="fa fa-plus">
+			</p:commandButton>
+		</div>
+		<p:fieldset legend="Filtro Consultoria e Acessoria" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova"  >
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="2" style="width:300px;">
+					<p:selectOneRadio  style="width:300px;"
+			        	id="idSelecta"
+			        	value="#{projetoBean.selectedPesquisarPor}">
+						<f:selectItem id="teste1" itemLabel="Listar Projeto&nbsp;&nbsp;" itemValue="PJ" />
+						<f:selectItem itemLabel="Listar O.S&nbsp;&nbsp;" itemValue="OS" />
+						<p:ajax event="change" update="@form" process="@this, idLabelData, idBtCadastrar, idTrocarOsPorjeto" listener="#{projetoBean.verificarTipoDeLista()}"/>
+					</p:selectOneRadio>
+					<p:outputLabel id="idListProjeto"  style="margin-top:-25px; margin-left:136px; width:20px;"> 
+						<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+					<p:tooltip id="toolTipListProj" for="idListProjeto" value="Selecione para pesquisar e listar Projetos" position="top"/>
+					<p:outputLabel id="idListOS"  style="margin-top:-25px; margin-left:284px; width:20px;"> 
+						<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+					<p:tooltip id="toolTipListOS" for="idListOS" value="Selecione para pesquisar e listar OS" position="top"/>
+				</p:column>
+				<p:column style="width:11%;" rendered="#{projetoBean.checkPlanejarFaturar}">
+					<p:outputLabel id="idLabelData" value="#{projetoBean.labelPesquisaData}">
+					<i id="tooTipeDate" class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+					<p:tooltip id="tooldt" for="idLabelData" value="Pesquisa projetos por data que foram cadastrados" position="top"/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:1%;" >
+					<p:selectCheckboxMenu 
+						id="idContrato" scrollHeight="200"
+						style="width:180px; margin-top: 25px;/>"
+						styleClass="ui-altera-selectMenu" 
+						value="#{projetoBean.listaDeIdContrato}"
+						label="Contrato" 
+						multiple="true"
+                        filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+            			<f:selectItems value="#{projetoBean.comboContrato}" var="item" itemLabel="#{item.nrContrato}" itemValue="#{item.id}" />
+            			<p:ajax event="change" update="@form" listener="#{projetoBean.obterOSsByContrato(projetoBean.listaDeIdContrato)}"/>
+        			</p:selectCheckboxMenu>
+        			<p:tooltip id="tooidContrato" for="idContrato" value="Selecione um ou mais contratos para realizar a pesquisa dos projetos cadastrados" position="top"/>
+				</p:column>
+				<p:column style="width:235px;" >  
+					<p:selectCheckboxMenu 
+						id="numOSPLA1" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						style="width:230px !important; margin-top: 25px;"
+						styleClass="ui-altera-selectMenu" 
+						value="#{projetoBean.listaDeIdOS}"
+						label="Ordens de Serviços" 
+						multiple="true"
+                        filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+            		<f:selectItems value="#{projetoBean.comboOrdemServico}" var="item" itemValue="#{item.id}" itemLabel="#{item.numeroOS}" />
+        			</p:selectCheckboxMenu>
+        			<p:tooltip id="toonumOSPLA1" for="numOSPLA1" value="Selecione um ou mais O.S para realizar a pesquisa dos projetos cadastrados" position="top"/>
+				</p:column>
+				<p:column style="width:1%;" rendered="#{projetoBean.checkPlanejarFaturar}">
+					<p:panelGrid style="width: 70px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+						<p:column style="width:10% !important;">
+							<p:outputLabel id="dtInicioProj" value="Início" >
+							<i id="tooTipeDtIni" class="fa fa-question-circle" style="font-size:18px"></i>
+							</p:outputLabel>
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data incial"
+								pattern="dd/MM/yyyy"
+								value="#{projetoBean.filtroDataInicial}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+							<p:tooltip id="tooldtIni" for="dtInicioProj" value="Data inicial de cadastro dos projetos" position="top"/>
+						</p:column>	
+						<p:column style="width:15% !important;">	
+							<p:outputLabel id="dtFimProj" value="Fim">
+							<i id="tooTipeDtFim" class="fa fa-question-circle" style="font-size:18px"></i>
+							</p:outputLabel>
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data final"
+								pattern="dd/MM/yyyy"
+								value="#{projetoBean.filtroDataFinal}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+							<p:tooltip id="tooldtFim" for="dtFimProj" value="Data final de cadastro dos projetos" position="top"/>
+						</p:column>
+					</p:panelGrid>
+				</p:column>
+				<p:column rendered="#{projetoBean.checkPlanejarFaturar}" style="width:300px !important;">	
+					<p:outputLabel id="idPesqNomeProjeto" value="Nome Projeto Agrega">
+					<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+					<p:inputText style="width:300px !important;"
+						placeholder="Nome Projeto"
+						value="#{projetoBean.filtroNomeProjeto}">
+						<p:ajax event="change" />
+					</p:inputText>
+					<p:tooltip id="toolPesqNome" for="idPesqNomeProjeto" value="Digite parte do nome ou nome completo do Projeto para pesquisar. Ex: UB-CIND" position="top"/>
+				</p:column>
+				
+			</p:row>
+			
+			
+			<p:row rendered="#{projetoBean.checkPlanejarFaturar}">
+				<p:column rendered="#{projetoBean.checkPlanejarFaturar}" >	
+					<p:outputLabel id="idNrProCli" value="Nº Projeto Cliente">
+						<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+					<p:inputText style="width:180px !important;"
+						placeholder="Nº Projeto Cliente"
+						value="#{projetoBean.filtroProjetoCliente}">
+						<p:ajax event="change" />
+					</p:inputText>
+					<p:tooltip id="toolProCli" for="idNrProCli" value="Pesquisa pelo Nº Projeto Cliente que foi cadastrado." position="top"/>
+				</p:column>
+				<p:column style="width:235px !important;">
+					<p:outputLabel id="idNrProAgrega" value="Número Projeto Agrega" >
+						<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+						<p:inputText style="width:40px !important;"
+							title="Tipo"
+							placeholder="sigla"
+							maxlength="5"
+							value="#{projetoBean.filtroSubProjeto}">
+							<p:ajax event="change" />
+						</p:inputText>
+						-
+						<p:inputMask style="width:60px !important;"
+							placeholder="Número"
+							mask="999"
+							value="#{projetoBean.filtroProjetoAgrega}">
+							<p:ajax event="change" />
+						</p:inputMask>
+						.
+					<p:inputMask style="width:40px !important;"
+								placeholder="Ano"
+								mask="99"
+								value="#{projetoBean.filtroAnoProjeto}">
+							<p:ajax event="change" />
+					</p:inputMask>
+				<p:tooltip id="toolProAgrega" for="idNrProAgrega" value="Pesquisa pelo Nº Projeto Agrega cadastrado. Digite a sigla, Numero e Ano" position="top"/>
+			</p:column>
+			<p:column style="width:3%;" >
+	           		<p:outputLabel id="idSitPlan" value="Situação do projeto no Planejamento" >
+	           		<i class="fa fa-question-circle" style="font-size:18px"></i>
+					</p:outputLabel>
+	           		<p:selectOneMenu id="idSituacaoPlan" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						style="width:150px !important;"
+						value="#{projetoBean.sitPlanejamento}"
+						label="Planejamentos">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.listSitPlanejamento}" var="item" itemValue="#{item.flag}" itemLabel="#{item.descricao}" />
+            		<p:ajax event="change" />
+				</p:selectOneMenu>
+				<p:tooltip id="toolSitPlan" for="idSitPlan" value="Pesquisa os projetos pelo status de planejamento selecionado" position="top"/>
+			</p:column>
+			<p:column>
+				<p:outputLabel id="idHabColPlan" value="Habilitar Colunas de Planejamento" >
+					<i class="fa fa-question-circle" style="font-size:18px"></i>
+				</p:outputLabel>
+				<p:selectBooleanCheckbox id="idHabilitaColunas" style="width:250px;"
+ 						value="#{projetoBean.planejar}">
+				<p:ajax event="change" update="@form" process="@this" listener="#{projetoBean.habilitaPlanejamento()}"/>
+				</p:selectBooleanCheckbox>
+				<p:tooltip id="toolHabColPlan" for="idHabColPlan" value="Habilita colunas da lista de projetos, com os profissionais responsáveis por cada etapa do planejamento. " position="top"/>
+			</p:column>
+			
+			</p:row>	
+		</p:panelGrid><br></br>
+		
+		<p:accordionPanel rendered="#{projetoBean.checkPlanejarFaturar}" activeIndex="-1" >
+	        <p:tab title="Ações do Planejamento">
+				<p:growl id="messages" showDetail="true" sticky="false"  life="7000" autoUpdate="true" />    
+	           	<p:panelGrid styleClass="ui-noborder">	
+		           <p:row>
+		           	<p:column style="width:3%;" >
+		           		<p:outputLabel style="margin-left:-34px;" value="Nome do Planejamanto" />
+		           		<p:selectOneMenu id="idplanList" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+							style="width:150px !important; margin-left:-34px;"
+							value="#{projetoBean.planSeleect}"
+							label="Planejamentos">
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{projetoBean.comboPlanejamentos}" var="item" itemValue="#{item.id}" itemLabel="#{item.nome}" />
+	            		<p:ajax event="change" update="idplanList, idTituloPla, criaNovoPlan, idBtAtuTituloPlan, idAssociarPlan" process="idplanList, idTituloPla, criaNovoPlan, idBtAtuTituloPlan, idAssociarPlan" listener="#{projetoBean.atualizaTituloPlaSelecionado()}"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column style="width:400px !important;">
+					<p:outputLabel value="Título do planejamento" />
+					<p:inputText id="idTituloPla" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						style="width:400px !important;" 
+						value="#{projetoBean.tituloPlan}">
+						<p:ajax event="change" listener="#{projetoBean.validaBotoesNovoPlan()}" update="criaNovoPlan"/>
+					</p:inputText>
+				</p:column>
+				<p:column>
+					<p:commandLink  style="margin-bottom:-25px; margin-right: 5px;"
+						id="idBtAtuTituloPlan" 
+						disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						title="Atualiza o título do planejamento"
+						styleClass="btn btn-green"
+						action="#{projetoBean.salvarTituloPlanejamento()}"
+						update="idplanList, idTituloPla">
+						<i class="fa fa-refresh" ></i>
+					</p:commandLink>
+					<p:commandLink  style="margin-bottom:-25px; margin-right: 5px;"
+						id="idAssociarPlan" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						title="Associar um planejamento a projetos selecionados"
+						styleClass="btn btn-green"
+						action="#{projetoBean.associarPlanejamentoAosProjetos()}"
+						update="@form">
+						<i class="fa fa-random" ></i>
+					</p:commandLink>
+					
+					<p:commandLink  style="margin-bottom:-25px; margin-right: 5px;"
+						id="criaNovoPlan" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						title="Cria um novo planejamento"
+						styleClass="btn btn-green"
+						action="#{projetoBean.criarNovoPlanejamento()}"
+						update="@form">
+						<i class="fa fa-plus-circle" ></i>
+					</p:commandLink>
+					
+					<p:commandLink  style="margin-bottom:-25px; margin-right: 5px;"
+						ajax="false"
+						id="idExcluirPla" 
+						title="Exclui um planejamento existente nos projetos selecionados"
+						styleClass="btn btn-green"
+						action="#{projetoBean.preExcluirPlanejamento()}"
+						update="@form">
+						<i class="fa fa-trash" ></i>
+					</p:commandLink>
+					
+				</p:column>
+				
+				</p:row>
+				<p:row>
+					<p:column style="width:3%;" >
+					<p:selectCheckboxMenu disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						id="idComboPlanej" 
+						style="width:250px; margin-top: 19px; margin-left:-34px;"
+						styleClass="ui-altera-selectMenu" 
+						value="#{projetoBean.idsPlanejamentos}"
+						label="Planejamentos Criados" 
+						multiple="true"
+                        filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+            		<f:selectItems value="#{projetoBean.comboPlanejamentos}" var="item" itemValue="#{item.id}" itemLabel="#{item.nome}" />
+            		<p:ajax event="change" />
+        			</p:selectCheckboxMenu>
+				</p:column>
+				<p:column colspan="2">
+				
+					<p:commandButton 
+						id="idListPlan" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: projetoBean.idsPlanejamentos.size()>0? false: true}"
+						title="lista todos os planejamentos existentes"
+						styleClass="btn btn-green"
+						value="Lista Planejamento"
+						action="#{projetoBean.ListaPlanejamentosExistentes()}"
+						icon="fa fa-search" 
+						update="@form">
+					</p:commandButton>
+					<p:commandButton 
+						id="idGerarPlan22" disabled="#{projetoBean.listaDeIdContrato.size()>0? false: true}"
+						title="Gera e imprime os planejamentos selecionados"
+						styleClass="btn btn-green"
+						value="Gerar Planejamento"
+						actionListener="#{projetoBean.gerarPlanejamento()}"
+						icon="fa fa-print" 
+						ajax="false">
+					</p:commandButton>
+				
+				</p:column>
+				</p:row>
+				</p:panelGrid>
+	        </p:tab>
+        </p:accordionPanel>
+		
+	</p:fieldset>
+	<br/> 	
+		<div align="right">	
+			<p:commandButton title="Limpar filtros de pesquisa"
+				id="idBtLimpar" 
+				styleClass="btn btn-green"
+				value="Limpar"
+				update="@form"
+				action="#{projetoBean.limparTelaPesquisa()}"
+				icon="fa fa-magic">
+			</p:commandButton>	 
+			<p:commandButton 
+				id="idBtPesquisar" 
+				title="Pesquisa projetos já cadastrados"
+				styleClass="btn btn-green"
+				value="Pesquisar"
+				action="#{projetoBean.buscar()}"
+				icon="fa fa-search" 
+				update="@form">
+			</p:commandButton>
+			<p:commandButton 	
+				id="idBtCadastrar" 
+				title="Cria uma nova OS"
+				rendered="#{projetoBean.exibitBotaoNovaOS}"
+				styleClass="btn btn-blue"
+				value="Nova O.S"
+				actionListener="#{projetoBean.adicionarOS()}"
+				update="@form"
+				icon="fa fa-plus">
+			</p:commandButton>
+		</div>	
+	<!-- PROJETOS-->	
+	<p:outputLabel rendered="#{!projetoBean.exibirListPorOS and projetoBean.listarProjetosByFiltro.size()>0}" value="Lista de Projetos" style=" text-align:-webkit-left; font-size:18px; margin-bottom:-12px;"/>
+	<p:scrollPanel rendered="#{!projetoBean.exibirListPorOS and projetoBean.listarProjetosByFiltro.size()>0}" style="width:100%;height:400px; border-color:white;" styleClass="header-tabelas">
+	<p:panel style="width:1150px;border: none;" >
+ 
+		<p:dataTable styleClass="header-tabelas" id="widProjeto"
+			style="margin-left:-17px; width:#{projetoBean.vlrColuna};"
+			var="item" 
+			value="#{projetoBean.listarProjetosByFiltro}"
+			widgetVar="widProjeto"
+            emptyMessage="Nenhum projeto adicionado." 
+            filteredValue="#{projetoBean.filterProjetos}"
+            selection="#{projetoBean.projetosSelecionados}"
+            filterMatchMode="in"
+            rowKey="#{item.id}"
+			sortOrder="DESCENDING">
+			
+            <p:ajax event="rowSelectCheckbox" process="@this"/>
+   			<p:ajax event="rowUnselectCheckbox" process="@this"/>
+   			<p:ajax event="toggleSelect" process="@this"/>
+   			
+			<p:column selectionMode="multiple" style="text-align: left; 
+			width:15px !important; max-width: 15px;" />   
+			
+			 <p:column headerText="Acão" width="80">
+					<center>
+					<p:commandLink 
+						title="Excluir projeto."
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="@this"
+					 	action="#{projetoBean.preExcluirProjeto(item)}"
+						style="text-decoration:underline;" >
+						<i class="fa fa-trash" style="font-size:20px"></i>
+					</p:commandLink>
+				  <p:commandLink 
+				  		title="Visualizar projeto."
+					 	immediate="true"
+					 	ajax="false"
+					 	action="#{projetoBean.visualizarProjeto(item)}"
+					 	update="@form"
+						style="text-decoration:underline;" >
+						<i class="fa fa-search" style="font-size:20px"></i>
+					</p:commandLink> 
+							
+				 	<p:commandLink 
+				 		title="Editar projeto"
+				 		immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	action="#{projetoBean.editarProjeto(item)}"
+					 	style="text-decoration:underline;">
+						<i class="fa fa-pencil-square-o" style="font-size:20px"></i>
+					</p:commandLink>
+						
+				</center>
+			</p:column>
+			<p:column width="98" filterBy="#{item.ordemServico.numeroOS}"  filterMatchMode="in">
+	            <f:facet name="filter">
+	                <p:selectCheckboxMenu style="background: no-repeat !important; border: none !important;" 
+	                	label="Nº OS" 
+	                	onchange="PF('widProjeto').filter()" panelStyle="width:135px" 
+	                	scrollHeight="150">
+	                    <f:selectItems value="#{projetoBean.listaOS}" var="os" itemLabel="#{os.numeroOS}" itemDescription="#{os.numeroOS}" itemValue="#{os.numeroOS}"/> 
+	                </p:selectCheckboxMenu>
+	            </f:facet>
+	             <center><h:outputText value="#{item.ordemServico.numeroOS}" /></center>
+	        </p:column>
+   			
+		        <p:column width="118" filterBy="#{item.numeroProjetoAgrega}"  filterMatchMode="in" >
+		            <f:facet name="filter">
+		                <p:selectCheckboxMenu style="background: no-repeat !important; border: none !important;" 
+		                	label="Nº Agrega" 
+		                	onchange="PF('widProjeto').filter()" panelStyle="width:185px" 
+		                	scrollHeight="200">
+		                    <f:selectItems value="#{projetoBean.listarProjetosByFiltro}" var="i" itemLabel="#{i.subTipoProjeto}-#{i.numeroProjetoAgrega}.#{i.anoReferencia}" itemValue="#{i.numeroProjetoAgrega}"/>  
+		                </p:selectCheckboxMenu>
+		            </f:facet>
+		             <center><h:outputText value="#{item.subTipoProjeto}-#{item.numeroProjetoAgrega}.#{item.anoReferencia}" /></center>
+		        </p:column>
+		        
+   		        <p:column width="118" filterBy="#{item.numeroProjetoCliente}"  filterMatchMode="in">
+		            <f:facet name="filter">
+		                <p:selectCheckboxMenu style="background: no-repeat !important; border: none !important;" 
+		                	label="Nº Cliente" 
+		                	onchange="PF('widProjeto').filter()" panelStyle="width:185px" 
+		                	scrollHeight="200">
+		                    <f:selectItems value="#{projetoBean.listarProjetosByFiltro}" var="i" itemLabel="#{i.numeroProjetoCliente}" itemDescription="#{i.numeroProjetoCliente}" itemValue="#{i.numeroProjetoCliente}"/> 
+		                </p:selectCheckboxMenu>
+		            </f:facet>
+		             <center><h:outputText value="#{item.numeroProjetoCliente}" /></center>
+		        </p:column>
+						
+  			 <p:column width="40" headerText="Planejamento" rendered="#{projetoBean.habilitaPlanejamento}">
+	            <center><h:outputText value="#{(item.planejamentos.nome == null ? '-' :item.planejamentos.nome)}" /></center>
+	         </p:column>
+		         
+		    <p:column rendered="#{projetoBean.habilitaPlanejamento}" width="64" headerText="Prof. EPI" style="background:#{projetoBean.marcaSituacaoPlanPendente(item.checkEPI, item.profEpi.id)};">
+	             <h:outputText value="#{projetoBean.obterProfissionalByIDConcat(item.profEpi.id)}"	/>
+	        </p:column>
+	        <p:column rendered="#{projetoBean.habilitaPlanejamento}" width="105" headerText="Prof. EV/CTGA" style="background:#{projetoBean.marcaSituacaoPlanPendente(item.checkEvCtga, item.profEvctgal.id)};">
+              	  <h:outputText value="#{projetoBean.obterProfissionalByIDConcat(item.profEvctgal.id)}" />
+            </p:column>
+		       	
+	        <p:column rendered="#{projetoBean.habilitaPlanejamento}" width="88" headerText="Prof. Mapas" style="background:#{projetoBean.marcaSituacaoPlanPendente(item.checkMapa, item.profMapas.id)};" >
+	              <h:outputText value="#{projetoBean.obterProfissionalByIDConcat(item.profMapas.id)}" 
+	              title="#{item.profMapas.nome}"/>
+	       	</p:column>
+		       	
+	       	<p:column rendered="#{projetoBean.habilitaPlanejamento}" width="78" headerText="Prof. Verif." style="background:#{projetoBean.marcaSituacaoPlanPendente(item.checkVerificacap, item.profVerif.id)};" >
+              	 <h:outputText  value="#{projetoBean.obterProfissionalByIDConcat(item.profVerif.id)}"
+              	 	title="#{item.profVerif.id}"/>
+	        </p:column>
+	        
+	       	<p:column rendered="#{projetoBean.habilitaPlanejamento}" width="50" headerText="PL. Inicio" >
+		           <p:cellEditor>
+		               <f:facet name="output">
+			             <center>
+			             	<h:outputText value="#{item.dtIniPlanj}">
+			             		<f:convertDateTime pattern="dd/MM/yyyy" />
+			             	</h:outputText>
+			             </center>
+			             </f:facet>
+		   				 <f:facet name="input">
+			               <p:calendar value="#{item.dtIniPlanj}"	
+						        pattern="dd/MM/yyyy" 
+						        styleClass="componente-data-nova"
+						        style="width:130px; !important;">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+		           </p:cellEditor>
+		        </p:column>	
+		        
+		       <p:column rendered="#{projetoBean.habilitaPlanejamento}" width="50" headerText="PL.Fim" >
+		           <p:cellEditor>
+			            <f:facet name="output">
+			              	<h:outputText value="#{item.dtFimPlanj}">
+					            <f:convertDateTime pattern="dd/MM/yyyy" />
+					        </h:outputText>
+			              </f:facet>
+				        <f:facet name="input">
+					        <p:calendar 
+								value="#{item.dtFimPlanj}"
+								style="text-align: center; width:80px !important;"
+								pattern="dd/MM/yyyy">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+		           </p:cellEditor>
+		        </p:column>	
+		        <p:column rendered="#{projetoBean.habilitaPlanejamento}" headerText="PL.Entrega" width="30">
+		      	 	<p:cellEditor>
+		      	 		<f:facet name="output">
+			              	<h:outputText value="#{projetoBean.obterDataEntregaProjeto(item)}">
+					            <f:convertDateTime pattern="dd/MM/yyyy" />
+					        </h:outputText>
+			              </f:facet>
+				        <f:facet name="input">
+					        <p:calendar 
+								value="#{item.dtEntrega}"
+								style="text-align: center; width:80px !important;"
+								pattern="dd/MM/yyyy">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+					</p:cellEditor>
+		        </p:column>		
+			
+		        
+    		     <p:column width="135" filterBy="#{item.municipio.nome}"  filterMatchMode="in" sortBy="#{item.municipio.nome}">
+		            <f:facet name="filter">
+		                <p:selectCheckboxMenu style="background: no-repeat !important; border: none !important;" 
+		                	label="Municipio" 
+		                	onchange="PF('widProjeto').filter()" panelStyle="width:135px" 
+		                	scrollHeight="150">
+		                    <f:selectItems value="#{projetoBean.listarProjetosByFiltro}" var="i" itemLabel="#{i.municipio.nome}" itemDescription="#{i.municipio.nome}" itemValue="#{i.municipio.nome}"/> 
+		                </p:selectCheckboxMenu>
+		            </f:facet>
+		             <center><h:outputText value="#{projetoBean.concatMunicipio(item.municipio.nome)}"
+		             		title="#{item.municipio.nome}" /></center>
+		        </p:column>
+		       		        
+	        	<p:column headerText="Nome Projeto" width="180">
+					<center>
+						<p:outputLabel  value="#{projetoBean.concatProjeto(item.nomeProjeto)}" 
+						title="#{item.nomeProjeto}"  style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column width="150" headerText="Programa" >
+		        	<center>
+						<p:outputLabel  value="#{item.tipoPrograma.descricao}" />
+					</center>
+		        </p:column>
+		        
+	           <p:column width="40" headerText="Ext.Total" >
+		             <center> <h:outputText value="#{projetoBean.retornarString(item.extensaoTotalKm)}"/></center>
+		        </p:column>
+		        
+            	<p:column width="138" headerText="Status" sortBy="#{item.status.nome}">
+		             <center> <h:outputText value="#{item.status.nome}"/></center>
+		        </p:column>
+		        
+		       
+		        
+		</p:dataTable>	
+		
+	</p:panel>
+	</p:scrollPanel>
+	
+	<p:outputLabel id="idTrocarOsPorjeto" rendered="#{projetoBean.listarProjetosByFiltro.size()>0 and(projetoBean.exibirListPorOS == 'true'? 'false' : 'true')}"> 
+		<div align="right">Total de registros: #{projetoBean.listarProjetosByFiltro.size()}</div>
+	</p:outputLabel>
+		
+<!-- ORDEM DE SERVICO -->
+	<p:outputLabel rendered="#{projetoBean.exibirListPorOS and projetoBean.listarOssByFiltro.size()>0}" value="Lista de O.S" style=" text-align:-webkit-left; font-size:18px;"/>
+		<p:dataTable styleClass="header-tabelas" 
+				rendered="#{projetoBean.listarOssByFiltro.size()>0}"
+				var="result"
+				id="tabelas"
+				value="#{projetoBean.listarOssByFiltro}"
+				summary="true"
+				rowKey="#{result.id}"
+				emptyMessage="Nenhum projeto adicionado."
+				rows="10"
+				rowsPerPageTemplate="10,15,20" 
+				paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" paginator="true" 
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				sortBy="#{item.numeroOS}" sortOrder="DESCENDING"  >
+				
+				<p:column headerText="Nº Contrato" width="12%" sortBy="#{result.contrato.nrContrato}">
+					<center>
+						<p:outputLabel value="#{result.contrato.nrContrato}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				<p:column headerText="Nº O.S" width="8%" sortBy="#{result.numeroOS}">
+					<center>
+						<p:outputLabel value="#{result.numeroOS}" />
+					</center>
+				</p:column>
+					
+				<p:column headerText="Nome do Cliente" width="50%" sortBy="#{result.contrato.proposta.cliente.nome}">
+					<center>
+						<p:outputLabel value="#{result.contrato.proposta.cliente.nome}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Qtde.Projetos" width="2%">
+					<center>
+						<p:outputLabel value="#{result.qtdProjetos}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Acão" width="13%">
+				<div align="left">
+					<p:commandLink id="ver" title="Vizualizar O.S"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	action="#{projetoBean.visualizarOrdemServico(result)}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+							
+				 	<p:commandLink id="edit" title="Edita O.S"
+				 		immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	action="#{projetoBean.editarOrdemServico(result)}"
+					 	style="text-decoration:underline;">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					
+					<p:commandLink id="add" title="Adiciona um Projeto na O.S"
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	action="#{projetoBean.adicioarProjetoNaOS(result)}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-adicionar"></b>
+					</p:commandLink>
+					
+					<p:commandLink 
+					 	immediate="true" 
+					 	ajax="false"
+					 	update="@form"
+					 	process="@this"
+					 	action="#{projetoBean.preExcluirOrdemServico(result)}"
+						title="Exclui uma O.S}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+				</div>
+			</p:column>
+		</p:dataTable>
+		<br/>
+		
+	<p:outputLabel id="idTrocarOsOS" rendered="#{projetoBean.listarOssByFiltro.size()>0 and(projetoBean.exibirListPorOS == 'true'? 'true' : 'false')}"> 
+		<div align="right">Total de registros: #{projetoBean.listarOssByFiltro.size()}</div>
+	</p:outputLabel>	
+	
+	
+	
+	</p:panel>
+</div>
+</p:panel>	
+
+
+<p:blockUI block="@form" trigger="idBtPesquisar">
+	<p:graphicImage name="img/ajaxloadingbar.gif" />
+</p:blockUI>
+
+<p:outputLabel rendered="#{projetoBean.ocultarFiltroProjeto and projetoBean.opPlanejar and !projetoBean.opFaturar}">
+	<ui:include src="projeto_planejamento.xhtml" />
+</p:outputLabel>
+
+<p:outputLabel rendered="#{projetoBean.ocultarFiltroProjeto and projetoBean.opFaturar and projetoBean.opFaturar}">
+	<ui:include src="projeto_faturar_projetos.xhtml" />
+</p:outputLabel>
+
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+		<p:confirmDialog 
+				id="dialogExcluir" 
+				widgetVar="dialogExcluir"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir esse registro?">
+	 
+			<center>
+				<p:commandButton 
+					id="bfOK" 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					id="btCancelar"
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluir').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO ORDEM SERVICO-->
+		<p:confirmDialog 
+				id="dialogExcluirDistancia" 
+				widgetVar="dialogExcluirDistancia"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir esse registro?">
+	 
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirDistancia').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR PROJETO OS-->
+		<p:confirmDialog 
+				id="dialogExcluirProjetoOS" 
+				widgetVar="dialogExcluirProjetoOS"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir esse registro?">
+	 
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirProjetoOS').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR PROJETO OS-->
+		<p:confirmDialog 
+				id="dialogExcluirProfissional" 
+				widgetVar="dialogExcluirProfissional"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir esse registro?">
+	 
+			<center>
+				<p:commandButton 
+					id="bfOKPreProfissionais" 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					id="bfCancelarPreProfissionais"
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirProfissional').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO PRE-PLANEJAR  PORJETOS OS-->
+		<p:confirmDialog 
+				id="dialogPrePlanejarOS" 
+				widgetVar="dialogPrePlanejarOS"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja planejar todos os projetos da Ordem de Serviço de número?">
+	 
+			<center>
+				<p:commandButton 
+					id="bfOKPlanejar" 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					id="btCancelarPrePlanejar"
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogPrePlanejarOS').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR PROJETO OS-->
+		<p:confirmDialog 
+				id="dialogExcluirOS" 
+				widgetVar="dialogExcluirOS"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir essa OS?">
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					action="#{projetoBean.excluirOS()}"
+					styleClass="btn btn-red"/>
+				<p:commandButton 
+					id="btCancelarPre"
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirOS').hide()"  />
+			</center>
+		</p:confirmDialog>
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR PROJETO OS-->
+		<p:confirmDialog 
+				id="dialogNaoExcluirOS" 
+				widgetVar="dialogNaoExcluirOS"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Essa Ordem de Serviço não pode ser exclída, pois existe projeto associado.">
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					onclick="PF('dialogNaoExcluirOS').hide()"
+					styleClass="btn btn-red"/>
+			</center>
+		</p:confirmDialog>
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR PROJETO OS-->
+		<p:confirmDialog 
+				id="dialogExcluirPlanejamento" 
+				widgetVar="dialogExcluirPlanejamento"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Deseja excluir o planejamenntos do projeto(s) selecionado(s)?">
+	 
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					action="#{projetoBean.excluirPlanejamento()}"
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirPlanejamento').hide()"  />
+			</center>
+		</p:confirmDialog>
+<style>
+	.ui-growl{
+	  position:fixed;
+	  top:22%;
+	  right:17%;
+	  width:25%;
+	}
+	.ui-growl-message {
+	    padding: 0 0 5px 0;
+	    width: 90%;
+	    float: right;
+	   }
+</style>	
+		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>	
+</html>

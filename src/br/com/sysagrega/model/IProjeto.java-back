@@ -1,0 +1,302 @@
+package br.com.sysagrega.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import br.com.sysagrega.model.imp.Situacao;
+import br.com.sysagrega.model.imp.Usuario;
+
+public interface IProjeto extends Serializable{
+
+	boolean isNovo();
+
+	boolean isExistente();
+
+	Long getId();
+
+	void setId(Long id);
+
+	Usuario getUsuarioAtualizacao();
+
+	void setUsuarioAtualizacao(Usuario usuarioAtualizacao);
+
+	Date getDataInclusao();
+
+	void setDataInclusao(Date dataInclusao);
+
+	IOrdemServico getOrdemServico();
+
+	void setOrdemServico(IOrdemServico ordemServico);
+
+	String getTipoProjeto();
+
+	void setTipoProjeto(String tipoProjeto);
+
+	Boolean getAtivo();
+
+	void setAtivo(Boolean ativo);
+
+	String getNumeroArt();
+
+	void setNumeroArt(String numeroArt);
+
+	IProfissional getProfissional();
+
+	void setProfissional(IProfissional profissional);
+
+	IEstado getEstadoGeral();
+
+	void setEstadoGeral(IEstado estadoGeral);
+
+	String getNumeroProjetoAgrega();
+
+	void setNumeroProjetoAgrega(String numeroProjetoAgrega);
+
+	String getDataEntrada();
+
+	void setDataEntrada(String dataEntrada);
+
+	String getNumeroProjetoCliente();
+
+	void setNumeroProjetoCliente(String numeroProjetoCliente);
+
+	String getNomeProjeto();
+
+	void setNomeProjeto(String nomeProjeto);
+
+	IProfissional getProfissionalGestor();
+
+	void setProfissionalGestor(IProfissional profissionalGestor);
+
+	String getSubTipoProjeto();
+
+	void setSubTipoProjeto(String subTipoProjeto);
+
+	IProfissional getResponsavelCadastro();
+
+	void setResponsavelCadastro(IProfissional responsavelCadastro);
+
+	String getObsEmpresaExecutora();
+
+	void setObsEmpresaExecutora(String obsEmpresaExecutora);
+
+/*	IMacroRegiao getMacroRegiao();
+
+	void setMacroRegiao(IMacroRegiao macroRegiao);
+
+	IMicroRegiao getMicroRegiao();
+
+	void setMicroRegiao(IMicroRegiao microRegiao);*/
+
+	IMunicipio getMunicipio();
+
+	void setMunicipio(IMunicipio municipio);
+
+	Double getTamanhoProjeto();
+
+	void setTamanhoProjeto(Double tamanhoProjeto);
+
+	String getObsDadosTecnico();
+
+	void setObsDadosTecnico(String obsDadosTecnico);
+
+	Boolean getPossuiLPT();
+
+	void setPossuiLPT(Boolean possuiLPT);
+
+	IEstado getEstadoDadosTecnico();
+
+	void setEstadoDadosTecnico(IEstado estadoDadosTecnico);
+
+	Date getDtInicialRealizadaCampo();
+
+	void setDtInicialRealizadaCampo(Date dtInicialRealizadaCampo);
+
+	Date getDtFimRealizadaCampo();
+
+	void setDtFimRealizadaCampo(Date dtFimRealizadaCampo);
+
+	Boolean getSupresaoVegetacao();
+
+	void setSupresaoVegetacao(Boolean supresaoVegetacao);
+
+	Boolean getUnidadaConservacao();
+
+	void setUnidadaConservacao(Boolean unidadaConservacao);
+
+	String getObsDadosCampo();
+
+	void setObsDadosCampo(String obsDadosCampo);
+
+	String getEmpresaProjetoEletrico();
+
+	void setEmpresaProjetoEletrico(String empresaProjetoEletrico);
+
+	String getTelResponsavelEletrico();
+
+	void setTelResponsavelEletrico(String telResponsavelEletrico);
+
+	Boolean getMeioFisico();
+
+	void setMeioFisico(Boolean meioFisico);
+
+	Boolean getMeioSocioEconomico();
+
+	void setMeioSocioEconomico(Boolean meioSocioEconomico);
+
+	Double getPrimariaKm();
+
+	void setPrimariaKm(Double primariaKm);
+
+	Double getSecundariaKm();
+
+	void setSecundariaKm(Double secundariaKm);
+
+	Double getConjugadaKm();
+
+	void setConjugadaKm(Double conjugadaKm);
+
+	Double getExtensaoTotalKm();
+
+	void setExtensaoTotalKm(Double extensaoTotalKm);
+
+	Double getAreaHa();
+
+	void setAreaHa(Double areaHa);
+
+	Long getPostesPrimario();
+
+	void setPostesPrimario(Long postesPrimario);
+
+	Long getPostesSecundario();
+
+	void setPostesSecundario(Long postesSecundario);
+
+	Long getPostesTotal();
+
+	void setPostesTotal(Long postesTotal);
+
+	Long getConsumidores();
+
+	void setConsumidores(Long consumidores);
+
+	Double getTensaoPrimariaKv();
+
+	void setTensaoPrimariaKv(Double tensaoPrimariaKv);
+
+	Double getTensaoSecundariaKV();
+
+	String getCabos();
+
+	void setCabos(String cabos);
+
+	String getFaixaServidaoM();
+
+	void setFaixaServidaoM(String faixaServidaoM);
+
+	Double getDistanciaSedeMunPav();
+
+	void setDistanciaSedeMunPav(Double distanciaSedeMunPav);
+
+	Double getDistanciaSedeMunNaoPav();
+
+	void setDistanciaSedeMunNaoPav(Double distanciaSedeMunNaoPav);
+
+	Double getDistanciaMunLocalProjPav();
+
+	void setDistanciaMunLocalProjPav(Double distanciaMunLocalProjPav);
+
+	Double getDistanciaMunLocalProjNaoPav();
+
+	void setDistanciaMunLocalProjNaoPav(Double distanciaMunLocalProjNaoPav);
+
+	Boolean getSitioArquilogico();
+
+	void setSitioArquilogico(Boolean sitioArquilogico);
+
+	Date getDataCadastroDadosCampo();
+
+	void setDataCadastroDadosCampo(Date dataCadastroDadosCampo);
+
+	String getObsCaracteristicas();
+
+	void setObsCaracteristicas(String obsCaracteristicas);
+
+	Date getDataCadastroCaracteristica();
+
+	void setDataCadastroCaracteristica(Date dataCadastroCaracteristica);
+
+	String getObsDiapSeiaNotificacao();
+
+	void setObsDiapSeiaNotificacao(String obsDiapSeiaNotificacao);
+
+	Double getValorProjeto();
+
+	void setValorProjeto(Double valorProjeto);
+
+	Double getValorJaCobrado();
+
+	void setValorJaCobrado(Double valorJaCobrado);
+
+	Double getSaldoRestante();
+
+	void setSaldoRestante(Double saldoRestante);
+
+	Boolean getConfirmaVerificacao();
+
+	void setConfirmaVerificacao(Boolean confirmaVerificacao);
+
+	Date getDataVerificacao();
+
+	void setDataVerificacao(Date dataVerificacao);
+
+	String getObsVerificacao();
+
+	void setObsVerificacao(String obsVerificacao);
+
+	IPlanejamento getPlanejamento();
+
+	void setPlanejamento(IPlanejamento planejamento);
+
+	Date getDataCadastroDiap();
+
+	void setDataCadastroDiap(Date dataCadastroDiap);
+
+	Date getDataCadastro();
+
+	void setDataCadastro(Date dataCadastro);
+
+	Boolean getVerificaNotificacao();
+
+	void setVerificaNotificacao(Boolean verificaNotificacao);
+
+	ICaracteristicaProjeto getCaracteristicasProjeto();
+
+	void setCaracteristicasProjeto(ICaracteristicaProjeto caracteristicasProjeto);
+
+	String getObservacoesPagamento();
+
+	void setObservacoesPagamento(String observacoesPagamento);
+
+	Boolean getQuitacaoParcela();
+
+	void setQuitacaoParcela(Boolean quitacaoParcela);
+
+	IContrato getContrato();
+
+	void setContrato(IContrato contrato);
+
+	Situacao getSituacao();
+
+	void setSituacao(Situacao situacao);
+
+	void setTensaoSecundariaKV(Double tensaoSecundariaKV);
+
+	String getObsDadosFronteira();
+
+	void setObsDadosFronteira(String obsDadosFronteira);;
+
+
+	
+	
+}

@@ -1,0 +1,55 @@
+<ui:composition template="/pages/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="acesso_rapido">
+	
+		<div class="container">
+
+				<div class="span3 sidebar">
+					<p:panelGrid id="idAcessoRapido" columns="1">
+						<f:facet name="header">#{msgs['label.menu.acesso.rapido']}</f:facet>
+						<ui:fragment>
+							<h:link 
+								outcome="servidor"
+								title="#{msgs['label.acesso.rapido.cadastro.padrao']}">
+								Cadastro <u>P</u>adrão
+							</h:link>	
+						</ui:fragment>
+						<ui:fragment>
+							<h:link 
+								outcome="relatorioListagemComAgrupamento"
+								title="#{msgs['label.acesso.rapido.relatorio.listagem.com.agrupamento']}">
+								Relatório - <u>L</u>istagem com agrupamento <u></u>
+							</h:link>	
+						</ui:fragment>
+						<ui:fragment>
+							<h:link 
+								outcome="relatorioFichaCadastral"
+								title="#{msgs['label.acesso.rapido.relatorio.ficha.cadastral']}">
+								Relatório - <u>F</u>icha Cadastral
+							</h:link>	
+						</ui:fragment>
+<!-- 						<ui:fragment> -->
+<!-- 							<h:link  -->
+<!-- 								outcome="exemplosLazy" -->
+<!-- 								title="#{msgs['label.acesso.rapido.componente.carregamento.lazy']}" accesskey="y"> -->
+<!-- 								Componentes - Carregamento Laz<u>y</u> -->
+<!-- 							</h:link>	 -->
+<!-- 						</ui:fragment> -->
+<!-- 						<ui:fragment> -->
+<!-- 							<h:link  -->
+<!-- 								outcome="exemplosEager" -->
+<!-- 								title="#{msgs['label.acesso.rapido.componente.carregamento.eager']}" accesskey="e"> -->
+<!-- 								Componentes - Carregamento <u>E</u>ager -->
+<!-- 							</h:link>	 -->
+<!-- 						</ui:fragment>						 -->
+					</p:panelGrid>
+				</div>
+			</div>
+
+	</ui:define>
+</ui:composition>

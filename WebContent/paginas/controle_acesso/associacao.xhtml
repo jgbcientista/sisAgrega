@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	
+		<p:panel id="idPaneCAD" style="border: none;">
+			<p:messages  /><br></br>
+		<p:fieldset legend="Informações da Associação - Associar Usuário X Servidor">	
+		
+		<div align="center">
+		<p:panelGrid columns="4" id="painelCad" style="margin-top:15px; margin-right:0px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				 
+			 	<p:outputLabel value="Usuario: " for="usuarioAssociar"/>
+					<p:selectOneMenu 
+						id="usuarioAssociar" 
+						style="width:120px;"
+						disabled="#{perfilBean.viewPerfilAssociacao}" 
+						value="#{perfilBean.idUsuario}" >
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{perfilBean.usuarios}"
+						var="item" 
+						itemLabel="#{item.nome}"
+						itemValue="#{item.id}" />
+				</p:selectOneMenu>
+							
+				<p:outputLabel value="Perfil: " for="perfilAssociarUSU"/>
+					<p:selectOneMenu 
+						id="perfilAssociarUSU" 
+						disabled="#{perfilBean.viewPerfilAssociacao}" 
+						style="width:340px !important;"
+						value="#{perfilBean.idPerfil}" >
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{perfilBean.perfis}"
+						var="item" 
+						itemLabel="#{item.nome}"
+						itemValue="#{item.id}" />
+				</p:selectOneMenu>
+		
+		</p:panelGrid>
+		</div>
+		 <br />
+ 		 <br />
+ 		 <br />
+	</p:fieldset>
+
+ 		 <br />
+ 		 <br />
+ 		 <br /> 		 
+ 		 <br />
+ 		 <br />
+ 		 <br />
+
+ 	 		<center>
+					<p:commandButton 
+						id="btSalvarASS" 
+						value="Associar"
+						actionListener="#{perfilBean.associar()}" 
+						icon="fa fa-fw fa-save"
+						update="@form"
+						styleClass="btn btn-green" 
+						rendered="#{perfilBean.isNew()}" />
+					<p:commandButton 
+						id="btAtualizarASS" 
+						value="Associar"
+						actionListener="#{perfilBean.associar()}"
+						icon="fa fa-fw fa-refresh" 
+						styleClass="btn btn-green"
+						update="@form"
+						rendered="#{perfilBean.isEdit()}" />
+					<p:commandButton 
+						id="BtVoltarUsuario" 
+						value="Voltar"
+						immediate="true"
+						styleClass="btn btn-yellow"
+						action="#{perfilBean.cancelarNovaAssociacao()}" 
+						update="@form" />
+						
+						
+				</center>
+				 
+	 
+		</p:panel>
+ 
+</html>

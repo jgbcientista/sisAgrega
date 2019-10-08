@@ -1,0 +1,148 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:panelGrid id="painel-cadastro-parcela" styleClass="ui-noborder">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nº Retificação:"  />
+					<p:inputText  style="width:85px !important;"
+						value="#{projetoBean.retificacao.numero}" > 
+						<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				<p:column>	
+					<p:outputLabel value="Data do Recebimento" />
+					<p:calendar 
+						value="#{projetoBean.retificacao.dataEnvio}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Status: "  />
+					<p:selectOneMenu 
+						style="width:160px !important;"
+						 value="#{projetoBean.idStatus}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboStatus}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+					<p:ajax event="change" />
+					</p:selectOneMenu>
+				</p:column>
+				
+				
+				<p:column>
+					<p:outputLabel value="Tipo de Retificação: "  />
+					<p:selectOneMenu 
+						style="width:72px !important;"
+						 value="#{projetoBean.idTipoRetificacao}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboTipoRetificacao}" var="resulte" itemLabel="#{resulte.descricao}" itemValue="#{resulte.id}" />
+					<p:ajax event="change" />
+					</p:selectOneMenu>
+				</p:column>
+				
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="4">
+				<p:outputLabel value="Descrição do problema"  />
+				<h:inputTextarea id="idDescricaoProblema" 
+					style="width:98% !important; height:60px !important;"
+					value="#{projetoBean.retificacao.descricaoProblema}" 
+					maxlength="1000"
+					cols="6">
+					<p:ajax event="change" />
+				</h:inputTextarea>	
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="4">
+					<p:outputLabel value="Causa da Retificação"  />
+					<h:inputTextarea id="idRetificacaoModals" 
+						style="width:98% !important; height:60px !important;"
+						value="#{projetoBean.retificacao.descricao}"
+						maxlength="1000"
+						cols="6">
+						<p:ajax event="change" />
+					</h:inputTextarea>	
+				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="4">
+				<p:outputLabel value="Ação Corretiva"  />
+				<h:inputTextarea id="idRetificacaoModalsResposta" 
+					style="width:98% !important; height:60px !important;"
+					value="#{projetoBean.retificacao.resumoResposta}" 
+					maxlength="1000"
+					cols="6">
+					<p:ajax event="change" />
+					</h:inputTextarea>	
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="2">	
+					<p:outputLabel value="Data de Resposta" for="dataResposta" />
+					
+					<p:calendar 
+						id="dataResposta"
+						style="width:130px !important;"
+						value="#{projetoBean.retificacao.dataResposta}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+					
+				</p:column>	
+				<p:column colspan="2">
+					<p:outputLabel value="Responsável pela Resposta:"/>
+					<p:selectOneMenu 
+						style="width:250px !important;"
+						value="#{projetoBean.idProfissionalResposanvelResposta}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+					<p:ajax event="change" />
+					</p:selectOneMenu>
+				</p:column>	
+			</p:row>
+			<p:row>
+				<p:column colspan="4" style="text-align: right;">
+				<hr />
+				<div>
+					<p:commandButton 
+						id="btSalvarRetificacao" 
+						value="Salvar"
+						ajax="true"
+						immediate="true"
+						update="@form"
+						rendered="#{projetoBean.retificacao.status.id==null? 'true':'false'}"
+						actionListener="#{projetoBean.salvarRetificacao()}"
+						onclick="PF('dialogRetificacao').hide();"
+						styleClass="btn btn-green">
+					</p:commandButton>
+					<p:commandButton 
+						id="btFinalizarRetificacao" 
+						value="Finalizar"
+						ajax="true"
+						immediate="false"
+						rendered="#{projetoBean.retificacao.status.id==1?'true' : 'false'}"
+						actionListener="#{projetoBean.finalizarRetificacao()}"
+						update="@form"
+						styleClass="btn btn-green">
+					</p:commandButton>
+					
+					<p:commandButton 
+						id="btCancelarRetificacao" 
+						value="Cancelar"
+						immediate="true"
+						onclick="PF('dialogRetificacao').hide();"
+						styleClass="btn btn-yellow">
+					</p:commandButton>
+				</div>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+</ui:composition>

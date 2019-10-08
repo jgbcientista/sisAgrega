@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelGraficoProposta" style="border: none;" rendered="#{!graficoPropostaBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPaonelProposta" style="border: none;">
+			
+			
+			<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" />
+			<p:panel >
+					<p:chart  type="bar"  model="#{graficoPropostaBean.horizontalBarModel}" style="width: 800px;height:400px;"/>
+					<br/>
+					<!-- <p:chart  type="bar"  model="#{graficoPropostaBean.horizontalBarModel2}" style="width: 800px;height:400px; "/>
+					<br/>
+					<p:chart  type="bar"  model="#{graficoPropostaBean.horizontalBarModelSemestre}" style="width: 800px;height:400px; "/>
+					<br/> -->
+					<p:chart  type="bar"  model="#{graficoPropostaBean.horizontalGraficoNegocio}" style="width: 800px;height:400px; "/>
+					<br/>
+					<p:chart  type="bar"  model="#{graficoPropostaBean.horizontalGraficoTipoNegocio}" style="width: 800px;height:400px;"/>
+			</p:panel>
+			<p:column>
+			
+			</p:column>
+				
+			
+					
+		</p:panel>
+	</div>
+</p:panel>
+
+<style>
+	.content table{width: 0%; right: -32px !important;} 
+	
+</style>
+	
+</html>

@@ -1,0 +1,418 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+		 <p:panelGrid id="painelDadosCampo" styleClass="ui-noborder">
+         	<p:row><h4 style="margin-left: 10px;">Dados de Campo</h4></p:row>
+		</p:panelGrid>
+		 <p:panelGrid id="painelDadosCampo2" styleClass="ui-noborder">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nº Projeto Agrega: " for="numeroProjAgregaVer" />
+					<p:inputText id="numeroProjAgregaVer" disabled="true"
+						style="width:130px !important; opacity:.80 !important;"
+						value="#{projetoBean.projeto.subTipoProjeto}-#{projetoBean.projeto.numeroProjetoAgrega}.#{projetoBean.projeto.anoReferencia}" >
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Nº Projeto Cliente " for="idNrProjCoelba" />
+					<p:inputText id="idNrProjCoelba" disabled="true"
+						style="width:120px !important; opacity:.80 !important;"
+						value="#{projetoBean.projeto.numeroProjetoCliente}" >
+					</p:inputText> 
+				</p:column>
+
+				<p:column>
+					<p:outputLabel value="Supressão de Vegetação?" />
+					 <p:selectOneRadio id="idSupVegetacao"
+					 disabled="#{projetoBean.visualizarProjeto}"
+					 	value="#{projetoBean.projeto.supresaoVegetacao}">
+			            <f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+		        	</p:selectOneRadio>
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Sitio Arquiológico? " />
+					 <p:selectOneRadio id="idsitio"
+					 disabled="#{projetoBean.visualizarProjeto}"
+			        	value="#{projetoBean.projeto.sitioArquilogico}" >
+			            <f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+		        	</p:selectOneRadio>
+				</p:column>
+				<p:column width="10%"> 
+				<p:outputLabel value="Data inicial" for="idDtInicioCampo" />
+					<p:calendar styleClass="componente-data-nova"
+						id="idDtInicioCampo" 
+						pattern="dd/MM/yyyy"
+						style="width:100px; !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.dataIncialCampo}" >
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+				</p:column>
+				<p:column width="10%"> 
+				<p:outputLabel value="Data final" for="idDtFimCampo" />
+					<p:calendar styleClass="componente-data-nova"
+						id="idDtFimCampo" 
+						pattern="dd/MM/yyyy"
+						style="width:100px; !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.dataFinalCampo}" >
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+				</p:column>
+				
+				</p:row>
+		</p:panelGrid>
+		
+		<br />
+		<p:panelGrid id="painelDadosCampo3" styleClass="ui-noborder">
+		
+		<p:outputLabel value="Descrição da(s) Coordenada(s)" style="text-align:left;font-weight: bold !important; font-size:15px !important; margin-left:10px !important;"/>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Ponto" for="idPonto" />
+					<p:inputText id="idPonto" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.coordenada.ponto}" 
+						placeholder="Ponto"
+						style="width:130px !important;" >
+						<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Coordenada (X)" for="idX" />
+					<p:inputText id="idX" 
+					disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.coordenada.coordenadaX}" 
+						placeholder="Coordenada X"
+						style="width:130px !important;"	>
+						<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Coordenada (Y)" for="idY" />
+					<p:inputText id="idY" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.coordenada.coordenadaY}" 
+						placeholder="Coordenada Y"
+						style="width:130px !important;" >
+							<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				
+				<p:column>
+					<p:outputLabel value="Fuso" for="idFuso" />
+					<p:inputText id="idFuso" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.fusoInformado}" 
+						placeholder="Fuso"
+						style="width:130px !important;" >
+						<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				<p:column style="width: 55%;">
+					<p:commandButton
+						id="addCordenada" 
+						style="margin-left: 6px; margin-top:25px;"
+						update="idListaCoornadas, painelDadosCampo4, idY, idX, idPonto, idFuso, msgs"
+						value="Exportar Excel"
+						title="Exportar para Excel"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						styleClass="btn btn-green"
+						action="#{projetoBean.addCoordenada()}" 
+						icon="#{projetoBean.coordenada.id== null ? 'fa fa-plus': 'fa fa-pencil-square-o'}">
+					</p:commandButton>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<br />
+		<p:panelGrid id="painelDadosCampo4" styleClass="ui-noborder">
+		
+		
+			<p:row>
+				<p:column>
+					<p:dataTable 
+						styleClass="header-tabelas" 
+						var="resulte" 
+						value="#{projetoBean.listCoordenada}"
+						rowKey="grup"
+						id="idListaCoornadas"
+		 				rowIndexVar="rowIndex"
+						style="width: 100%; margin-top:-0px;"
+						emptyMessage="Nenhum registro cadastrado." 
+						rowsPerPageTemplate="10,20,30" 
+						rows="10" 
+						paginatorAlwaysVisible="true"
+						paginatorPosition="bottom" 
+						paginator="true"
+						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+						currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+						rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}">
+		 				
+				        <p:columnGroup type="header">
+				            <p:row>
+				                <p:column rowspan="2" headerText="PONTO" sortBy="#{resulte.ponto2}" />
+				                <p:column colspan="6" headerText="COORDENADA" />
+				                <p:column rowspan="2" headerText="AÇÃO" />
+				            </p:row>
+				            <p:row>
+				                <p:column colspan="2" headerText="X" />
+				                <p:column colspan="2" headerText="Y" />
+				                <p:column colspan="2" headerText="Fuso" />
+				            </p:row>
+				        </p:columnGroup>
+				        
+				        	<p:column>
+				        		<center><h:outputText value="#{resulte.ponto}" /></center>
+				        	</p:column>
+				        	
+				            <p:column colspan="2">
+				                <center><h:outputText value="#{resulte.coordenadaX}" /></center>
+				            </p:column>
+				            <p:column colspan="2">
+				               <center> <h:outputText value="#{resulte.coordenadaY}" />	</center>
+				            </p:column>
+			            	<p:column colspan="2">
+				        		<center><h:outputText value="#{resulte.fuso== null ? '-': resulte.fuso}" /></center>
+				        	</p:column>
+			                
+				         <p:column style="width:10%">
+				            <center>
+				            <p:commandLink  
+							 	immediate="true"
+							 	ajax="false"
+							 	update="idDescPontos"
+							 	process="listaCoornadas"
+							 	action="#{projetoBean.preExcluirCoordenada(resulte)}"
+								style="text-decoration:underline;" >
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+					                 
+							<p:commandLink 
+						 		id="editCo" 
+							 	ajax="true"
+							 	immediate="false"
+							 	update="@form"
+							 	disabled="#{projetoBean.visualizarProjeto}"
+							 	action="#{projetoBean.editarCoordenada(resulte)}"
+							 	style="text-decoration:underline;">
+								<b class="icone-splash ico-editar"></b>
+							</p:commandLink>
+			               </center>
+			             </p:column>
+				        
+				        
+				      </p:dataTable>
+					</p:column>
+			</p:row>
+		</p:panelGrid>
+		<br/>
+		<p:panelGrid id="painelTrajeto" styleClass="ui-noborder">
+			<p:outputLabel value="Ligação dos Pontos do Trajeto" style="text-align:left;font-weight: bold !important; font-size:15px !important; margin-left:10px !important;"/>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Inicio" for="idP1" />
+					<p:inputText id="idP1" 
+						style="width:140px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						placeholder="Início"
+						value="#{projetoBean.trajetoRede.pontoInicio}">
+						<p:ajax event="change"/>
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Fim" for="idP2" />
+					<p:inputText id="idP2" 
+						style="width:140px !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						placeholder="Fim"
+						value="#{projetoBean.trajetoRede.pontoFim}">
+					<p:ajax event="change"/>
+					</p:inputText> 
+				</p:column>
+				
+				<p:column style="width: 68%;">
+					<p:commandButton 
+						id="addTrajeto" 
+						style="margin-left: 6px; margin-top:25px;"
+						update="idP2, idP1, tabelaTrajeto, msgs"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						value="#{projetoBean.trajetoRede.id== null ? 'Adicionar': 'Alterar'}"
+						styleClass="btn btn-green"
+						action="#{projetoBean.addTrajetoRede()}"
+						icon="#{projetoBean.coordenada.id== null ? 'fa fa-plus': 'fa fa-pencil-square-o'}">
+					</p:commandButton>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		
+		<p:panelGrid columns="1" style="width: 100%; margin-top:10px; margin-left:0px;" styleClass="ui-noborder">
+			<p:growl id="msgs"/>
+			<p:dataTable
+				styleClass="header-tabelas" 
+				value="#{projetoBean.listTrajetoRede}"
+				id="tabelaTrajeto"
+				widgetVar="tabelaTrajeto"
+				rowsPerPageTemplate="10, 20, 30" 
+				rows="10" 
+				var="resulte"
+				style="width: 100%; margin-top:-0px;"
+				editable="true" 
+				emptyMessage="Nenhum registro cadastrado." 
+				paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" paginator="true"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}">
+		 	
+		       <p:column headerText="PONTO INICIAL" style="width:40%;" sortBy="#{resulte.pontoInicio}">
+		           <p:cellEditor >
+				       <f:facet name="output"><center><h:outputText value="#{resulte.pontoInicio}" /></center></f:facet>
+		               <f:facet name="input"><p:inputText id="modelInput1" value="#{resulte.pontoInicio}" style="width:100%" /></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		       
+		        <p:column headerText="PONTO FINAL" style="width:40%;" sortBy="#{resulte.pontoFim}">
+		           <p:cellEditor >
+				       <f:facet name="output"><center><h:outputText value="#{resulte.pontoFim}" /> </center></f:facet>
+		               <f:facet name="input"><p:inputText id="modelInput2" value="#{resulte.pontoFim}" style="width:100%" /></f:facet>
+		           </p:cellEditor>
+		       </p:column>
+		      
+		       <p:column style="width:10% !important;" headerText="AÇÃO">
+		       <center>
+		       		<p:commandLink 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="@this"
+					 	action="#{projetoBean.preExcluirTrajetoRede(resulte)}"
+						title="#{msgs['label.button.excluir']}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+					 
+					<p:commandLink 
+				 		id="editTrajeto" 
+					 	ajax="true"
+					 	immediate="false"
+					 	update="@form"
+					 	disabled="#{projetoBean.visualizarProjeto}"
+					 	action="#{projetoBean.editarTrajeto(resulte)}"
+					 	style="text-decoration:underline;">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+			</center>
+	             </p:column>
+       
+		   </p:dataTable>
+		</p:panelGrid>
+		
+		<p:panelGrid id="painelObsDadosCampo" styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="2">
+				<p:outputLabel value="Observações/Comentários Gerais" for="idObsComentario" />
+				<h:inputTextarea id="idObsComentario" 
+					style="width:98% !important; height:200px !important;"
+					value="#{projetoBean.projeto.obsDadosCampo}" 
+					maxlength="3400"
+					disabled="#{projetoBean.visualizarProjeto}"
+					cols="4"/>	
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="4" style="text-align: right;">
+				<hr />
+				<div>
+				
+				
+				 	<p:commandButton 
+						value="Voltar"
+						actionListener="#{projetoBean.cancelar()}" 
+						update="@form"
+						styleClass="btn btn-red"
+						icon="fa fa-reply-all">
+					</p:commandButton>
+					
+					
+					<p:commandButton 
+						value="Disparar E-mails"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						action="#{projetoBean.dispararEmail(1)}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-envelope-o">
+					</p:commandButton>
+					
+					<p:commandButton 
+						value="Salvar"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						action="#{projetoBean.salvarDadosCampo()}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-floppy-o">
+					</p:commandButton>
+					
+				</div>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+	<p:confirmDialog 
+				id="dialogExcluirCO" 
+				widgetVar="dialogExcluirCoordenada"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir o item selecionado?">
+	 
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					action="#{projetoBean.excluirCoordenada()}"
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirCoordenada').hide()"  />
+			</center>
+	</p:confirmDialog>
+		
+	<p:confirmDialog 
+				id="dialogExcluirTRajeto" 
+				widgetVar="dialogExcluirTrajeto"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir o item selecionado?">
+	 
+			<center>
+				<p:commandButton 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					action="#{projetoBean.excluirTrajeto()}"
+					styleClass="btn btn-red"
+					 />
+				<p:commandButton 
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluirTrajeto').hide()"  />
+			</center>
+</p:confirmDialog>
+		
+</ui:composition>

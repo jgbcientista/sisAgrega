@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProjeto" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.6076916075000145"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="7af184e8-d2c6-445b-8141-506c883c5741"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<parameter name="filtroContrato" class="java.lang.String"/>
+	<parameter name="filtroOrdemServico" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="contrato.nrContrato" class="java.lang.String"/>
+	<field name="numeroOS" class="java.lang.String"/>
+	<field name="contrato.proposta.numeroProposta" class="java.lang.String"/>
+	<field name="dataInclusao" class="java.util.Date"/>
+	<field name="qtdProjetos" class="java.lang.Integer"/>
+	<field name="profissionalPlanejamento.nome" class="java.lang.String"/>
+	<variable name="contrato.nrContrato_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{contrato.nrContrato}]]></variableExpression>
+	</variable>
+	<variable name="soma_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<title>
+		<band height="100">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="1" y="80" width="800" height="20" uuid="4485fca3-7403-4370-9979-bd4fc639685f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="0" width="800" height="80" forecolor="#009900" uuid="3045020b-b72b-435a-b9a9-68ad06a3d040"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="63" width="78" height="5" forecolor="#FFFFFF" uuid="2aba6879-d204-4ed8-a2e8-e36ddc264055"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="80" width="64" height="20" uuid="aeddf57c-a7b3-4c05-a6f3-4ceb669cf8c3"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="28" y="3" width="19" height="10" uuid="f6cb1e06-6928-4233-90ff-b0084c4cf8a5"/>
+				<imageExpression><![CDATA["img/cabecalho.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement mode="Opaque" x="21" y="64" width="102" height="4" forecolor="#FFFFFF" uuid="1048a9ec-6696-4743-8a84-1212de3068b5"/>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="100" y="3" width="7" height="64" forecolor="#FFFFFF" uuid="974eaac7-09d2-4a9d-ab74-2d81294b27c2"/>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="25" width="801" height="20" uuid="0f9135a5-d35b-47f0-a328-84732096f386"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RELATÓRIO DE ORDENS DE SERVIÇOS"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="64" y="80" width="155" height="20" uuid="70a89f25-35a3-4a13-9698-0d9407ec8eee"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{filtroContrato}== null? '-' : $P{filtroContrato})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="218" y="80" width="97" height="20" uuid="21296292-adb9-4e7d-abd3-bebc91ff0a67"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ordem de Serviço:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="314" y="80" width="155" height="20" uuid="a640ca46-fa14-4436-af1a-9aa93cea48f2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($P{filtroOrdemServico}== null? '-' : $P{filtroOrdemServico})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22">
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="-1" width="236" height="22" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="9f453506-d6fb-4688-ab08-fb277e483f4f"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsável]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="445" y="-1" width="150" height="22" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="6e7d476a-3e13-4b90-9410-41cc9ddcdd15"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº OS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="236" y="-1" width="209" height="22" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="e87309f6-eb31-4823-95b6-dc1ef6ea3ad9"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº Proposta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="701" y="-1" width="100" height="22" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="6e1daa1b-7ab0-4324-a584-e7e0de03e749"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QT. Projetos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="595" y="-1" width="107" height="22" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="9ae8590d-a43f-4269-b2e8-ff81baf5c882"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data Criação]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="150" height="19" isPrintWhenDetailOverflows="true" uuid="b02ff698-f08c-4a98-8c2c-a3287254c03a"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="236" y="0" width="209" height="19" isPrintWhenDetailOverflows="true" uuid="a15446b2-a1f1-4f56-b7f5-4b9c0f1c154c"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contrato.proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="236" height="19" isPrintWhenDetailOverflows="true" uuid="2240cdbd-3712-4278-b6d1-ad943dce7dc9"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{profissionalPlanejamento.nome}== null ? "-" : $F{profissionalPlanejamento.nome})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="595" y="0" width="107" height="19" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="e8b1ad7b-167e-4810-8714-1b2e3bb661cc"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dataInclusao}== null? '-' : $F{dataInclusao})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="702" y="0" width="100" height="19" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" uuid="060b9b12-8dcb-49e5-823f-e6d6287b8060"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{qtdProjetos}== null ? "-" : $F{qtdProjetos})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="445" y="0" width="150" height="20" uuid="b306c47b-69b4-460e-89c2-24482b8353c9"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total: " + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="18" width="801" height="11" forecolor="#000000" uuid="a027adf7-8c37-433e-a9e2-2ceda7498cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="29" width="802" height="11" forecolor="#3333FF" uuid="97cfce9d-a0c4-4702-ba81-be6389a8e99d"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="43" width="801" height="13" forecolor="#000000" uuid="3e4463ad-624a-4fde-88a8-4a202b0d00d0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág."+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="6" width="801" height="13" forecolor="#000000" uuid="9a3768e3-9c7e-4f93-856c-23ba2712287e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="801" height="1" forecolor="#009900" uuid="fd2f1f12-1942-4084-97ec-81615d5d302d"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

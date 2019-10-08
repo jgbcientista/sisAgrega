@@ -1,0 +1,302 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+	<div align="right" style="margin-bottom:-30px;">
+		<p:commandButton 
+			value="Gerar Proposta" title="visualiza e gera a proposta técnica/financeira"
+			styleClass="btn btn-blue"
+			style="width: 150px;"
+			actionListener="#{propostaBean.gerarPropostaTecnicaFinanceiraOficialVer1()}" 
+			ajax="false">
+		</p:commandButton>
+		<p:commandButton 
+			value="Confirma Emissão" title="Confirma a emissão da proposta técnica/financeira"
+			style="width: 170px;"
+			styleClass="btn btn-blue"
+			actionListener="#{propostaBean.confirmaEmissao(3)}" 
+			ajax="false"
+			update="@form">
+		</p:commandButton>
+	</div>
+	<p:panelGrid styleClass="ui-noborder" style="width:280px;">
+		<p:row>
+			<p:column>
+				<p:outputLabel value="Emitida em: " 
+					style="font-size:18px !important; color: red; margin-left: 14px;">
+				</p:outputLabel>
+			</p:column>
+			<p:column>
+				<p:outputLabel value="#{proposta.dtEmissPropTecFinac}" 
+					style="font-size:18px !important; color: red;">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:outputLabel>
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+		
+	<p:fieldset legend="Proposta Técnica-Financeira" style="margin-bottom:20px" rendered="true"> 
+		<p:panelGrid columnClasses="column1Class, column2Class" id="idPanelDestinatarioFinanceiro2" styleClass="ui-noborder">
+					<br/>
+					<p:row>
+						<p:column style="width:5%">
+							<p:outputLabel value="Nome Destinatário:" />
+						</p:column>
+						<p:column style="width:100%">
+							<p:inputText id="destinatario" 
+								style="width:99% !important;" 
+								disabled="#{propostaBean.viewProposta}"
+								placeholder="Digite o nome do destinatário."
+								value="#{propostaBean.proposta.destEnvioTecFinan}">
+								<p:ajax event="change" />
+							</p:inputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Dados do Destino:" />
+						</p:column>
+						<p:column>
+							<p:inputTextarea 
+								id="dadosDestino2"  
+								style="width:100% !important; height:70px !important;" 
+								addLine="false" maxlength="200"
+								autoResize="false"
+								disabled="#{propostaBean.viewProposta}"
+								placeholder="Digite a descrição do destinatário."
+								value="#{propostaBean.proposta.dadosDestEnvioTecFinan}">
+								<p:ajax event="change" />
+							</p:inputTextarea>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Referente" style="width:20%"/>
+						</p:column>	
+						<p:column>
+							<p:inputTextarea id="dptoEnvio2" 
+								rows="3"
+								autoResize="false" maxlength="999"
+								style="width:100% !important; height:20px !important;" 
+								disabled="#{propostaBean.viewProposta}"
+								placeholder="Digite o nome do departamanto para envio da proposta."
+								value="#{propostaBean.proposta.dptoEnvioTecFinan}">
+								<p:ajax event="change" />
+							</p:inputTextarea>	
+						</p:column>				
+					</p:row>
+			</p:panelGrid>
+			
+				<br />
+			<p:panelGrid columns="1" id="idPanelDescrProposta2" style="width: 100% !important; " styleClass="ui-noborder">
+				<p:outputLabel value="Carta Apresentação:" />
+					<p:inputTextarea 
+						id="descriPropo2" 
+						style="width:100% !important;"
+						autoResize="false"
+						rows="3"
+							disabled="#{propostaBean.viewProposta}" maxlength="3499"
+							placeholder="Digite a descrição da proposta."
+							value="#{propostaBean.proposta.descricaoTecFinan}">
+							<p:ajax event="change" />
+					</p:inputTextarea>	
+			</p:panelGrid><br/>
+			<center> 
+		<div align="right">
+		<p:panelGrid>
+			<p:commandButton 
+				id="btAtualizarTEcFin" 
+				rendered="#{!propostaBean.viewProposta}"
+				immediate="true"
+				value="Salvar"
+				action="#{propostaBean.atualizarProposta()}"
+				styleClass="btn btn-blue"
+				update="idPanelProposta">
+			</p:commandButton>
+		
+		</p:panelGrid>		
+		</div>
+		</center>
+			</p:fieldset>
+			
+			<p:fieldset legend="Itens da Proposta - Técnica/Financeira" style="margin-bottom:20px" rendered="true"> 
+				<p:panelGrid columns="1" id="idPanelDescrItens2" style="width: 100% !important; " styleClass="ui-noborder" rendered="#{!propostaBean.viewProposta}">
+				<p:outputLabel value="Título" />
+					<p:inputText
+					id="tituloItem2" 
+					styleClass="caixa-disabled"
+					value="#{propostaBean.tituloTipoItemTecFinan}"
+					autoResize="false"
+					disabled="#{propostaBean.viewProposta}"
+					style="width:100% !important;" 
+					placeholder="Digite o item proposta"
+					maxlength="250" />
+				<p:outputLabel value="Descrição" />
+				<p:inputTextarea 
+					id="descricaoItem2" 
+					rows="4" 
+					autoResize="false"
+					disabled="#{propostaBean.viewProposta}"
+					placeholder="Digite a descrição da proposta financeira"
+					style="width:100% !important; height:100px !important;"
+					value="#{propostaBean.descricaoTipoItemTecFinan}"
+					/>
+				<p:outputLabel />
+				<p:commandButton 
+						id="addItem2" 
+						disabled="#{propostaBean.viewProposta}"
+						immediate="false"
+						update="@form"
+						value="#{propostaBean.labelBotaoAdicionarItemProposta}" 
+						styleClass="btn btn-green"
+						action="#{propostaBean.salvarItens(3)}" >
+				 </p:commandButton>
+			</p:panelGrid>
+			</p:fieldset>
+			<p:fieldset legend="Lista itens adicionados - Técnica/Financeira" style="margin-bottom:20px" rendered="true"> 
+			<p:dataTable 
+					styleClass="header-tabelas" 
+					id="tabelaTipoItensTec2"
+					widgetVar="tabelaTipoItensTec2"
+					value="#{propostaBean.proposta.listarTipoItemPropostaTecFinanceira}"
+					var="resulte"
+					style="width: 100%;"
+				 	emptyMessage="Nenhum Ítem adicionado."
+				 	rows="100"
+				 	scrollable="true" scrollHeight="500">
+				 	
+				 	<p:column headerText="Editar" style="width: 30px;">
+						<p:commandLink 
+							 	id="editarItemPropostaTec2" 
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta}"
+							 	update="idPanelDescrItens"
+							 	action="#{propostaBean.editarItensProposta(resulte, 3)}"
+								title="Editar"
+								style="text-decoration:underline; text-align:center;" >
+							<b class="icone-splash ico-editar"></b>
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="Item" style="width:150px;" sortBy="#{resulte.titulo}">
+						<p:outputLabel value="#{resulte.titulo}" />
+					</p:column>
+					<p:column headerText="Descrição" style="width: 620px;">
+						
+					<p:inputTextarea 
+						rows="4" 
+						style="width:100% !important; height:100px !important; opacity:1.8 !important; text-overflow: ellipsis !important;" maxlength="500" 
+						value="#{resulte.descricao}" disabled="true">
+					</p:inputTextarea>
+					</p:column>
+					
+					<p:column headerText="Excluir" style="width: 30px;">
+						<p:commandLink 
+							 	id="removerItemPropostaTec3" 
+							 	immediate="true"
+							 	ajax="false"
+							 	disabled="#{propostaBean.viewProposta}"
+							 	update="@form:tabelaTipoItens"
+							 	action="#{propostaBean.preExcluirItemProposta(resulte)}"
+								title="Excluir"
+								style="text-decoration:underline;" >
+								<b class="icone-splash ico-excluir"></b>
+						</p:commandLink>
+					</p:column>
+			</p:dataTable>
+			</p:fieldset>
+			<p:fieldset legend="Planilha Financeira" style="margin-bottom:20px" rendered="true"> 
+			<p:panelGrid columns="1" id="idPanelPlanFinaTec" style="width: 99% !important; " styleClass="ui-noborder">
+				<p:panelGrid id="idPanelPlancom"  columnClasses="column1Class, column2Class" style="width: 80% !important; " styleClass="ui-noborder">
+					<p:row>
+						<p:column>
+							<p:outputLabel  value="Deseja inserir a planilha financeira feita na precificação?" style="font-size:14px !important; margin-left: 3px; font-weight:bold !important;" />
+						</p:column>
+						<p:column>
+							<p:selectBooleanCheckbox 
+								disabled="#{propostaBean.viewProposta}"
+								value="#{propostaBean.proposta.inserirPlanCom}">
+								<p:ajax event="change" update="idPanelPlanFinaTec, idPanelPlancom " process="@this, tituloItemPlanTec, idTituloPlanTec, idDescPlanFinTec, descricaoItemPlanTec" listener="#{propostaBean.verificaSeInseriPlanfinanceiraTec()}"/>	
+								</p:selectBooleanCheckbox>
+						</p:column>
+						<p:column>
+							<p:outputLabel  value="Sim" style="font-size:14px !important; font-weight:bold !important;" />
+						</p:column>
+						<p:column>
+							<p:outputLabel  value="" style=" width:311px;" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<p:outputLabel value="Título" id="idTituloPlanTec" rendered="#{propostaBean.inseriPlanFinanceraTec}"/>
+				<p:inputText id="tituloItemPlanTec"  
+					style="width:99% !important;" 
+					disabled="#{propostaBean.viewProposta}"
+					placeholder="Digite o Titulo da Planilha Financeira."
+					maxlength="400"
+					rendered="#{propostaBean.inseriPlanFinanceraTec}"
+					value="#{propostaBean.proposta.tituloPlanComer}">
+					<p:ajax event="change" />
+				</p:inputText>
+				<p:outputLabel value="Descrição:" id="idDescPlanFinTec" rendered="#{propostaBean.inseriPlanFinanceraTec}"/>
+				<p:inputTextarea id="descricaoItemPlanTec"  
+					rows="4"
+					autoResize="false"
+					style="width:100% !important; height:100px !important;" 
+					disabled="#{propostaBean.viewProposta}"
+					placeholder="Digite a descrição da Planilha Financeira."
+					rendered="#{propostaBean.inseriPlanFinanceraTec}"
+					value="#{propostaBean.proposta.descricaPlanComer}">
+					<p:ajax event="change" />
+				</p:inputTextarea>
+			</p:panelGrid>	
+		</p:fieldset>
+			
+			<p:fieldset legend="Validade e Assinatura" style="margin-bottom:20px" rendered="true"> 
+			<p:panelGrid  columnClasses="column1Class, column2Class" style="width: 100% !important; " styleClass="ui-noborder">
+				<p:column>
+					<p:row>
+						<p:outputLabel value="VALIDADE DA PROPOSTA" style="font-size:14px !important; margin-left: 3px; font-weight:bold !important;" />
+					</p:row>
+					<p:row>
+						<p:inputText 
+							style="width:99% !important;"
+							autoResize="false"
+							placeholder="Esta proposta tem validade de..."
+							disabled="#{propostaBean.viewProposta}"
+							value="#{propostaBean.proposta.validadeTecFinac}">
+							<p:ajax event="change" />
+						</p:inputText><br></br>
+					</p:row>
+					<p:row>
+						<br/><p:outputLabel value="ASSINATURA DA PROPOSTA" style="font-size:14px !important; margin-left: 3px; font-weight:bold !important;" />
+					</p:row>
+					<p:row>
+						<p:panelGrid columns="4" style="width: 100% !important; " styleClass="ui-noborder">
+						<p:outputLabel value="Nome " style="font-size:14px !important; margin-left: 3px; font-weight:bold !important;"  />
+						<p:inputText 
+							style="width:90% !important;"
+							placeholder="responsável pela proposta"
+							disabled="#{propostaBean.viewProposta}"
+							value="#{propostaBean.proposta.assinaturaTecFinan}">
+							<p:ajax event="change" />
+						</p:inputText>
+						<p:outputLabel value="Função/Cargo" style="width: 10% !important; font-size:14px !important; margin-left: 3px; font-weight:bold !important;" />
+						<p:inputText 
+							style="width:100% !important; "
+							placeholder="função/cargo responsável"
+							disabled="#{propostaBean.viewProposta}"
+							value="#{propostaBean.proposta.funcaoCargoTecFinan}">
+							<p:ajax event="change" />
+						</p:inputText>
+						</p:panelGrid><br/><br/>
+					</p:row>
+				</p:column>
+			</p:panelGrid>
+			</p:fieldset>
+			<center>
+			<p:panelGrid>
+			</p:panelGrid>
+			</center>
+</ui:composition>

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	
+	
+<p:panel id="painelRelatorioProposta" style="border: none;" rendered="#{relatorioPropostaBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:growl id="msgs66" />
+		<p:panel style="border: none;">
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>	
+				<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Cliente: " style="width: 55px; !important;"/>
+							<p:selectOneMenu id="idcliente" title="Filtra relatório por cliente"
+								style="width:280px !important;" 
+								value="#{relatorioPropostaBean.filtro.idCliente}"
+								disabled="#{clienteBean.viewCliente}" 
+								onkeypress="return event.keyCode != 13;"
+								panelStyle="width:500px;"
+								effect="fade" 
+								filter="true" filterMatchMode="startsWith">
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{relatorioPropostaBean.listClientes}" var="item"
+									itemLabel="#{item.nome}" itemValue="#{item.id}"/>
+							</p:selectOneMenu>
+					
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Tipo de Negócio " style="width: 150px; !important;"/>
+							<p:selectOneMenu id="tpNegocio" styleClass="ui-altera-selectMenu" 
+									style="width:200px;" title="Filtra relatório por tipo de negócio"
+									value="#{relatorioPropostaBean.filtro.idServicoNegocio}">
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioPropostaBean.listTipoServicos}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}">
+								</f:selectItems>
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Área de Negócio " style="width: 150px; !important;"/>
+							<p:selectOneMenu id="areaNegocio" styleClass="ui-altera-selectMenu" 
+									style="width:200px;" title="Filtra relatório por área de negócio"
+									value="#{relatorioPropostaBean.filtro.idArea}">
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioPropostaBean.listAreas}" var="area" itemLabel="#{area.descricao}" itemValue="#{area.id}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Ano" for="tpAno"/>
+							<p:selectOneMenu id="tpAno" styleClass="ui-altera-selectMenu"
+							title="Filtra relatório por ano. Campo obrigatório para pesquisar"
+							value="#{relatorioPropostaBean.filtro.anoRelatorio}" style="width:150px !important">
+					            <f:selectItem itemLabel="- Selecione -" itemValue="" />
+					            <f:selectItem itemLabel="2017" itemValue="2017" />
+					            <f:selectItem itemLabel="2018" itemValue="2018" />
+					            <f:selectItem itemLabel="2019" itemValue="2019" />
+		       				</p:selectOneMenu>			 		
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:fieldset><br/>	
+			<div align="right">		
+				<p:commandButton 
+					id="idBtpesquiRel" title="Realiza a pesquisa conforme filtros selecionados"
+					value="Pesquisar"
+					styleClass="btn btn-yellow"
+					action="#{relatorioPropostaBean.pesquisarPropostas()}" 
+					update="relatProposta, msgs66">
+				</p:commandButton>
+				<p:commandButton 
+					id="idLimpar" title="Limpa a pesquisa e todos os filtros selecionados"
+					value="Limpar"
+					styleClass="btn btn-blue"
+					action="#{relatorioPropostaBean.limpar()}" 
+					update="relatProposta, idcliente, tpAno, areaNegocio, tpNegocio">
+				</p:commandButton>
+			</div>
+			<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" />
+			<p:dataTable id="relatProposta" styleClass="header-tabelas" 
+				var="item" value="#{relatorioPropostaBean.listPropostaMes}"
+				emptyMessage="Nenhuma relatorio encontrado." 
+				 >
+				
+				<f:facet name="header">
+				 	<h:outputText value="Relatório de Propostas Emitidas por Mês" />
+		        </f:facet>
+		        	 
+		        <p:columnGroup type="header">
+		            <p:row>
+		                <p:column width="8%" rowspan="2" headerText="Nº Proposta" />
+		                
+		            </p:row>
+		            <p:row>
+		                <p:column width="13%" headerText="Nome do Cliente" />
+		                <p:column width="15%" headerText="Nome do Projeto" />
+		                <p:column width="5%" headerText="Data Emissão" />
+		                <p:column width="5%" headerText="Status" />
+		                <p:column width="10%" headerText="Valor da Proposta" />
+		                
+		            </p:row>
+		        </p:columnGroup>
+				<p:subTable var="proposta" value="#{item.listPropostas}" >
+		            <f:facet name="header" >
+			            <div align="center">	
+			                <h:outputText value="Mês - #{item.nomeMes} - Total de #{item.totalQdtProposta} propostas" />
+			            </div>	
+		            </f:facet>
+		            <p:column>
+		                <h:outputText value="#{proposta.numeroProposta}" />
+		            </p:column>
+		            <p:column>
+		                <h:outputText value="#{relatorioPropostaBean.concatNome(proposta.cliente.nome)}" 
+		                title="#{proposta.cliente.nome}"/>
+		            </p:column>
+		            <p:column>
+		                <h:outputText value="#{relatorioPropostaBean.concatProjeto(proposta.nomeProposta)}" 
+		                title="#{proposta.nomeProposta}"/>
+		            </p:column>
+		            <p:column>
+						<h:outputText value="#{proposta.dtEmissaoGeral}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+		            <p:column>
+		                <h:outputText value="#{proposta.statusProposta}" 
+		                title="#{proposta.nomeProposta}"/>
+		            </p:column>
+		            <p:column>
+		            <div align="right">		
+		                <h:outputText 
+		                	value="#{proposta.valorTotalComBdiComissao+((proposta.valorTotalComBdiComissao) / (1 - proposta.impostos)  - (proposta.valorTotalComBdiComissao))-(proposta.desconto)}" >
+		                <f:convertNumber pattern="#,##0.00"/>
+		                </h:outputText>
+		              </div>
+		            </p:column>
+		            
+		            <p:columnGroup type="footer" styleClass="ui-noborder">
+		                <p:row styleClass="header-tabelas">
+		                    <p:column footerText="Total : " 
+		                    	style="background:rgba(221,235,229,1) !important; background:-webkit-linear-gradient(top, rgba(221,235,229,1) 0%, rgba(167,200,187,1) 100%) !important;"/>
+		                    <p:column colspan="4" 
+		                    	style="background:rgba(221,235,229,1) !important; background:-webkit-linear-gradient(top, rgba(221,235,229,1) 0%, rgba(167,200,187,1) 100%) !important;"/>
+		                    <p:column style="background:rgba(221,235,229,1) !important; background:-webkit-linear-gradient(top, rgba(221,235,229,1) 0%, rgba(167,200,187,1) 100%) !important;">
+		                    	<f:facet name="footer">
+		                    	<div align="right">	
+									<h:outputText value="#{item.totalVlrProposta}"  >
+									<f:convertNumber pattern="#,##0.00"/>
+									</h:outputText>
+								</div>
+								</f:facet>
+		                    </p:column>
+		                </p:row>
+		                <p:row style="background: white;border: white;border-right: white;">
+		                 <p:column style="background: white;border: white;border-right: white;"/>
+		                </p:row>
+		            </p:columnGroup>
+		        </p:subTable>
+		    </p:dataTable>
+
+			<p:blockUI block="relatProposta" trigger="idBtpesquiRel">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</p:panel>
+	</div>
+</p:panel>
+
+<style>
+.ui-growl{
+  position:fixed;
+  top:35%;
+  right:15%;
+  width:301px;
+}
+
+.ui-fieldset-content td .input-block-level {
+    width: 123px !important;
+}
+</style>
+</html>

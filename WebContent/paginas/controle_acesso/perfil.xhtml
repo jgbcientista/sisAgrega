@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	
+		<p:panel id="idPaneCAD" style="border: none;">
+			<p:messages  /><br></br>
+			<p:fieldset legend=">> Perfil >> Informações de Cadastro">
+		
+		<div align="center">
+		<p:panelGrid columns="4" id="painelCad" style="margin-top:15px; margin-right:0px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:outputLabel value="Nome: " for="nomeCad"/>
+				 	<p:inputText id="nomeCad" style="width:450px !important;"
+							disabled="#{perfilBean.viewPerfil}" 
+							required="#{!perfilBean.viewPerfil}"
+							placeholder="Digite o nome do perfil."
+							requiredMessage="Campo nome é obrigatório"
+							value="#{perfilBean.perfil.nome}" />
+							
+				<p:outputLabel value="Sigla: " for="siglaCad"/>
+				 	<p:inputText id="siglaCad" style="width:350px !important;"
+							disabled="#{perfilBean.viewPerfil}" 
+							required="#{!perfilBean.viewPerfil}"
+							placeholder="Digite o sigla do perfil."
+							requiredMessage="Campo login é obrigatório"
+							value="#{perfilBean.perfil.sigla}" />
+							
+		
+		</p:panelGrid>
+		</div>
+		 <br />
+ 		 <br />
+ 		 <br />
+	</p:fieldset>
+
+ 		 <br />
+ 		 <br />
+ 		 <br /> 		 
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 
+
+ 	 		<center>
+					<p:commandButton 
+						id="btSalvarPerfil" 
+						value="Salvar"
+						actionListener="#{perfilBean.salvar()}" 
+						icon="fa fa-fw fa-save"
+						update="@form"
+						styleClass="btn btn-green" 
+						rendered="#{perfilBean.isNew()}" />
+					<p:commandButton 
+						id="btAtualizarPerfil" 
+						value="Atualizar"
+						actionListener="#{perfilBean.atualizar()}"
+						icon="fa fa-fw fa-refresh" 
+						styleClass="btn btn-green"
+						update="@form"
+						rendered="#{perfilBean.isEdit()}" />
+					<p:commandButton 
+						id="BtVoltarPerfil" 
+						value="Voltar"
+						immediate="true"
+						styleClass="btn btn-yellow"
+						action="#{perfilBean.cancelarNovo()}" 
+						update="@form" />
+						
+						
+				</center>
+				 
+	 
+		</p:panel>
+ 
+</html>

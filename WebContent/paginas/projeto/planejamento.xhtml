@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelPlanejamento" style="border: none;" rendered="#{projetoBean.pagPlanejando}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+	<p:panel id="idPanelPlanej" style="border: none;" >
+		<p:messages for="idOperacaoPlan" />
+		<p:fieldset legend="Filtro de Planejamento" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova"  >
+		
+		<p:panelGrid  styleClass="ui-noborder">
+			<p:row>
+				<p:column style="width:11%;"/>
+				<p:column style="width:11%;"/>
+				<p:column style="width:11%;"/>
+				<p:column style="width:15%;"/>
+			</p:row>
+			<p:row>
+				<p:column style="width:3%;" >
+					<p:selectCheckboxMenu 
+						id="idComboPlanejamentos" 
+						style="width:250px; margin-top: 19px;"
+						styleClass="ui-altera-selectMenu" 
+						value="#{projetoBean.idsPlanejamentos}"
+						label="Planejamentos" 
+						multiple="true"
+                        filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+            		<f:selectItems value="#{projetoBean.comboPlanejamentos}" var="item" itemValue="#{item.id}" itemLabel="#{item.nome}" />
+            		<p:ajax event="change" />
+        			</p:selectCheckboxMenu>
+				</p:column>
+		
+			<p:column>
+				<p:panelGrid style="width: 200px;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:column style="width:20% !important;">
+						<p:outputLabel value="Período de Pesquisa: "  />
+						<p:calendar styleClass="componente-data-nova-pro"
+							id="dataUm" 
+							placeholder="Data incial"
+							pattern="dd/MM/yyyy"
+							value="#{projetoBean.filtroDataInicial}" 
+							style="width:100px; !important;" >
+							<p:ajax event="dateSelect" />
+						</p:calendar>
+					</p:column>	
+						
+			<p:column style="width:20% !important;">	
+				<p:outputLabel value="." />
+				<p:calendar styleClass="componente-data-nova-pro"
+					id="dataDois" 
+					placeholder="Data final"
+					pattern="dd/MM/yyyy"
+					value="#{projetoBean.filtroDataFinal}" 
+					style="width:100px; !important;" >
+					<p:ajax event="dateSelect" />
+				</p:calendar>
+			</p:column>
+		</p:panelGrid>
+	</p:column>
+	</p:row>
+			
+			
+	</p:panelGrid>
+	<p:panelGrid styleClass="ui-noborder">	
+	</p:panelGrid>
+	</p:fieldset>
+	<br/> 	
+		<div align="right">		 
+			<p:commandButton 
+				id="idBtPesquisarPlanejamento" 
+				styleClass="btn btn-green"
+				value="Pesquisar"
+				immediate="true"
+				icon="fa fa-search"
+				ajax="true"
+				action="#{projetoBean.buscarPlanejamentos()}" 
+				update="@form">
+			</p:commandButton>
+			
+			<h:link outcome="consultar_projeto" 
+				value="Voltar"
+				styleClass="btn btn-red"
+				style="background: linear-gradient(to bottom, rgba(255,216,161,1) 0%, rgba(250,167,50,1) 100%) !important;
+    				color: #FFF !important;
+    				text-shadow: 0px 1px 0px rgba(0,0,0,0.7) !important;">
+			</h:link>
+		</div>	
+	<!-- PROJETOS-->	
+	<p:outputLabel rendered="#{projetoBean.listProjetosPlanejar.size()>0}" value="Lista de Projetos" style=" text-align:-webkit-left; font-size:18px; margin-bottom:-12px;"/>
+	<p:scrollPanel rendered="#{projetoBean.listProjetosPlanejar.size()>0}" style="width:100%;height:300px; border-color:white;" styleClass="header-tabelas">
+	<p:panel style="width:1200px;border: none;" >
+		
+		 <p:growl id="msgs2" showDetail="true"/>
+	 	<p:dataTable styleClass="header-tabelas" id="tablePlanejamanto"
+			style="width:1800px;margin-left:-17px;"
+			var="item" 
+			editable="true" editMode="cell" 
+			widgetVar="cellTablePlanejamanto"
+			value="#{projetoBean.listProjetosPlanejar}"
+            emptyMessage="Nenhum projeto adicionado." 
+            rowKey="#{item.id}"
+           
+			sortOrder="DESCENDING">
+       		       		 
+        <p:columnGroup type="header">
+        	 <p:row>
+        	 	<p:column rowspan="2" headerText="Planejamento" />
+            	<p:column rowspan="2" headerText="O.S" />
+                <p:column rowspan="2" headerText="Nº Agrega" />
+                <!-- <p:column rowspan="2" headerText="Nº Projeto" /> -->
+                <p:column rowspan="2" headerText="Tam LD" />
+                <p:column rowspan="2" headerText="Nome Projeto" />
+                <p:column rowspan="2" headerText="Municipio" />
+             <!--    <p:column rowspan="2" headerText="Status" /> -->
+                <p:column colspan="4" headerText="Profissionais" />
+                <p:column colspan="3" headerText="Data Planejamento" />
+            </p:row>
+           
+            <p:row>
+                <p:column headerText="EPI" />
+                <p:column headerText="EV/CTGA" />
+                <p:column headerText="Mapa" />
+                <p:column headerText="Verificação" />
+                <p:column headerText="Inicial" />
+                <p:column headerText="Final" />
+                <p:column headerText="Entrega" />
+                <p:column headerText="Ação" />
+                
+                
+            </p:row>
+        </p:columnGroup>
+         	<p:ajax event="cellEdit" listener="#{dtEditView.onCellEdit}" update="tablePlanejamanto" />
+				 
+		         <p:column  width="2%">
+		            <center><h:outputText value="#{(item.planejamentos.nome == null ? '-' :item.planejamentos.nome)}" /></center>
+		         </p:column>
+        
+     		      <p:column  width="2%">
+		            <h:outputText value="#{item.ordemServico.numeroOS}" />
+		         </p:column>
+       		
+		        <p:column width="100px">
+		            <h:outputText value="#{item.subTipoProjeto} - #{item.numeroProjetoAgrega}.#{item.anoReferencia}" />
+		        </p:column>
+		        
+		       <!--  <p:column width="3%">
+		            <h:outputText value="#{item.numeroProjetoCliente}" />
+		        </p:column> -->
+				
+				<p:column width="2%">
+					<center>
+						<p:outputLabel value="#{projetoBean.retornarString(item.tamanhoProjeto)}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column width="7%">
+					<center>
+						<p:outputLabel  value="#{projetoBean.concatNome(item.nomeProjeto)}"
+							title="#{item.nomeProjeto}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column width="8%" >
+		           <h:outputText value="#{projetoBean.concatNome(item.municipio.nome)}" 
+		           	title="#{item.municipio.nome}"/>
+		        </p:column>
+		        
+	           <!-- 	<p:column width="5%">
+		             <center> 
+		             	<h:outputText value="#{item.status.nome}"/>
+		             </center>
+	       		</p:column> -->
+	
+		         <p:column width="5%" >
+		             <h:outputText style="width:130px; !important;" value="#{projetoBean.obterProfissionalByIDConcat(item.profEpi.id)}"	/>
+		        </p:column>
+		       	<p:column width="5%">
+	              	  <h:outputText style="width:130px; !important;" value="#{projetoBean.obterProfissionalByIDConcat(item.profEvctgal.id)}" />
+	            </p:column>
+		       	
+		       	<p:column width="5%">
+		              <h:outputText style="width:130px; !important;" value="#{projetoBean.obterProfissionalByIDConcat(item.profMapas.id)}" 
+		              title="#{item.profMapas.nome}"/>
+		       	</p:column>
+		       	
+		       	<p:column width="5%">
+	              	 <h:outputText style="width:130px; !important;" value="#{projetoBean.obterProfissionalByIDConcat(item.profVerif.id)}"
+	              	 	title="#{item.profVerif.id}"/>
+		        </p:column>
+				<p:column width="3%" >
+		           <p:cellEditor>
+		               <f:facet name="output">
+			             <center>
+			             	<h:outputText value="#{item.dtIniPlanj}">
+			             		<f:convertDateTime pattern="dd/MM/yyyy" />
+			             	</h:outputText>
+			             </center>
+			             </f:facet>
+		   				 <f:facet name="input">
+			               <p:calendar value="#{item.dtIniPlanj}"	
+						        pattern="dd/MM/yyyy" 
+						        styleClass="componente-data-nova"
+						        style="width:130px; !important;">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+		           </p:cellEditor>
+		        </p:column>	
+		        
+		        <p:column width="3%">
+		           <p:cellEditor>
+			            <f:facet name="output">
+			              	<h:outputText value="#{item.dtFimPlanj}">
+					            <f:convertDateTime pattern="dd/MM/yyyy" />
+					        </h:outputText>
+			              </f:facet>
+				        <f:facet name="input">
+					        <p:calendar 
+								value="#{item.dtFimPlanj}"
+								style="text-align: center; width:80px !important;"
+								pattern="dd/MM/yyyy">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+		           </p:cellEditor>
+		        </p:column>	
+		        <p:column headerText="Dt.Entrega" width="3%">
+		      	 	<p:cellEditor>
+		      	 		<f:facet name="output">
+			              	<h:outputText value="#{item.dtEntrega}">
+					            <f:convertDateTime pattern="dd/MM/yyyy" />
+					        </h:outputText>
+			              </f:facet>
+				        <f:facet name="input">
+					        <p:calendar 
+								value="#{item.dtEntrega}"
+								style="text-align: center; width:80px !important;"
+								pattern="dd/MM/yyyy">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</f:facet>
+					</p:cellEditor>
+		        </p:column>		
+		       
+		<p:column headerText="Acão" width="7%">
+			<center>
+					<p:commandLink 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="@this"
+						title="#{msgs['label.button.excluir_']}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+				</center>
+			</p:column>
+		</p:dataTable>	
+		<p:contextMenu for="tablePlanejamanto" widgetVar="cMenu">   
+       <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('cellTablePlanejamanto').showCellEditor();return false;"/>  
+       <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide()"/>  
+   </p:contextMenu> 
+	</p:panel>
+	</p:scrollPanel>
+	
+		<p:outputLabel rendered="#{!projetoBean.exibirListPorOS and projetoBean.listProjetosPlanejar.size()>0}"> 
+		<div align="right">Total de registros: #{projetoBean.listProjetosPlanejar.size()}</div>
+		</p:outputLabel>
+	
+		<br/>
+		<div align="right">		 
+			<p:commandButton 
+				id="idBtConfirmar" 
+				styleClass="btn btn-blue"
+				value="Confirmar"
+				rendered="#{projetoBean.listProjetosPlanejar.size()>0 and projetoBean.btConfirmarPlanejamento }"
+				update="tablePlanejamanto"
+				action="#{projetoBean.addPlanejamento(true)}">
+			</p:commandButton>
+			<p:commandButton 
+				id="idBtAtualizar" 
+				styleClass="btn btn-blue"
+				value="Atualizar"
+				rendered="#{projetoBean.listProjetosPlanejar.size()>0 and projetoBean.btAtualizarPlanejamento}"
+				update="tablePlanejamanto"
+				action="#{projetoBean.addPlanejamento(false)}">
+			</p:commandButton>
+			<p:commandButton 
+				value="Gerar Relatorio"
+				styleClass="btn btn-blue"
+				rendered="#{projetoBean.listProjetosPlanejar.size()>0}"
+				actionListener="#{projetoBean.gerarPlanejamento()}"
+				ajax="false" >
+			</p:commandButton>
+		</div>	
+	</p:panel>
+</div>
+</p:panel>	
+
+
+<p:blockUI block="@form" trigger="idBtPesquisar">
+	<p:graphicImage name="img/ajaxloadingbar.gif" />
+</p:blockUI>
+
+
+
+</html>

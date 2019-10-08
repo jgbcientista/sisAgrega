@@ -1,0 +1,114 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:panelGrid id="painel-registro-notificacao" styleClass="ui-noborder">
+		<p:row>
+		<p:message for="idRegisto" />
+			<p:column>	
+					<p:outputLabel value="Registro" for="idRegisto"/>
+					<p:selectOneMenu id="idRegisto" required="#{projetoBean.camposDeNotificacaoObrigatorio}" requiredMessage="Todos os campos são obrigatórios." value="#{projetoBean.registroSeia.id}" styleClass="ui-altera-selectMenu" style="width:115px;" >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.listarRegistroSeia}"  var="resulte" itemLabel="#{resulte.numeroRequerimento}" itemValue="#{resulte.id}" />
+						<p:ajax event="change" />
+					</p:selectOneMenu>
+			</p:column>
+				
+			<p:column>
+				<p:outputLabel value="Nº da Notificação" for="numNot" />
+				<p:inputText id="numNot" required="#{projetoBean.camposDeNotificacaoObrigatorio}" requiredMessage="Todos os campos são obrigatórios." style="width:130px !important;"
+					value="#{projetoBean.notificacao.numero}" > 
+					<p:ajax event="change" />
+				</p:inputText> 
+			</p:column>
+			
+				<p:column style="width:30%">
+					<p:outputLabel value="Status" for="sta"/>	
+					<p:selectOneRadio id="sta" required="#{projetoBean.camposDeNotificacaoObrigatorio}" requiredMessage="Todos os campos são obrigatórios." value="#{projetoBean.notificacao.status}" >
+		            	<f:selectItem itemLabel="Aberto" itemValue="Aberto" />
+						<f:selectItem itemLabel="Fechado" itemValue="Fechado" />
+						<p:ajax event="change" />
+		        	</p:selectOneRadio>
+				</p:column>
+			
+				<p:column>	
+					<p:outputLabel value="Data de Recebimento" for="dtReceb"/>
+					<p:calendar 
+						id="dtReceb" 
+						required="#{projetoBean.camposDeNotificacaoObrigatorio}" requiredMessage="Todos os campos são obrigatórios."
+						value="#{projetoBean.notificacao.dataRecebimento}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				</p:row>
+			<p:row>
+				
+				<p:column style="width:30%">
+					<p:outputLabel value="Resposta" for="tipoResposta"/>	
+					<p:selectOneRadio id="tipoResposta" value="#{projetoBean.notificacao.responsavelResposta}">
+		            	<f:selectItem itemLabel="Agrega" itemValue="agrega" />
+						<f:selectItem itemLabel="Cliente" itemValue="cliente" />
+						<p:ajax event="change" />
+		        	</p:selectOneRadio>
+				</p:column>
+				
+				
+				<p:column>	
+					<p:outputLabel value="Data da Resposta" for="dtPagamento"/>
+					<p:calendar 
+						id="dtPagamento"
+						requiredMessage="Todos os campos são obrigatórios." 
+						value="#{projetoBean.notificacao.dataResposta}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				
+			</p:row>
+			<p:row>
+				<p:column colspan="4">
+					<p:outputLabel value="Motivo da Notificação" for="idNotificaca1" />
+					<h:inputTextarea id="idNotificaca1" 
+						style="width:98% !important; height:70px !important;"
+						maxlength="1000"
+						required="#{projetoBean.camposDeNotificacaoObrigatorio}" requiredMessage="Todos os campos são obrigatórios."
+						value="#{projetoBean.notificacao.motivo}"
+						cols="6">
+						<p:ajax event="change" />
+					</h:inputTextarea>	
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="4" style="text-align: right;">
+				<hr />
+				<div>
+					<p:commandButton 
+						id="btSalvarNotificacao" 
+						value="Salvar"
+						ajax="true"
+						immediate="true"
+						process="@this"
+						update="@form"
+						actionListener="#{projetoBean.salvarNotificacao()}"
+						onclick="PF('dialogRegistroNotificacao').hide();"
+						styleClass="btn btn-green">
+					</p:commandButton>
+					
+					<p:commandButton 
+						id="btCancelarNotificacao" 
+						value="Cancelar"
+						immediate="true"
+						actionListener="#{projetoBean.btCancelarNotificacao()}"
+						styleClass="btn btn-yellow">
+					</p:commandButton>
+				</div>
+				</p:column>
+			</p:row>
+			
+			
+		</p:panelGrid>
+</ui:composition>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="idPanelCadCeletistaMensal" style="border: none;" rendered="#{!celetistaMensalistaBean.pesquisar}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<center>
+		<p:fieldset legend="Parametros - Celetista Mensalista" style="width: 97%;text-align: left;"  >
+			<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder" >
+				<p:row>
+					<p:outputLabel value="Informações da Tabela" style="font-size: 15px"/>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="Codigo" />
+						<p:inputText id="idCodigo" style="width:80px !important; text-transform:uppercase;"   
+							value="#{celetistaMensalistaBean.cltMensal.cod}"
+							maxlength="200" disabled="true"
+							onkeypress="return event.keyCode != 13;">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="Data" />
+						<p:calendar styleClass="componente-data-nova"
+							placeholder="Data incial" style="width:80px;"
+							pattern="dd/MM/yyyy" disabled="true"
+							value="#{celetistaMensalistaBean.cltMensal.dateCriacao}">
+							<p:ajax event="dateSelect" />
+						</p:calendar>
+						
+					</p:column>
+					<p:column style="width: 0px !important;">
+						<p:outputLabel value="Status" />
+						<p:inputText id="idStatus" style="width:80px !important;" maxlength="200"
+							onkeypress="return event.keyCode != 13;" disabled="true"
+							value="#{celetistaMensalistaBean.cltMensal.status}">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+				</p:row>
+			</p:panelGrid><br/>
+			
+			<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder" >
+				<p:row>
+					<p:outputLabel value="Custos do Salário Base:" style="font-size: 15px"/>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="FGTS:" />
+						<p:inputText id="idFgts" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							onkeypress="return event.keyCode != 13;"
+							value="#{celetistaMensalistaBean.cltMensal.fgts}">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="RAT:" />
+						<p:inputText id="idIRat" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							onkeypress="return event.keyCode != 13;"
+							value="#{celetistaMensalistaBean.cltMensal.rat}">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="Entidades:" />
+						<p:inputText id="idOutrasEntidades" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							onkeypress="return event.keyCode != 13;"
+							value="#{celetistaMensalistaBean.cltMensal.entidades}">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="Multa FGTS:" />
+						<p:inputText id="iMltFgts" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							onkeypress="return event.keyCode != 13;"
+							value="#{celetistaMensalistaBean.cltMensal.multaFgts}">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="INSS Patronal:" />
+						<p:inputText id="idInssPatronal" style="width:82px !important;   text-transform:uppercase;" maxlength="200"
+							value="#{celetistaMensalistaBean.cltMensal.inssPatronal}"
+							onkeypress="return event.keyCode != 13;">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 1px !important;">
+						<p:outputLabel value="Ajuda VT R$:" />
+						<p:inputText id="idAjudaVT" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							value="#{celetistaMensalistaBean.cltMensal.ajudaVt}"
+							onkeypress="return event.keyCode != 13;">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					<p:column style="width: 360px !important;">
+						<p:outputLabel value="Ajuda VA R$:" />
+						<p:inputText id="idAjudaVA" style="width:80px !important;   text-transform:uppercase;" maxlength="200"
+							value="#{celetistaMensalistaBean.cltMensal.ajudaVa}"
+							onkeypress="return event.keyCode != 13;">
+							<p:ajax event="change"/>
+						</p:inputText> 
+					</p:column>
+					
+				</p:row>
+			</p:panelGrid><br/>
+			<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder" style="width: 10% !important;">
+				<div><p:outputLabel value="Provisões Mensais:" style="font-size: 15px"/></div>
+				 <p:row>
+				
+				 <p:column>
+				  	<p:selectBooleanCheckbox 
+				  		value="#{celetistaMensalistaBean.cltMensal.feriasMes}">
+			        </p:selectBooleanCheckbox>
+				 </p:column>
+				 <p:column>
+				 	<p:outputLabel value="Férias 1/12" style="width: 77px"/>
+				 </p:column>
+				 <p:column>
+				  	<p:selectBooleanCheckbox 
+				  		value="#{celetistaMensalistaBean.cltMensal.ferias13Mes}">
+			        </p:selectBooleanCheckbox>
+				 </p:column>
+				 <p:column>
+				 	<p:outputLabel value="1/3 Férias 1/12" style="width: 95px"/>
+				 </p:column>
+				 
+				 <p:column>
+				  	<p:selectBooleanCheckbox 
+				  		value="#{celetistaMensalistaBean.cltMensal.salario13Mes}">
+			        </p:selectBooleanCheckbox>
+				 </p:column>
+				 <p:column>
+				 	<p:outputLabel value="13º Salário 1/12" style="width: 117px"/>
+				 </p:column>
+				 <p:column>
+				  	<p:selectBooleanCheckbox 
+				  		value="#{celetistaMensalistaBean.cltMensal.avisoPrevioMes}">
+			        </p:selectBooleanCheckbox>
+				 </p:column>
+				 <p:column>
+				 	<p:outputLabel value="Aviso Previo 1/12" style="width: 117px"/>
+				 </p:column>
+				 </p:row>
+			</p:panelGrid>
+			
+		</p:fieldset>
+		<br />
+		
+		<center>
+			<div align="right">
+		
+			<p:commandButton style="width:112px !important;"
+				id="btSalvar" 
+				value="Salvar"
+				action="#{celetistaMensalistaBean.salvar()}" 
+				update="@form"
+				rendered="true"
+				styleClass="btn btn-green"
+				icon="fa fa-save">
+			</p:commandButton>
+			<p:commandButton style="width:112px !important;"
+				id="BtVoltar" 
+				value="Cancelar"
+				action="#{celetistaMensalistaBean.cancelar()}" 
+				immediate="true"
+				styleClass="btn btn-red"
+				update="@form"
+				icon="fa fa-ban">
+			</p:commandButton>
+			
+			</div>
+			</center>
+			<p:blockUI block="idPanelCadCeletistaMensal" trigger="btSalvar">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+			</center>
+		</div>
+	</p:panel>
+	
+<style>
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled, 
+		.ui-widget-header .ui-state-disabled {
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	
+	.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger, 
+		.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-label{
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</html>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubRelatoriCronogramaTarefas" language="groovy" pageWidth="553" pageHeight="842" columnWidth="553" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8af3e2fb-ae47-4a8f-9aa6-5d2413cd1fc4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<field name="notaOcorrencia" class="java.lang.String"/>
+	<pageHeader>
+		<band height="234">
+			<rectangle>
+				<reportElement x="486" y="46" width="66" height="31" backcolor="#C6C6C6" uuid="2a533c92-0e17-4f2b-83b6-7a84d2309bd5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="137" width="67" height="20" uuid="773768a2-901c-45e5-9620-6ddcbf65e3e4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="487" y="197" width="65" height="31" backcolor="#E4E4E4" uuid="55139290-4c5c-4686-98e7-60dc40ce3a52"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="77" width="355" height="20" backcolor="#E4E4E4" uuid="eb5766aa-a324-40bc-af83-9765cb4d187b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="117" width="65" height="20" uuid="34a9488d-9cdb-4b96-b337-4379009e0923"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="177" width="65" height="20" uuid="944c324a-83f1-4a08-920a-9efc91096fea"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="197" width="132" height="31" backcolor="#E4E4E4" uuid="7571a223-db6b-4d34-b217-58f1f3c2d52e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="197" width="355" height="31" backcolor="#E4E4E4" uuid="007b5c1a-0f9f-44c2-95a2-62032fce06f7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="137" width="355" height="20" uuid="56627ba4-a4c5-474d-b1c8-a0961807f21d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="77" width="67" height="20" uuid="33ae8d71-bdf7-4a9d-9f8e-4fbf14d876de"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="137" width="65" height="20" uuid="f141c13c-aafa-4c9d-9ba7-b202f05a1201"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="177" width="67" height="20" uuid="97ac7953-e7d3-4e51-a8bd-f5951ff710d2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="117" width="67" height="20" uuid="a9424eed-0532-4165-9b14-825c5c3c44e0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="97" width="487" height="20" backcolor="#E4E4E4" uuid="12b57593-e397-4948-9b72-bb23e0bd7f64"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="487" y="77" width="65" height="120" uuid="90d5842d-08dd-4bad-9fa8-ca0e31fc6aa8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="61" width="65" height="16" backcolor="#C6C6C6" uuid="e52326e6-0f9c-4449-a6a2-a58e4fd35053"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="46" width="355" height="31" backcolor="#C6C6C6" uuid="26e96de8-8727-453a-bf8c-04966015575f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="422" y="77" width="65" height="20" uuid="3a2280bb-ec8d-46a0-8edf-7427a86ece78"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="61" width="67" height="16" backcolor="#C6C6C6" uuid="b25b4ca8-acc3-44e3-982f-f91d7058dedb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="157" width="487" height="20" backcolor="#E4E4E4" uuid="93d7fc21-de16-47ff-8185-939bbb1b20f8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="46" width="132" height="15" backcolor="#C6C6C6" uuid="8d95b1ea-4167-4373-b5a8-89801c279d8a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="177" width="355" height="20" uuid="e77bd2d9-43dc-4da8-a094-b0285ad46357"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="117" width="355" height="20" uuid="378ab781-9467-4830-8e86-55b23c5e9552"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="19" width="334" height="20" uuid="c1899366-0ebd-4418-b0d7-5178a9922202"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2. OCORRÊNCIAS FUNCIONAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="46" width="355" height="31" uuid="1499473d-2353-4d3d-8865-c35f49ade65b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OCORRÊNCIAS FUNCIONAIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="61" width="65" height="16" uuid="918001de-51fe-49d8-94f1-42abfcaaf6cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NEGATIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="61" width="67" height="16" uuid="7a1285ff-f4af-4855-a3fd-54315bb7e489"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POSITIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="137" width="67" height="20" uuid="bf5296e2-c79a-4559-ae4d-ff80e1677678"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="117" width="355" height="20" uuid="2f250596-16c2-4b50-bd4f-fe96fbefa435"/>
+				<box leftPadding="20" rightPadding="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[a) Ter sofrido pena de advertência/repreensão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="197" width="132" height="31" uuid="d4aa8aff-f092-49cd-9665-5a977d7fd900"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONTUAÇÃO OBTIDA NO ITEM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="177" width="354" height="20" uuid="49bb188d-d31c-4713-abf7-87643116b7ce"/>
+				<box leftPadding="20" rightPadding="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[a) Faltas não justificadas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="177" width="67" height="20" uuid="2772a3cd-036e-451d-be17-42992edb6081"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="77" width="65" height="20" uuid="5ed47f75-eda0-41c7-977a-f369faa24617"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="137" width="65" height="20" uuid="e59b54b0-833c-49b8-adeb-2b8571670ef2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="117" width="67" height="20" uuid="2ba5604f-1342-4123-bdaa-274e607e17ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="117" width="65" height="20" uuid="b925a469-060b-4f17-bb40-9622d9aa0a21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="137" width="356" height="20" uuid="f97b014a-a813-4105-bb01-da895d7b180a"/>
+				<box leftPadding="20" rightPadding="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[b) Ter sofrido pena de suspensão ou multa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="157" width="487" height="20" uuid="175f667d-f429-4777-9f15-f3b60da0e596"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[2.3 Assiduidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="197" width="65" height="31" uuid="a2d0b91a-8884-44af-8fee-2364e9a28be5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONTUAÇÃO ACUMULADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="77" width="355" height="20" uuid="d3444a58-5554-45d1-afb9-d4e56f2750c4"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[2.1 Elogio (não cumulativo)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="46" width="66" height="31" uuid="e6471c1d-a983-4b7b-88d8-b71e0915e6fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONTOS OBTIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="487" height="20" uuid="6cb513ba-fbdc-4d63-864c-5d4d57c768bd"/>
+				<box leftPadding="10" rightPadding="10"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[2.2 Penalidades]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="77" width="67" height="20" uuid="b6826bd7-2d4b-442e-b8be-c6b62a6aba7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="46" width="132" height="15" uuid="34c43bdd-9563-4bee-a66e-09ee9477def4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONTUAÇÂO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="177" width="65" height="20" uuid="578cbe20-c541-43b5-8829-fb268681fffc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="486" y="77" width="66" height="120" uuid="c8738b4a-909d-44f6-84e1-028fe159bcfe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{notaOcorrencia}==null ? "0.00":$F{notaOcorrencia})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

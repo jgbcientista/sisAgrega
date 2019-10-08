@@ -1,0 +1,283 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<div style="border: 1px solid #a8a8a8;" >
+     	  <p:panelGrid styleClass="ui-noborder" style="width:80%;">
+     	  <p:row><h4 style="margin-left: 10px;">SEIA</h4></p:row>
+			<p:row>
+				<p:column style="width:8%; text-align:left;">
+					<p:outputLabel value="Registro" for="tpRegistro"/>
+					<p:selectOneMenu id="tpRegistro" disabled="#{projetoBean.visualizarProjeto}" styleClass="ui-altera-selectMenu"
+					value="#{projetoBean.registoSalvar.tipoRegistro}" style="width:100px !important">
+			            <f:selectItem itemLabel="- Selecione -" itemValue="" />
+			            <f:selectItem itemLabel="ASV" itemValue="asv" />
+			            <f:selectItem itemLabel="DIAP" itemValue="DIAP" />
+       				</p:selectOneMenu>			 		
+				</p:column>
+				
+				<p:column style="width:5%; text-align:left;">
+					<p:outputLabel value="Nº Requerimento" for="numRequerimento"/>
+						<p:inputText id="numRequerimento" 
+							style="width:150px;"
+							disabled="#{projetoBean.visualizarProjeto}"
+							value="#{projetoBean.registoSalvar.numeroRequerimento}">
+							<p:ajax event="change" />
+						</p:inputText>
+				</p:column>
+				
+				<p:column style="width:16%; text-align:left;">	
+					<p:outputLabel value="Nº Processo Formado" for="numProcessoFormado"/>
+						<p:inputText id="numProcessoFormado" 
+						disabled="#{projetoBean.visualizarProjeto}"
+							style="width:150px;"
+							value="#{projetoBean.registoSalvar.numeroProcessoFormado}">
+						<p:ajax event="change" />
+						</p:inputText>
+				</p:column>
+				<p:column style="width:10%; text-align:left;">	
+					<p:outputLabel value="Data de formação" for="dataForm"/>
+					<p:calendar
+						styleClass="componente-data-nova"
+						id="dataForm" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.registoSalvar.dataFormacaoProcesso}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				<p:column style="width:15%">
+					<p:outputLabel value="Gerou DAE?" for="gerouDae" />	
+					<p:selectOneRadio id="gerouDae" disabled="#{projetoBean.visualizarProjeto}" value="#{projetoBean.registoSalvar.gerouDAE}" >
+		            	<f:selectItem itemLabel="Sim" itemValue="0" />
+						<f:selectItem itemLabel="Não" itemValue="1" />
+							<p:ajax event="change" update="gerouDAETexArea, dadosPagamento" listener="#{projetoBean.verificarGerouDae()}" />
+		        	</p:selectOneRadio>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:outputLabel id="dadosPagamento" >
+          <p:panelGrid styleClass="ui-noborder" style="width:80%;">
+			<p:row>
+			<p:column style="width:10%">
+					<p:outputLabel value="Valor do DAE" for="vlwDae" rendered="#{projetoBean.gerouDae}" />
+					<p:inputText style="width:130px !important;" 
+						id="vlwDae"
+						rendered="#{projetoBean.gerouDae}"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.registoSalvar.valorDAE}">
+						<p:ajax event="change" />
+					</p:inputText> 
+				</p:column>
+				<p:column>
+					<p:outputLabel value="Data do pagamento" rendered="#{projetoBean.gerouDae}" />
+					<p:calendar 
+						id="dtPag"
+						styleClass="componente-data-nova"
+						rendered="#{projetoBean.gerouDae}" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.registoSalvar.dataPagamento}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+			</p:row>
+			
+         </p:panelGrid>
+         <div align="right">
+            <p:commandButton 
+			id="btSalvarRegistro" 
+			actionListener="#{projetoBean.salvarRegistro()}" 
+			value="#{projetoBean.registoSalvar.id ==null? 'Adicionar Registro' : 'Alterar Registro'}"
+			update="@form"
+			disabled="#{projetoBean.visualizarProjeto}"
+			styleClass="btn btn-green"
+			icon="#{projetoBean.coordenada.id== null ? 'fa fa-plus': 'fa fa-pencil-square-o'}">
+		  </p:commandButton>
+		  
+		  <p:commandButton 
+			id="btExcluirRegistro" 
+			value="Excluir Registro"
+			disabled="#{projetoBean.visualizarProjeto}"
+			rendered="#{projetoBean.registoSalvar.id !=null? 'true' : 'false' }"
+			actionListener="#{projetoBean.excluirRegistro()}" 
+			update="@form"
+			styleClass="btn btn-green"
+			icon="fa fa-trash-o">
+		  </p:commandButton>
+       </div>
+         </p:outputLabel>
+       
+	<p:outputLabel id="gerouDAETexArea" >
+	    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" rendered="#{!projetoBean.gerouDae}">
+			<p:column colspan="2">
+					<p:outputLabel value="Motivo por que não gerou DAE"  for="motivoNaoDae"/>
+					<h:inputTextarea id="motivoNaoDae" 
+						style="width: 95% !important; height:95% !important;"
+						maxlength="1000"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.registoSalvar.motivoNaoGerouDae}"
+						rows="3"
+						cols="5">
+						<p:ajax event="change" />
+					</h:inputTextarea>	
+			</p:column>
+	   	</h:panelGrid>  
+    </p:outputLabel>
+    <br /><br />
+   	<p:outputLabel id="possuiNotificacao" >
+       	<p:fieldset legend="Dados da Notificação" style="margin-left: 9px">
+        	<p:panelGrid styleClass="ui-noborder">
+        	  <p:row>
+        		<p:column style="width:10%; text-align:left;">
+					<p:outputLabel value="Nº Notificação" for="numNotificacao"/>
+						<p:inputText id="numNotificacao" 
+						style="width:130px;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.notificacao.numero}" />
+				</p:column>
+				
+				<p:column style="width:10%; text-align:left;">
+					<p:outputLabel value="Data Recebimento" />
+					<p:calendar 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.notificacao.dataRecebimento}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				
+				<p:column style="width:5%; text-align:left;">
+					<p:outputLabel value="Resposta" for="Resposta"/>
+						<p:inputText id="Resposta"
+						style="width:130px;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.notificacao.responsavelResposta}" />
+				</p:column>
+				
+				<p:column style="width:50%; text-align:left;">
+					<p:outputLabel value="Data Resposta" />
+					<p:calendar 
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.notificacao.dataResposta}">
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>
+				</p:row>
+				
+				<p:row>
+				<p:inputTextarea id="motivoNotificacao" 
+					style="width: 98% !important; height:70px !important;"
+					maxlength="1000"
+					placeholder="Motivo da Notificação"
+					disabled="#{projetoBean.visualizarProjeto}"
+					value="#{projetoBean.notificacao.motivo}"
+					cols="5">
+					<p:ajax event="change" />
+				</p:inputTextarea>
+				</p:row>
+				
+				</p:panelGrid>
+       	
+   	
+   </p:fieldset>
+  </p:outputLabel>
+  <br />
+       <div align="right">
+	 
+		<p:commandButton 
+			id="btSalvarNotificacao" 
+			value="#{projetoBean.notificacao.id ==null? 'Adicionar Notificação' : 'Alterar Notificação'}"
+			disabled="#{projetoBean.visualizarProjeto}"
+			actionListener="#{projetoBean.salvarNotificacao()}" 
+			rendered="#{projetoBean.registoSalvar.id !=null? 'true' : 'false' }"
+			update="@form"
+			styleClass="btn btn-green"
+			icon="#{projetoBean.coordenada.id== null ? 'fa fa-plus': 'fa fa-pencil-square-o'}">
+		</p:commandButton>
+		
+        </div>
+        
+         <p:panelGrid columns="1" style="width: 100%; margin-left:0px;" styleClass="ui-noborder">
+         	<h5 style="margin-bottom:-12px;">Notificações</h5>
+			<p:dataTable styleClass="header-tabelas" 
+				var="resulte"
+				value="#{projetoBean.listarNotificacao}"
+				rowKey="#{result.id}"
+				emptyMessage="Nenhuma notificação adicionado."
+				rows="10"
+				paginator="false" 
+				summary="true"
+				id="tableRegistros"
+				pageLinks="4" 
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				sortOrder="DESCENDING">
+								
+				<p:column headerText="Nº Requerimento" width="15%">
+					<center>
+						<p:outputLabel  value="#{resulte.numero}"/>
+					</center>
+				</p:column>
+				
+				<p:column headerText="Data recebimento" width="10%">
+					<center>
+						<p:outputLabel value="#{resulte.dataRecebimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</center>
+				</p:column>
+						
+				<p:column headerText="Responsável resposta" width="20%">
+					<center>
+						<p:outputLabel  value="#{resulte.responsavelResposta}"/>
+					</center>
+				</p:column>
+			 
+				<p:column headerText="Ação" width="10%" >
+					
+					<p:commandLink 
+					 	ajax="true"
+					 	immediate="false"
+					 	update="@form"
+					 	disabled="#{projetoBean.visualizarProjeto}"
+					 	action="#{projetoBean.editarNotificacao(resulte)}"
+					 	style="text-decoration:underline;">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					
+					<p:commandLink 
+					 	id="idExcluirRegistro" 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	disabled="#{projetoBean.visualizarProjeto}"
+					 	process="@this"
+					 	action="#{projetoBean.excluirNotificacao(resulte)}"
+						title="#{msgs['label.button.excluir']}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+    </div><br/>
+   
+   <div align="right">
+    <p:commandButton 
+		value="Voltar"
+		actionListener="#{projetoBean.cancelar()}" 
+		update="@form"
+		styleClass="btn btn-red"
+		icon="fa fa-reply-all">
+	</p:commandButton>
+	
+ 
+
+   </div>
+   
+   <hr style="margin:5px;"></hr>
+	 
+    
+</ui:composition>

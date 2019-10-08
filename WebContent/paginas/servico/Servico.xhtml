@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="idPanelservico" style="border: none;" rendered="#{!servicoBean.pesquisar}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<center>
+		<p:fieldset legend="Cadastro tipo de negócio" style="width: 97%;text-align: left;">
+			<p:panelGrid columns="2" id="painelCadastro" columnClasses="rotulo, campo" styleClass="ui-noborder" >
+				<p:outputLabel value="Tipo de negócio:" for="tipoServico" style="width:130px;" />
+				<p:selectOneMenu  id="tipoServico" 
+						styleClass="ui-altera-selectMenu" 
+						style="width:120px; opacity:1.8 !important; width:290px;"  
+						required="true"
+						requiredMessage="Campo tipo de negócio obrigatório."
+						value="#{servicoBean.servico.tipoServico.id}" 
+						disabled="#{servicoBean.viewServico}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{servicoBean.tipoServicos}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}" />
+				</p:selectOneMenu>
+			
+				<p:outputLabel value="Área de negócio:"  for="area" style="width:130px;" />
+				<p:selectOneMenu  id="area" 
+						style="width:120px; opacity:1.8 !important; " 
+						required="true"
+						requiredMessage="Campo área obrigatório."
+						value="#{servicoBean.servico.area.id}" 
+						disabled="#{servicoBean.viewServico}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{servicoBean.areas}" var="area" itemLabel="#{area.descricao}" itemValue="#{area.id}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Descrição da Atividade" for="idDescricao"/>
+				<p:inputText  id="idDescricao"
+					required="true"
+					requiredMessage="Campo descrição obrigatório."
+					placeholder="Digite a descrição" 
+					disabled="#{servicoBean.viewServico}"  
+					style="width:900px !important; opacity:1.8 !important;"
+					value="#{servicoBean.servico.descricao}">
+				</p:inputText>
+			</p:panelGrid>
+		</p:fieldset><br/>
+			</center>
+			</div>
+		<center>
+		<div align="right">
+			<p:commandButton 
+				id="btSalvar" 
+				value="Salvar"
+				action="#{servicoBean.salvarServico()}" 
+				update="@form"
+				styleClass="btn btn-green" 
+				rendered="#{servicoBean.isNewServico()}">
+			</p:commandButton>
+			<p:commandButton 
+				id="btAtualizar" 
+				value="Atualizar"
+				actionListener="#{servicoBean.atualizarServico()}"
+				styleClass="btn btn-green"
+				update="@form"
+				rendered="#{servicoBean.isEditServico()}" />
+			<p:commandButton 
+				id="BtVoltar" 
+				value="Voltar"
+				immediate="true"
+				styleClass="btn btn-yellow"
+				action="#{servicoBean.voltar()}" 
+				update="@form" />
+		</div>
+		</center>
+			<p:blockUI block="idPanelservico" trigger="btSalvar">
+			 	<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+	</p:panel>
+	
+</html>

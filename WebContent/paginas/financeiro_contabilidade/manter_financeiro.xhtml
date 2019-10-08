@@ -1,0 +1,30 @@
+<ui:composition template="/paginas/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<ui:define name="principal">
+		<div class="container">
+			<h:form id="form-funcao" prependId="false">
+				<ui:decorate template="/paginas/templates/templateinclusao.xhtml">
+					<ui:param name="bean" value="#{clienteBean}" />
+					
+					<ui:define name="titulo">
+						<h:outputText class="titulo-detalhe" value="CONSULTAR FINANCEIRO" rendered="#{financeiroBean.pesquisar and !financeiroBean.novo}" />	
+						<h:outputText class="titulo-detalhe" value="CADASTRAR FINANCEIRO" rendered="#{financeiroBean.novo and !financeiroBean.pesquisar and !financeiroBean.editar }" />
+						<h:outputText class="titulo-detalhe" value="EDITAR CADASTRO DO FINANCEIRO" rendered="#{financeiroBean.editar and !financeiroBean.pesquisar}" />
+						<h:outputText class="titulo-detalhe" value="VISUALIZAR CADASTRO FINANCEIRO" rendered="#{financeiroBean.visualizar and !financeiroBean.pesquisar}" />
+											
+					</ui:define>
+					
+					<ui:define name="formulario">
+					<ui:include src="/paginas/financeiro_contabilidade/consultarFinanceiro.xhtml" />
+					<ui:include src="/paginas/financeiro_contabilidade/financeiro.xhtml" />
+					</ui:define>
+				</ui:decorate>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

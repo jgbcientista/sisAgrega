@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Meta" pageWidth="803" pageHeight="100" whenNoDataType="AllSectionsNoDetail" columnWidth="803" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cd5fafb6-6858-4b1e-b45e-7c045e5ff138">
+	<property name="ireport.zoom" value="1.1000000000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="competencia.metaServidor.servidor.nu_matricula" class="java.lang.String"/>
+	<field name="tipoIndicacao.descricao" class="java.lang.String"/>
+	<field name="competencia.servidorSuperior.nomeServidor" class="java.lang.String"/>
+	<field name="competencia.servidorIndicadoPeloSuperior.nomeServidor" class="java.lang.String"/>
+	<field name="usuarioCadastrante.nome" class="java.lang.String"/>
+	<field name="dataIndicacao" class="java.util.Date"/>
+	<field name="competencia.metaServidor.servidor.nomeServidor" class="java.lang.String"/>
+	<field name="competencia.metaServidor.servidor.setor.nome" class="java.lang.String"/>
+	<field name="competencia.metaServidor.servidor.cargoComissionado.nome" class="java.lang.String"/>
+	<pageHeader>
+		<band height="35">
+			<frame>
+				<reportElement mode="Opaque" x="-348" y="0" width="78" height="35" uuid="c4194337-5bdb-433e-a73d-fa28b97f8a84"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="137" height="35" backcolor="#C4C4C4" uuid="b5da7c55-4900-47d7-95e4-7a977a95dee2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servidor Avaliado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="137" y="0" width="75" height="35" backcolor="#C4C4C4" uuid="04beaaf0-5e66-40cc-a191-ea81b26b8c0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="212" y="0" width="80" height="35" backcolor="#C4C4C4" uuid="146e26bf-1bb5-488b-9f7a-ac0beccb2b1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="292" y="0" width="75" height="35" backcolor="#C4C4C4" uuid="86be4a55-9bf4-4c29-9c8d-1a6f736360b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="367" y="0" width="75" height="35" backcolor="#C4C4C4" uuid="29377d07-c085-4c83-9ab1-74f876f254fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Indicação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="442" y="0" width="94" height="35" backcolor="#C4C4C4" uuid="7526b2e1-db24-463a-a0d4-87f81111c41a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Superior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="536" y="0" width="94" height="35" backcolor="#C4C4C4" uuid="ad79f71a-7831-4198-9961-574ac1a4c7ea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Par]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="630" y="0" width="94" height="35" backcolor="#C4C4C4" uuid="369a460c-d85e-42e5-84cb-0a6899c9ec71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cadastrante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="725" y="0" width="78" height="35" backcolor="#C4C4C4" uuid="ae9808e6-4df0-451c-b919-153c4b68a37a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Indicação]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="137" height="35" uuid="474bedf6-1cac-463c-bca0-ebdc0e97bf57"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="442" y="0" width="94" height="35" uuid="268b522b-4459-4125-b4fa-6142de640142"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="212" y="0" width="80" height="35" uuid="33645009-39c4-4b95-9e82-4cde5a7a3d99"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="367" y="0" width="75" height="35" uuid="bd8cd513-eaaf-4bab-9d37-bdfc767d4e01"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="292" y="0" width="75" height="35" uuid="85c9a2be-d547-4989-9656-49855839632a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="137" y="0" width="75" height="35" uuid="3b6418a2-c39b-4db4-87d3-5a41b35fe44c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="536" y="0" width="94" height="35" uuid="4511e683-ab93-468a-9140-1e0184ebc5aa"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="630" y="0" width="94" height="35" uuid="4edd6fb2-4e92-437e-9b4a-dcfa5a7e5d16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="724" y="0" width="78" height="35" uuid="ebec2a2d-1a3b-45d3-aca8-efdcad52fae2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="28">
+			<textField>
+				<reportElement x="0" y="0" width="137" height="28" uuid="3b7dd071-e5e8-4dfb-8eab-0b7e59dc08f6"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.setor.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="75" height="28" uuid="6e4d2d8e-76eb-41fa-9671-6b7e9ba8bf37"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.setor.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="80" height="28" uuid="f23d04a1-3ae3-42e5-8917-0653a81ae723"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.cargoComissionado.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="75" height="28" uuid="5f0db587-a19f-49d2-ba4f-b5f1cefcd4b3"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.metaServidor.servidor.nu_matricula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="0" width="75" height="28" uuid="704ab78e-9c4f-446d-a981-56571b907176"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tipoIndicacao.descricao} == null ? "-" : $F{tipoIndicacao.descricao})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="0" width="94" height="28" uuid="6ee0168b-1d59-4671-b20a-2cf13f09d7a7"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.servidorIndicadoPeloSuperior.nomeServidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="536" y="0" width="94" height="28" uuid="732473a9-172b-425e-be41-35b7364f4303"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{competencia.servidorSuperior.nomeServidor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="630" y="0" width="94" height="28" uuid="436da956-5b1c-498b-8cbf-9b70f64ecb5b"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{usuarioCadastrante.nome} == null ? "-" : $F{usuarioCadastrante.nome})]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="725" y="0" width="77" height="28" uuid="70fa007a-6098-4d08-9666-7fb127fa14cb"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{dataIndicacao} == null ? "-" : $F{dataIndicacao})]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="137" height="28" uuid="397da6a6-bccf-4c53-b6ef-9d015975a363"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="212" y="0" width="80" height="28" uuid="59371a85-2971-4f05-9b04-fdd39003a22c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="292" y="0" width="75" height="28" uuid="b3e0b56c-6ed1-4156-8109-732c26d3a900"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="367" y="0" width="75" height="28" uuid="fd60e772-298a-424d-ac77-b42041c2b597"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="724" y="0" width="78" height="28" uuid="aa087d44-d572-4108-963c-4602cb31717f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="442" y="0" width="94" height="28" uuid="f491b6b9-882c-40ab-9ff9-8a2ea48b0083"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="137" y="0" width="75" height="28" uuid="66a39128-65d9-44bd-a921-c8a6bc36f2e6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="536" y="0" width="94" height="28" uuid="86925691-adcf-4454-ad24-df27919576f1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="630" y="0" width="94" height="28" uuid="ac8f35b4-320b-4736-9b70-9a41c227ebf4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui"
+	xml:lang="pt-br">
+	
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+	<title> #{msgs['title.geral']} </title>
+	
+	<link href="#{facesContext.externalContext.requestContextPath}/resources/css/_resetCSS.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.requestContextPath}/resources/css/padraoCSS.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.requestContextPath}/resources/css/thickbox.css" rel="stylesheet" type="text/css" />
+	<link href="#{facesContext.externalContext.requestContextPath}/resources/css/menu-principal.css" rel="stylesheet" type="text/css" />
+	
+	<h:outputScript library="js" name="global.js" target="head" />
+	<h:outputScript library="js" name="menu_principal.js" target="head" />
+	<h:outputScript library="js" name="transforma_txt.js" target="head" />
+</h:head>
+
+<h:body>
+
+	<!-- inicio div tooltipe -->
+	<div id="navtxt" class="navtext" style="position: absolute; top: 0px; left: 0px; visibility: hidden; z-index: 200"></div>
+	<!-- final div tooltipe -->
+	
+	<div id="tudo">
+	
+		<!-- CABECALHO -->
+		<div id="acessibilidade">
+			<!-- <p>Acessibilidade -</p> -->
+			<!-- <a title="Ir para o conteudo" href="#topo" class="alt">Saltar para o conteudo</a> -->
+			<!-- <a title="Aumentar o tamanho das letras" href="javascript:ts('miolo',1)">A <SUP>+</SUP> Aumentar Fonte</a> --> 
+			<!-- <a title="Diminuir o tamanho das letras" href="javascript:ts('miolo',-1)">| A <SUP>-</SUP> Diminuir Fonte</a> -->
+
+			<!-- <li><a href="#">| Alto Contraste</a></li> -->
+		</div>
+		
+		<div id="header">
+			<div class="headerBarraInfo">
+				<div class="headerMarca" title="#{msgs['label.titulo.portal']}">
+					<a href="#{msgs['label.url.arce']}">
+						<img class="logo-home" alt="#{msgs['label.titulo.portal']}" src="#{facesContext.externalContext.requestContextPath}/resources/img/logo.gif" border="0" />
+					</a>
+				</div>
+				<div class="headerTitulo">
+					<h1>#{msgs['label.cabecalho.sistema']}</h1>
+					<p:spacer height="10"></p:spacer>
+					<h2>#{msgs['label.nome.sistema']} - #{msgs['label.versao.sistema']}</h2>
+				</div>
+			</div>
+			<div>
+				
+			</div>
+		</div>
+		<!-- FIM CABECALHO -->		
+					
+		<ui:insert name="principal" />		
+		
+	</div>
+</h:body>
+</html>

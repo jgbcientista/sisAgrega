@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="idPanelProposta" style=" border: none;" align="left" rendered="#{propostaBean.novaProposta}">
+		<div align="right">
+			<p:commandButton 
+				id="btSAirTela" 
+				value="Sair"
+				action="#{propostaBean.voltar()}" 
+				immediate="true"
+				style="width: 127px;"
+				update="@form" 
+				styleClass="btn btn-red"
+				rendered="#{propostaBean.proposta.getId()==null? 'false':'true'}">
+			</p:commandButton>
+			<p:commandButton 
+				id="btAtualizar1" 
+				rendered="#{!propostaBean.viewProposta}"
+				style="width: 127px;"
+				immediate="true"
+				value="Atualizar"
+				action="#{propostaBean.atualizarProposta()}"
+				styleClass="btn btn-green"
+				update="idPanelProposta">
+			</p:commandButton>
+			<p:commandButton 
+				id="BtVoltar2" 
+				style="width: 127px;"
+				value="Precificação"
+				immediate="true"
+				styleClass="btn btn-green"
+				action="#{propostaBean.voltarPrecificacao()}" 
+				update="@form">
+			</p:commandButton>
+			
+			</div>
+		
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;">
+		<p:growl id="msgs2"/>
+		
+		 <p:fieldset legend="Informações da Proposta" style="margin-bottom:20px">
+			<p:panelGrid id="gridProposta1" style="width: 100%; " styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:35% !important;">
+						<p:outputLabel value="Nº da Proposta:" style="width:122px !important; font-size:16px !important;"/>
+						<p:outputLabel value="#{propostaBean.proposta.numeroProposta}" style="font-size:16px !important; font-weight:bold !important; width:290px;"/>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Cliente:" style="width:122px !important; font-size:16px !important;"/>
+						<p:outputLabel value="#{propostaBean.proposta.cliente.nome}" style="width:560px; font-size:16px !important; font-weight:bold !important;"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:fieldset>
+		<br />
+		<p:fieldset  legend="Propostas" style="margin-bottom:20px; background-color: white !important;" rendered="true"> 
+			
+			<p:tabView >
+				<p:tab title="Proposta Financeira" rendered="true" >	
+					<ui:include src="/paginas/proposta/tipoProposta/propostaFinanceira_Ver1-0.xhtml"/>
+				</p:tab>
+				<p:tab title="Proposta Técnica" rendered="true" >
+					<ui:include src="/paginas/proposta/tipoProposta/propostaTecnica_Ver1-0.xhtml" />
+				</p:tab>
+				<p:tab title="Proposta Técnica-Financeira" rendered="true">
+					<ui:include src="/paginas/proposta/tipoProposta/propostaTecnica_Financeira_Ver1-0.xhtml" />
+				</p:tab>
+				<p:tab title="Anexo" rendered="true">
+					<ui:include src="/paginas/proposta/tipoProposta/include_anexo_proposta.xhtml" />
+				</p:tab>
+				
+			</p:tabView>		
+		</p:fieldset>
+		
+		<!-- </p:outputLabel> -->
+			<p:blockUI block="idPanelProposta" trigger=" btAtualizar1 ">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+		</div>
+</p:panel>
+<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogFinalizarProposta" 
+		widgetVar="dialogFinalizarProposta"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja Finalizar a proposta?">
+		<center>
+			<p:commandButton 
+				id="idFinalizar" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.finalizarProposta()}" />
+			<p:commandButton 
+				id="btCancelarFinalizar"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogFinalizarProposta').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluirItem" 
+		widgetVar="dialogExcluirItem"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso Exclusão"
+		message="Tem certeza que deseja excluir esse Item?">
+		<center>
+			<p:commandButton 
+				id="idDialogItemProposta" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.excluirTipoItemProposta()}" />
+			<p:commandButton 
+				id="btCancelarItem1"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluirItem').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluirItemTec" 
+		widgetVar="dialogExcluirItemTec"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso Exclusão"
+		message="Tem certeza que deseja excluir esse Item da Equipe Técnica?">
+		<center>
+			<p:commandButton 
+				id="idDialogItemPropostaTec" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.excluirEquipeTecnica()}" />
+			<p:commandButton 
+				id="btCancelarItemTec"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluirItemTec').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluirEquipamento" 
+		widgetVar="dialogExcluirEquipamento"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso Exclusão"
+		message="Tem certeza que deseja excluir esse Item de Equipamento?">
+		<center>
+			<p:commandButton 
+				id="idEquipamente" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.excluirPlanEquipamento()}" />
+			<p:commandButton 
+				id="btCancelarItemEquipamento"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluirEquipamento').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	
+	
+	<p:confirmDialog 
+		id="dialogNaoPermiteEmissao" 
+		widgetVar="dialogNaoPermiteEmissao"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso de Emissão"
+		message="Já foi emitido uma proposta. Para alteração criei nova revisão">
+		<center>
+		<p:commandButton 
+			styleClass="btn btn-blue"
+			style="width: 127px;"
+			value="OK" 
+			type="button"
+			onclick="PF('dialogNaoPermiteEmissao').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<p:confirmDialog 
+		id="dialogEmiteProposta" 
+		widgetVar="dialogEmiteProposta"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso de Emissão"
+		message="Confirmar a emissão da proposta gerada? Após confirmação só poderá ser alterada com nova Revisão">
+		<center>
+			<p:commandButton 
+				update="@form" 
+				process="@this"
+				style="width: 127px;"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{propostaBean.emitirPropostaGerada()}" />
+			<p:commandButton 
+				styleClass="btn btn-blue"
+				style="width: 127px;"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogEmiteProposta').hide()"  />
+		</center>
+	</p:confirmDialog>
+
+	<style>
+	.ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-tabs-selected {
+		border-bottom: 0;
+		background: white !important;
+	}
+</style>
+	
+</html>

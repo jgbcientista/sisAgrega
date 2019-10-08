@@ -1,0 +1,261 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	 
+	 <p:panelGrid styleClass="ui-noborder" id="tudo">
+         	<p:row><h4 style="margin-left: 10px;">Características</h4></p:row>
+			<p:row>
+				<p:column>
+					<p:fieldset legend="Tipos de Relatorio" style="height:310px; width: 160px;">
+						<p:tree disabled="#{projetoBean.visualizarProjeto}" value="#{projetoBean.rootRelatorio}" var="node" dynamic="true" selectionMode="checkbox" selection="#{projetoBean.selectedRelatorioNodes}">
+							<p:treeNode expandedIcon="ui-icon ui-icon-folder-open" >
+								<h:outputText value="#{node}"/>
+							</p:treeNode>
+							<p:treeNode type="EPI">
+								<h:outputText value="#{node}" />
+							</p:treeNode>
+							<p:treeNode type="EV">
+								<h:outputText value="#{node}"/>
+							</p:treeNode>
+							<p:treeNode type="RO">
+								<h:outputText value="#{node}"/>
+							</p:treeNode>
+							
+							<p:treeNode type="RCA">
+								<h:outputText value="#{node}"/>
+							</p:treeNode>
+							
+							<p:treeNode type="RIUC">
+								<h:outputText value="#{node}"/>
+							</p:treeNode>
+						</p:tree>
+					</p:fieldset>
+				</p:column>
+				<p:column>
+				<p:fieldset legend="Intervenção" style="height:310px; width: 245px;">
+					<p:tree disabled="#{projetoBean.visualizarProjeto}" value="#{projetoBean.rootIntervencao}" var="node" dynamic="true" selectionMode="checkbox" selection="#{projetoBean.selectedIntervecaoNodes}">
+						<p:treeNode expandedIcon="ui-icon ui-icon-folder-open" >
+							<h:outputText value="#{node}"/>
+						</p:treeNode>
+						<p:treeNode type="DIAP(APP)">
+							<h:outputText value="#{node}"/>
+						</p:treeNode>
+						<p:treeNode type="SEIA">
+							<h:outputText value="#{node}"/>
+						</p:treeNode>
+					</p:tree>
+				</p:fieldset>
+				</p:column>
+				<p:column>
+					<p:fieldset legend="Tipos de Mapas" style="height:310px; width: 185px;">
+						<p:tree disabled="#{projetoBean.visualizarProjeto}" value="#{projetoBean.rootMapas}" var="node2" dynamic="true" selectionMode="checkbox" selection="#{projetoBean.selectedMapasNodes}">
+							<p:treeNode expandedIcon="ui-icon ui-icon-folder-open" >
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Localização">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Hidrografia">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Unidade Conservação">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Vegetação">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Lei da Mata Atlântica">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+							<p:treeNode type="Área Especial">
+								<h:outputText value="#{node2}"/>
+							</p:treeNode>
+						</p:tree>
+					</p:fieldset>
+				</p:column>
+				<p:column >
+					<p:fieldset disabled="#{projetoBean.visualizarProjeto}" legend="Unidade de Conservação" style="height:310px; width: 131px;">
+						<p:tree value="#{projetoBean.rootUnidadeConservacao}" var="node3" dynamic="true" selectionMode="checkbox" selection="#{projetoBean.selectedUnidadeConservacaoNodes}">
+							<p:treeNode expandedIcon="ui-icon ui-icon-folder-open" >
+								<h:outputText value="#{node3}"/>
+							</p:treeNode>
+							<p:treeNode type="Federal">
+								<h:outputText value="#{node3}"/>
+							</p:treeNode>
+							<p:treeNode type="Estadual">
+								<h:outputText value="#{node3}"/>
+							</p:treeNode>
+							<p:treeNode type="Municipal">
+								<h:outputText value="#{node3}"/>
+							</p:treeNode>
+						</p:tree>
+					  </p:fieldset>
+				</p:column>
+				<p:column >
+					<p:fieldset style="height:256px; width: 140px;"></p:fieldset>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<hr style="margin:5px;"></hr>
+       
+         <p:panelGrid styleClass="ui-noborder" id="bt_exibir_botao_add">
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Houve Retificação?" />
+				</p:column>
+				<p:column style="width:15%">	
+					<p:selectOneRadio value="#{projetoBean.projeto.verificaNotificacao}" disabled="#{projetoBean.visualizarProjeto}">
+		            	<f:selectItem itemLabel="Não" itemValue="false" />
+		            	<f:selectItem itemLabel="Sim" itemValue="true" />
+						<p:ajax event="change" update="bt_exibir_botao_add" listener="#{projetoBean.verificarRefiticao(projetoBean.projeto.verificaNotificacao)}"/>
+		        	</p:selectOneRadio>
+				</p:column>
+				<p:column>
+					<p:commandButton 
+						id="addRetificacao" 
+						style="margin-left: 6px; "
+						ajax="true"
+						disabled="#{!projetoBean.exibirBtRetificacao}"
+		 				update="@form"
+						value="Retificar"
+						action="#{projetoBean.novaRetificacao()}" >
+					</p:commandButton>
+					
+					
+				</p:column>
+				<p:column style="width:58%"></p:column>
+			</p:row>
+         </p:panelGrid>
+         <p:panelGrid columns="1" style="width: 100%; margin-left:0px;" styleClass="ui-noborder">
+         	<h5 style="margin-bottom:-12px;">Lista de Retificações</h5>
+			
+			<p:dataTable 
+				styleClass="header-tabelas" 
+				value="#{projetoBean.listRetificacao}"
+				var="resulte"
+				emptyMessage="Nenhum retificação adicionada."
+				rows="10"
+				paginator="false" 
+				summary="true"
+				pageLinks="4" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}" >
+								
+				<p:column headerText="Nº da Retificação" width="10%">
+					<center>
+						<h:outputText value="#{resulte.numero}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Tipo de Retificação" width="10%">
+					<h:outputText value="#{resulte.tipoRetificacao.descricao}" />
+				</p:column>
+						
+				<p:column headerText="Data de Recebimento" width="10%">
+					<center>
+						<h:outputText value="#{resulte.dataEnvio}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</center>
+				</p:column>
+						
+				<p:column headerText="Data de Resposta" width="10%">
+					<center>
+						<p:outputLabel value="#{resulte.dataResposta}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</center>
+				</p:column>
+				
+				<p:column headerText="Responsável" width="10%">
+					<center>
+						<p:outputLabel value="#{resulte.responsavelResposta.nome}" />
+					</center>
+				</p:column>
+						
+				<p:column headerText="Status" width="10%">
+					<center>
+						<p:outputLabel value="#{resulte.status.nome}" />
+					</center>
+				</p:column>
+			
+				<p:column headerText="Ação" width="10%" >
+					<p:commandLink 
+				 		id="editRetificacao" 
+					 	ajax="true"
+					 	immediate="false"
+					 	update="@form"
+					 	disabled="#{projetoBean.visualizarProjeto}"
+					 	action="#{projetoBean.editarRetificacao(resulte)}"
+					 	style="text-decoration:underline;">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					<p:commandLink id="excluirRET" 
+						immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	disabled="#{projetoBean.visualizarProjeto}"
+					 	process="tabelas"
+					 	action="#{projetoBean.removerRetificacao(resulte)}"
+						title="#{msgs['label.button.excluir']}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+				
+				
+				</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+        <hr style="margin:5px;"></hr>
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="3">
+				<p:outputLabel value="Observações Gerais" for="ObsCaracter" />
+				<h:inputTextarea id="ObsCaracter" 
+					style="width:98% !important; height:100px !important;"
+					value="#{projetoBean.projeto.obsCaracteristicas}" 
+					maxlength="3400"
+					disabled="#{projetoBean.visualizarProjeto}"
+					cols="6"/>	
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="34" style="text-align: right;">
+				<hr />
+				<div>
+					<p:commandButton 
+						value="Voltar"
+						actionListener="#{projetoBean.cancelar()}" 
+						update="@form"
+						styleClass="btn btn-red"
+						icon="fa fa-reply-all">
+					</p:commandButton>
+					
+					<p:commandButton 
+						value="Disparar E-mails"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						action="#{projetoBean.dispararEmail(3)}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-envelope-o">
+					</p:commandButton>
+					<p:commandButton 
+						id="btSalvarCaracte" 
+						value="Salvar"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						action="#{projetoBean.salvarCaracteristicas}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-floppy-o">
+					</p:commandButton>
+			 
+					
+				</div>
+				</p:column>
+			</p:row>
+         </p:panelGrid>
+	 
+</ui:composition>

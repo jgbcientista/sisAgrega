@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="painelServicoBusca" style="border: none;" rendered="#{servicoBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPanelCliente" style="border: none;" >
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>
+				<p:panelGrid id="idPanelServico" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:40% !important;">
+							<p:outputLabel value="Tipo de Negócio: " for="tpNegocio"/>
+							<p:selectOneMenu id="tpNegocio" styleClass="ui-altera-selectMenu" 
+									style="width:290px;" 
+									value="#{servicoBean.filtroTipoServico}">
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{servicoBean.tipoServicos}" var="tipo" itemLabel="#{tipo.descricao}" itemValue="#{tipo.id}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column>
+							<p:outputLabel value="Área de negócio:" for="tArea"/>
+							<p:selectOneMenu id="tArea" 
+									style="width:120px;" 
+									value="#{servicoBean.filtroArea}"  >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{servicoBean.areas}" var="area" itemLabel="#{area.descricao}" itemValue="#{area.id}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+				</p:panelGrid> <br />
+			</p:fieldset><br />
+			
+				<div align="right">		 
+					<p:commandButton 
+						id="idBtPesquisar" 
+						styleClass="btn btn-yellow"
+						value="Pesquisar"
+						action="#{servicoBean.filtrarServico()}" 
+						update="@form">
+					</p:commandButton>
+					<p:commandButton 
+						id="novoServico" 
+						value="Cadastrar"
+						styleClass="btn btn-blue"
+						action="#{servicoBean.novoNegocio()}" 
+						update="@form">
+					</p:commandButton>
+				</div>
+		<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" rendered="#{servicoBean.servicos.size()>0}"/>
+		<p:dataTable id="tableServicos" 
+			var="servico" 
+			styleClass="header-tabelas"
+			lazy="true"
+			rendered="#{servicoBean.servicos.size()>0}"
+			value="#{servicoBean.servicos}"
+			emptyMessage="Nenhum serviço cadastrado." 
+			rows="5" 
+			rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true" paginatorPosition="bottom"
+			paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}" sortBy="#{servico.dataAcao}" sortOrder="DESCENDING" >
+
+				<p:column headerText="Tipo de Negócio" width="27%">
+					
+					<h:outputText style="text-overflow: ellipsis important;" 
+						maxlength="15" value="#{servico.tipoServico.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Área de negócio" width="20%">
+					<h:outputText value="#{servico.area.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Descrição" width="38%">
+					<h:outputText value="#{servico.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Acão" width="12%">
+					<div align="left">
+						 <p:commandLink 
+						 	id="ver" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form"
+						 	process="tableServicos"
+						 	action="#{servicoBean.visualizarServico(servico)}"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-visualisar"></b>
+						</p:commandLink>
+						<p:commandLink 
+						 	id="edit" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form"
+						 	process="tableServicos"
+						 	action="#{servicoBean.redirectEditServico(servico)}"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-editar"></b>
+						</p:commandLink>
+						<p:commandLink 
+						 	id="idExcluir" 
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form"
+						 	process="tableServicos"
+						 	action="#{servicoBean.preExcluir(servico)}"
+							title="#{msgs['label.button.excluir']}"
+							style="text-decoration:underline;" >
+							<b class="icone-splash ico-excluir"></b>
+						</p:commandLink>
+					</div>
+				</p:column>
+			</p:dataTable>
+				<p:blockUI block="tableServicos" trigger="idBtPesquisar">
+				 	<p:graphicImage name="img/ajaxloadingbar.gif" />
+				</p:blockUI>
+		</p:panel>
+		</div>
+	</p:panel>
+		
+		<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+		<p:confirmDialog 
+				id="dialogExcluir" 
+				widgetVar="dialogExcluir"
+				closeOnEscape="true" 
+				severity="alert"
+				header="Aviso"
+				message="Tem certeza que deseja excluir esse registro?">
+	 
+			<center>
+				<p:commandButton 
+					id="bfOK" 
+					update="@form" 
+					process="@this"
+					value="Ok" 
+					styleClass="btn btn-red"
+					action="#{servicoBean.excluirServico()}" />
+				<p:commandButton 
+					id="btCancelar"
+					styleClass="btn btn-blue"
+					value="Cancelar" 
+					type="button"
+					onclick="PF('dialogExcluir').hide()"  />
+			</center>
+		</p:confirmDialog>
+</html>

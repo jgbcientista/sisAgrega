@@ -1,0 +1,107 @@
+<ui:composition template="/paginas/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<ui:define name="principal">
+		<div class="container">
+			<h:form id="form-funcao" prependId="false">
+				<ui:decorate template="/paginas/templates/templateinclusao.xhtml">
+					<ui:param name="bean" value="#{mensagemBean}" />
+					
+				<ui:define name="titulo">
+					<h:outputText class="titulo-detalhe" value="Modulo Mensagens"  style="margin-left:35px;" />	
+				</ui:define>
+
+	<ui:define name="formulario">
+					
+			<div align="right">				 
+				<p:commandButton id="idBtAtualizar" 
+					styleClass="btn btn-yellow"
+					value="Atualizar mensagens" 
+					action="#{mensagemBean.obterMensagens()}" update="@form" />
+				 
+		 	</div>
+						 
+	 <p:panel id="painelNegocioBusca" style="border: none;" >
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+			<p:panel id="idPanelMensagem" style="border: none;" >
+	 			
+				<p:dataTable 
+					id="tableMensagem" 
+					var="resulte" 
+					styleClass="header-tabelas"
+					lazy="true"
+					value="#{mensagemBean.listaMensagesByUsuario}"
+					emptyMessage="Não existe mensagem para você." 
+					rows="5" 
+					rowsPerPageTemplate="10,15,20" 
+					paginatorAlwaysVisible="true"
+					paginatorPosition="bottom"
+					paginator="true"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+					sortBy="#{recurso.nome}" sortOrder="DESCENDING" >
+					
+					<p:column headerText="Título" width="10%">
+						<center><h:outputText value="#{resulte.titulo}" /></center>
+					</p:column>
+					
+					<p:column headerText="Descrição" width="20%">
+						<center><h:outputText value="#{resulte.descricao}" /></center>
+					</p:column>
+					
+					<p:column headerText="Tipo" width="7%">
+						<center><h:outputText value="#{resulte.tipo}" /></center>
+					</p:column>
+					
+					<p:column headerText="Usuário" width="7%">
+						<center>	
+							<h:outputText value="#{resulte.profissional.usuarioAcesso.login}" /> 
+						</center>
+					</p:column>
+					
+					<p:column headerText="OS" width="7%">
+						<center><h:outputText value="#{resulte.projeto.ordemServico.numeroOS}" /></center>
+					</p:column>
+					
+					<p:column headerText="SubTipo" width="7%">
+						<center><h:outputText value="#{resulte.projeto.subTipoProjeto}" /></center>
+					</p:column>
+					
+					<p:column headerText="Projeto" width="7%">
+						<center><h:outputText value="#{resulte.projeto.numeroProjetoAgrega}" /></center>
+					</p:column>
+					
+						
+					<p:column headerText="Data" width="8%">
+						<center><h:outputText value="#{resulte.dataInclusao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText> </center>
+					</p:column>
+					
+					<p:column headerText="Leitura" width="8%">
+						<center>
+							<p:commandButton styleClass="botao_menu" value="Ler" image="ui-icon-power"
+                         	action="#{mensagemBean.atualizar(resulte)}"
+                        	 ajax="false"/>
+						</center>
+					</p:column>
+					
+					
+				</p:dataTable>
+			 
+			</p:panel>
+			</div>
+	</p:panel>
+					
+					
+					</ui:define>
+				</ui:decorate>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

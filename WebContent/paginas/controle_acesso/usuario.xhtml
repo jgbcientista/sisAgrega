@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	
+		<p:panel id="idPaneCAD" style="border: none;">
+			<p:messages  /><br></br>
+		<p:fieldset legend="Informações do Cadastro">	
+		
+		 <br />
+ 		 <br />
+		<div align="center">
+		<p:panelGrid columns="4" id="painelCad" style="margin-top:15px; margin-right:0px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:outputLabel value="Usuário:" for="usuarioCad"/>
+				 	<p:inputText id="usuarioCad" style="width:450px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite o nome do usuário."
+							requiredMessage="Campo nome é obrigatório"
+							value="#{usuarioBean.usuario.nome}" />
+							
+				<p:outputLabel value="Login:" for="loginCad"/>
+				 	<p:inputText id="loginCad" style="width:350px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite o login do usuário."
+							requiredMessage="Campo login é obrigatório"
+							value="#{usuarioBean.usuario.login}" />
+							
+				<p:outputLabel value="Senha:" for="senhaCad" rendered="#{!usuarioBean.viewUsuario}"/>
+				 	<p:password id="senhaCad" style="width:250px !important;"
+							rendered="#{!usuarioBean.viewUsuario}"
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite a senha do usuário."
+							requiredMessage="Campo senha é obrigatório"
+							value="#{usuarioBean.usuario.senha}" />
+							
+				<p:outputLabel value="Função:" for="funcaoCad"/>
+				 	<p:inputText id="funcaoCad" style="width:350px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite a função do usuário."
+							requiredMessage="Campo função é obrigatório"
+							value="#{usuarioBean.usuario.funcao}" />
+							
+				<p:outputLabel value="Setor: " for="setorCad"/>
+				 	<p:inputText id="setorCad" style="width:450px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite o setor do usuário."
+							requiredMessage="Campo setor é obrigatório"
+							value="#{usuarioBean.usuario.setor}" />
+							
+				<p:outputLabel value="Telefone:" for="telefoneCad"/>
+				 	<p:inputText id="telefoneCad" style="width:350px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite o telefone do usuário."
+							requiredMessage="Campo telefone é obrigatório"
+							value="#{usuarioBean.usuario.telefone}" />
+							
+							
+				<p:outputLabel value="E-mail: " for="emailCad"/>
+				 	<p:inputText id="emailCad" style="width:450px !important;"
+							disabled="#{usuarioBean.viewUsuario}" 
+							required="#{!usuarioBean.viewUsuario}"
+							placeholder="Digite o e-mail do usuário."
+							requiredMessage="Campo e-mail é obrigatório"
+							value="#{usuarioBean.usuario.email}" />
+							
+				<p:outputLabel value="Perfil: " for="perfilAssociarUSU"/>
+				<p:selectOneMenu 
+						id="perfilAssociarUSU" 
+						style="width:340px !important;"
+						disabled="#{usuarioBean.viewUsuario}" 
+						rendered="#{!usuarioBean.viewUsuario}"
+						value="#{usuarioBean.idPerfil}" >
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{usuarioBean.perfis}"
+						var="item" 
+						itemLabel="#{item.nome}"
+						itemValue="#{item.id}" />
+				</p:selectOneMenu>
+				
+				
+				<p:inputText id="verPerifl" 
+					style="width:350px !important;"
+					disabled="#{usuarioBean.viewUsuario}" 
+					rendered="#{usuarioBean.viewUsuario}"
+					value="#{usuarioBean.usuario.perfil.nome}" />
+				
+		
+		</p:panelGrid>
+		</div>
+		 <br />
+ 		 <br />
+ 		 <br />
+	</p:fieldset>
+
+ 		 <br />
+ 		 <br />
+ 		 <br /> 		 
+ 		 <br />
+ 		 <br />
+ 		 <br />
+ 		 
+
+ 	 		<center>
+					<p:commandButton 
+						id="btSalvarUsuario" 
+						value="Salvar"
+						actionListener="#{usuarioBean.salvar()}" 
+						update="@form"
+						styleClass="btn btn-green" 
+						rendered="#{usuarioBean.isNew()}" />
+					<p:commandButton 
+						id="btAtualizarUsuario" 
+						value="Atualizar"
+						actionListener="#{usuarioBean.atualizar()}"
+						styleClass="btn btn-green"
+						update="@form"
+						rendered="#{usuarioBean.isEdit()}" />
+					<p:commandButton 
+						id="BtVoltarUsuario" 
+						value="Voltar"
+						immediate="true"
+						styleClass="btn btn-yellow"
+						action="#{usuarioBean.cancelarNovo()}" 
+						update="@form" />
+						
+						
+				</center>
+				 
+	 
+		</p:panel>
+ 
+</html>

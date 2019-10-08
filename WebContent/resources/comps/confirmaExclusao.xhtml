@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<!-- INTERFACE -->
+	<cc:interface>
+		<cc:attribute name="id" />
+		<cc:attribute name="header" default="#{msgs['label.titulo.sistema']}" />
+		<cc:attribute name="message" default="#{msgs['msg.info.confirmacao.operacao']}" />
+		<cc:attribute name="widgetVar" required="true" />
+		<cc:attribute name="rotuloBotaoSim" default="#{msgs['label.button.ok']}" />
+		<cc:attribute name="rotuloBotaoNao" default="#{msgs['label.button.cancelar']}" />
+		<cc:attribute name="updateSim" required="true" />
+		<cc:attribute name="updateNao" />
+		<cc:attribute name="onClickSim" />
+		<cc:attribute name="onClickNao" />
+		<cc:attribute name="actionListener" targets="btnSim" />
+		<cc:attribute name="action"
+			method-signature="java.lang.String action()" targets="btnSim" />
+		<cc:attribute name="actionNao"
+			method-signature="java.lang.String action()" />
+		<cc:attribute name="notAjaxSim" required="false" />
+		<cc:attribute name="oncomplete" />
+		<cc:attribute name="closeOnEscape" default="true" />
+		<cc:attribute name="width" default="300" />
+	</cc:interface>
+	<!-- IMPLEMENTATION -->
+	<cc:implementation>
+		<p:confirmDialog id="#{cc.attrs.id}" modal="true" header="#{cc.attrs.header}"
+			message="#{cc.attrs.message}" closeOnEscape="#{cc.attrs.closeOnEscape}"
+			widgetVar="#{cc.attrs.widgetVar}" width="#{cc.attrs.width}">
+			<center>
+				<h:panelGrid columns="2">
+					<p:commandButton id="btnSim" style="float:left; width: 80px !important;" value="#{cc.attrs.rotuloBotaoSim}"
+						update="#{cc.attrs.updateSim}"
+						rendered="true" process="@this"
+						title="#{cc.attrs.rotuloBotaoSim}"
+						oncomplete="#{cc.attrs.widgetVar}.hide();#{cc.attrs.oncomplete}"
+						onclick="#{cc.attrs.onClickSim}" ajax="#{!cc.attrs.notAjaxSim}" />
+					<p:commandButton style="float:left; width: 80px !important;" value="#{cc.attrs.rotuloBotaoSim}"
+						actionListener="#{cc.attrs.actionListenerSim}" update="#{cc.attrs.updateSim}"
+						title="#{cc.attrs.rotuloBotaoSim}"
+						rendered="#{not empty cc.attrs.actionListenerSim}" process="@this"
+						onclick="#{cc.attrs.onClickSim}"
+						oncomplete="#{cc.attrs.widgetVar}.hide();#{cc.attrs.oncomplete}" />
+					<p:commandButton id="btnNao" style="float:right; width: 80px !important;" value="#{cc.attrs.rotuloBotaoNao}"
+						rendered="#{empty cc.attrs.actionNao}"
+						onclick="#{cc.attrs.onClickNao}"
+						title="#{cc.attrs.rotuloBotaoNao}"
+						oncomplete="#{cc.attrs.widgetVar}.hide();#{cc.attrs.oncomplete}" />
+				</h:panelGrid>
+			</center>
+		</p:confirmDialog>
+	</cc:implementation>
+</ui:composition>

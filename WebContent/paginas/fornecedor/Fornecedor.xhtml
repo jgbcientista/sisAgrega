@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<p:panel id="idPanelFornecedor" style="border: none;" rendered="#{!fornecedorBean.pesquisar}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<center>
+			<p:fieldset legend="Dados do Fornecedor" style="width: 97%;text-align: left;"  >
+				<p:panelGrid columns="4" id="painelCadastro" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:outputLabel value="Tipo Fornecedor: " for="tipoFornecedor"/>
+						<p:selectOneMenu id="tipoFornecedor" style="width:120px !important; " 
+							required="true" requiredMessage="Campo tipo Fornecedor obrigatório."
+							value="#{fornecedorBean.fornecedor.tipoFornecedor}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.tipoFornecedor}"
+								var="tipoFornecedor" itemLabel="#{tipoFornecedor}"
+								itemValue="#{tipoFornecedor}" />
+								<p:ajax event="change" update="@form" listener="#{fornecedorBean.verificarTipoPessoa(fornecedorBean.fornecedor.tipoFornecedor)}"/>
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Ramo:" for="ramoAtividade" />
+						<p:selectOneMenu id="ramoAtividade" style="width:120px !important; " rendered="true" 
+							required="true" requiredMessage="Campo Ramo de Atividade obrigatório."
+							value="#{fornecedorBean.fornecedor.ramoAtividade}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.tipoRamoAtividade}"
+								var="tipoRamoAtividade" itemLabel="#{tipoRamoAtividade}"
+								itemValue="#{tipoRamoAtividade}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="Principal Atividade:" for="princAtividade" />
+						<p:selectOneMenu  id="princAtividade" style="width:120px !important; " 
+							value="#{fornecedorBean.fornecedor.principalAtividade}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.tipoPrincipalAtividade}"
+								var="tipoPrincipalAtividade" itemLabel="#{tipoPrincipalAtividade}"
+								itemValue="#{tipoPrincipalAtividade}" />
+						</p:selectOneMenu>
+							
+						<p:outputLabel for="nomeFantasia" value="#{fornecedorBean.labelNomeFornecedor}" />
+						<p:inputText id="nomeFantasia" style="width:380px !important; " 
+							required="true" requiredMessage="Campo Nome obrigatório"
+							onkeypress="return event.keyCode != 13;"
+							disabled="#{fornecedorBean.viewFornecedor}" maxlength="200"
+							value="#{fornecedorBean.fornecedor.nomeFantasia}">
+						</p:inputText>
+							
+						<p:outputLabel for="razaoSocial" value="Razão Social:" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"/>
+						<p:inputText id="razaoSocial" style="width:380px !important; " 
+							rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"
+							required="#{fornecedorBean.pessoaJuridicaSelecionada}" 
+							onkeypress="return event.keyCode != 13;"
+							requiredMessage="Campo Razão Social obrigatório." maxlength="200"
+							disabled="#{fornecedorBean.viewFornecedor}"
+							value="#{fornecedorBean.fornecedor.razaoSocial}">
+						</p:inputText>
+							
+						<p:outputLabel value="CNPJ:" for="fornCnpj" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}" />
+						<p:inputMask id="fornCnpj" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"
+							required="#{fornecedorBean.pessoaJuridicaSelecionada}"
+							requiredMessage="Campo CNPJ obrigatório."
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.cnpjCPF}" 
+							disabled="#{fornecedorBean.viewFornecedor}" 
+							mask="99.999.999/9999-99" 
+							style="width:200px !important; ">
+							<p:ajax event="change" listener="#{fornecedorBean.verificaCpfCnpjCadastrado}" update="fornCnpj"  />
+						</p:inputMask>
+								
+						<p:outputLabel value="CPF:" for="fornCpf" rendered="#{fornecedorBean.pessoaFisicaSelecionada}"  />
+						<p:inputMask  id="fornCpf" rendered="#{fornecedorBean.pessoaFisicaSelecionada}"
+							required="#{fornecedorBean.pessoaFisicaSelecionada}"
+							requiredMessage="Campo CPF obrigatório."
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.cnpjCPF}"
+							disabled="#{fornecedorBean.viewFornecedor}" 
+							mask="999.999.999-99" 
+							style="width:200px !important; ">
+							<p:ajax event="change" listener="#{fornecedorBean.verificaCpfCnpjCadastrado}" update="fornCpf"  />
+						</p:inputMask>
+								
+						<p:outputLabel value="Inscrição Estadual:" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"/>
+						<p:inputMask maxlength="15" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"
+							style="width:200px !important; "
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.iscricaoEstadual}"
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputMask>
+								
+						<p:outputLabel value="Inscrição Municipal:" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"/>
+						<p:inputMask maxlength="15" rendered="#{fornecedorBean.pessoaJuridicaSelecionada}"
+							style="width:200px !important; " 
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.iscricaoMunicipal}"
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputMask>
+		
+						<p:outputLabel for="idEstados" value="Estado:" />
+						<p:selectOneMenu id="idEstados" style="width:200px !important; " 
+							required="true"
+							requiredMessage="Campo Estado obrigatório."
+							onkeypress="return event.keyCode != 13;"
+							disabled="#{fornecedorBean.viewFornecedor}" panelStyle="width:180px;"
+							value="#{fornecedorBean.fornecedor.endereco.estado}"
+							effect="fade" filter="true" filterMatchMode="startsWith">
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.estados}" var="estado"
+								itemLabel="#{estado.uf}" 
+								itemValue="#{estado}" />
+							<p:ajax event="change" listener="#{fornecedorBean.carregarCidadesPorEstado}" update="idCidades" global="false" />
+						</p:selectOneMenu>
+		
+						<p:outputLabel for="idCidades" value="Cidade:" />
+						<p:selectOneMenu id="idCidades" style="width:200px !important; "
+							required="true"
+							onkeypress="return event.keyCode != 13;"
+							requiredMessage="Campo Cidade obrigatório." 
+							disabled="#{fornecedorBean.disableCity || fornecedorBean.viewFornecedor}"
+							panelStyle="width:180px;" effect="fade" filter="true"
+							filterMatchMode="startsWith"
+							value="#{fornecedorBean.fornecedor.endereco.cidade}" >
+							<f:selectItem itemLabel="#{fornecedorBean.fornecedor.endereco.cidade.nome}" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.cidades}" var="cidade"
+								itemLabel="#{cidade.nome}" 
+								itemValue="#{cidade}" />
+						</p:selectOneMenu>
+		
+						<p:outputLabel value="Endereço:" />
+						<p:inputText style="width:380px !important; " maxlength="250"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.endereco.rua}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+						
+						<p:outputLabel value="Número:" />
+						<p:inputText style="width:60px !important; " maxlength="9"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.endereco.numeroRua}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+						
+						<p:outputLabel value="Complemento:" />
+						<p:inputText style="width:380px !important; " maxlength="250"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.endereco.infoComplementar}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+		
+						<p:outputLabel value="Bairro:" />
+						<p:inputText style="width:200px !important; " maxlength="100"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.endereco.bairro}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+		
+						<p:outputLabel value="CEP:" />
+						<p:inputMask mask="99999-999" style="width:200px !important; "
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.endereco.cep}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputMask>
+		
+						<p:outputLabel value="Email:" />
+						<p:inputText style="width:350px !important; " maxlength="250"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.email}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+						
+						<p:outputLabel value="Tel Principal" />
+						<p:inputText id="telPrincipalFor"  style="width:120px !important; " maxlength="15" 
+							value="#{fornecedorBean.fornecedor.telefone}" 
+							onkeypress="return event.keyCode != 13;"
+							disabled="#{fornecedorBean.viewFornecedor}"
+							process="@this" >
+							<p:ajax event="change" update="telPrincipalFor" process="@this" listener="#{fornecedorBean.validarTelPrincipal}"/>
+						</p:inputText>
+						
+						<p:outputLabel for="banco" value="Banco:" />
+						<p:selectOneMenu id="banco" style="width:180px !important; text-overflow: ellipsis; " 
+								onkeypress="return event.keyCode != 13;"
+								disabled="#{fornecedorBean.viewFornecedor}"
+								panelStyle="width:180px;" effect="fade" filter="true"
+								filterMatchMode="startsWith"
+								value="#{fornecedorBean.fornecedor.dadosBancarios.idBanco}"
+								title="#{fornecedorBean.fornecedor.dadosBancarios.idBanco.nome}">
+							<f:selectItem itemLabel="- Selecione -" itemValue=""  />
+							<f:selectItems value="#{fornecedorBean.bancos}" var="banco" itemLabel="#{banco.nome}" itemValue="#{banco}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel for="tipoConta" value="Tipo de Conta:" />
+						<p:selectOneMenu id="tipoConta" style="width:120px !important; "
+								onkeypress="return event.keyCode != 13;"
+								value="#{fornecedorBean.fornecedor.dadosBancarios.tipoConta}" 
+								disabled="#{fornecedorBean.viewFornecedor}">
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{fornecedorBean.tiposConta}" var="tipos" itemLabel="#{tipos}" itemValue="#{tipos}" />
+						</p:selectOneMenu>
+									
+						<p:outputLabel for="agencia" value="Nº Agência:" />
+						<p:inputText id="agencia" style="width:120px !important; " maxlength="20"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.dadosBancarios.nrAgencia}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+		
+						<p:outputLabel value="Nº Conta:" />
+						<p:inputText style="width:120px !important; " maxlength="20"
+							onkeypress="return event.keyCode != 13;"
+							value="#{fornecedorBean.fornecedor.dadosBancarios.nrConta}" 
+							disabled="#{fornecedorBean.viewFornecedor}">
+						</p:inputText>
+					</p:panelGrid><br></br>
+				</p:fieldset>
+			</center>
+			<br/>
+			
+			<p:fieldset legend="Contatos" style="width: 97%;text-align: left;" >
+			<br/>
+			<p:panelGrid columns="6" id="idFornContatos" style="width: 97%; margin-top:-13px; margin-left:-10px;" columnClasses="rotulo, campo" styleClass="ui-noborder"
+				rendered="#{fornecedorBean.adicionarContato}">
+				
+				<p:outputLabel value="Nome de Contato:" for="nomeContatoFor" />
+				<p:outputLabel value="1º Telefone" for="telContato1For" />
+				<p:outputLabel value="2º Telefone" for="telContato2For" />
+				<p:outputLabel value="Setor" for="setorContatoFor" />
+				<p:outputLabel value="E-mail" for="emailContatoFor" />
+				<p:outputLabel></p:outputLabel>
+				
+				<p:inputText id="nomeContatoFor" style="width:200px !important; " 
+					value="#{fornecedorBean.contato.nomeContato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{fornecedorBean.viewFornecedor}" >
+				<p:ajax event="change"/>
+				</p:inputText> 
+				
+				<p:inputText id="telContato1For"  style="width:120px !important; " maxlength="15" 
+					value="#{fornecedorBean.contato.tel1Contato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{fornecedorBean.viewFornecedor}"
+					process="@this" >
+					<p:ajax event="change" update="telContato1For" process="@this" listener="#{fornecedorBean.validarTel1}"/>
+				</p:inputText>
+				
+				<p:inputText id="telContato2For" style="width:120px !important; " maxlength="15" 
+					value="#{fornecedorBean.contato.tel2Contato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{fornecedorBean.viewFornecedor}"
+					process="@this" >
+					<p:ajax event="change" update="telContato2For" listener="#{fornecedorBean.validarTel2}"/>
+				</p:inputText>
+				
+				<p:inputText id="setorContatoFor" style="width:130px !important; " 
+					value="#{fornecedorBean.contato.setorContato}" maxlength="30"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{fornecedorBean.viewFornecedor}" >
+					<p:ajax event="change"/>
+				</p:inputText> 
+				
+				<p:inputText id="emailContatoFor" style="width:250px !important; " 
+					value="#{fornecedorBean.contato.emailContato}" maxlength="100"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{fornecedorBean.viewFornecedor}" >
+					<p:ajax event="change"/>
+				</p:inputText> 
+								
+				<p:commandButton 
+					id="addContatoFor" 
+					value="Adicionar"
+					immediate="true"
+					actionListener="#{fornecedorBean.adicionarContato}"
+					disabled="#{fornecedorBean.viewFornecedor}"
+					update="idFornContatos, tabelaContatosFor" 
+					process="@this"
+					style="margin-left:0px;"
+					styleClass="btn btn-green">
+				</p:commandButton>
+			</p:panelGrid>
+			<br/>
+				<p:growl id="msgs" showDetail="false"/>
+				<p:dataTable
+					styleClass="header-tabelas" 
+					value="#{fornecedorBean.listContatoTemp}"
+					id="tabelaContatosFor"
+					widgetVar="tabelaContatosFor"
+					rows="10" 
+					var="resulte"
+					style="width: 97%;"
+					editable="true" 
+					disabled="#{fornecedorBean.viewFornecedor}"
+					emptyMessage="Nenhuma contato cadastrada." 
+					rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+					paginatorPosition="bottom" paginator="true"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}">
+				 	
+				       <p:ajax event="rowEdit" listener="#{fornecedorBean.onRowEdit}" update="msgs" />
+				       <p:ajax event="rowEditCancel" listener="#{fornecedorBean.onRowCancel}" update="msgs" />
+						
+					   <p:column  headerText="Editar" style="width:10px">
+				           <p:rowEditor  />
+				       </p:column>
+				       
+				       <p:column headerText="Nome de Contato" style="width:20%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.nomeContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput1" value="#{resulte.nomeContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				 
+				       <p:column headerText="1º Telefone" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.tel1Contato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput2" value="#{resulte.tel1Contato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					   <p:column headerText="2º Telefone" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.tel2Contato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput3" value="#{resulte.tel2Contato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					    <p:column headerText="Setor" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.setorContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput4" value="#{resulte.setorContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					   <p:column headerText="E-mail" style="width:25%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.emailContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput5" value="#{resulte.emailContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   <p:column  headerText="Excluir" style="width:10px" >
+						 	<p:commandLink id="removerContatoFor" 
+								immediate="true"
+								disabled="#{fornecedorBean.viewFornecedor}"
+							 	ajax="false"
+							 	update="@form:tabelaContatosFor"
+							 	process="tabelaContatosFor"
+							 	actionListener="#{fornecedorBean.preExcluirContato(resulte)}"	
+							 	title="#{msgs['label.button.excluir']}"
+								style="text-decoration:underline;" >
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+				       </p:column>
+				   </p:dataTable>
+				  </p:fieldset>
+				   <center>
+				   <br/>
+				  <p:fieldset legend="Observações Gerais" style="width: 97%;text-align: left;" >
+						<p:panelGrid columns="1" id="idPanelGridObservacao" style="width: 95%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+							<p:inputTextarea id="idObservacaoForne" style="width:1131px !important; margin-left:-10px; height: 110px !important" 
+									counter="display" maxlength="500" counterTemplate="{0} Caracteres restantes." autoResize="false"
+									value="#{fornecedorBean.fornecedor.observacao}" 
+									disabled="#{fornecedorBean.viewFornecedor}"/>
+						</p:panelGrid>
+						<h:outputText id="display" />
+				  </p:fieldset><br/>
+				  
+				  <p:fieldset legend="Anexo de Documentos" style="width: 97%;text-align: left;" >
+					<div class="borda-retirar borda-retira-tabela-anexos" style="border: 0px solid #a8a8a8; width: 100%; margin-bottom:-25px;">
+					<p:panelGrid style="width:100%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+						<p:row>
+							<p:column style="width:10%;">
+								<p:fileUpload styleClass="class-upload" process="@this"
+									auto="true" 
+									disabled="true"
+									label="Anexar" 
+									fileLimit="5"
+									fileUploadListener="#{fornecedorBean.arquivoUpload}"
+									mode="advanced"
+									dragDropSupport="false"
+									multiple="true"
+									update="@this">
+								</p:fileUpload>
+							</p:column>
+							<p:column></p:column>
+						</p:row>
+					</p:panelGrid>
+				</div>
+				<p:dataTable id="tabelaListaAnexoSelecionado" 
+					lazy="true"
+					var="resulteAnexo" 
+					widgetVar="tabelaListaAnexoSelecionado"
+					styleClass="header-tabelas"
+					
+					emptyMessage="Nenhum arquivo anexado"
+					rows="5" 
+					style="width:50%" rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true" paginatorPosition="bottom"
+					paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}" sortOrder="DESCENDING" >
+					<p:column>
+						<p:commandLink id="idAnexarAcompanhamento" 
+							immediate="true" 
+							disabled="false"
+							title="Anexar"
+							actionListener="#{clienteBean.setExcluirAnexo(resulteAnexo)}"
+							onclick="PF('dialoConfirmExclusaoAnexo').show()">
+							<i class="icon-remove position-icon"></i>
+						</p:commandLink>
+						<h:outputText value="#{resulteAnexo.descricao}"></h:outputText>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</center>
+		<br />
+		<p:separator />
+		<center>
+		<div align="right">
+			<p:commandButton id="btSalvar" 
+				value="Salvar" 
+				action="#{fornecedorBean.salvarFornecedor()}" 
+				update="@form"
+				rendered="#{fornecedorBean.isNewFornecedor()}"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			<p:commandButton 
+				id="btAtualizar" 
+				value="Atualizar"
+				styleClass="btn btn-green"
+				actionListener="#{fornecedorBean.atualizarFornecedor()}"
+				update="@form"
+				rendered="#{fornecedorBean.editFornecedor()}" />
+			<p:commandButton 
+				id="BtVoltar" 
+				value="Voltar"
+				immediate="true"
+				styleClass="btn btn-yellow"
+				action="#{fornecedorBean.voltar()}" 
+				update="@form" />
+			</div>
+		<p:blockUI block="idPanelFornecedor" trigger="btSalvar btAtualizar">
+			 	<p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+	</center>
+	</div>
+</p:panel>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogContatoExcluir" 
+		widgetVar="dialogContatoExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir esse Contato?">
+		<center>
+			<p:commandButton 
+				id="bfOK1" 
+				update="@form" 
+				process="@this"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{fornecedorBean.excluirContato()}" />
+			<p:commandButton 
+				id="btCancelar1"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogContatoExcluir').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG TELEFONE ERRADO-->
+	<p:confirmDialog id="dialoTelContato"
+		widgetVar="dialoTelContato" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Telefone Inválido"
+		message="Digite o DD + numero Ex: Fixo 71 3999-9999 ou Celular 71 99999-9999">
+		<center>
+			<p:commandButton id="btncancelaTel"
+				styleClass="btn btn-red"
+				value="OK"
+				title="cancela a ação" 
+				type="button"
+				onclick="PF('dialoTelContato').hide()" />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+		<p:confirmDialog id="dialoConfirmExclusaoAnexo"
+			widgetVar="dialoConfirmExclusaoAnexo" 
+			closeOnEscape="true"
+			severity="alert" 
+			header="Excluir Anexo}"
+			message="Exclusao de anexos">
+			<center>
+				<p:commandButton id="btnConfirmExclusaoAnexo" 
+					update="@form"
+					process="@this, tabelaListaAnexoSelecionado"
+					value="#{msgs['label.button.ok']}"
+					title="#{msgs['label.button.ok']}" styleClass="btn btn-red"
+					oncomplete="PF('dialoConfirmExclusaoAnexo').hide()"
+					actionListener="#{profissionalBean.excluirAnexo()}" />
+				<p:commandButton id="btnCancelarExclusaoAnexo"
+					styleClass="btn btn-blue" 
+					value="#{msgs['label.button.cancelar']}"
+					title="#{msgs['label.button.cancelar']}" 
+					type="button"
+					onclick="PF('dialoConfirmExclusaoAnexo').hide()" />
+			</center>
+		</p:confirmDialog>
+		
+		<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+	<p:confirmDialog id="dialoCpfJaCadastrado"
+		widgetVar="dialoCpfJaCadastrado" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Cliente já Cadastrado" 
+		message="Esse CPF ou CNPJ já foi cadastrado. Favor digite outro número">
+		<center>
+			<p:commandButton id="btncancelaCpf"
+				styleClass="btn btn-red"
+				value="OK"
+				title="cancela a ação" 
+				type="button"
+				onclick="PF('dialoCpfJaCadastrado').hide()" />
+		</center>
+	</p:confirmDialog>
+<style>
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled, 
+		.ui-widget-header .ui-state-disabled {
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	
+	.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger, 
+		.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-label{
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+</style>
+</html>

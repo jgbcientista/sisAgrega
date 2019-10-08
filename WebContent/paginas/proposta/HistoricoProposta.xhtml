@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="painelHistorico" style="border: none;" rendered="#{propostaBean.visualizarHistorico}" >
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<hr />
+		<p:panel id="idPanelHistoricoProposta" style="border: none;">
+		
+		<p:outputLabel style="font-size:16px !important; font-weight:bold !important;" 
+			value="Nº Proposta Atual: #{propostaBean.proposta.numeroProposta}">
+		</p:outputLabel>
+		
+		<p:dataTable id="tableHistoricoProposta" 
+			var="historico" 
+			lazy="true"
+			styleClass="header-tabelas"
+			value="#{propostaBean.historicos}"
+			emptyMessage="Nenhum histórico cadastrado" 
+			rows="10" 
+			rowsPerPageTemplate="10,15,20" 
+			paginatorAlwaysVisible="true"
+			paginatorPosition="bottom"
+			paginator="true"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+			sortBy="#{historico.numeroRevisao}" sortOrder="DESCENDING" >
+			
+			<p:column headerText="Ação" width="3%">
+					<p:commandLink 
+					 	immediate="true"
+					 	ajax="false"
+					 	title="Visualiza detalhes do histórico"
+					 	update="@form"
+					 	process="tableHistoricoProposta"
+					 	action="#{propostaBean.historicoVisualizar(historico)}">
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+				</p:column>
+			<p:column headerText="Nº Revisão" width="22%">
+				<h:outputText value="#{historico.numeroRevisao}" />
+			</p:column>
+			<p:column headerText="Data da Revisão" width="8%">
+				<h:outputText value="#{historico.dataRevisao}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			<!-- <p:column headerText="Total Execução">
+				<h:outputText value="#{historico.valorTotalCustosExecucao}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Deslocamento">
+				<h:outputText value="#{historico.valorTotalCustosDesclocamento}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Operacional">
+				<h:outputText value="#{historico.valorTotalCustosOperacionais}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Segurança">
+				<h:outputText value="#{historico.valorTotalCustosSeguranca}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Administrativo">
+				<h:outputText value="#{historico.valorTotalCustosAdministrativos}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column> -->
+
+			<p:column headerText="Total Sem BDI/Comissão" width="10%">
+				<h:outputText value="#{historico.valorTotalSemBdiComissao}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total BDI/Comissão">
+				<h:outputText value="#{historico.valorTotalCustosBdiComissoes}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Após BDI/Comissão">
+				<h:outputText value="#{historico.valorTotalComBdiComissao}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Impostos">
+				<h:outputText value="#{historico.valorTotalImpostos}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Total Desconto">
+				<h:outputText value="#{historico.desconto}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Total Proposta">
+				<h:outputText value="#{historico.valorTotalDaProposta}">
+					<f:convertNumber currencySymbol="R$" type="currency" />
+				</h:outputText>
+			</p:column>
+			<f:facet name="footer">
+				<div align="left">
+					<p:commandButton 
+							id="toggler" 
+							styleClass="btn btn-yellow"
+							type="button" 
+							value="Colunas"	/>
+						<p:columnToggler datasource="tableHistoricoProposta" trigger="toggler" />
+				</div>
+			</f:facet>
+		</p:dataTable>
+		<br /><br />
+		
+		<p:panelGrid id="teste">
+		<p:commandButton 
+			id="btHistoricoVoltarTela" 
+			value="Voltar"
+			action="#{propostaBean.voltaHistorico()}" 
+			immediate="true"
+			update="@form" 
+			styleClass="btn btn-yellow"
+			rendered="#{propostaBean.proposta.getId()==null? 'false':'true'}">
+		</p:commandButton>
+		</p:panelGrid>
+		
+		
+				<p:blockUI block="teste" trigger="btHistoricoVoltarTela">
+					<p:graphicImage name="img/ajaxloadingbar.gif" />
+				</p:blockUI>
+			</p:panel>
+		</div>
+	</p:panel>
+	
+</html>

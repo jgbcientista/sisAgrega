@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TemplateGenericoPrincipal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="341"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<parameter name="CUSTOFINANCEIRO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{proposta.listarCustoPlanilhaFinanceira}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_proposta.`numeroProposta` AS numeroProposta,
+     tb_proposta.`objeto` AS objeto,
+     tb_proposta.`dataEnvioAoCliente` AS dataEnvioAoCliente,
+     tb_proposta.`dataInclusao` AS dataInclusao,
+     tb_proposta.`cliente` AS cliente,
+     tb_proposta.`dataContratacao` AS dataContratacao,
+     tb_proposta.`contato` AS contato,
+     tb_proposta.`tipoProposta` AS tipoProposta,
+     tb_proposta.`nomeProjeto` AS nomeProjeto,
+     tb_proposta.`ID_UF` AS estado,
+     tb_proposta.`ID_CIDADE` AS cidade,
+     tb_proposta.`statusContratada` AS statusContratada,
+     tb_proposta.`status` AS status,
+     tb_proposta.`valorTotalComBdiComissao` AS valorTotalComBdiComissao,
+     tb_proposta.`valorTotalCustosAdministrativos` AS valorTotalCustosAdministrativos,
+     tb_proposta.`valorTotalCustosBdiComissoes` AS valorTotalCustosBdiComissoes,
+     tb_proposta.`valorTotalCustosDesclocamento` AS valorTotalCustosDesclocamento,
+     tb_proposta.`valorTotalCustosExecucao` AS valorTotalCustosExecucao,
+     tb_proposta.`valorTotalCustosOperacionais` AS valorTotalCustosOperacionais,
+     tb_proposta.`valorTotalCustosSeguranca` AS valorTotalCustosSeguranca,
+     tb_proposta.`valorTotalDaProposta` AS valorTotalDaProposta,
+     tb_proposta.`valorTotalImpostos` AS valorTotalImpostos,
+     tb_proposta.`valorTotalPrecificacao` AS valorTotalPrecificacao,
+     tb_proposta.`valorTotalSemBdiComissao` AS valorTotalSemBdiComissao,
+     tb_proposta.`id` AS id
+FROM
+     `tb_proposta` tb_proposta
+WHERE
+     id = 1]]>
+	</queryString>
+	<field name="proposta.numeroProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="listarTipoItemValor" class="java.util.Collection"/>
+	<field name="proposta.genrValidade" class="java.lang.String"/>
+	<field name="proposta.textPropostaGenerica" class="java.lang.String"/>
+	<field name="proposta.listarCustoPlanilhaFinanceira" class="java.util.Collection"/>
+	<field name="proposta.listarTipoItemPropostaFinanceira" class="java.util.Collection"/>
+	<title>
+		<band height="102">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="80" width="555" height="19" isRemoveLineWhenBlank="true" uuid="76adb44a-a76d-4859-8cb9-b2bd29af36c7">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemValor}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubApresentacaoPropostaFinaceneira.jasper"]]></subreportExpression>
+			</subreport>
+			<image>
+				<reportElement x="2" y="2" width="97" height="78" uuid="b4c9797e-eb92-4b48-a5e6-ae8c60280701"/>
+				<imageExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\img\\cabecalho.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="2" y="78" width="553" height="1" forecolor="#339900" uuid="036fc68c-fbe5-4c12-8210-7d4d623141d2"/>
+			</line>
+			<rectangle>
+				<reportElement mode="Opaque" x="86" y="1" width="32" height="76" forecolor="#FFFFFF" uuid="9f37117b-bd1b-47d1-9a18-3d92d9952210"/>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="68">
+			<staticText>
+				<reportElement x="2" y="44" width="554" height="20" forecolor="#009900" uuid="4cf0b9a5-e9e2-41d3-a6ba-8f35f9bb2389"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Financeira]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="64" width="555" height="1" forecolor="#339900" uuid="ad607356-c667-40d2-9105-51420021500c"/>
+			</line>
+			<image hAlign="Center">
+				<reportElement x="1" y="2" width="81" height="62" uuid="bfb55b9c-62c1-4fa5-bef6-9e4c62351c12"/>
+				<imageExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\img\\cabecalho.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement mode="Opaque" x="71" y="2" width="23" height="60" uuid="6acf5e74-1e3a-4a56-8b74-d2ce577a03b5"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="484" splitType="Stretch">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="27" width="555" height="19" isRemoveLineWhenBlank="true" uuid="4a9dadf2-9e46-42e0-ad52-b6ecf5067c71">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemValor}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubDadosFinanceiros2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="3" width="555" height="19" isRemoveLineWhenBlank="true" uuid="413a3594-060a-4265-9ee6-5afbf5cde7ac">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemValor}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubDadosFinanceiros.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="139" width="528" height="66" uuid="867c264c-bcb1-44e3-a57c-eca499a26244"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Todas as informações, amostras ou documentos entregues pela CONTRATANTE à AGREGA serão considerados confidenciais, sendo que qualquer forma de divulgação a terceiros só ocorrerá com autorização escrita da mesma. Excetua-se da presente regra as solicitações de informações feitas por parte de órgãos públicos responsáveis pela fiscalização das atividades da AGREGA Consultores Ltda., ou com autoridade legal para solicitar o acesso aos processos.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="119" width="244" height="15" uuid="9d5afe17-95b6-4c30-a613-d9985d58da38"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[8 - SIGILO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="216" width="244" height="15" uuid="cf8db092-c76d-4588-aeda-21c669f3a48e"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[9 - VALIDADE DA PROPOSTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="416" width="198" height="17" uuid="560def5d-e12c-4728-bd37-287c412fc016"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia da Silva Guimarães]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="432" width="198" height="22" uuid="0ce469f0-1961-40bf-9980-c7fe72785ca8"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Diretora Técnica Executiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="327" y="431" width="198" height="22" uuid="6ab18536-fe32-4f7c-9c73-fc1bedcae43a"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Diretor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="327" y="415" width="198" height="17" uuid="d75eb886-10b0-4482-b790-0dec73337771"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Carlos Fernando Pina Caires]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="12" y="235" width="528" height="20" uuid="9d2b4cb6-dbf3-47ad-99e5-26141f9ace04"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Esta proposta tem validade de " + $F{proposta.genrValidade}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement positionType="Float" x="443" y="138" width="54" height="15" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" uuid="bda92b0f-c293-412a-bee5-afa0401d30d7"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="442" y="139" width="49" height="15" uuid="29759b62-09d6-42f4-88f8-9b8f376c699a"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[AGREGA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement positionType="Float" x="341" y="178" width="148" height="15" forecolor="#FFFFFF" uuid="28aee133-682d-40ce-8bdf-248ab0fc9c90"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="342" y="177" width="148" height="15" uuid="abcfdc30-b3bc-417e-ac8b-4809758c501a"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[AGREGA Consultores Ltda.]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="74" width="554" height="19" isRemoveLineWhenBlank="true" uuid="2aaf932e-2433-47f0-8804-f949b5e13d4c">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemValor}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubDadosFinanceirosPlanilhaCusto.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="51" width="555" height="19" isRemoveLineWhenBlank="true" uuid="df2a5f42-01aa-43fe-ba43-fa5c08517e65">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{proposta.listarTipoItemPropostaFinanceira}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubReporListaFinanceira.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="1" y="97" width="555" height="19" isRemoveLineWhenBlank="true" uuid="a7bab029-f500-433b-8461-6d2cb855f967">
+					<printWhenExpression><![CDATA[$P{RENDER_CUSTOS}]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listarTipoItemValor}, false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubDadosFinanceiro3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="55">
+			<line>
+				<reportElement x="1" y="2" width="555" height="1" forecolor="#339900" uuid="cc2536c2-3456-42cd-afad-3507fd9155aa"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="28" width="555" height="11" uuid="35e486c0-35a9-4497-8296-1a54ed4de5d8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="16" width="555" height="11" forecolor="#000000" uuid="b299bd64-c6b9-418a-a689-82326b953a07"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="6" width="555" height="10" uuid="b2e50c0b-f452-4199-99be-421310c8202f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="1" y="39" width="554" height="15" forecolor="#000000" uuid="4a324ddf-755d-42bd-a360-eb1eca784fde"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

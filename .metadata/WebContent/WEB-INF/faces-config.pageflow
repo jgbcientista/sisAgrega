@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15256206654070" configfile="/agregawebapp/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="paginas/login.xhtml" x="122" y="178" id="pf15256207675191" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15256207675192" path="/paginas/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/home.xhtml" x="338" y="178" id="pf15256207675193" referenceLink="//@navigationRule.21/@navigationCase.0/@toViewId|" inlinks="pf15256207675192 pf15256207675194" path="/paginas/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="7090" id="pf15256207675195" referenceLink="//@navigationRule.48/@fromViewId|" outlinks="pf15256207675196 pf15256207675197 pf15256207675198 pf15256207675199 pf152562076751910 pf152562076751911 pf152562076751912 pf152562076751913 pf152562076751914 pf152562076751915 pf152562076751916 pf152562076751917 pf152562076751918 pf152562076751919 pf152562076751920 pf152562076751921 pf152562076751922 pf152562076751923 pf152562076751924 pf152562076751925 pf15256207675194 pf152562076751926 pf152562076751927 pf152562076751928 pf152562076751929 pf152562076751930 pf152562076751931 pf152562076751932 pf152562076751933 pf152562076751934 pf152562076751935 pf152562076751936 pf152562076751937 pf152562076751938 pf152562076751939 pf152562076751940 pf152562076751941 pf152562076751942 pf152562076751943 pf152562076751944 pf152562076751945 pf152562076751946 pf152562076751947 pf152562076751948 pf152562076751949 pf152562076751950 pf15306369320633 pf15331837465264" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/controle_acesso_usuario.xhtml" x="338" y="562" id="pf152562076752051" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15256207675196" path="/paginas/controle_acesso/controle_acesso_usuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/controle_acesso_perfil.xhtml" x="338" y="946" id="pf152562076752052" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15256207675197" path="/paginas/controle_acesso/controle_acesso_perfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/controle_acesso_associacao.xhtml" x="338" y="1330" id="pf152562076752053" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf15256207675198" path="/paginas/controle_acesso/controle_acesso_associacao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/usuario.xhtml" x="338" y="1714" id="pf152562076752054" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" inlinks="pf15256207675199 pf152562076751910" path="/paginas/controle_acesso/usuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/ConsultarUsuario.xhtml" x="338" y="2098" id="pf152562076752055" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" inlinks="pf152562076751911" path="/paginas/controle_acesso/ConsultarUsuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/perfil.xhtml" x="338" y="2482" id="pf152562076752056" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf152562076751912" path="/paginas/controle_acesso/perfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/controle_acesso/consultarAssociarUsuarioXPerfil.xhtml" x="338" y="2866" id="pf152562076752057" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf152562076751913" path="/paginas/controle_acesso/consultarAssociarUsuarioXPerfil.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/servico/manter_servico.xhtml" x="338" y="3250" id="pf152562076752058" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf152562076751914" path="/paginas/servico/manter_servico.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/servico/Servico.xhtml" x="338" y="3634" id="pf152562076752059" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" inlinks="pf152562076751915 pf152562076751916" path="/paginas/servico/Servico.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/servico/ConsultarServico.xhtml" x="338" y="4018" id="pf152562076752060" referenceLink="//@navigationRule.12/@navigationCase.0/@toViewId|" inlinks="pf152562076751917" path="/paginas/servico/ConsultarServico.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/recurso/manter_recurso.xhtml" x="338" y="4402" id="pf152562076752061" referenceLink="//@navigationRule.13/@navigationCase.0/@toViewId|" inlinks="pf152562076751918" path="/paginas/recurso/manter_recurso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/recurso/Recurso.xhtml" x="338" y="4786" id="pf152562076752062" referenceLink="//@navigationRule.15/@navigationCase.0/@toViewId|" inlinks="pf152562076751919 pf152562076751920" path="/paginas/recurso/Recurso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/recurso/ConsultarRecurso.xhtml" x="338" y="5170" id="pf152562076752063" referenceLink="//@navigationRule.16/@navigationCase.0/@toViewId|" inlinks="pf152562076751921" path="/paginas/recurso/ConsultarRecurso.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/profissional/manter_profissional.xhtml" x="338" y="5554" id="pf152562076752064" referenceLink="//@navigationRule.17/@navigationCase.0/@toViewId|" inlinks="pf152562076751922" path="/paginas/profissional/manter_profissional.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/profissional/Profissional.xhtml" x="338" y="5938" id="pf152562076752165" referenceLink="//@navigationRule.19/@navigationCase.0/@toViewId|" inlinks="pf152562076751923 pf152562076751924" path="/paginas/profissional/Profissional.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/profissional/ConsultarProfissional.xhtml" x="338" y="6322" id="pf152562076752166" referenceLink="//@navigationRule.20/@navigationCase.0/@toViewId|" inlinks="pf152562076751925" path="/paginas/profissional/ConsultarProfissional.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/cliente/manter_cliente.xhtml" x="338" y="6706" id="pf152562076752167" referenceLink="//@navigationRule.22/@navigationCase.0/@toViewId|" inlinks="pf152562076751926" path="/paginas/cliente/manter_cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/cliente/Cliente.xhtml" x="338" y="7090" id="pf152562076752168" referenceLink="//@navigationRule.24/@navigationCase.0/@toViewId|" inlinks="pf152562076751927 pf152562076751928" path="/paginas/cliente/Cliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/cliente/ConsultarCliente.xhtml" x="338" y="7474" id="pf152562076752169" referenceLink="//@navigationRule.25/@navigationCase.0/@toViewId|" inlinks="pf152562076751929" path="/paginas/cliente/ConsultarCliente.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/fornecedor/manter_fornecedor.xhtml" x="338" y="7858" id="pf152562076752170" referenceLink="//@navigationRule.26/@navigationCase.0/@toViewId|" inlinks="pf152562076751930" path="/paginas/fornecedor/manter_fornecedor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/fornecedor/Fornecedor.xhtml" x="338" y="8242" id="pf152562076752171" referenceLink="//@navigationRule.28/@navigationCase.0/@toViewId|" inlinks="pf152562076751931 pf152562076751932" path="/paginas/fornecedor/Fornecedor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/fornecedor/ConsultarFornecedor.xhtml" x="338" y="8626" id="pf152562076752172" referenceLink="//@navigationRule.29/@navigationCase.0/@toViewId|" inlinks="pf152562076751933" path="/paginas/fornecedor/ConsultarFornecedor.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/manter_proposta.xhtml" x="338" y="9010" id="pf152562076752173" referenceLink="//@navigationRule.30/@navigationCase.0/@toViewId|" inlinks="pf152562076751934" path="/paginas/proposta/manter_proposta.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/Proposta.xhtml" x="338" y="9394" id="pf152562076752174" referenceLink="//@navigationRule.33/@navigationCase.0/@toViewId|" inlinks="pf152562076751935 pf152562076751937" path="/paginas/proposta/Proposta.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/Precificacao.xhtml" x="338" y="9778" id="pf152562076752175" referenceLink="//@navigationRule.32/@navigationCase.0/@toViewId|" inlinks="pf152562076751936" path="/paginas/proposta/Precificacao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/ConsultarProposta.xhtml" x="338" y="10162" id="pf152562076752176" referenceLink="//@navigationRule.34/@navigationCase.0/@toViewId|" inlinks="pf152562076751938" path="/paginas/proposta/ConsultarProposta.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/construcao/Construcao.xhtml" x="338" y="10546" id="pf152562076752177" referenceLink="//@navigationRule.35/@navigationCase.0/@toViewId|" inlinks="pf152562076751939" path="/paginas/construcao/Construcao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/construcao/Manutencao.xhtml" x="338" y="10930" id="pf152562076752178" referenceLink="//@navigationRule.36/@navigationCase.0/@toViewId|" inlinks="pf152562076751940" path="/paginas/construcao/Manutencao.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/contrato/manter_contrato.xhtml" x="338" y="11314" id="pf152562076752179" referenceLink="//@navigationRule.37/@navigationCase.0/@toViewId|" inlinks="pf152562076751941" path="/paginas/contrato/manter_contrato.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/contrato/Contrato.xhtml" x="338" y="11698" id="pf152562076752280" referenceLink="//@navigationRule.38/@navigationCase.0/@toViewId|" inlinks="pf152562076751942" path="/paginas/contrato/Contrato.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/contrato/ConsultarContrato.xhtml" x="338" y="12082" id="pf152562076752281" referenceLink="//@navigationRule.39/@navigationCase.0/@toViewId|" inlinks="pf152562076751943" path="/paginas/contrato/ConsultarContrato.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/projeto/manter_projeto.xhtml" x="338" y="12466" id="pf152562076752282" referenceLink="//@navigationRule.40/@navigationCase.0/@toViewId|" inlinks="pf152562076751944" path="/paginas/projeto/manter_projeto.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/projeto/projeto.xhtml" x="338" y="12850" id="pf152562076752283" referenceLink="//@navigationRule.41/@navigationCase.0/@toViewId|" inlinks="pf152562076751945" path="/paginas/projeto/projeto.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/projeto/relatorio/manter_relatorio.xhtml" x="338" y="13234" id="pf152562076752284" referenceLink="//@navigationRule.42/@navigationCase.0/@toViewId|" inlinks="pf152562076751946" path="/paginas/projeto/relatorio/manter_relatorio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/plano/manter_plano.xhtml" x="338" y="13618" id="pf152562076752285" referenceLink="//@navigationRule.43/@navigationCase.0/@toViewId|" inlinks="pf152562076751947" path="/paginas/plano/manter_plano.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/financeiro_contabilidade/manter_financeiro.xhtml" x="338" y="14002" id="pf152562076752286" referenceLink="//@navigationRule.44/@navigationCase.0/@toViewId|" inlinks="pf152562076751948" path="/paginas/financeiro_contabilidade/manter_financeiro.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/grafico/manterGraficoProposta.xhtml" x="338" y="14386" id="pf152562076752287" referenceLink="//@navigationRule.45/@navigationCase.0/@toViewId|" inlinks="pf152562076751949" path="paginas/proposta/grafico/manterGraficoProposta.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/proposta/relatorios/manteRelatorioPropostas.xhtml" id="pf152562076752288" referenceLink="//@navigationRule.46/@navigationCase.0/@toViewId|" inlinks="pf152562076751950" path="paginas/proposta/relatorio/manteRelatorioPropostas.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/mensagem/manter_mensagem.xhtml" id="pf15306369320634" referenceLink="//@navigationRule.48/@navigationCase.0/@toViewId|" inlinks="pf15306369320633" path="/paginas/mensagem/manter_mensagem.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="paginas/parametrizacao/manter_CeletistaMensalista.xhtml" id="pf15331837465295" referenceLink="//@navigationRule.48/@navigationCase.0/@toViewId|" inlinks="pf15331837465264" path="/paginas/parametrizacao/manter_CeletistaMensalista.xhtml"/>
+  <links id="pf15256207675192" target="pf15256207675193" source="pf15256207675191" outcome="pag_principal"/>
+  <links id="pf15256207675196" target="pf152562076752051" source="pf15256207675195" outcome="controle_acesso_usuario"/>
+  <links id="pf15256207675197" target="pf152562076752052" source="pf15256207675195" outcome="controle_acesso_perfil"/>
+  <links id="pf15256207675198" target="pf152562076752053" source="pf15256207675195" outcome="controle_acesso_associacao"/>
+  <links id="pf15256207675199" target="pf152562076752054" source="pf15256207675195" outcome="cadastro_usuario"/>
+  <links id="pf152562076751910" target="pf152562076752054" source="pf15256207675195" outcome="editar_usuario"/>
+  <links id="pf152562076751911" target="pf152562076752055" source="pf15256207675195" outcome="consultar_usuario"/>
+  <links id="pf152562076751912" target="pf152562076752056" source="pf15256207675195" outcome="editar_perfil"/>
+  <links id="pf152562076751913" target="pf152562076752057" source="pf15256207675195" outcome="associar_usuario_perfil"/>
+  <links id="pf152562076751914" target="pf152562076752058" source="pf15256207675195" outcome="negocio"/>
+  <links id="pf152562076751915" target="pf152562076752059" source="pf15256207675195" outcome="cadastro_servico"/>
+  <links id="pf152562076751916" target="pf152562076752059" source="pf15256207675195" outcome="editar_servico"/>
+  <links id="pf152562076751917" target="pf152562076752060" source="pf15256207675195" outcome="consultar_servico"/>
+  <links id="pf152562076751918" target="pf152562076752061" source="pf15256207675195" outcome="recurso"/>
+  <links id="pf152562076751919" target="pf152562076752062" source="pf15256207675195" outcome="cadastro_recurso"/>
+  <links id="pf152562076751920" target="pf152562076752062" source="pf15256207675195" outcome="editar_recurso"/>
+  <links id="pf152562076751921" target="pf152562076752063" source="pf15256207675195" outcome="consultar_recurso"/>
+  <links id="pf152562076751922" target="pf152562076752064" source="pf15256207675195" outcome="profissional"/>
+  <links id="pf152562076751923" target="pf152562076752165" source="pf15256207675195" outcome="cadastro_profissional"/>
+  <links id="pf152562076751924" target="pf152562076752165" source="pf15256207675195" outcome="editar_profissional"/>
+  <links id="pf152562076751925" target="pf152562076752166" source="pf15256207675195" outcome="consultar_profissional"/>
+  <links id="pf15256207675194" target="pf15256207675193" source="pf15256207675195" outcome="home"/>
+  <links id="pf152562076751926" target="pf152562076752167" source="pf15256207675195" outcome="cliente"/>
+  <links id="pf152562076751927" target="pf152562076752168" source="pf15256207675195" outcome="cadastro_cliente"/>
+  <links id="pf152562076751928" target="pf152562076752168" source="pf15256207675195" outcome="editar_cliente"/>
+  <links id="pf152562076751929" target="pf152562076752169" source="pf15256207675195" outcome="consultar_cliente"/>
+  <links id="pf152562076751930" target="pf152562076752170" source="pf15256207675195" outcome="fornecedor"/>
+  <links id="pf152562076751931" target="pf152562076752171" source="pf15256207675195" outcome="cadastro_fornecedor"/>
+  <links id="pf152562076751932" target="pf152562076752171" source="pf15256207675195" outcome="editar_fornecedor"/>
+  <links id="pf152562076751933" target="pf152562076752172" source="pf15256207675195" outcome="consultar_fornecedor"/>
+  <links id="pf152562076751934" target="pf152562076752173" source="pf15256207675195" outcome="proposta"/>
+  <links id="pf152562076751935" target="pf152562076752174" source="pf15256207675195" outcome="cadastro_proposta"/>
+  <links id="pf152562076751936" target="pf152562076752175" source="pf15256207675195" outcome="cadastro_precificacao"/>
+  <links id="pf152562076751937" target="pf152562076752174" source="pf15256207675195" outcome="editar_proposta"/>
+  <links id="pf152562076751938" target="pf152562076752176" source="pf15256207675195" outcome="consultar_proposta"/>
+  <links id="pf152562076751939" target="pf152562076752177" source="pf15256207675195" outcome="construcao"/>
+  <links id="pf152562076751940" target="pf152562076752178" source="pf15256207675195" outcome="manutencao"/>
+  <links id="pf152562076751941" target="pf152562076752179" source="pf15256207675195" outcome="contrato"/>
+  <links id="pf152562076751942" target="pf152562076752280" source="pf15256207675195" outcome="editar_contrato"/>
+  <links id="pf152562076751943" target="pf152562076752281" source="pf15256207675195" outcome="consultar_contrato"/>
+  <links id="pf152562076751944" target="pf152562076752282" source="pf15256207675195" outcome="consultar_projeto"/>
+  <links id="pf152562076751945" target="pf152562076752283" source="pf15256207675195" outcome="cadastro_projeto"/>
+  <links id="pf152562076751946" target="pf152562076752284" source="pf15256207675195" outcome="relatorio_projeto"/>
+  <links id="pf152562076751947" target="pf152562076752285" source="pf15256207675195" outcome="consultar_plano"/>
+  <links id="pf152562076751948" target="pf152562076752286" source="pf15256207675195" outcome="consultar_financeiro"/>
+  <links id="pf152562076751949" target="pf152562076752287" source="pf15256207675195" outcome="graficoProposta"/>
+  <links id="pf152562076751950" target="pf152562076752288" source="pf15256207675195" outcome="relatorioProposta"/>
+  <links id="pf15306369320633" target="pf15306369320634" source="pf15256207675195" outcome="mensagem_usuario"/>
+  <links id="pf15331837465264" target="pf15331837465295" source="pf15256207675195" outcome="celetistaMensalista"/>
+</pageflow:Pageflow>

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelCeletistaMensalista" style="border: none;" rendered="#{celetistaMensalistaBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel style="border: none;" id="idCelestina">
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>
+				<p:panelGrid columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:1px !important;">
+							<p:outputLabel value="Vigência"  title="pesquiar por período de vigência" style="margin-top: -27px;"/>
+							<p:outputLabel value="Inicio" />
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data incial"
+								pattern="dd/MM/yyyy"
+								value="#{celetistaMensalistaBean.filtro.dateCriacao}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>	
+						<p:column style="width:0px !important;">	
+							<p:outputLabel value="Fim" />
+							<p:calendar styleClass="componente-data-nova"
+								style="width:50px !important;"
+								placeholder="Data final"
+								pattern="dd/MM/yyyy"
+								value="#{celetistaMensalistaBean.filtro.dateCriacao}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>
+					</p:row>
+				</p:panelGrid> <br/>
+			</p:fieldset><br/>
+	 	
+		<div align="right">		 
+			<p:commandButton id="idBtPesquisar" 
+				styleClass="btn btn-green"
+				value="Pesquisar" style="width:125px !important;"
+				action="#{celetistaMensalistaBean.pesquisar()}" 
+				update="@form"
+				icon="fa fa-search">
+			</p:commandButton>
+			<p:commandButton id="novoCliente" 
+				value="Novo" style="width:112px !important;"
+				styleClass="btn btn-green"
+				action="#{celetistaMensalistaBean.novo()}" 
+				update="@form"
+				icon="fa fa-plus">
+			</p:commandButton>
+		</div><br/>
+		<p:outputLabel value="Parametros Celetista Mensalista" style="text-align:left; font-size: 16px;"/>
+		<p:dataTable id="paramCltMensal" styleClass="header-tabelas" 
+			value="#{celetistaMensalistaBean.listCltMensal}"
+			var="cltMes" 
+			emptyMessage="Nenhum Registro encontrado" 
+			rows="5" 
+			rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+			paginatorPosition="bottom" paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}">
+					
+			<p:column headerText="Codigo" width="5%" sortOrder="ASCENDING">
+				<h:outputText value="#{cltMes.cod}" />
+			</p:column>
+						
+			<p:column headerText="Data Ref." width="8%">
+				<h:outputText value="#{cltMes.dateCriacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Fgts" width="8%">
+				<h:outputText value="#{cltMes.fgts}" />
+			</p:column>
+			
+			<p:column headerText="RAT" width="8%">
+				<h:outputText value="#{cltMes.rat}" />
+			</p:column>
+			
+			<p:column headerText="Entidades" width="8%">
+				<h:outputText value="#{cltMes.entidades}" />
+			</p:column>
+			<p:column headerText="Multa Fgts" width="8%">
+				<h:outputText value="#{cltMes.multaFgts}" />
+			</p:column>
+			
+			<p:column headerText="INSS Patronal" width="10%">
+				<h:outputText value="#{cltMes.inssPatronal}" />
+			</p:column>
+			
+			<p:column headerText="Ajuda VT" width="10%">
+				<h:outputText value="#{cltMes.ajudaVt}" />
+			</p:column>
+			
+			<p:column headerText="Ajuda VA" width="10%">
+				<h:outputText value="#{cltMes.ajudaVa}" />
+			</p:column>
+			<p:column headerText="Status" width="15%">
+				<h:outputText value="#{cltMes.status}" />
+			</p:column>
+			
+			<p:column headerText="Acão" width="10%">
+				<div align="left">
+					<p:commandLink id="ver" 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tableClientes"
+					 	
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+							
+				 	<p:commandLink id="edit" 
+				 		immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tableClientes"
+					 	
+					 	style="text-decoration:underline;">
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					
+				</div>
+			</p:column>
+		</p:dataTable>
+				
+		<p:blockUI block="idCelestina" trigger="idBtPesquisar">
+			<p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+	</p:panel>
+	</div>
+</p:panel>	
+	<style>
+		.ui-fieldset-content td .input-block-level {
+		    width: 148px !important;
+		}
+	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</html>

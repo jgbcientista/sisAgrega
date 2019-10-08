@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.numeroProposta" class="java.lang.String"/>
+	<field name="proposta.numeroRevisao" class="java.lang.String"/>
+	<field name="proposta.objPrincTec" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="651" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="12" y="88" width="443" height="15" uuid="37ce9d52-a970-41b2-931d-82cea66461b6"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[DADOS E INFORMAÇÕES SOBRE A EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="108" width="83" height="15" uuid="329c5939-7f69-4b06-81dc-ed7a3cdb6365"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Razão Social:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="122" width="38" height="15" uuid="813d32d8-de60-4a49-97d3-7da4198e578f"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CNPJ: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="136" width="110" height="15" uuid="451b3e1e-0d46-42d9-b592-8285db7a36e7"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Inscrição Municipal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="150" width="105" height="15" uuid="8843f1d8-eec2-4564-bfa9-68cde118cc77"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Inscrição Estadual:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="164" width="125" height="15" uuid="c01d3e66-f90f-4dda-b9a0-a91a9a36aa92"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Inscrição no CREA-BA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="178" width="60" height="15" uuid="c23a35f2-9806-4748-9e55-81c63923d70a"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="192" width="70" height="15" uuid="bc4fbc36-92b1-422b-b1a6-452afab90715"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Home Page:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="206" width="40" height="15" uuid="f0d1e38f-8c66-4061-b931-252dcd77cd69"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[E-mail: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="220" width="60" height="15" uuid="1166f0cc-23f7-4bd9-9935-273dac8869bf"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Telefones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="94" y="108" width="250" height="15" uuid="83680e81-f562-43fc-9cfa-3a24bac29a22"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[AGREGA Consultores Ltda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="49" y="122" width="118" height="15" uuid="7cc6e691-dea8-4702-841b-80be2d440e62"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ 09.220.626/0001-88]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="121" y="136" width="110" height="15" uuid="193417f8-1012-40d8-8988-6e83c0922535"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[293.834/001-15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="116" y="150" width="115" height="15" uuid="287e7ce4-64c4-454e-a283-7bd207450cdb"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ isento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="136" y="164" width="95" height="15" uuid="8e86626a-750c-4684-8ccf-cae3fadefe29"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ 19.931]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="71" y="178" width="419" height="15" uuid="64fac44f-1636-466c-ba26-274a23980a58"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Rua Dr. José Peroba- Edf. Elite Comercial, 325, Sala 1403 –CEP: 41770-235]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="81" y="192" width="419" height="15" uuid="876addc8-b4ec-4b3c-a94a-04fb7bd9933a"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[http://www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="52" y="206" width="419" height="15" uuid="e2491308-4fff-40c7-a2e8-c6dd31162ab2"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="71" y="220" width="419" height="15" uuid="9d038a1f-19b8-4066-a3eb-0bb36f6f6ae6"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(71) 3106-0126  /  98638-1980  /  99161-0802]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="282" width="529" height="91" uuid="175b6808-e71c-47c7-b207-4a9dc8a877a8"/>
+				<box topPadding="1" leftPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[qualificados e experientes com o objetivo de prestar serviços especializados em Qualidade/Produtividade; Saúde; Segurança; Meio Ambiente, Higiene Ocupacional e Gestão de Projetos de Engenharia
+
+Somos uma empresa de desenvolvimento e implementação das melhores práticas de Gestão de Sistemas Empresariais; Gerenciamento de Projetos; Treinamento e Capacitação, focados em fornecer soluções confiáveis, inovadoras e sustentáveis.
+
+Nossos projetos respeitam as necessidades e estrutura de nossos clientes.
+
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="23" y="267" width="150" height="15" uuid="aefda74c-7de5-45f7-9f1f-56205f2be867"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Agrega  Consultores  Ltda. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="174" y="267" width="367" height="15" uuid="72c2e9ac-1bd3-4363-aad6-617f8b24cdb2"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[é  uma  empresa  de  consultoria  empresarial, formada  por  profissionais]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="267" width="10" height="15" uuid="83f43652-c07f-4932-9aa4-5e49bc511cef"/>
+				<box leftPadding="0"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="248" width="82" height="15" uuid="e642a4d0-3d6a-4449-8ca3-49dfb2e025fb"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[A EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="401" width="529" height="106" uuid="a72d6244-e4fd-44b4-bf28-70b2d22c0299"/>
+				<box topPadding="0" leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[A Agrega Consultores Ltda. considera a valorização do ser humano, o comportamento ético, a educação e a prática do desenvolvimento sustentável a base para sua atuação e estabeleceu como princípios básicos:
+
+   Respeito às Pessoas
+   Ética
+   Transparência
+   Competência
+   Compromisso com a sustentabilidade
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="13" y="380" width="82" height="15" uuid="8f2720aa-3283-4573-b091-2ba29a665c32"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[VALORES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="13" y="535" width="528" height="41" uuid="5b009895-cbe2-4650-b68c-e52aa5081b03"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Prestar serviços de consultoria empresarial, treinamento e capacitação de pessoas, implantação e manutenção das melhores práticas de Gestão de Sistemas e Projetos, tendo como principal compromisso a ética e o desenvolvimento sustentável.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="13" y="515" width="82" height="15" uuid="a951bb64-2128-4741-b0b3-ed751e552baa"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[MISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="8" width="109" height="14" uuid="1a8259bb-4dcd-406c-93d9-cfad2af60437"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proposta Tecnica:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="124" y="8" width="377" height="14" uuid="5b8196d4-abc9-4d15-9f38-2dacb8c6e679"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="39" width="443" height="15" uuid="7e182956-7254-4bd6-b576-29373d411256"/>
+				<box leftPadding="0"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[OBJETIVO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="13" y="60" width="527" height="16" uuid="4dac8bd9-f48f-4119-b237-5674e3ecc16e"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.objPrincTec}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="13" y="585" width="82" height="15" uuid="11e7423b-a7ab-4733-a7cf-9f4ea93dd2c0"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[VISÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="14" y="609" width="527" height="26" uuid="a236457b-5926-4cf9-80a9-5037c36eedf1"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ser reconhecida como uma empresa fornecedora de soluções confiáveis, inovadoras e que traz valor para os clientes e parceiros.
+]]></text>
+			</staticText>
+		</band>
+		<band height="688">
+			<staticText>
+				<reportElement x="10" y="269" width="443" height="15" uuid="d4a5f1ff-c9db-4d69-b913-e2873f433144"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia da Silva Guimarães]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="156" width="443" height="15" uuid="5ebcab30-c82c-4536-a1ec-d4e7d6bf7986"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[SÓCIOS GESTORES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="397" width="384" height="139" uuid="30ff2168-e8b9-4d79-90cf-c41893825e0f"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BRASKEM
+BRAZUL Transporte de Veículos
+COELBA– Companhia de Eletricidade do Estado da Bahia
+FUNDAÇÃO JOSÉ SILVEIRA
+MONSANTO DO BRASIL LTDA
+HOTEL TRANSAMERICA
+TERMOVERDE
+AB ENERGY DO BTASIL LTDA
+LOGISTCS
+TEGMA
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="172" y="216" width="140" height="15" uuid="fc1720d4-897d-4b45-a792-b9418306d35c"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Agrega Consultores Ltda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="286" width="528" height="82" uuid="773ee058-c920-4a78-a02b-68849f341198"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Graduação/Especialização: Bacharel em Química (UFBA), com especialização em Química Analítica Aplicada, Tecnologias de Gerenciamento Ambiental para Indústria e em Gestão Responsável para a Sustentabilidade.
+Sócia Responsável Operacional da
+Registro CRQ-BA: 071000-50/7ª Região
+E-mail: adeliaguimaraes@agregaconsultores.com.br
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="184" y="324" width="140" height="15" uuid="040f5857-036e-41f5-a6f5-f99f9d9fccfd"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Agrega Consultores Ltda.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="378" width="443" height="15" uuid="351477ff-e01c-43f7-aef7-2e72895498c2"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[PRINCIPAIS CLIENTES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="190" width="528" height="71" uuid="705549a6-33e1-40d8-bebe-dd742eb249de"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Graduação/especialização: Engenheiro Químico, com especialização em Engenharia de Segurança do Trabalho
+Sócio Responsável Técnico pela
+Registro CREA-BA: 63.505
+E-mail: fernandopina@agregaconsultores.com.br
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="174" width="443" height="15" uuid="e9d0de02-84f2-4bf8-b31d-3f15a2ecc3a3"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Carlos Fernando Pina Caires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="10" y="13" width="443" height="15" uuid="bb78dbc9-edaa-40e8-946c-a1046fab8c84"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[POLITICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="34" width="527" height="26" uuid="718cbc61-225c-41d7-88dc-3378c623dae1"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[A Agrega Consultores,  acredita que a base para que as organizações e a sociedade alcancem a excelência está na educação, no conhecimento e principlamente no preparo profissional das pessoas.
+ ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="22" y="34" width="114" height="13" forecolor="#FFFFFF" uuid="45a8d382-ddbc-42be-a6ec-3cf6c45fce60"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="24" y="34" width="113" height="15" uuid="60d3626b-b649-4955-bfa4-cef37c939111"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Agrega  Consultores ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="24" y="63" width="515" height="81" uuid="7a8e5a7b-d8e4-4c0d-bd8f-d7758c22e0bc"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[- Trabalhar com profissionais qualificados, atualizados, inovadores e motivados;
+- Atuar de forma independente e imparcial;
+- Atender as expectativas e necessidade dos clientes;
+- Atender a requisitos normativos e estatuário e outros requisitos voluntários aplicáveis aos seu negócio;
+- Atuar de forma preventiva nas questões de segurança e saúde de seus colaboradores e clientes;
+- Atuar para garantir o uso racional dos recursos naturais;
+- Promover a melhoria de seus colaboradores;
+- Tornar os requisitos regulatórios, da qualidade, do meio ambiente e da segurança química fatores de competitividade para nossos Clientes.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

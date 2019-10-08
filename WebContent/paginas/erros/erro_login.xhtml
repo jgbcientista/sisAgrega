@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xml:lang="pt-br">
+<head>
+<link rel="stylesheet"
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/bootstrap.min.css" />
+<link
+	href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="barra-top access"></div>
+
+	<div class="container" id="slogan-login">
+		<div class="header" id="header-login">
+			<h1>
+				<img
+					src="#{facesContext.externalContext.requestContextPath}/resources/img/logo-login-arce.png"
+					alt="#{msgs['alt.logo.pj.arce']}" />
+			</h1>
+<!-- 			<p>Agência Reguladora de Serviços Públicos Delegados dos Estado do Ceará</p> -->
+			<p class="logo">#{msgs['label.nome.sistema']}</p>
+			<p>
+				<small>#{msgs['label.versao.sistema']}</small>
+			</p>
+		</div>
+		<!-- .header -->
+	</div>
+	<!-- .container  -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="span4 offset4">
+
+				<div class="alert alert-error text-center">
+					<p>
+						<strong>Usuário e/ou senha inválidos.</strong>
+					</p>
+					<p>
+						<a href="javascript:history.go(-1);" class="btn btn-small btn-warning" title="Tentar Novamente">Tentar Novamente</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

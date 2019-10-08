@@ -1,0 +1,30 @@
+<ui:composition template="/paginas/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<ui:define name="principal">
+		<div class="container">
+			<h:form id="form-funcao" prependId="false">
+				<ui:decorate template="/paginas/templates/templateinclusao.xhtml">
+					<ui:param name="bean" value="#{recursoBean}" />
+					
+					<ui:define name="titulo">
+						<h:outputText class="titulo-detalhe" value="Modulo Recursos" rendered="#{recursoBean.pesquisar and !recursoBean.novo}" style="margin-left:35px;" />	
+						<h:outputText class="titulo-detalhe" value="CADASTRAR RECURSO" rendered="#{recursoBean.novo and !recursoBean.pesquisar and !clienteBean.editar }" />
+						<h:outputText class="titulo-detalhe" value="EDITAR CADASTRO DE RECURSO" rendered="#{recursoBean.editar and !recursoBean.pesquisar}" />
+						<h:outputText class="titulo-detalhe" value="VISUALIZAR CADASTRO DE RECURSOS" rendered="#{recursoBean.visualizar and !recursoBean.pesquisar}" />
+											
+					</ui:define>
+					
+					<ui:define name="formulario">
+					<ui:include src="/paginas/recurso/ConsultarRecurso.xhtml" />
+					<ui:include src="/paginas/recurso/Recurso.xhtml" />
+					</ui:define>
+				</ui:decorate>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ASSINATURA" class="java.lang.String"/>
+	<parameter name="FUNC_CARGO" class="java.lang.String"/>
+	<parameter name="RENDER" class="java.lang.Boolean"/>
+	<parameter name="PLANFINANCEIRA" class="java.util.Collection"/>
+	<parameter name="TITULO" class="java.lang.String"/>
+	<parameter name="DESCRICAO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.listarTipoItemPropostaTecFinanceira" class="java.util.Collection"/>
+	<field name="proposta.descPlanFin" class="java.lang.Double"/>
+	<field name="proposta.valorTotalCustoPlanilhaFinanceira" class="java.lang.Double"/>
+	<field name="proposta.vlrNegTotalPlanFinanceira" class="java.lang.Double"/>
+	<field name="proposta.listarCustoPlanilhaFinanceira" class="java.util.Collection"/>
+	<variable name="total" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band height="75">
+			<textField>
+				<reportElement positionType="Float" x="7" y="14" width="316" height="15" uuid="de73c432-07d3-4b5a-b283-5821e9778845"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="7" y="40" width="316" height="15" uuid="53c851b4-5818-4bb1-a7dd-3adfb19a9bf1"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASSINATURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="7" y="55" width="316" height="15" uuid="5700382b-18b1-4ad1-a379-aff92ecd7d01"/>
+				<textElement>
+					<font fontName="Arial" size="11" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FUNC_CARGO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="150">
+			<textField>
+				<reportElement positionType="Float" x="7" y="93" width="316" height="15" uuid="f311e9ca-d9c0-4c99-9bb5-545d5e47cec3"/>
+				<textElement>
+					<font fontName="Arial" size="11" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FUNC_CARGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="7" y="78" width="316" height="15" uuid="e63b9edc-732c-4879-9bec-2b3ef8b12efa"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ASSINATURA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="7" y="52" width="316" height="15" uuid="1b187f2f-80b7-4f65-80f1-17ebfe23e9f4"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="3" y="0" width="536" height="19" isPrintWhenDetailOverflows="true" uuid="1e0195ce-60cd-42e6-8e26-807d04e2d4ed"/>
+				<subreportParameter name="DESCONTOPLANFIN">
+					<subreportParameterExpression><![CDATA[$F{proposta.descPlanFin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{PLANFINANCEIRA},false)]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SubFinanceiraTecnicaLista_ver1-0_Planilha.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

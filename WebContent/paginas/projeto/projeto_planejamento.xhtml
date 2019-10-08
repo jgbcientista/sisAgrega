@@ -1,0 +1,149 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		<div align="center">
+	
+<p:scrollPanel style="width:100%">
+	<p:dataTable styleClass="header-tabelas" 
+			rendered="#{projetoBean.exibirListPorProjeto}"
+			var="item"
+			id="projPlanejarVarios" 
+			value="#{projetoBean.listarProjetosByFiltro}"
+			summary="true"
+			style="width:100%"
+			rowKey="#{item.id}"
+			emptyMessage="Nenhum Registro encontrado" 
+			rows="10"
+			rowsPerPageTemplate="10,15,20" 
+			paginatorAlwaysVisible="true"
+			paginatorPosition="bottom" 
+			paginator="true" 
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+			sortBy="#{item.numeroProjetoAgrega}" 
+			sortOrder="DESCENDING">
+			
+			<p:column headerText="Nº O.S" sortBy="#{item.numeroProjetoAgrega}">
+				<center>
+					<p:outputLabel value="#{item.ordemServico.numeroOS}" />
+				</center>
+			</p:column>
+   			
+			<p:column headerText="Nº Proj. Agrega" sortBy="#{item.numeroProjetoAgrega}">
+				<center>
+					<p:outputLabel value="#{item.numeroProjetoAgrega}" style="width:150px !important;"/>
+				</center>
+			</p:column>	
+			
+		   	<p:column width="5%" headerText="Status" >
+	             <center> 
+	             	<h:outputText value="#{item.status.nome}"/>
+	             </center>
+	        </p:column>
+			
+			<p:column headerText="Profisional de EPI">
+				<p:selectOneMenu  
+					style="width:210px !important;" 
+					value="#{item.planejamento.profissionalEPI.id}" >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+					<p:ajax event="change"/>
+				</p:selectOneMenu>	
+			</p:column>
+				
+		
+				<p:column headerText="Profisional de Mapas">
+					<p:selectOneMenu  
+						style="width:210px !important;"
+						value="#{item.planejamento.profissionalMapas.id}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+
+				<p:column headerText="Profisional de EV/CTGAL">
+					<p:selectOneMenu  
+						style="width:210px !important;"
+						value="#{item.planejamento.profissionalEVCTGAL.id}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+				
+				<p:column headerText="Profisional de Verificação">
+					<p:selectOneMenu  
+						style="width:180px !important;"
+						value="#{item.planejamento.profissionalVerificacao.id}" >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<p:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column headerText="D. Início Planej.">
+					<p:calendar 
+						id="idPlanejarDtInicioCampo" 
+						style="width:20px !important;"
+						value="#{item.planejamento.dtInicioPlanejamento}">
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+				</p:column>
+				
+				<p:column headerText="D. Fim Planej.">
+					<p:calendar 
+						id="idPlanejarDtFimCampo" 
+						style="width:20px !important;"
+						value="#{item.planejamento.dtfimPlanejamento}">
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+				</p:column>
+				
+			<p:column headerText="D. Entrega">
+				<p:calendar styleClass="componente-data-nova-pro"
+					id="idDtFimPla" 
+					pattern="dd/MM/yyyy"
+					style="width:20px !important;"
+					value="#{item.planejamento.dtEntrega}" >
+					<p:ajax event="dateSelect" update="@this"/>
+				</p:calendar>
+			</p:column>
+			
+			<p:column headerText="Status" >
+				<center>
+					<p:outputLabel value="#{item.status.nome}" style="width:150px !important;"/>
+				</center>
+			</p:column>	
+				
+		</p:dataTable>		
+	</p:scrollPanel>	
+				
+		
+		<hr />
+		<div align="center">
+			<p:commandButton 
+				id="btLimparPlanejamento" 
+				value="Limpar"
+				update="@form"
+				rendered="#{projetoBean.listarProjetosByFiltro.size()>0}"
+				action="#{projetoBean.cancelarPlanjamento()}" 
+				styleClass="btn btn-yellow">
+			</p:commandButton>
+			<p:commandButton 
+				id="btSalvarPlanejamento" 
+				rendered="#{projetoBean.listarProjetosByFiltro.size()>0}"
+				value="Planejar"
+				action="#{projetoBean.planejar()}" 
+				update="@form"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			
+		</div>
+		
+	</div>	
+</ui:composition>

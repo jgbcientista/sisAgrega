@@ -1,0 +1,135 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		
+	<p:panelGrid id="painel-projetos-faturar" styleClass="ui-noborder">
+		<p:row>
+			<p:column>
+				<p:outputLabel value="Nº Nota Fiscal"  />
+				<p:inputText  
+					style="width:130px !important;" value="#{projetoBean.faturamento.numeroNF}"> 
+					<p:ajax event="change" />
+				</p:inputText> 
+			</p:column>
+			<p:column>	
+				<p:outputLabel value="Data de Faturamento" for="dataFaturamento"/>
+				 <p:calendar 
+					id="dataFaturamento" 
+					value="#{projetoBean.faturamento.dataNF}">
+					<p:ajax event="dateSelect" />
+				</p:calendar>
+			</p:column>
+			<p:column >
+					<p:outputLabel value="Responsável pelo Faturamento" for="idResFaturamento" />
+					<p:selectOneMenu  id="idResFaturamento" 
+						style="width:210px !important;"
+						value="#{projetoBean.idResponsavelFaturamento}">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+					<p:ajax event="change" />
+					</p:selectOneMenu>
+				</p:column>
+				
+				
+			<p:column style="width:33%;" rendered="#{projetoBean.ocultarFiltroProjeto}" > 
+				<p:outputLabel value="Situação"/>
+				<p:selectOneMenu 
+					disabled="#{projetoBean.visualizarProjeto}" 
+					styleClass="ui-altera-selectMenu" 
+					style="width:150px;"
+					value="#{projetoBean.filtroSituacaoFaturar}">
+				 	<f:selectItems value="#{projetoBean.comboSituacoes}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+				 	<p:ajax event="change" />
+        		</p:selectOneMenu>
+			</p:column>
+		</p:row>
+			
+		<p:row>
+		<p:column colspan="4">
+			<hr style="margin:5px;"></hr>
+	
+	         <p:panelGrid columns="1" style="width: 100%; margin-left:0px;" styleClass="ui-noborder">
+	         	<h5 style="margin-bottom:-12px;">Projetos a Faturar</h5>
+				<p:dataTable styleClass="header-tabelas" 
+					var="result"
+					rowKey="#{result.id}"
+					value="#{projetoBean.projetosSelecionados}"
+					emptyMessage="Nenhum projeto adicionado."
+					rows="10"
+					paginator="false" summary="true"
+					pageLinks="4" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+					sortOrder="DESCENDING">
+									
+					<p:column headerText="Projeto" width="15%">
+						<center>
+							<p:outputLabel value="#{result.nomeProjeto}" />
+						</center>
+					</p:column>
+					
+					<p:column headerText="Nº Proj.Cliente" width="20%">
+						<center>
+							<p:outputLabel value="#{result.ordemServico.contrato.proposta.cliente.nome}" />
+						</center>
+					</p:column>
+					
+					<p:column headerText="Municipio" width="15%">
+						<center>
+							<p:outputLabel value="#{result.municipio.nome}" style="text-align: center;"/>
+						</center>
+					</p:column>
+							
+					<p:column headerText="Valor" width="10%" id="valorProjetoParcela">
+						<center>
+							<p:outputLabel value="R$ #{projetoBean.calcularParcela(result)}" />
+						</center>
+					</p:column>
+					
+					<p:column headerText="Situação" width="10%">
+						<center>
+							<p:outputLabel value="#{result.situacao.nome}" />
+						</center>
+					</p:column>
+					
+					<f:facet name="footer" >
+           				<h:outputText value="Total a_ Faturar R$: #{projetoBean.formtoReal(projetoBean.valorTotalFaturar)}">
+	           				 <f:convertNumber pattern="#,###,##0.00"/>
+        			 	</h:outputText> 
+        			</f:facet>
+				</p:dataTable>
+			</p:panelGrid>
+		</p:column>
+		</p:row>
+						
+			<p:row>
+				<p:column colspan="4" style="text-align:center;">
+				<hr />
+				<div>
+					<p:commandButton 
+						id="btFaturar" 
+						value="Faturar"
+						ajax="true"
+						immediate="true"
+						update="@form"
+						process="@form"
+						actionListener="#{projetoBean.faturar()}"
+						onclick="PF('dialogRetificacao').hide();"
+						styleClass="btn btn-green">
+					</p:commandButton>
+					<p:commandButton 
+						id="btCancelarFaturar" 
+						value="Cancelar"
+						immediate="true"
+						onclick="PF('dialogRetificacao').hide();"
+						styleClass="btn btn-yellow">
+					</p:commandButton>
+				</div>
+				</p:column>
+			</p:row>
+			
+		</p:panelGrid>
+</ui:composition>

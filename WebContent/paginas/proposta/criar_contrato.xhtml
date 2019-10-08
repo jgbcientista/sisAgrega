@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="idPanelCriaContrato" style="border: none;">
+		
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" >
+		<p:fieldset id="idCriaDadosContrato" legend="Dados da proposta" >
+			<p:panelGrid id="idContatos" styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:255px !important;">
+						<p:outputLabel value="Nº da Proposta aprovada" for="nrProposta" />
+						<p:inputText id="nrProposta"  
+							value="#{propostaBean.contrato.proposta.numeroProposta}"
+							title="#{propostaBean.contrato.proposta.numeroProposta}"  
+							disabled="true"
+							style="width:250px; text-overflow: ellipsis;">
+						</p:inputText>
+					</p:column>
+					<p:column style="width:300px !important;">
+						<p:outputLabel value="Nome do Cliente" />
+						<p:inputText id="nmCliente" 
+							style="width:300px !Important;" maxlength="15" 
+							disabled="true"
+							update="@form"
+							title="#{propostaBean.contrato.proposta.cliente.nome}"
+							value="#{propostaBean.contrato.proposta.cliente.nome}">
+						</p:inputText>
+					</p:column>
+					<p:column width="390px">
+						<p:outputLabel value="Nome do Projeto" />
+						<p:inputText id="nmProjeto"  
+							style="width:430px !Important;" 
+							maxlength="15" 
+							disabled="true"
+							title="#{propostaBean.contrato.proposta.nomeProjeto}"
+							value="#{propostaBean.contrato.proposta.nomeProjeto}">
+						</p:inputText>
+					</p:column>
+					<p:column>
+						
+				</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:fieldset>
+			
+		<br/>	
+		<p:fieldset legend="Dados do Contrato" styleClass="ui-fildset-nova">
+			<p:panelGrid styleClass="ui-noborder">
+				<p:row>						
+					<p:column style="width: 170px !important;">
+						<p:outputLabel value="Nº Contrato" for="nrCtro"/>
+						<p:inputText id="nrCtro"  style="width:170px !Important;" maxlength="15" 
+							required="false" requiredMessage="Campo nº contrato Obrigatório"
+							value="#{propostaBean.contrato.nrContrato}"
+							>
+						</p:inputText>
+					</p:column>
+					<p:column style="width: 142px !important;">
+						<p:outputLabel value="Valor do Contrato" for="vrContrato"/>
+						<p:inputText style="width:142px !Important;" id="vrContrato" 
+							required="false" requiredMessage="Campo Valor do contrato Obrigatório"
+							value="#{propostaBean.contrato.vlrContrato}">
+							<f:convertNumber pattern="#,##0.00"/>
+						
+						</p:inputText>
+					</p:column>
+					<p:column style="width:145px !important;">
+						<p:outputLabel value="Data de Assinatura" for="idAssinatura"/>
+						<p:calendar styleClass="componente-data-nova"
+							id="idAssinatura" 
+							pattern="dd/MM/yyyy"
+							style="width:145px !Important;"
+							value="#{propostaBean.contrato.dataAssinatura}">
+							<p:ajax event="dateSelect" />
+						</p:calendar>
+					</p:column>
+					<p:column style="width:180px !important;">
+						<p:outputLabel value="Forma de Pagamento"  />
+						 <p:selectOneRadio style="width:100px !important;"
+						 	required="false" requiredMessage="Escolha uma forma de Pagamento"
+				        	id="idSelecta" 
+				        	value="#{propostaBean.contrato.formaPagamento}">
+				            <f:selectItem itemLabel="&nbsp;Avista&nbsp;&nbsp;" itemValue="Avista" />
+							<f:selectItem itemLabel="&nbsp;Parcelado&nbsp;&nbsp;" itemValue="Parcelado" />
+							<f:selectItem itemLabel="&nbsp;Projeto&nbsp;&nbsp;" itemValue="Projeto" />
+							<p:ajax event="change" update="vlrParcela, qtdParcelas"/>
+				        </p:selectOneRadio>
+					</p:column>
+					<p:column style="width:100px !important;">
+						<p:outputLabel value="Início da Vigêcia" for="idAVigenciaInicio" />
+						<p:calendar styleClass="componente-data-nova"
+							id="idAVigenciaInicio" 
+							pattern="dd/MM/yyyy"
+							style="width:100px !important;"
+							value="#{propostaBean.contrato.vigenciaDataInicial}">
+							<p:ajax event="dateSelect" />
+						</p:calendar>
+					</p:column>
+						
+					<p:column style="width:100px !important;">
+						<p:outputLabel value="Fim da vigêcia" for="idAVigenciaFim"/>
+						<p:calendar styleClass="componente-data-nova"
+							id="idAVigenciaFim" 
+							style="width:100px!important;"
+							pattern="dd/MM/yyyy"
+							value="#{propostaBean.contrato.vigenciaDataFinal}">
+							<p:ajax event="dateSelect" />
+						</p:calendar>
+					</p:column>		
+				</p:row>
+			</p:panelGrid><br></br>
+			<p:outputLabel value="Dados de Pagamento" style="margin-left:7px; text-align:left;font-weight: bold !important; font-size:16px !important;"/>
+			<p:panelGrid styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:140px !Important;">
+						<p:outputLabel value="Data 1ª Parcela" />
+						<p:calendar styleClass="componente-data-nova"
+							id="dtpagto" 
+							style="width:140px !Important;"
+							pattern="dd/MM/yyyy"
+							value="#{propostaBean.contrato.dataVencimento}">
+							<p:ajax event="dateSelect" update="dtpagto" process="dtpagto" />
+						</p:calendar>
+					</p:column>
+					<p:column style="width:140px !important;" >
+						<p:outputLabel value="Valor"/>
+						<p:inputText style="width:140px;"  id="vlrParcela"
+							value="#{propostaBean.contrato.valorParcela}"
+							process="@this" >
+							<f:convertNumber pattern="#,##0.00"/>
+							<p:ajax event="change" update="vlrParcela" process="vlrParcela" />
+						</p:inputText>
+					</p:column>
+					<p:column style="width:120px !important;">
+						<p:outputLabel value="Qtd Parcela"/> 
+						<p:inputMask maxlength="2" style="width:40px;" id="qtdParcelas"
+							value="#{propostaBean.contrato.quantidadeParcela}" >
+							<p:ajax event="change" update="idinforPagto" listener="#{propostaBean.listParcelas()}"/>
+						</p:inputMask>
+					</p:column>
+					<p:column style="width:680px !important;"></p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:growl id="msgs3" showDetail="false"/>
+			<p:growl id="msgs4" showDetail="false"/>
+			<br></br>
+			<p:outputLabel value="Detalhes da Forma de Pagamento:" style="margin-left:7px; text-align:left;font-weight: bold !important; font-size:16px !important;"/>
+			<p:accordionPanel id="idinforPagto" style="width: 80% !important;" activeIndex="-1">
+				 <p:tab title="Informações de Pagamento - Avista e Parcelado" closable="true">
+					<p:dataTable styleClass="header-tabelas" value="#{propostaBean.listParcelaContrato}"
+						id="tabelaTipoItensTec" widgetVar="tabelaTipoItensTec" rows="10" 
+						var="resulte" editable="true" 
+						emptyMessage="Nenhuma proposta cadastrada." 
+						rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+						paginatorPosition="bottom" paginator="true"
+						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+						currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+						sortBy="#{resulte.nrParcela}">
+				 	
+				       <p:ajax event="rowEdit" listener="#{propostaBean.onRowEdit}" update="tabelaTipoItensTec, msgs" />
+				       <p:ajax event="rowEditCancel" listener="#{propostaBean.onRowCancel}" update="tabelaTipoItensTec, msgs" />
+				 
+				       <p:column headerText="Nº Parcela" style="width:60px;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.nrParcela}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput" value="#{resulte.nrParcela}" style="width:100%" /></f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				 
+				       <p:column headerText="Vencimento" style="width:60px;">
+				           <p:cellEditor>
+				               <f:facet name="output">
+									<h:outputText value="#{resulte.dataVencimento}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+							   </f:facet>
+				               <f:facet name="input">
+									<p:inputText value="#{resulte.dataVencimento}" style="width:100%" label="Data Vencimento" >
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</p:inputText>
+								</f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				 
+				       <p:column headerText="Valor Parcela" style="width:60px;">
+				           <p:cellEditor>
+				               <f:facet name="output">
+									<h:outputText value="#{resulte.valorParcela}">
+										<f:convertNumber pattern="#,##0.00"/>
+									</h:outputText>
+							   </f:facet>
+				               <f:facet name="input">
+									<p:inputText value="#{resulte.valorParcela}" style="width:100%" label="Valor da Parcela" >
+										<f:convertNumber pattern="#,##0.00"/>
+									</p:inputText>
+							   </f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				       
+				       <p:column headerText="Observações" style="width:100px;">
+				           <p:cellEditor>
+				               <f:facet name="output"><h:outputText value="#{resulte.observacoesParcela}"/></f:facet>
+				               <f:facet name="input"><p:inputText value="#{resulte.observacoesParcela}" style="width:100%" label="Valor da Parcela" /></f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				       <p:column style="width:10px">
+				           <p:rowEditor  />
+				       </p:column>
+				   </p:dataTable>
+				 </p:tab>
+				 
+			</p:accordionPanel>
+			<br></br>
+			<p:outputLabel value="Total do Contrato" style="margin-left:7px; text-align:left;font-weight: bold !important; font-size:16px !important;"/>
+			<p:panelGrid styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:160px !Important;">
+						<p:outputLabel value="Total Contrato Aditivos" />
+						<p:inputText style="width:150px !Important;"
+							value="#{propostaBean.contrato.vlrContrato}"
+							disabled="true"
+							process="@this" >
+							<f:convertNumber pattern="#,##0.00"/>
+						</p:inputText>
+					</p:column>
+				</p:row>
+				
+			</p:panelGrid>
+			<br></br>
+			
+			
+		</p:fieldset>	
+		<br></br>
+		<center>
+		<div align="right">
+			<p:commandButton 
+				id="BtCancelar" 
+				value="Sair"
+				immediate="true"
+				styleClass="btn btn-red"
+				actionListener="#{propostaBean.fecharModalContrato()}"
+				onclick="PF('dialogContrato').hide();"
+				update="@form">
+			</p:commandButton>
+			<p:commandButton 
+				id="btSalvar" 
+				value="Salvar"
+				update="@form"
+				styleClass="btn btn-blue"
+				actionListener="#{propostaBean.salvarContrato()}"
+				onclick="PF('dialogContrato').hide();">
+			</p:commandButton>
+			</div>
+			<p:blockUI block="idPanelCriaContrato" trigger="btSalvar ">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</center>
+		</div>
+	</p:panel>
+	
+<style>
+	.ui-fieldset-content td .input-block-level {
+	    width: 123px !important;
+	}
+	
+	.ui-fieldset-content td {
+    padding-left: 8px;
+}
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, 
+		.ui-widget-header .ui-state-disabled {
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger, 
+		.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-label{
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+
+	
+</style>
+	
+	
+</html>

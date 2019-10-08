@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioProjetos" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<parameter name="CUSTOFINANCEIRO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{proposta.listarCustoPlanilhaFinanceira}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tb_proposta.`numeroProposta` AS numeroProposta,
+     tb_proposta.`objeto` AS objeto,
+     tb_proposta.`dataEnvioAoCliente` AS dataEnvioAoCliente,
+     tb_proposta.`dataInclusao` AS dataInclusao,
+     tb_proposta.`cliente` AS cliente,
+     tb_proposta.`dataContratacao` AS dataContratacao,
+     tb_proposta.`contato` AS contato,
+     tb_proposta.`tipoProposta` AS tipoProposta,
+     tb_proposta.`nomeProjeto` AS nomeProjeto,
+     tb_proposta.`ID_UF` AS estado,
+     tb_proposta.`ID_CIDADE` AS cidade,
+     tb_proposta.`statusContratada` AS statusContratada,
+     tb_proposta.`status` AS status,
+     tb_proposta.`valorTotalComBdiComissao` AS valorTotalComBdiComissao,
+     tb_proposta.`valorTotalCustosAdministrativos` AS valorTotalCustosAdministrativos,
+     tb_proposta.`valorTotalCustosBdiComissoes` AS valorTotalCustosBdiComissoes,
+     tb_proposta.`valorTotalCustosDesclocamento` AS valorTotalCustosDesclocamento,
+     tb_proposta.`valorTotalCustosExecucao` AS valorTotalCustosExecucao,
+     tb_proposta.`valorTotalCustosOperacionais` AS valorTotalCustosOperacionais,
+     tb_proposta.`valorTotalCustosSeguranca` AS valorTotalCustosSeguranca,
+     tb_proposta.`valorTotalDaProposta` AS valorTotalDaProposta,
+     tb_proposta.`valorTotalImpostos` AS valorTotalImpostos,
+     tb_proposta.`valorTotalPrecificacao` AS valorTotalPrecificacao,
+     tb_proposta.`valorTotalSemBdiComissao` AS valorTotalSemBdiComissao,
+     tb_proposta.`id` AS id
+FROM
+     `tb_proposta` tb_proposta
+WHERE
+     id = 1]]>
+	</queryString>
+	<field name="proposta.numeroProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="listarTipoItemValor" class="java.util.Collection"/>
+	<field name="proposta.textPropostaGenerica" class="java.lang.String"/>
+	<field name="proposta.listarCustoPlanilhaFinanceira" class="java.util.Collection"/>
+	<field name="proposta.listarTipoItemPropostaFinanceira" class="java.util.Collection"/>
+	<field name="proposta.listarTipoItemPropostaTecnica" class="java.util.Collection"/>
+	<field name="proposta.validadeTec" class="java.lang.String"/>
+	<field name="proposta.listarCustoEquipeTecnica" class="java.util.Collection"/>
+	<field name="proposta.inserirPlanTec" class="java.lang.Boolean"/>
+	<field name="proposta.tituloPlanTecnica" class="java.lang.String"/>
+	<field name="proposta.descricaPlanTecnica" class="java.lang.String"/>
+	<field name="proposta.assinaturaTec" class="java.lang.String"/>
+	<field name="proposta.funcaoCargoTec" class="java.lang.String"/>
+	<field name="proposta.tituloPlanEquipamento" class="java.lang.String"/>
+	<field name="proposta.descricaPlanEquipamento" class="java.lang.String"/>
+	<field name="proposta.listarPlanilhaEquipamento" class="java.util.Collection"/>
+	<field name="proposta.inserirPlanTecEquipamento" class="java.lang.Boolean"/>
+	<title>
+		<band height="181">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<rectangle>
+				<reportElement x="166" y="1" width="394" height="28" uuid="3a381b47-5295-4396-95ec-47d04247a367"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="166" y="29" width="394" height="14" uuid="34bf948e-0cd2-49c0-80e2-c3bf261ec65e"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<image>
+				<reportElement x="30" y="1" width="74" height="47" uuid="b4c9797e-eb92-4b48-a5e6-ae8c60280701"/>
+				<imageExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\img\\cabecalho.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement mode="Opaque" x="94" y="3" width="10" height="44" forecolor="#FFFFFF" uuid="9f37117b-bd1b-47d1-9a18-3d92d9952210"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="560" y="1" width="242" height="14" uuid="3eea7031-05a0-4583-ac0f-310cec94557b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="560" y="2" width="242" height="13" uuid="f6b6bf75-1651-487f-8285-49382e396fc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO Nº:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="560" y="15" width="242" height="14" uuid="e02296cc-8b42-4ae0-ab45-687cda457c5b"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="560" y="29" width="129" height="14" uuid="6e426d21-1f04-42f4-aca1-e53e8e8741eb"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="560" y="30" width="31" height="12" uuid="f698cdb7-95bf-42b2-b0a7-0bc2f846da9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="689" y="29" width="113" height="14" uuid="d07a45e5-1131-4d45-b1e1-4a1c90116856"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="689" y="30" width="47" height="13" uuid="b63214db-079b-4abf-a2e8-cdf60d870011"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revisão:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="43" width="802" height="14" uuid="1a9c11bc-bcd3-4d59-96b9-916b212d1f83"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="44" width="785" height="12" uuid="3a026f24-4121-4308-92c2-bee8f835d3e7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Formulário de Cálculo e Forma de Pagamento conforme Contrato]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="57" width="207" height="14" uuid="e62b4219-c012-4cfb-b1b5-7ec3b4ac3468"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="59" width="143" height="12" uuid="9fa91bfe-2a39-4b5c-b2d7-e658c563b614"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estrada Pavimentada (R$/Km)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="16" width="242" height="13" uuid="9ccc7964-15e7-4e77-9a27-7c94630f8f29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VER Nº O.S INDICADA ABAIXO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="71" width="207" height="14" uuid="852c879c-e5da-4511-ab51-06325ec1129d"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="74" width="143" height="12" uuid="617d21c6-7930-4171-a900-f8c81942fdf0"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Estrada Pavimentada (R$/Km)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="85" width="207" height="14" uuid="c3c0f9dd-9043-4408-9f68-220fe1d869f6"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="87" width="143" height="12" uuid="06056a2f-58ad-44ba-81db-2f633dfb7128"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[P = Valor Base do Estudo (R$)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="207" y="57" width="64" height="14" uuid="2aec0f18-8602-46a4-86a4-f47486c06398"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="207" y="71" width="64" height="14" uuid="e4151f17-5a73-4a17-8bc9-ede90053247c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="207" y="85" width="64" height="14" uuid="ef6ddc50-a50d-4828-9df6-22a3731cb163"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="271" y="57" width="531" height="14" uuid="d2f86783-f085-4396-a206-eb84a63c4764"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="271" y="71" width="531" height="14" uuid="50d04ab4-874d-43d9-b8bc-75a83553e1cc"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="271" y="58" width="531" height="12" uuid="561d44e3-154f-4d88-97af-f7c641360e3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cálculo do Valor da Remuneração pela COELBA conforme item 8.2 do Contrato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="73" width="154" height="12" uuid="96dd1deb-2c50-4cde-9b64-95a9d647c2c2"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor Total do Estudo = T =S + D]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="271" y="85" width="531" height="14" uuid="6f752ce2-2f03-4245-a41c-f21164d8937f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="271" y="87" width="175" height="12" uuid="849ecd45-6964-457d-94a6-10f2fcd1ce47"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[D = Distância percorrida x RS /kM]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="99" width="207" height="14" uuid="43d13f9b-dd57-4f8e-96a5-4d2ba6c335c6"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="207" y="99" width="64" height="14" uuid="eff5c2fc-5f9c-48f9-b8c9-f06397119a87"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="271" y="99" width="531" height="14" uuid="b10cd004-3206-4f08-ac5f-aaba44a9d38c"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="101" width="205" height="12" uuid="b22e26b7-e40d-4690-9380-620493f795e9"/>
+				<textElement>
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor Base do Estudo(extensão até 1km) =]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="100" width="531" height="12" uuid="6e7d374f-4187-4d2f-b6e8-ca78c98d958b"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[S = 100% (de P para o primeiro km de estudo) + 10% (de P para os próximos 4 km) + 5% (de P para os km remanescentes).]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="113" width="802" height="14" uuid="fef247cd-a02e-4ab1-947c-07a3a5c4853a"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="114" width="802" height="12" uuid="d1400508-b074-4d50-b218-69012a9c5084"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORMA DE PAGAMENTO: 1ª Parcela = 30% da O.S | 2ª Parcela = 50% do valor p/EA da O.S | 3ª Parcela = 20% do valor p/EA da O.S]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="127" width="64" height="40" uuid="5e3cd99f-91c2-4196-97d5-469f79559006"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="127" width="146" height="40" uuid="3cac13ea-99ed-4a3d-a237-1ca3972987d3"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="257" y="127" width="50" height="40" uuid="235eb8d8-aeaa-49f9-aba4-8b2fbb471da9"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="456" y="127" width="94" height="26" uuid="5d19522d-07e0-4d64-9eb9-399f3c4c29de"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="752" y="141" width="50" height="14" uuid="d2dcf320-6dc9-4036-abcb-7e9acd9d414f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="652" y="127" width="150" height="14" uuid="cc05e514-6003-413a-a8b5-ef607c6cc974"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="702" y="141" width="50" height="14" uuid="8600d87f-8c2f-4673-ad70-dfc431901cdb"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="652" y="141" width="50" height="14" uuid="302cae52-4efb-4222-84d7-fd5187072612"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="380" y="127" width="76" height="40" uuid="535d751c-4d6e-498b-9bc4-2ea49c0380d6"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="307" y="127" width="73" height="40" uuid="fe0e1a56-965f-4ad5-9a43-eb888e9e989f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="210" y="127" width="47" height="40" uuid="54fae315-63dd-4680-a1ff-b5da7d7b2836"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="129" width="25" height="38" uuid="bc1ec44d-5abd-440f-8d81-3fdb107fdb91"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="128" width="62" height="38" uuid="179a5f0c-4f4e-4f2e-bf1c-e0c7ea9fb55c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="128" width="33" height="38" uuid="b5f1643e-d9f9-4a9f-8177-af1248056bdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº O.S]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="128" width="46" height="38" uuid="da75e76f-2de2-4e92-a780-9bb3897509e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NÚMERO DO PROJETO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="127" width="60" height="38" uuid="2bf80a44-e76e-417d-a53d-438fa621f6d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICÍPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="386" y="129" width="60" height="38" uuid="f54de37e-849d-4238-9d7d-8a8e736a444e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXTENSÃO DA LINHA (KM)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="456" y="153" width="48" height="14" uuid="b5cb4237-5d0a-4ab0-b7b9-117282982a5a"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="456" y="152" width="48" height="12" uuid="55ce5015-86c8-46da-83e7-5060e0f657bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pav (Km)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="504" y="153" width="46" height="14" uuid="91e234e2-705f-49a2-8e8b-56e6b43f89b2"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="456" y="129" width="94" height="24" uuid="c7986840-75d9-4b48-a6a5-f92194752d23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIST.(SSA) ATÉ MUNICIPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="152" width="46" height="12" uuid="e2a2e193-6d91-4b6e-86ba-e32970b13d07"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ñ Pav (Km)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="550" y="153" width="48" height="14" uuid="050b67a7-229f-4934-bfe5-b37be9097952"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="550" y="127" width="94" height="26" uuid="f4775974-d537-4791-99a4-3ffbd61fddda"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="598" y="153" width="46" height="14" uuid="6b90ca68-fe72-4305-a193-867ffbea3c2f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="550" y="129" width="94" height="24" uuid="15742694-7076-4870-be0d-78d2964f3042"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIST.(MUNIC) ATÉ LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="153" width="48" height="12" uuid="b419d376-224f-4468-bfc4-ec9a3da1f686"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pav (Km)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="598" y="153" width="46" height="12" uuid="f6007daa-d9d4-4372-a796-79c2d1a46e40"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ñ Pav (Km)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="74">
+			<rectangle>
+				<reportElement x="691" y="20" width="61" height="14" uuid="64c6baba-273a-4ae8-9b5b-67bdee9d5f9e"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch">
+			<printWhenExpression><![CDATA[new Boolean($V{PAGE_NUMBER}.intValue() == 1)]]></printWhenExpression>
+		</band>
+	</columnHeader>
+</jasperReport>

@@ -1,0 +1,105 @@
+<ui:composition template="/paginas/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="principal">
+
+
+		<div class="container">
+			<div class="row-fluid main">
+			<div class="span3 sidebar">
+					<p:panelGrid id="idAcessoRapido" columns="1" rendered="#{(menuBean.profissional !=null ? 'true' : 'false') and menuBean.diretor || menuBean.operacional}">
+						<f:facet name="header">Acesso Rápido</f:facet>
+						
+						<ui:fragment>
+							<h:link outcome="cliente"
+								title="Cliente"
+								accesskey="c">
+								Consultar e Cadastrar <u>C</u>liente
+							</h:link>
+						</ui:fragment>
+						<ui:fragment>
+							<h:link outcome="fornecedor"
+								title="Fornecedor"
+								accesskey="f">
+								Consultar e Cadastrar <u>F</u>orncecedor
+							</h:link>
+						</ui:fragment>
+							<ui:fragment>
+							<h:link outcome="profissional"
+								title="Profissional"
+								accesskey="f">
+								Consultar e Cadastrar Pro<u>f</u>issional
+							</h:link>
+						</ui:fragment>
+						<ui:fragment>
+							<h:link outcome="proposta"
+								title="Proposta"
+								accesskey="p">
+								Consultar e Cadastrar <u>P</u>recif./Proposta
+							</h:link>
+						</ui:fragment>
+						<ui:fragment>
+						<h:link outcome="negocio"
+							title="Negócio"
+							accesskey="a">
+							Consultar e Cadastrar <u>N</u>egócio
+						</h:link>
+					</ui:fragment>
+					
+						<ui:fragment>
+							<h:link outcome="recurso"
+								title="Recursos"
+								accesskey="r">
+								Consultar e Cadastrar <u>R</u>ecurso
+							</h:link>
+						</ui:fragment>
+						
+						<ui:fragment>
+							<h:link outcome="consultar_projeto"
+								title="Consultoria e Assessoria"
+								accesskey="c">
+								Operar <u>C</u>onsultoria e Assessoria
+							</h:link>
+						</ui:fragment>
+						
+						<ui:fragment>
+							<h:link outcome="proposta"
+								title="Precificação e proposta"
+								accesskey="c">
+								Criar e Consultar <u>P</u>recificação/Proposta
+							</h:link>
+						</ui:fragment>
+					
+						
+						
+					</p:panelGrid>
+				</div>
+				<div class="span9 content content-home">
+				<H4>INTEGRA - Inteligência e Gerenciamento Rápido Agrega</H4>
+				
+				<p:column rendered="#{menuBean.profissional !=null}"> 
+	 				 <H5>SISTEMA INTEGRADO DE GESTÃO AGREGA - Concebido com a  finalidade de organizar dados e informações, facilitando o gerenciamento da empresa, a integração e a melhoria continua dos seus processos com diminuição de tempo e custos.
+</H5> 
+					</p:column>
+					
+					<p:column rendered="#{menuBean.profissional ==null}"> 
+	 				 <H5>Você não possui permissão para executar as funções do sistema. Você precisa ser incluído como Profissional da Agrega Consultores. Por favor, entre em contato com o setor Administrativo da Agrega Consultores.</H5> 
+					</p:column>
+					
+						
+				</div>
+
+				
+			</div>
+
+
+		</div>
+	
+
+	</ui:define>
+
+</ui:composition>

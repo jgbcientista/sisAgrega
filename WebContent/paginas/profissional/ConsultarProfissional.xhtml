@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelProfissionalBusca" style="border: none;" rendered="#{profissionalBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPanelProfissionalConsulta" style="border: none;" >
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>
+				<p:panelGrid id="painelProf" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:40% !important;">
+							<p:outputLabel value="Nome do Colaborador:" for="idNmProfissional" />
+							<p:inputText id="idNmProfissional" 
+								style="width:390px !important;"
+								value="#{profissionalBean.filtroNome}">
+							</p:inputText>
+						</p:column>
+						<p:column style="width:25% !important;">
+							<p:outputLabel value="Nº do CPF:" />
+							<p:inputMask mask="999.999.999-99" 
+								value="#{profissionalBean.filtroCpf}" 
+								style="width:200px !important;">
+							</p:inputMask>
+						</p:column>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Tipo Profis./Colabab.:" />
+							<p:selectOneMenu id="tpColProf" style="width:120px;"
+									value="#{profissionalBean.filtroTipoColaborador}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{profissionalBean.tipoColaborador}" 
+									var="colaborador"
+									itemLabel="#{colaborador}" itemValue="#{colaborador}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+				</p:panelGrid><br/>
+			</p:fieldset><br />
+		
+		<div align="right">		 
+			<p:commandButton 
+				id="idBtPesquisar" 
+				value="Pesquisar"
+				styleClass="btn btn-yellow"
+				action="#{profissionalBean.pesquisarProfissional}" 
+				update="@form" />
+			<p:commandButton 
+				id="novoProfissional" 
+				value="Cadastrar"
+				styleClass="btn btn-blue"
+				action="#{profissionalBean.novoProfissional()}" 
+				update="@form"
+				process="@this" />
+		</div>
+		<p:outputLabel value="Resultado da Pesquisa" style="text-align:left; font-size: 16px;" rendered="#{profissionalBean.profissionais.size()>0}"/>
+		
+		<p:dataTable id="tableProfissionais" styleClass="header-tabelas"
+				value="#{profissionalBean.profissionais}" 
+				rendered="#{profissionalBean.profissionais.size()>0}"
+				var="profissional"
+				emptyMessage="Nenhum Registro encontrado" 
+				rows="5" 
+				rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				sortBy="#{profissional.nome}" sortOrder="ASCENDING" >
+				
+				<p:column headerText="Profissional/Colaborador" width="40%">
+					<h:outputText value="#{profissional.nome}" />
+				</p:column>
+				
+				<p:column headerText="Data Nascimento" width="15%">
+					<h:outputText value="#{profissional.dataNascimento}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Tipo Profis./Colab." width="15%">
+					<h:outputText value="#{profissional.tipoColaborador}" />
+				</p:column>
+				
+				<p:column headerText="Celular" width="15%">
+					<h:outputText value="#{profissional.celular}" />
+				</p:column>
+				<p:column headerText="Ação" width="12%">
+				 <div align="left">
+					<p:commandLink 
+					 	id="ver" 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tableProfissionais"
+					 	action="#{profissionalBean.visualizar(profissional)}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+					<p:commandLink 
+					 	id="edit" 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tableProfissionais"
+					 	action="#{profissionalBean.redirectEdit(profissional)}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-editar"></b>
+					</p:commandLink>
+					 <p:commandLink 
+					 	id="idExcluir" 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tableProfissionais"
+					 	action="#{profissionalBean.preExcluir(profissional)}"
+						title="#{msgs['label.button.excluir']}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-excluir"></b>
+					</p:commandLink>
+				</div>
+			</p:column>
+	</p:dataTable>
+		<p:blockUI block="tableProfissionais" trigger="idBtPesquisar" >
+			<p:graphicImage name="img/ajaxloadingbar.gif" />
+		</p:blockUI>
+	</p:panel>
+	</div>
+</p:panel>	
+
+<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+			id="dialogExcluir" 
+			widgetVar="dialogExcluir"
+			closeOnEscape="true" 
+			severity="alert"
+			header="Aviso"
+			message="Tem certeza que deseja excluir esse registro?">
+		<center>
+			<p:commandButton 
+				id="bfOK" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{profissionalBean.excluirProfissional()}">
+			</p:commandButton>
+			<p:commandButton 
+				id="btCancelar"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluir').hide()">
+			</p:commandButton>
+		</center>
+	</p:confirmDialog>
+</html>

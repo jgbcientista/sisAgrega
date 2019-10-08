@@ -1,0 +1,286 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<p:fieldset legend="Planejamento" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova" >	
+	  <p:panelGrid styleClass="ui-noborder">
+	  	
+			<p:row>
+				<p:column >
+					<p:outputLabel value="Profisional de Mapas " for="proMaps" />
+					<p:selectOneMenu  
+						id="proMaps" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:210px !important;"
+						value="#{projetoBean.idProMap}"  
+						effect="fade" 
+						filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Profisional de EPI " for="proEPI" />
+					<p:selectOneMenu  
+						id="proEPI" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:210px !important;"
+						value="#{projetoBean.idProfEPI}"  
+						effect="fade" 
+						filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Profisional de EV/CTGAL " for="proEvctGal" />
+					<p:selectOneMenu  
+						id="proEvctGal" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:210px !important;"
+						value="#{projetoBean.idProCtgal}"  
+						effect="fade" 
+						filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+					<f:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Profisional de Verificação " for="proVerificacao" />
+					<p:selectOneMenu id="proVerificacao" 
+						disabled="#{projetoBean.visualizarProjeto}"
+						style="width:210px !important;"
+						value="#{projetoBean.idProfVerificacao}"  
+						effect="fade" 
+						filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{projetoBean.comboProfisssional}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+			<p:row>
+				<p:column colspan="3">
+					<h5 style="margin-left: 1px;">Check dos planejamento já realizado</h5>
+   					<p:selectBooleanCheckbox id="idCheckMapa" style="width:80px;"
+   						itemLabel=" Mapas" value="#{projetoBean.projeto.checkMapa}">
+					</p:selectBooleanCheckbox>
+					<p:selectBooleanCheckbox id="idCheckEPI" style="width:80px;"
+   						itemLabel="EPI" value="#{projetoBean.projeto.checkEPI}">
+					</p:selectBooleanCheckbox>
+					<p:selectBooleanCheckbox id="idCheckEvCtga" style="width:100px;"
+   						itemLabel="EV/CTGA" value="#{projetoBean.projeto.checkEvCtga}">
+					</p:selectBooleanCheckbox>
+					<p:selectBooleanCheckbox id="idCheckVerifi" style="width:100px;"
+   						itemLabel="Verificação" value="#{projetoBean.projeto.checkVerificacap}">
+					</p:selectBooleanCheckbox>
+				</p:column>
+			</p:row>
+	</p:row>
+		<p:panelGrid styleClass="ui-noborder" style="width:70%; !important;">
+			<p:row>
+				<h5 style="margin-left: 5px;margin-top:19px; margin-bottom:-1px">Datas do Planejamento</h5>
+				<p:column >
+					<p:outputLabel value="Data Início" for="idDtInicioPlan" />
+					<p:calendar styleClass="componente-data-nova"
+						id="idDtInicioPlan" 
+						pattern="dd/MM/yyyy"
+						style="width:100px; !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.dtIniPlanj}" >
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+						
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Data Fim" for="idDtFimPlanCampo" />
+					<p:calendar styleClass="componente-data-nova"
+						id="idDtFimPlanCampo" 
+						pattern="dd/MM/yyyy"
+						style="width:100px; !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.dtFimPlanj}" >
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+					
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Data Prev. da Entrega"  for="dtEntregaPLA"/>
+					<p:calendar styleClass="componente-data-nova"
+						id="dtEntregaPLA" 
+						pattern="dd/MM/yyyy" 
+						style="width:100px; !important;"
+						disabled="#{projetoBean.visualizarProjeto}"
+						value="#{projetoBean.projeto.dtEntrega}" >
+						<p:ajax event="dateSelect" update="@this"/>
+					</p:calendar>
+				</p:column>
+				<p:column >
+				<p:outputLabel value="Planejamento" />
+				<p:selectOneMenu id="Plan"
+					disabled="#{projetoBean.visualizarProjeto or !projetoBean.jaAlterado}"
+					style="width:210px !important;"
+					value="#{projetoBean.idPlanejamento}"  >
+					<f:selectItem itemLabel="- Selecione -" itemValue="" />
+					<f:selectItems value="#{projetoBean.comboPlanejamentos}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+					<p:ajax event="change" update="@this"/>
+				</p:selectOneMenu>
+			</p:column>
+				<p:column />
+				<p:column />
+			</p:row>
+			</p:panelGrid>
+		<p:panelGrid styleClass="ui-noborder">
+			<p:row>
+				<p:column colspan="3">
+				<h5>Observações Gerais</h5>
+				<p:outputLabel  for="ObsPlanejamento" />
+				<h:inputTextarea id="ObsPlanejamento" 
+					disabled="#{projetoBean.visualizarProjeto}"
+					style="width:98% !important; height:100px !important;"
+					value="#{projetoBean.projeto.obsPlanejamento}"
+					maxlength="1000"
+					cols="6"/>	
+				</p:column>
+			</p:row>
+			
+			</p:panelGrid>
+		</p:panelGrid>
+		</p:fieldset><br/>
+		
+		<p:fieldset legend="Anexo do Planejamento" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova" >
+			<div class="borda-retirar borda-retira-tabela-anexos" style="border: 0px solid #a8a8a8; width: 100%; margin-bottom:-25px;">
+				<p:growl id="messages2" showDetail="true" sticky="false" life="7000" autoUpdate="true" />  
+			<p:panelGrid id="pAnexoPlaneja" style="width:100%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:row>
+					<p:column style="width:10%;">
+						<p:fileUpload styleClass="class-upload" process="@form"
+							auto="true" 
+							label="Anexar" 
+							fileLimit="5"
+							disabled="#{projetoBean.visualizarProjeto}"
+							fileUploadListener="#{projetoBean.arquivoUploadPlan}" 
+							mode="advanced" 
+							dragDropSupport="false"
+							multiple="true"
+							update="@this, tabelaListaAnexoSelecionadoPlan">
+						</p:fileUpload>
+					</p:column>
+					<p:column></p:column>
+				</p:row>
+			</p:panelGrid>
+			</div>
+			<p:dataTable 
+			id="tabelaListaAnexoSelecionadoPlan" 
+			lazy="true"
+			var="resulteAnexo" 
+			widgetVar="tabelaListaAnexoSelecionadoPlan"
+			styleClass="header-tabelas"
+			value="#{projetoBean.listAnexosPlan}"
+			emptyMessage="Nenhum arquivo anexado"
+			rows="5" 
+			style="width:100%" rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true" paginatorPosition="bottom"
+			paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}" sortOrder="DESCENDING" >
+			<p:column>
+				<p:commandLink id="idAnexarPlan" 
+					immediate="true" 
+					title="Excluir arquivo"
+					disabled="#{projetoBean.visualizarProjeto}"
+					actionListener="#{projetoBean.setExcluirAnexo(resulteAnexo)}"
+					onclick="PF('dialoConfirmExclusaoAnexoPlan').show()">
+					<i class="icon-remove position-icon"></i>
+				</p:commandLink>
+				<h:outputText value="#{resulteAnexo.descricao}"></h:outputText>
+			</p:column>
+		
+			<p:column style="width:10%;">
+				<p:commandLink title="Fazer download do arquivo"
+							id="downloadLink" 
+							immediate="true" 
+							ajax="false">
+							<i class="fa fa-download"></i>
+					<p:fileDownload value="#{projetoBean.downloadAnexo(resulteAnexo.descricao, 2)}" />
+				</p:commandLink>
+			</p:column>
+			
+			
+		</p:dataTable>
+		</p:fieldset>
+		
+		<p:panelGrid styleClass="ui-noborder">
+			
+			<p:row>
+				<p:column colspan="34" style="text-align: right;">
+				<hr />
+				<div>
+				
+					<p:commandButton 
+						value="Voltar"
+						actionListener="#{projetoBean.cancelar()}" 
+						update="@form"
+						styleClass="btn btn-red"
+						icon="fa fa-reply-all">
+					</p:commandButton>
+					
+					<p:commandButton 
+						value="Disparar E-mails"
+						rendered="#{!projetoBean.visualizarProjeto}"
+						action="#{projetoBean.dispararEmail(2)}" 
+						update="@form"
+						styleClass="btn btn-green"
+						icon="fa fa-envelope-o">
+					</p:commandButton>
+					
+					<p:commandButton 
+						id="btSalvarPlanejamento" 
+						value="Salvar"
+						action="#{projetoBean.salvarPlanejamento()}" 
+						rendered="#{!projetoBean.visualizarProjeto}"
+						update="@form, Plan"
+						styleClass="btn btn-green"
+						icon="fa fa-floppy-o">
+					</p:commandButton>
+					
+				</div>
+				</p:column>
+			</p:row>
+         </p:panelGrid>
+          <!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+<p:confirmDialog id="dialoConfirmExclusaoAnexoPlan"
+	widgetVar="dialoConfirmExclusaoAnexoPlan" 
+	closeOnEscape="true"
+	severity="alert" 
+	header="Excluir Anexo"
+	message="Exclusão de anexo">
+	<center>
+		<p:commandButton 
+			id="btnConfirmExclusaoAnexoPlan" 
+			update="@form"
+			process="@this, tabelaListaAnexoSelecionadoPlan"
+			value="Ok"
+			title="Salvar OK" 
+			styleClass="btn btn-red"
+			oncomplete="PF('dialoConfirmExclusaoAnexoPlan').hide()"
+			actionListener="#{projetoBean.excluirAnexo(2)}" />
+		<p:commandButton 
+			id="btnCancelarExclusaoAnexoPlan"
+			styleClass="btn btn-blue" 
+			value="Cancelar"
+			title="Cancelar excluir" 
+			type="button"
+			onclick="PF('dialoConfirmExclusaoAnexoPlan').hide()" />
+</center>
+	</p:confirmDialog>
+</ui:composition>

@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+<p:panel id="painelBusca" style="border: none;" rendered="#{projetoBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+	<p:panel id="idPanel" style="border: none;" >
+		<p:messages for="idOperacao" />
+	<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;" styleClass="ui-fildset-nova"  >
+	
+	<p:panelGrid styleClass="ui-noborder">	
+			<p:row>
+				<p:column style="width:1%">
+					<p:outputLabel value="Filtrar por:" style="width: 150px;"/>
+					 <p:selectOneRadio
+					 	style="width:25%;" 
+					 	rendered="true" 
+			        	id="idSelecta"  
+			        	value="#{relatorioProjetoBean.opcaoSelecionada}">
+			            <f:selectItem itemLabel="&nbsp;O.S&nbsp;&nbsp;" itemValue="OS"  />
+						<f:selectItem itemLabel="&nbsp;Projeto&nbsp;&nbsp;" itemValue="Projeto" />
+						<p:ajax update="@form" event="change" listener="#{relatorioProjetoBean.verificarSeOsProjeto(relatorioProjetoBean.opcaoSelecionada)}"/>
+			        </p:selectOneRadio>
+				</p:column>
+			</p:row>
+	</p:panelGrid>
+	
+	
+
+<!-- POR ORDEM DE SERIVO -->
+<p:outputLabel rendered="#{!relatorioProjetoBean.eprojeto}" id="eos">
+<p:panelGrid id="painelOS" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Contrato" for="idContratoOS"/>
+							<p:selectOneMenu id="idContratoOS" 
+								style="width:100px !important;"
+								value="#{relatorioProjetoBean.filtroContrato}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.contratos}" var="resulte" itemLabel="#{resulte.nrContrato}" itemValue="#{resulte.id}" />
+								<p:ajax event="change" update="idOrdemServicoOS" listener="#{relatorioProjetoBean.obterByOrdemServico()}"/>
+							</p:selectOneMenu>
+						</p:column>
+						
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Ordem de Serviço" for="idOrdemServicoOS"/>
+							<p:selectOneMenu id="idOrdemServicoOS" 
+								style="width:100px !important;"
+								value="#{relatorioProjetoBean.filtroOrdemServico}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.ordensServicos}" var="resulte" itemLabel="#{resulte.numeroOS}" itemValue="#{resulte.id}" />
+								<p:ajax event="change" update="idProjeto" listener="#{relatorioProjetoBean.obterByProjetos()}"/>
+							</p:selectOneMenu>
+						</p:column>
+						
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Cliente" for="idClienteOS"/>
+							<p:selectOneMenu id="idClienteOS" style="width:120px;"
+								value="#{relatorioProjetoBean.filtroCliente}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.comboClientes}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+							</p:selectOneMenu>
+						</p:column>
+						
+						<p:column />
+					 		 
+				</p:row>	
+					
+					
+				 
+</p:panelGrid>
+
+<br/>
+<br/>
+
+
+
+
+
+
+
+
+		<p:dataTable styleClass="header-tabelas" 
+				var="result"
+				id="tabelasOS"
+				value="#{relatorioProjetoBean.ordensServicos}"
+				summary="true"
+				rowKey="#{result.id}"
+				emptyMessage="Nenhuma ordem de serviço encontrado."
+				rows="10"
+				rowsPerPageTemplate="10,15,20" 
+				paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" paginator="true" 
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				sortBy="#{item.numeroOS}" sortOrder="DESCENDING"  >
+				
+						
+				<p:column headerText="Nº Contrato" width="10%" sortBy="#{result.contrato.nrContrato}">
+					<center>
+						<p:outputLabel value="#{result.contrato.nrContrato}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column headerText="Nº O.S" width="10%" sortBy="#{result.numeroOS}">
+					<center>
+						<p:outputLabel value="#{result.numeroOS}" />
+					</center>
+				</p:column>
+						
+				<p:column headerText="Nome do Cliente" width="35%" sortBy="#{result.contrato.proposta.cliente.nome}">
+					<center>
+						<p:outputLabel value="#{result.contrato.proposta.cliente.nome}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Qtd. Projetos" width="35%" >
+					<center>
+						<p:outputLabel value="#{result.qtdProjetos}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Ver Projetos" width="3%" >
+					<center>
+					<p:commandLink 
+					 	immediate="true"
+					 	ajax="false"
+					 	update="@form"
+					 	process="tabelas"
+					 	action="#{relatorioProjetoBean.verProjetosByOS(result.id)}"
+						style="text-decoration:underline;" >
+						<b class="icone-splash ico-visualisar"></b>
+					</p:commandLink>
+					</center>
+				</p:column>
+				 
+			</p:dataTable>
+	<br />
+	<div align="right">		 
+			<p:commandButton 
+				id="grRelatorioOS" 
+				value="Relatório"
+				rendered="#{relatorioProjetoBean.ordensServicos.size()>0 and  relatorioProjetoBean.eos}"
+				styleClass="btn btn-blue"
+				action="#{relatorioProjetoBean.gerarRelatorioOS()}" 
+				update="@form">
+			</p:commandButton>
+								
+		</div>
+
+
+</p:outputLabel>
+
+	
+
+<!-- POR PROJETO -->
+<p:outputLabel rendered="#{relatorioProjetoBean.eprojeto}" id="oProjeto">
+ 	<p:panelGrid id="painel" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Contrato" for="idContrato"/>
+							<p:selectOneMenu id="idContrato" 
+								style="width:100px !important;"
+								value="#{relatorioProjetoBean.filtroContrato}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.contratos}" var="resulte" itemLabel="#{resulte.nrContrato}" itemValue="#{resulte.id}" />
+								<p:ajax event="change" update="idOrdemServico" listener="#{relatorioProjetoBean.obterByOrdemServico()}"/>
+							</p:selectOneMenu>
+						</p:column>
+						
+						
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Ordem de Serviço" for="idOrdemServico"/>
+							<p:selectOneMenu id="idOrdemServico" 
+								style="width:100px !important;"
+								value="#{relatorioProjetoBean.filtroOrdemServico}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.ordensServicos}" var="resulte" itemLabel="#{resulte.numeroOS}" itemValue="#{resulte.id}" />
+								<p:ajax event="change" update="idProjeto" listener="#{relatorioProjetoBean.obterByProjetos()}"/>
+							</p:selectOneMenu>
+						</p:column>
+						
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Projeto" for="idProjeto"/>
+							<p:selectOneMenu id="idProjeto" style="width:120px;"
+								value="#{relatorioProjetoBean.filtroProjeto}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.projetos}" var="resulte" itemLabel="#{resulte.numeroProjetoAgrega}" itemValue="#{resulte.id}" />
+							</p:selectOneMenu>
+						</p:column>
+						
+						
+						<p:column style="width:30% !important;">
+							<p:outputLabel value="Status" for="idStatus"/>
+							<p:selectOneMenu id="idStatus" style="width:120px;"
+								value="#{relatorioProjetoBean.filtroStatus}" >
+								<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+								<f:selectItems value="#{relatorioProjetoBean.comboStatus}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+							</p:selectOneMenu>
+						</p:column>
+					</p:row>
+				
+				<p:row>
+					<p:column style="width:30% !important;">
+						<p:outputLabel value="Cliente" for="idCliente"/>
+						<p:selectOneMenu id="idCliente" style="width:120px;"
+							value="#{relatorioProjetoBean.filtroCliente}" >
+							<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+							<f:selectItems value="#{relatorioProjetoBean.comboClientes}" var="resulte" itemLabel="#{resulte.nome}" itemValue="#{resulte.id}" />
+						</p:selectOneMenu>
+					</p:column>
+					
+					<p:column >
+				 		<p:outputLabel value="Estado" for="idEstado" />
+						<p:selectOneMenu id="idEstado"  styleClass="ui-altera-selectMenu" style="width:220px;"
+							effect="fade" filter="true"
+							filterMatchMode="startsWith" value="#{relatorioProjetoBean.filtroEstado}">
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{relatorioProjetoBean.comboEstado}" var="item" itemLabel="#{item.descricaoUf}" itemValue="#{item.id}" />
+							<p:ajax event="change" listener="#{relatorioProjetoBean.obterMunicipios()}" update="idMunicipioConsulta" />
+						</p:selectOneMenu>
+					</p:column>
+				
+					<p:column>
+				 		<p:outputLabel value="Município" for="idMunicipioConsulta" />
+						<p:selectOneMenu id="idMunicipioConsulta"  styleClass="ui-altera-selectMenu" style="width:220px;"
+							effect="fade" filter="true"
+							filterMatchMode="startsWith" value="#{relatorioProjetoBean.filtroMunicipio}">
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{relatorioProjetoBean.comboMunicipio}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+						</p:selectOneMenu>
+					</p:column>
+					
+					<p:column>
+						<p:outputLabel value="Tipo Projeto" for="idTipoProjeto" />
+						<p:selectOneMenu id="idTipoProjeto" 
+							value="#{relatorioProjetoBean.filtroTipoProjeto}" >
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{relatorioProjetoBean.comboTipoProjeto}" var="item" itemLabel="#{item}" itemValue="#{item}" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+				
+				<p:row>	
+					<p:column>
+				 		<p:outputLabel value="Profissional EPI" for="idProfissional" />
+						<p:selectOneMenu id="idProfissional"  styleClass="ui-altera-selectMenu" style="width:220px;"
+							effect="fade" filter="true"
+							filterMatchMode="startsWith" value="#{relatorioProjetoBean.filtroProfisionalEPI}">
+							<f:selectItem itemLabel="- Selecione -" itemValue="" />
+							<f:selectItems value="#{relatorioProjetoBean.comboProfissionais}" var="item" itemLabel="#{item.nome}" itemValue="#{item.id}" />
+						</p:selectOneMenu>
+					</p:column>
+					
+				<p:column >
+					<p:outputLabel value="Profisional EVCTGAL" for="proDadosCampoOS" />
+					<p:selectOneMenu  
+						id="proDadosCampoOS" 
+						style="width:210px !important;"
+						value="#{relatorioProjetoBean.filtroProfissionalEVCTGAL}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{relatorioProjetoBean.comboProfissionais}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>	
+		
+				<p:column >
+					<p:outputLabel value="Profisional de Mapas" for="proMapsOS" />
+					<p:selectOneMenu  
+						id="proMapsOS" 
+						style="width:210px !important;"
+						value="#{relatorioProjetoBean.filtroProfisionalMapas}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{relatorioProjetoBean.comboProfissionais}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column >
+					<p:outputLabel value="Profisional de Verificação" for="proVerificacao" />
+					<p:selectOneMenu  
+						id="proVerificacao" 
+						style="width:210px !important;"
+						value="#{relatorioProjetoBean.filtroProfissionalVerificacao}"  >
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{relatorioProjetoBean.comboProfissionais}" var="profissional" itemLabel="#{profissional.nome}" itemValue="#{profissional.id}" />
+						<f:ajax event="change"/>
+					</p:selectOneMenu>	
+				</p:column>
+					
+					
+				</p:row>
+				
+				
+			<p:row>	
+			<p:panelGrid style="width: 200px;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:column style="width:20% !important;">
+					<p:outputLabel value="Período de Pesquisa: "  />
+					<p:calendar styleClass="componente-data-nova-pro"
+						id="dataUm" 
+						placeholder="Data incial"
+						pattern="dd/MM/yyyy"
+						value="#{relatorioProjetoBean.filtroDataInicial}" 
+						style="width:100px; !important;" >
+						<p:ajax event="dateSelect" />
+					</p:calendar>
+				</p:column>	
+						
+			<p:column style="width:20% !important;">	
+				<p:outputLabel value="." />
+				<p:calendar styleClass="componente-data-nova-pro"
+					id="dataDois" 
+					placeholder="Data final"
+					pattern="dd/MM/yyyy"
+					value="#{relatorioProjetoBean.filtroDataFinal}" 
+					style="width:100px; !important;" >
+					<p:ajax event="dateSelect" />
+				</p:calendar>
+			</p:column>
+		</p:panelGrid>
+	</p:row>	
+					
+ </p:panelGrid>
+</p:outputLabel>
+ 
+ <br/>
+ </p:fieldset>
+ 
+ 
+ <br /><br />
+ 	 	
+		<div align="right">		 
+			<p:commandButton 
+				id="idBtPesquisar" 
+				styleClass="btn btn-yellow"
+				value="Pesquisar"
+				action="#{relatorioProjetoBean.buscar()}" 
+				update="@form">
+			</p:commandButton>
+			
+			<p:commandButton 
+				id="idBtLimpar" 
+				styleClass="btn btn-yellow"
+				value="Limpar"
+				action="#{relatorioProjetoBean.limpar()}" 
+				update="@form">
+			</p:commandButton>
+								
+		</div> 
+ 
+ 
+ 
+ 
+  <!-- INICIO - PROJETO -->
+ <p:outputLabel rendered="#{relatorioProjetoBean.projetos.size()>0 and relatorioProjetoBean.eprojeto and relatorioProjetoBean.eprojeto}">
+ <h4>Relatório de Projetos</h4>
+ <p:scrollPanel style="width:100%">
+ 	<p:dataTable 
+ 			styleClass="header-tabelas" 
+			var="item"
+			id="idProjetos" 
+			value="#{relatorioProjetoBean.projetos}"
+			summary="true"
+			rowKey="#{item.id}"
+			rendered="#{relatorioProjetoBean.projetos.size()>0}"
+			emptyMessage="Nenhum registro encontrado" 
+			rows="5"
+			rowsPerPageTemplate="5,10,15" 
+			paginatorAlwaysVisible="true"
+			paginatorPosition="bottom" 
+			paginator="true" 
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+			sortBy="#{item.id}" 
+			sortOrder="DESCENDING"  >
+			
+			<p:column headerText="Nº Contrato" width="10%" sortBy="#{item.ordemServico.contrato.nrContrato}">
+				<center>
+					<p:outputLabel value="#{item.ordemServico.contrato.nrContrato}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Cliente" width="10%" sortBy="#{item.ordemServico.contrato.proposta.cliente.nome}">
+				<center>
+					<p:outputLabel value="#{item.ordemServico.contrato.proposta.cliente.nome}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Nº O.S" width="10%" sortBy="#{item.ordemServico.numeroOS}">
+				<center>
+					<p:outputLabel value="#{item.ordemServico.numeroOS}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Nº Projeto" width="10%" sortBy="#{item.numeroProjetoAgrega}">
+				<center>
+					<p:outputLabel value="#{item.numeroProjetoAgrega}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Nome" width="10%" sortBy="#{item.nomeProjeto}">
+				<center>
+					<p:outputLabel value="#{item.nomeProjeto}" />
+				</center>
+			</p:column>
+					
+		 	<p:column headerText="Entrada" width="10%" sortBy="#{item.dataEntrada}">
+				<center>
+					<p:outputLabel value="#{item.dataEntrada}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+					</p:outputLabel>
+				</center>
+			</p:column>
+			
+		 	<p:column headerText="Município" width="10%" sortBy="#{item.municipio.nome}">
+				<center>
+					<p:outputLabel value="#{item.municipio.nome}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Status" width="10%" sortBy="#{item.status.nome}">
+				<center>
+					<p:outputLabel value="#{item.status.nome}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Tipo" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.tipoProjeto}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="SubTipo" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.subTipoProjeto}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Tamanho" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.tamanhoProjeto}" />
+				</center>
+			</p:column>
+			
+
+			<p:column headerText="Distância Sede Mun. Pavimentada" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.distanciaSedeMunPav}" />
+				</center>
+			</p:column>
+			
+			
+			<p:column headerText="Distância Sede Mun. Não Pavimentada" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.distanciaSedeMunNaoPav}" />
+				</center>
+			</p:column>
+			
+			
+			<p:column headerText="Distância Local  Proj. Pavimentada" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.distanciaMunLocalProjPav}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Distância Local Proj. Não Pavimentada" width="10%" sortBy="#{item.tipo}">
+				<center>
+					<p:outputLabel value="#{item.distanciaMunLocalProjNaoPav}" />
+				</center>
+			</p:column>
+			
+			
+			<p:column headerText="Profissonal Mapa" width="10%" sortBy="#{item.verificacaoProfissional== null ? '-' : item.verificacaoProfissional.profissionalMapas.nome}">
+				<center>
+					<p:outputLabel value="#{item.planejamento== null ? '-' : item.planejamento.profissionalMapas.nome}" />
+				</center>
+			</p:column>
+			
+						
+			<p:column headerText="Profissonal EPI" width="10%" sortBy="#{item.planejamento.profissionalEPI== null ? '-' : item.planejamento.profissionalEPI.nome}">
+				<center>
+					<p:outputLabel value="#{item.planejamento.profissionalEPI== null ? '-' : item.planejamento.profissionalEPI.nome}" />
+				</center>
+			</p:column>
+			
+			
+			<p:column headerText="Profissonal EVCTGAL" width="10%" >
+				<center>
+					<p:outputLabel value="#{item.planejamento.profissionalEVCTGAL== null ? '-' : item.planejamento.profissionalEVCTGAL.nome}" />
+				</center>
+			</p:column>
+			
+			<p:column headerText="Profissonal de Verificação" width="10%" sortBy="#{item.planejamento.profissionalVerificacao== null ? '-' : item.planejamento.profissionalVerificacao.nome}">
+				<center>
+					<p:outputLabel value="#{item.planejamento.profissionalVerificacao== null ? '-' : item.planejamento.profissionalVerificacao.nome}" />
+				</center>
+			</p:column>
+			
+			
+				<p:column headerText="D. Inicial Planejamento" sortBy="#{item.planejamento.dtInicioPlanejamento}">
+				<center>
+					<p:outputLabel value="#{item.planejamento.dtInicioPlanejamento}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+					</p:outputLabel>
+				</center>
+			</p:column>		
+			
+			<p:column headerText="D. Fim Planejamento" sortBy="#{item.planejamento.dtFimPlanejamento}">
+				<center>
+					<p:outputLabel value="#{item.planejamento.dtfimPlanejamento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT-03:00"/>
+					</p:outputLabel>
+				</center>
+			</p:column>		
+			
+			<p:column headerText="D. Entrega" sortBy="#{item.planejamento.dtEntrega}">
+				<center>
+					<p:outputLabel value="#{item.planejamento.dtEntrega}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:outputLabel>
+				</center>
+			</p:column>	
+			
+			
+			<p:column headerText="Valor R$" width="10%">
+				<center>
+					<p:outputLabel value="#{item.valorProjeto== null? '-' :item.valorProjeto}" />
+				</center>
+			</p:column>	
+			
+			<p:column headerText="Valor já Cobrado R$" width="10%">
+				<center>
+					<p:outputLabel value="#{item.valorJaCobrado== null? '-' :item.valorJaCobrado}" />
+				</center>
+			</p:column>	
+			
+			<p:column headerText="Valor Restante R$" width="10%">
+				<center>
+					<p:outputLabel value="#{item.saldoRestante== null? '-' : item.saldoRestante}" />
+				</center>
+			</p:column>	
+			
+			
+				
+			
+ </p:dataTable>
+ </p:scrollPanel>
+ </p:outputLabel>
+ <!-- FIM - PROJETO -->
+ 
+ <br />
+		<div align="right">		 
+			<p:commandButton 
+				id="grRelatorio" 
+				value="Relatório"
+				rendered="#{relatorioProjetoBean.projetos.size()>0 and relatorioProjetoBean.eprojeto}"
+				styleClass="btn btn-blue"
+				action="#{relatorioProjetoBean.gerarRelatorio()}" 
+				update="@form">
+			</p:commandButton>
+								
+		</div>
+ 
+		 
+	</p:panel>
+</div>
+
+
+<p:dialog 
+	id="dialogVerProjetos" 
+	showEffect="explode"
+	hideEffect="fade"
+	header="Projetos por Ordem de Serviço" 
+	widgetVar="dialogVerProjetos"
+	style="overflow-y:scroll;height:100%;width:100%;overflow:auto"
+	resizable="false" 
+	closeOnEscape="true" 
+	severity="alert" 
+	modal="true" 
+	width="80%">
+
+	<p:dataTable 
+				styleClass="header-tabelas" 
+				lazy="true"
+				var="item" 
+				value="#{relatorioProjetoBean.projetos}"
+				emptyMessage="Nenhum Registro encontrado" 
+				rows="5" 
+				rowsPerPageTemplate="10,15,20" 
+				paginatorAlwaysVisible="true"
+				paginatorPosition="bottom" 
+				paginator="true" 
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+				currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+				rowsPerPageLabel="#{msgs['label.panelgrid.quantidade.registros']}"
+				sortBy="#{item.municipio.nome}" sortOrder="DESCENDING" >
+				
+				<p:column headerText="Nº Proj.Cliente" width="7%">
+					<center>
+						<p:outputLabel value="#{item.numeroProjetoCliente}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column headerText="Nº Proj.Agrega" width="7%">
+					<center>
+						<p:outputLabel value="#{item.numeroProjetoAgrega}" style="text-align: center;"/>
+					</center>
+				</p:column>
+				
+				<p:column headerText="Nome" width="15%">
+					<center>
+						<p:outputLabel value="#{item.nomeProjeto}" style="text-align: center;"/>
+					</center>
+				</p:column>
+						
+				<p:column headerText="Nº O.S" width="7%">
+					<center>
+						<h:outputText value="#{item.ordemServico.numeroOS}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Macro Região" width="10%">
+					<center>
+						<h:outputText value="#{item.municipio.regiao.nome}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Municipio" width="10%">
+					<center>
+						<h:outputText value="#{item.municipio.nome}" />
+					</center>
+				</p:column>
+				
+				<p:column headerText="Status" width="10%">
+					<center>
+						<h:outputText value="#{(item.status==null? '-' : item.status.nome)}" />
+					</center>
+				</p:column>
+				
+			</p:dataTable>
+</p:dialog>
+</p:panel>	
+ 
+		
+		
+</html>

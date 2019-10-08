@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioPropostaFinanceira" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="ddffff67-31a5-4133-b4fe-9c8b76a5c17a">
+	<property name="ireport.zoom" value="1.5000000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1367"/>
+	<subDataset name="dataset1" uuid="7af184e8-d2c6-445b-8141-506c883c5741"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Elton\\workspace\\sysagrega\\jrxml\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="RENDER_CUSTOS" class="java.lang.Boolean"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_proposta.`numeroProposta` AS numeroProposta,
+     tb_proposta.`objeto` AS objeto,
+     tb_proposta.`dataEnvioAoCliente` AS dataEnvioAoCliente,
+     tb_proposta.`dataInclusao` AS dataInclusao,
+     tb_proposta.`cliente` AS cliente,
+     tb_proposta.`dataContratacao` AS dataContratacao,
+     tb_proposta.`contato` AS contato,
+     tb_proposta.`tipoProposta` AS tipoProposta,
+     tb_proposta.`nomeProjeto` AS nomeProjeto,
+     tb_proposta.`ID_UF` AS estado,
+     tb_proposta.`ID_CIDADE` AS cidade,
+     tb_proposta.`statusContratada` AS statusContratada,
+     tb_proposta.`status` AS status,
+     tb_proposta.`valorTotalComBdiComissao` AS valorTotalComBdiComissao,
+     tb_proposta.`valorTotalCustosAdministrativos` AS valorTotalCustosAdministrativos,
+     tb_proposta.`valorTotalCustosBdiComissoes` AS valorTotalCustosBdiComissoes,
+     tb_proposta.`valorTotalCustosDesclocamento` AS valorTotalCustosDesclocamento,
+     tb_proposta.`valorTotalCustosExecucao` AS valorTotalCustosExecucao,
+     tb_proposta.`valorTotalCustosOperacionais` AS valorTotalCustosOperacionais,
+     tb_proposta.`valorTotalCustosSeguranca` AS valorTotalCustosSeguranca,
+     tb_proposta.`valorTotalDaProposta` AS valorTotalDaProposta,
+     tb_proposta.`valorTotalImpostos` AS valorTotalImpostos,
+     tb_proposta.`valorTotalPrecificacao` AS valorTotalPrecificacao,
+     tb_proposta.`valorTotalSemBdiComissao` AS valorTotalSemBdiComissao,
+     tb_proposta.`id` AS id
+FROM
+     `tb_proposta` tb_proposta
+WHERE
+     id = 1]]>
+	</queryString>
+	<field name="proposta.dataInclusao" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.numeroProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.cliente.nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.tipoProposta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.nomeProjeto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proposta.dptoEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.cliente.cnpjCPF" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.rua" class="java.lang.String"/>
+	<field name="proposta.destinatarioEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.dadosDestinatarioEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.descricaoFinanceira" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.bairro" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.cep" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.cidade.nome" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.estado.descricaoUf" class="java.lang.String"/>
+	<field name="proposta.listarCustoPlanilhaFinanceira" class="java.util.Collection"/>
+	<group name="TITULO_HEADER" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{titulo}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band height="102">
+				<textField>
+					<reportElement x="5" y="14" width="542" height="20" uuid="ebb8ffee-22ba-484e-9e0a-4185b6b238b5"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="14" isBold="true" isStrikeThrough="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="4" y="42" width="542" height="20" uuid="0af0c090-fbf0-4668-8ba7-18091c25b5d3"/>
+					<box leftPadding="3" rightPadding="3"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement positionType="Float" x="4" y="65" width="523" height="37" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="621c2c73-671b-46e4-b15d-36eab1c37d57">
+						<printWhenExpression><![CDATA[($F{titulo}.equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(1).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(2).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(3).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(4).equalsIgnoreCase("Planilha Financeira") ? true :
+ $F{titulo}.substring(5).equalsIgnoreCase("Planilha Financeira") ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{proposta.listarCustoPlanilhaFinanceira}, false)]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ResumoPlanilhaFinanceira.jasper"]]></subreportExpression>
+				</subreport>
+				<elementGroup/>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="801">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<staticText>
+				<reportElement x="1" y="47" width="553" height="20" forecolor="#009900" uuid="85085b35-7fb9-4483-8048-f92e07e13149"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Técnico-Comercial]]></text>
+			</staticText>
+			<line>
+				<reportElement x="5" y="70" width="543" height="1" forecolor="#009900" uuid="e3b291b3-8218-445f-a952-6f317e3ac64f"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="63" width="78" height="5" forecolor="#FFFFFF" uuid="2aba6879-d204-4ed8-a2e8-e36ddc264055"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="80" width="52" height="20" uuid="9a784623-01b0-40ee-9a06-b2fdda2158f1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Salvador,]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+				<reportElement x="448" y="80" width="98" height="20" uuid="b6b82074-7bc1-4a55-8336-bdd334285e92"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.dataInclusao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="80" width="62" height="20" uuid="aeddf57c-a7b3-4c05-a6f3-4ceb669cf8c3"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="80" width="312" height="20" uuid="24773d79-fe3b-4d4b-aad3-9751d96ae3ef"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="128" width="421" height="16" uuid="1bda8465-a107-44a2-8192-ec469111e727"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="329" width="542" height="20" uuid="2daa8f5e-60f8-44bb-ad13-dec6d9576b9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Técnico-Comercial]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="143" width="421" height="16" uuid="39abc0ff-eb8e-4d3b-a82c-24bf5005bca2"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.dptoEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="158" width="209" height="16" uuid="831f4ea9-234b-4e27-b6e2-57b0222b15c0"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.cnpjCPF}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="223" width="283" height="16" uuid="684e69a7-9cfb-4f73-8d79-08a73485fdff"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.destinatarioEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="239" width="283" height="61" uuid="e3213eb9-87f8-4f57-94f9-e47453352bb5"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.dadosDestinatarioEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="361" width="542" height="241" uuid="8dee9e13-abd7-48d8-8a51-80ad15bc2da2"/>
+				<box leftPadding="3" rightPadding="3"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.descricaoFinanceira}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="173" width="426" height="16" uuid="416fb4c3-67f1-4067-a1e6-a20fae9f9333"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.endereco.rua} + " - " + $F{proposta.cliente.endereco.bairro} + " - " + $F{proposta.cliente.endereco.cep}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="188" width="426" height="16" uuid="78b43c8c-72bb-4a40-a35d-1cf7c1c5750e"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.endereco.cidade.nome} + " - " +$F{proposta.cliente.endereco.estado.descricaoUf}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="28" y="3" width="78" height="65" uuid="f6cb1e06-6928-4233-90ff-b0084c4cf8a5"/>
+				<imageExpression><![CDATA["img/cabecalho.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="5" y="629" width="100" height="16" uuid="25ed432b-3be2-4fdb-b99e-9fea23a89740"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Cordialmente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="646" width="150" height="16" uuid="04df261c-999e-4b0b-b6e6-0c9cea086126"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia Guimarães ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="661" width="176" height="16" uuid="9f4010ad-87bd-48ba-b187-703ed330a57a"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Diretora Técnica e Executiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="645" width="150" height="16" uuid="cc03baad-3127-4be4-a020-9a3541070f3b"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carlos Fernando Pina Caires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="661" width="150" height="16" uuid="487b83d3-1c42-4dde-904f-ca3e61eb169d"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Diretor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="706" width="62" height="20" uuid="63143294-68df-4415-b199-22b373417300"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anexo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="706" width="312" height="20" uuid="bb028269-9703-4d21-8ac0-aaf61224622b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="-1" y="779" width="554" height="11" forecolor="#000000" uuid="c8426b7a-8ec2-4e40-ad30-d5f99ef4f0c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="-1" y="790" width="554" height="11" forecolor="#3333FF" uuid="bc1a83b8-9657-41fd-8ba2-641316d170cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="765" width="554" height="1" forecolor="#009900" uuid="f8bfd632-529b-4d9e-9a87-0edb5d1ff574"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="-1" y="767" width="555" height="13" forecolor="#000000" uuid="bdd09791-20a5-46f5-b3d4-8ba4ffed1d86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="97" y="2" width="11" height="63" forecolor="#FFFFFF" uuid="1c26620b-a02d-4ba6-9795-e12e3bcd6dbc"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="64" width="95" height="4" forecolor="#FFFFFF" uuid="427eebe2-235a-4dcf-af54-fa7e6063ddc8"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="75">
+			<image>
+				<reportElement x="37" y="4" width="78" height="65" uuid="0ac1f4e2-88b9-43a0-a80e-083749b21368"/>
+				<imageExpression><![CDATA["img/cabecalho.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="2" y="53" width="552" height="20" forecolor="#009900" uuid="cf09115e-5195-44d0-b921-0450b9d6b04b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proposta Técnico-Comercial]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="74" width="543" height="1" forecolor="#009900" uuid="1c16b519-0e31-44b9-a521-283401e7b3f5"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="107" y="4" width="11" height="64" forecolor="#FFFFFF" uuid="ddb35e50-f16d-4838-ab47-4e66270bdca6"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="23" y="65" width="105" height="6" forecolor="#FFFFFF" uuid="5f0a0e0a-89ca-41ea-9556-87939088e316"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<pageFooter>
+		<band height="63" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="22" width="554" height="11" forecolor="#000000" uuid="a027adf7-8c37-433e-a9e2-2ceda7498cc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="33" width="554" height="11" forecolor="#3333FF" uuid="97cfce9d-a0c4-4702-ba81-be6389a8e99d"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="47" width="554" height="13" forecolor="#000000" uuid="3e4463ad-624a-4fde-88a8-4a202b0d00d0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág."+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="10" width="555" height="13" forecolor="#000000" uuid="9a3768e3-9c7e-4f93-856c-23ba2712287e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="8" width="554" height="1" forecolor="#009900" uuid="fd2f1f12-1942-4084-97ec-81615d5d302d"/>
+			</line>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="127">
+			<textField>
+				<reportElement mode="Transparent" x="0" y="112" width="554" height="13" forecolor="#000000" uuid="22cb3523-cbcb-4221-bb94-0c82cf07f8cf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág."+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="73" width="554" height="1" forecolor="#009900" uuid="d91de8ad-2679-41b1-98db-3bce5bfe8243"/>
+			</line>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="99" width="554" height="11" forecolor="#3333FF" uuid="9ca66c10-c2ab-417e-a7aa-702cc2af1e6b"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[contato@agregaconsultores.com.br - www.agregaconsultores.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="87" width="554" height="11" forecolor="#000000" uuid="972b60ff-9248-446e-a2c3-9782357a05cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contato telefones: (71) 3106-.0126 / 98638-1980 / 99161-0802 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="75" width="555" height="13" forecolor="#000000" uuid="2c692259-8e48-4b6b-a384-9ef8666b95c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA. – CNPJ 09.220.626/0001-88 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="10" y="22" width="176" height="16" isPrintInFirstWholeBand="true" uuid="330facd7-879c-4978-a3ff-944cc20d92de"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Diretora Técnica e Executiva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="377" y="6" width="150" height="16" isPrintInFirstWholeBand="true" uuid="64ea882d-531d-41ba-873a-ddd1085cdd99"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carlos Fernando Pina Caires]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="10" y="5" width="150" height="16" isPrintInFirstWholeBand="true" uuid="b05b2b0a-0d16-447e-a4e1-35d9630b528d"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia Guimarães ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="377" y="22" width="150" height="16" isPrintInFirstWholeBand="true" uuid="92455893-dfd0-4f0d-b95a-059f593b2da6"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Diretor]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

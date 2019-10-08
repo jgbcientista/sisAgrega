@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+		
+		<p:outputPanel styleClass="painel-body painel-modal" id="painel-geral">
+ 
+		<p:message />
+			
+ <p:dialog id="modalAlterarSenha1" 
+				showEffect="fade" 
+				hideEffect="fade"
+				header="Cadastrar nova senha" 
+				widgetVar="modalAlterarSenha"
+				style="overflow:hidden" 
+				closeOnEscape="true"  
+				closable="false" 
+				severity="alert"
+				modal="true" 
+				width="500px">
+			
+		<p:panelGrid columns="2" id="painelSenha" style="margin-top:15px; margin-right:0px !important;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+		
+			<p:outputLabel value="Usuário: " />
+			<p:outputLabel value="#{menuBean.usuario.nome}" />
+			
+			<p:outputLabel value="Perfil:" />
+				<p:outputLabel value="#{menuBean.usuario.perfil.nome}" />
+				
+			<p:outputLabel value="Senha Atual:" />
+				<p:password value="#{menuBean.senhaAtual}" />
+			
+			<p:outputLabel value="Nova Senha: " />
+				<p:password value="#{menuBean.senhaNova}" />
+			
+		</p:panelGrid>
+			
+			<br />
+				<p:commandButton 
+					id="btnSalvarAL"
+					value="Ok"
+					title="confirmar"
+					styleClass="btn btn-green" 
+					immediate="false"
+					style="color:#FFF; 
+					margin-left:10px; 
+					margin-top: 24px;"
+					update="@form" 
+					process="@form"
+					actionListener="#{menuBean.alterarSenha()}">
+				</p:commandButton>
+				
+				<p:commandButton 
+					id="btACancelarAL"
+					styleClass="btn btn-yellow" 
+					value="Cancelar"
+					title="Cancelar" 
+					type="button"
+					style="margin-top: 24px;"
+					update="@form" 
+					process="@form"
+					onclick="PF('modalAlterarSenha').hide()" />
+			<br />
+			
+		</p:dialog>
+	</p:outputPanel>
+</ui:composition>

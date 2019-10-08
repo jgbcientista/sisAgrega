@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioPropostaCustoDeslocamento" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.dataInclusao" class="java.util.Date"/>
+	<field name="proposta.nomeProjeto" class="java.lang.String"/>
+	<field name="proposta.cliente.nome" class="java.lang.String"/>
+	<field name="proposta.numeroProposta" class="java.lang.String"/>
+	<field name="proposta.numeroRevisao" class="java.lang.String"/>
+	<field name="proposta.respProjeto" class="java.lang.String"/>
+	<field name="proposta.dadosDestinatarioEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.dptoEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.descricaoFinanceira" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.rua" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.bairro" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.cep" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.cidade.nome" class="java.lang.String"/>
+	<field name="proposta.cliente.endereco.estado.descricaoUf" class="java.lang.String"/>
+	<field name="proposta.cliente.cnpjCPF" class="java.lang.String"/>
+	<field name="proposta.destinatarioEnvioFinanceiro" class="java.lang.String"/>
+	<field name="proposta.assinaturaFinanc" class="java.lang.String"/>
+	<field name="proposta.funcaoCargoFinanc" class="java.lang.String"/>
+	<field name="proposta.dtEmissPropFinc" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="706" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="604" width="555" height="101" uuid="3faec6aa-ff55-4ae2-95f7-17969b697cff"/>
+				<imageExpression><![CDATA["C:\\Desenvolvimento\\Agrega\\workspace\\agregawebapp\\WebContent\\jasper\\img\\rodapeNovo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="421" width="111" height="14" uuid="40c2b6ab-a4fa-40b9-b266-3d076d385fb1"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Cordialmente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="10" width="111" height="14" uuid="62002843-998e-4a74-bfd1-9a6e131099e7"/>
+				<textElement markup="html">
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proposta Financeira:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="212" width="26" height="15" uuid="4fab9b06-7969-463f-b2c2-da05cfc41901"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Ref.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="577" width="56" height="14" uuid="6993d082-78de-4a0c-9ef0-8206af0a11eb"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Anexos:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="374" y="10" width="166" height="14" uuid="7f264790-e61f-4c5b-9cb5-bc877663732a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Salvador, "+ new java.text.SimpleDateFormat("dd 'de' MMMMM 'de' yyyy").format($F{proposta.dtEmissPropFinc})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="132" width="48" height="15" uuid="9a65f3ea-89bb-49ac-a62a-3b0a3b0b4f02"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Atenção:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="10" width="227" height="14" uuid="9fec7e83-af09-459a-8446-ea10681ad097"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="39" width="529" height="20" uuid="a25f4b85-b803-4592-98a9-b2714f705362"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="12" y="59" width="528" height="16" uuid="e2c73324-120d-4502-a5b7-b5e637279942"/>
+				<box leftPadding="0"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.endereco.rua} + " - " + $F{proposta.cliente.endereco.bairro} + ", CEP: " + $F{proposta.cliente.endereco.cep}+" - "+ $F{proposta.cliente.endereco.cidade.nome} + " - " +$F{proposta.cliente.endereco.estado.descricaoUf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="74" width="57" height="16" uuid="13aaaa33-4465-4fdf-bec3-b41edf126f8e"/>
+				<box leftPadding="0"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[CNPJ/CPF:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="74" width="209" height="16" uuid="57529e88-da82-4d52-a14f-6e487630c1cf"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.cliente.cnpjCPF}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="132" width="474" height="15" uuid="027046fb-0ad9-45d3-b9e7-8ab0e8e86a42"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.destinatarioEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="147" width="267" height="38" uuid="d55a2743-6679-4bfc-a267-2fe683d3f361"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.dadosDestinatarioEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="37" y="212" width="503" height="57" uuid="6a46381c-1d15-45f3-ac34-bf9ff72ebe92"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.dptoEnvioFinanceiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="279" width="528" height="131" uuid="45c9c6ce-1862-4ae8-bd56-582eb00ee278"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.descricaoFinanceira}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="577" width="306" height="14" uuid="c2b9e181-668f-4320-9c97-6b0221d74a63"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="461" width="187" height="14" uuid="aa9557bb-d2b9-4ae5-bb54-ea22e45a4751"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.assinaturaFinanc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="477" width="186" height="14" uuid="f78f6993-19a3-48b3-9fbf-c9280f5de3e7"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.funcaoCargoFinanc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

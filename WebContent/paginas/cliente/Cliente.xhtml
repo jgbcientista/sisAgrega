@@ -1,0 +1,639 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<p:panel id="idPanelClienteCadastro" style="border: none;" rendered="#{!clienteBean.pesquisar}">
+		<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<center>
+		<p:fieldset legend="Dados do Cliente" style="width: 97%;text-align: left;"  >
+			<p:panelGrid columns="4" id="painelCadastro" columnClasses="rotulo, campo" styleClass="ui-noborder" >
+				<p:outputLabel value="Tipo Cliente: "  for="tpCliente"/>
+				<p:selectOneMenu id="tpCliente" style="width:120px !important; " 
+					required="true" requiredMessage="Campo tipo Cliente obrigatório."
+					value="#{clienteBean.cliente.tipoCliente}" 
+					disabled="#{clienteBean.viewCliente}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.tiposClientes}"	
+						var="tipoCliente" itemLabel="#{tipoCliente}"
+						itemValue="#{tipoCliente}" />
+					<p:ajax event="change" update="@form, idPanelGridObservacao" listener="#{clienteBean.verificarCliente(clienteBean.cliente.tipoCliente)}"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Como conheceu?"  for="tipoIndicacao" />
+				<p:selectOneMenu  id="tipoIndicacao"  style="width:120px !important; "  
+					value="#{clienteBean.cliente.tipoIndicacao}"
+					disabled="#{clienteBean.viewCliente}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.tiposIndicacao}"
+						var="tipoIndicacao" itemLabel="#{tipoIndicacao}"
+						itemValue="#{tipoIndicacao}" />
+						<p:ajax event="change"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Porte do Cliente:" for="tipoPorte" />
+				<p:selectOneMenu id="tipoPorte" style="width:120px !important; " 
+					required="true" requiredMessage="Campo porte do Cliente obrigatório."
+					value="#{clienteBean.cliente.porteEmpresa}" 
+					disabled="#{clienteBean.viewCliente}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.tipoPorteEmpresa}"
+						var="tipoPorte" itemLabel="#{tipoPorte}"
+						itemValue="#{tipoPorte}" />
+						<p:ajax event="change"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Segmento:" for="tpSeguimento" />
+				<p:selectOneMenu id="tpSeguimento" style="width:120px !important; "
+					required="true" requiredMessage="Campo seguimento do Cliente obrigatório."
+					value="#{clienteBean.cliente.seguimento}" 
+					disabled="#{clienteBean.viewCliente}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.seguimentos}"
+						var="seguimento" itemLabel="#{seguimento}"
+						itemValue="#{seguimento}" />
+						<p:ajax event="change"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="#{clienteBean.pessoaFisicaSelecionada? 'Nome:': 'Razão Social:'}" for="nomeCliente" />
+				<p:inputText id="nomeCliente" style="width:400px !important;   text-transform:uppercase;" maxlength="200"
+					required="true" requiredMessage="Campo nome do Cliente obrigatório."
+					value="#{clienteBean.cliente.nome}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+					<p:ajax event="change"/>
+				</p:inputText> 
+		
+				<p:outputLabel value="Sigla do Cliente: " for="siglaEmpresa" />
+				<p:inputMask  id="siglaEmpresa" style="width:160px !important;  text-transform: uppercase;" 
+					onkeypress="return event.keyCode != 13;"
+					value="#{clienteBean.cliente.sigla}" 
+					maxlength="10"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+		
+				<p:outputLabel value="RG:" for="rg" rendered="#{clienteBean.pessoaFisicaSelecionada}"/>
+				<p:inputMask  id="rg" mask="99.999.999-99" style="width:160px !important; " rendered="#{clienteBean.pessoaFisicaSelecionada}"
+					value="#{clienteBean.cliente.rg}" 
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+					
+				<p:outputLabel value="#{clienteBean.pessoaFisicaSelecionada? 'CPF': 'CNPJ:'}" 
+					for="#{clienteBean.pessoaFisicaSelecionada? 'cpf': 'cnpj:'}" required="#{clienteBean.pessoaFisicaSelecionada}"/>	
+				<p:inputMask id="cpf" mask="999.999.999-99" style="width:160px !important; " rendered="#{clienteBean.pessoaFisicaSelecionada}"
+					required="#{clienteBean.pessoaFisicaSelecionada}" requiredMessage="Campo CPF obrigatório."
+					value="#{clienteBean.cliente.cnpjCPF}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change" listener="#{clienteBean.verificaCPFCadastrado}" update="cpf"  />
+				</p:inputMask>
+				
+				<p:inputMask id="cnpj" mask="99.999.999/9999-99" style="width:160px !important;" rendered="#{clienteBean.pessoaJuridicaSelecionada}"
+					required="#{clienteBean.pessoaJuridicaSelecionada}" requiredMessage="Campo CNPJ obrigatório."
+					value="#{clienteBean.cliente.cnpjCPF}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change" listener="#{clienteBean.verificaCPFCadastrado}" update="cnpj"  />
+				</p:inputMask>
+		
+				<p:outputLabel value="Inscrição Estadual:"  for="insEstadual" rendered="#{clienteBean.pessoaJuridicaSelecionada}"/>
+				<p:inputMask  id="insEstadual" maxlength="15" style="width:160px !important; " rendered="#{clienteBean.pessoaJuridicaSelecionada}"
+					value="#{clienteBean.cliente.inscricaoEstadual}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+		
+				<p:outputLabel value="Inscrição Municipal:" for="insMunicipal" rendered="#{clienteBean.pessoaJuridicaSelecionada}"/>
+				<p:inputMask id="insMunicipal" maxlength="15" style="width:160px !important; " rendered="#{clienteBean.pessoaJuridicaSelecionada}"
+					value="#{clienteBean.cliente.inscricaoMunicipal}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+				
+		
+				<p:outputLabel value="CNAE:" for="cnae" rendered="#{clienteBean.pessoaJuridicaSelecionada}"/>
+				<p:inputText id="cnae" style="text-transform:uppercase; width:325px !important; " rendered="#{clienteBean.pessoaJuridicaSelecionada}"
+					value="#{clienteBean.cliente.cnae}" maxlength="200"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+		
+				<p:outputLabel value="Estado:" for="idEstados" />
+				<p:selectOneMenu id="idEstados" style="width:160px !important; " 
+					required="true" requiredMessage="Campo Estado obrigatório."
+					value="#{clienteBean.cliente.endereco.estado}"
+					disabled="#{clienteBean.viewCliente}" 
+					onkeypress="return event.keyCode != 13;"
+					panelStyle="width:180px;"
+					effect="fade"
+					filter="true" filterMatchMode="startsWith">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.estados}" var="estado"
+						disabled="#{clienteBean.viewCliente}"
+						itemLabel="#{estado.uf}" itemValue="#{estado}" />
+					<p:ajax event="change" listener="#{clienteBean.carregarCidadesPorEstado}" update="idCidades"  />
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Cidade:" for="idCidades" />
+				<p:selectOneMenu id="idCidades" style="width:120px !important; " 
+					required="true" requiredMessage="Campo Cidade obrigatório."
+					value="#{clienteBean.cliente.endereco.cidade}"
+					disabled="#{clienteBean.disableCity || clienteBean.viewCliente}" 
+					panelStyle="width:180px;"
+					onkeypress="return event.keyCode != 13;"
+					effect="fade" 
+					filter="true" 
+					filterMatchMode="startsWith">
+					<f:selectItem itemLabel="#{clienteBean.cliente.endereco.cidade.nome}" itemValue="" />
+					<f:selectItems value="#{clienteBean.cidades}" var="cidade" 
+							itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+							<p:ajax event="change"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Endereço:" for="idEndereco" />
+				<p:inputText id="idEndereco" style="width:400px !important; " maxlength="250"
+					value="#{clienteBean.cliente.endereco.rua}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Número:" />
+				<p:inputMask mask="9?9999" process="@this" maxlength="5" slotChar=" " 
+					style="width:60px !important; " 
+					value="#{clienteBean.cliente.endereco.numeroRua}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+				
+				<p:outputLabel value="Complemento:" />
+				<p:inputText style="width:400px !important; " maxlength="250"
+					value="#{clienteBean.cliente.endereco.infoComplementar}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+		
+				<p:outputLabel value="Bairro:" for="idBairro" />
+				<p:inputText id="idBairro" style="width:200px !important; " maxlength="100"
+					value="#{clienteBean.cliente.endereco.bairro}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+		
+				<p:outputLabel value="CEP:" />
+				<p:inputMask mask="99999-999" style="width:200px !important; " 
+					value="#{clienteBean.cliente.endereco.cep}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputMask>
+				
+				<p:outputLabel value="Tel Fixo Principal:" />
+				<p:inputMask mask="(99) 9999-9999?" style="width:200px !important; " maxlength="12" 
+					value="#{clienteBean.cliente.telefone}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+					<p:ajax event="change"/>
+				</p:inputMask>
+				
+				<p:outputLabel value="Tel.Cel Principal:" />
+				<p:inputMask mask="(99) 99999-9999?" style="width:200px !important; " maxlength="12" 
+					value="#{clienteBean.cliente.celular}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+					<p:ajax event="change"/>
+				</p:inputMask>
+
+				<p:outputLabel value="Email Principal:" />
+				<p:inputText style="width:300px !important; " maxlength="200"
+					value="#{clienteBean.cliente.email}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+		
+				<p:outputLabel value="Setor:" />
+				<p:inputText id="setor" style="width:200px !important; " maxlength="100"
+					value="#{clienteBean.cliente.setor}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+		
+				<p:outputLabel value="Função:" />
+				<p:inputText id="funcao" style="width:200px !important; " maxlength="200"
+					value="#{clienteBean.cliente.funcao}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}">
+					<p:ajax event="change"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Status do cliente:" for="statusCliente" />
+				<p:selectOneMenu id="statusCliente" style="width:120px !important; " 
+					value="#{clienteBean.cliente.status}" 
+					disabled="#{clienteBean.viewCliente}">
+					<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+					<f:selectItems value="#{clienteBean.tipoStatus}"
+						var="tipoStatus" itemLabel="#{tipoStatus}"
+						itemValue="#{tipoStatus}" />
+						<p:ajax event="change"/>
+				</p:selectOneMenu>
+		
+				<p:outputLabel value="Pendência:" for="lbPendencia" />
+				<p:selectOneMenu id="lbPendencia" style="width:120px !important; " 
+					value="#{clienteBean.cliente.pendencia}" 
+					disabled="#{clienteBean.viewCliente}">
+						<f:selectItem itemLabel="- Selecionar -" itemValue="" />
+						<f:selectItems value="#{clienteBean.pendencias}"
+							var="item" itemLabel="#{item}"
+							itemValue="#{item}" />
+							<p:ajax event="change"/>
+				</p:selectOneMenu>
+			</p:panelGrid><br></br>
+			</p:fieldset>
+			</center>
+			<br/>
+			<p:fieldset legend="Contatos" style="width: 97%;text-align: left;" >
+			<br/>
+			<p:panelGrid columns="6" id="idContatos" style="width: 97%; margin-top:-13px; margin-left:-10px;" columnClasses="rotulo, campo" styleClass="ui-noborder"
+				rendered="#{clienteBean.adicionarContato}">
+				
+				<p:outputLabel value="Nome de Contato:" for="nomeContato" />
+				<p:outputLabel value="1º Telefone" for="telContato1" />
+				<p:outputLabel value="2º Telefone" for="telContato2" />
+				<p:outputLabel value="Setor" for="setorContato" />
+				<p:outputLabel value="E-mail" for="emailContato" />
+				<p:outputLabel></p:outputLabel>
+				
+				<p:inputText id="nomeContato" style="width:200px !important; " 
+					value="#{clienteBean.contato.nomeContato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+				<p:ajax event="change"/>
+				</p:inputText> 
+				
+				<p:inputText id="telContato1"  style="width:120px !important; " maxlength="15" 
+					value="#{clienteBean.contato.tel1Contato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}"
+					process="@this" >
+					<p:ajax event="change" update="telContato1" process="@this" listener="#{clienteBean.validarTel1}"/>
+				</p:inputText>
+				
+				<p:inputText id="telContato2" style="width:120px !important; " maxlength="15" 
+					value="#{clienteBean.contato.tel2Contato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" 
+					process="@this" >
+					<p:ajax event="change" update="telContato2" listener="#{clienteBean.validarTel2}"/>
+				</p:inputText>
+			
+				<p:inputText id="setorContato" style="width:130px !important; " 
+					value="#{clienteBean.contato.setorContato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+					<p:ajax event="change"/>
+				</p:inputText> 
+				
+				<p:inputText id="emailContato" style="width:250px !important; " 
+					value="#{clienteBean.contato.emailContato}"
+					onkeypress="return event.keyCode != 13;"
+					disabled="#{clienteBean.viewCliente}" >
+					<p:ajax event="change"/>
+				</p:inputText> 
+				<p:commandButton 
+					id="addContato" 
+					value="Adicionar"
+					immediate="true"
+					actionListener="#{clienteBean.adicionarContato}"
+					disabled="#{clienteBean.viewCliente}"
+					update="tabelaContatos, idContatos" 
+					process="@this"
+					style="margin-left:0px;"
+					styleClass="btn btn-green">
+				</p:commandButton>
+			</p:panelGrid>
+			<br/>
+				<p:growl id="msgs" showDetail="false"/>
+				<p:dataTable
+					styleClass="header-tabelas" 
+					value="#{clienteBean.listContatoTemp}"
+					id="tabelaContatos"
+					widgetVar="tabelaContatos"
+					rows="10" 
+					var="resulte"
+					style="width: 97%;"
+					editable="true" 
+					disabled="#{clienteBean.viewCliente}"
+					emptyMessage="Nenhuma contato cadastrada." 
+					rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+					paginatorPosition="bottom" paginator="true"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					>
+				 	
+				       <p:ajax event="rowEdit" listener="#{clienteBean.onRowEdit}" update="msgs" />
+				       <p:ajax event="rowEditCancel" listener="#{clienteBean.onRowCancel}" update="msgs" />
+						
+					   <p:column  headerText="Editar" style="width:10px">
+				           <p:rowEditor  />
+				       </p:column>
+				       
+				       <p:column headerText="Nome de Contato" style="width:20%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.nomeContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput1" value="#{resulte.nomeContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+				       </p:column>
+				 
+				       <p:column headerText="1º Telefone" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.tel1Contato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput2" value="#{resulte.tel1Contato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					   <p:column headerText="2º Telefone" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.tel2Contato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput3" value="#{resulte.tel2Contato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					    <p:column headerText="Setor" style="width:15%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.setorContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput4" value="#{resulte.setorContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					   <p:column headerText="E-mail" style="width:25%;">
+				           <p:cellEditor >
+						       <f:facet name="output"><h:outputText value="#{resulte.emailContato}" /></f:facet>
+				               <f:facet name="input"><p:inputText id="modelInput5" value="#{resulte.emailContato}" style="width:100%" disabled="#{clienteBean.viewCliente}"/></f:facet>
+				           </p:cellEditor>
+					   </p:column>
+					   
+					   <p:column  headerText="Excluir" style="width:10px" >
+						 	<p:commandLink id="removerContato" 
+								immediate="true"
+								disabled="#{clienteBean.viewCliente}"
+							 	ajax="false"
+							 	update="@form:tabelaContatos"
+							 	process="tabelaContatos"
+							 	actionListener="#{clienteBean.preExcluirContato(resulte)}"
+								title="#{msgs['label.button.excluir']}"
+								style="text-decoration:underline;" >
+								<b class="icone-splash ico-excluir"></b>
+							</p:commandLink>
+				       </p:column>
+				   </p:dataTable>
+				   </p:fieldset>
+				   <center>
+				   <br/>
+			<p:fieldset legend="Observações Gerais" style="width: 97%;text-align: left;" >
+			<p:panelGrid columns="1" id="idPanelGridObservacao" style="width: 95%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+				<p:inputTextarea id="idObservacao" style="width:1131px !important; margin-left:-10px; height: 110px !important" 
+					counter="display" maxlength="1000" counterTemplate="{0} Caracteres restantes." autoResize="false"
+					value="#{clienteBean.cliente.observacoes}" 
+					disabled="#{clienteBean.viewCliente}"/>
+			</p:panelGrid>
+			<h:outputText id="display" />
+			</p:fieldset>
+			<br/>
+			<p:fieldset legend="Anexo de Documentos" style="width: 97%;text-align: left;" >
+				<div class="borda-retirar borda-retira-tabela-anexos" style="border: 0px solid #a8a8a8; width: 100%; margin-bottom:-25px;">
+					<p:panelGrid style="width:100%;" columnClasses="rotulo, campo" styleClass="ui-noborder">
+						<p:row>
+							<p:column style="width:10%;">
+								<p:fileUpload styleClass="class-upload" process="@form"
+									auto="true" 
+									label="Anexar" 
+									fileLimit="5"
+									disabled="#{clienteBean.viewCliente}"
+									fileUploadListener="#{clienteBean.arquivoUpload}" 
+									mode="advanced"
+									dragDropSupport="false"
+									multiple="true"
+									update="@this">
+								</p:fileUpload>
+							</p:column>
+							<p:column></p:column>
+						</p:row>
+					</p:panelGrid>
+				</div>
+				<p:dataTable 
+					id="tabelaListaAnexoSelecionado" 
+					lazy="true"
+					var="resulteAnexo" 
+					widgetVar="tabelaListaAnexoSelecionado"
+					styleClass="header-tabelas"
+					value="#{clienteBean.anexos}"
+					emptyMessage="Nenhum arquivo anexado"
+					rows="5" 
+					style="width:100%" rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true" paginatorPosition="bottom"
+					paginator="true" paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+					currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+					 sortOrder="DESCENDING" >
+					<p:column>
+						<p:commandLink id="idAnexarAcompanhamento" 
+							immediate="true" 
+							title="Excluir arquivo"
+							disabled="#{clienteBean.viewCliente}" 
+							actionListener="#{clienteBean.setExcluirAnexo(resulteAnexo)}"
+							onclick="PF('dialoConfirmExclusaoAnexo').show()">
+							<i class="icon-remove position-icon"></i>
+						</p:commandLink>
+						<h:outputText value="#{resulteAnexo.descricao}"></h:outputText>
+					</p:column>
+				
+					<p:column style="width:10%;">
+						<p:commandLink title="Fazer download do arquivo"
+							id="downloadLink" 
+							immediate="true" 
+							ajax="false">
+							<i class="fa fa-download"></i>
+							<p:fileDownload value="#{clienteBean.downloadAnexo(resulteAnexo.descricao)}" />
+						</p:commandLink>
+					</p:column>
+					
+					
+				</p:dataTable>
+			</p:fieldset>
+		</center>
+		<br />
+		<p:separator />
+		<center>
+			<div align="right">
+			<p:commandButton 
+				id="btSalvar" 
+				value="Salvar"
+				actionListener="#{clienteBean.salvarCliente()}" 
+				update="@form"
+				rendered="#{clienteBean.isNewCliente()}"
+				styleClass="btn btn-green">
+			</p:commandButton>
+			<p:commandButton 
+				id="btAtualizar" 
+				value="Atualizar"
+				actionListener="#{clienteBean.atualizarCliente()}"
+				styleClass="btn btn-green"
+				update="@form"
+				rendered="#{clienteBean.isEditCliente()}" >
+			</p:commandButton>		
+			<p:commandButton 
+				id="BtVoltar" 
+				value="Voltar"
+				immediate="true"
+				styleClass="btn btn-yellow"
+				action="#{clienteBean.voltar()}" 
+				update="@form">
+			</p:commandButton>
+			</div>
+			<p:blockUI block="idPanelClienteCadastro" trigger="btSalvar btAtualizar">
+		 		<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+		</center>
+		</div>
+	</p:panel>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogContatoExcluir" 
+		widgetVar="dialogContatoExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir esse Contato?">
+		<center>
+			<p:commandButton 
+				id="bfOK1" 
+				update="@form" 
+				process="@this"
+				value="Sim" 
+				styleClass="btn btn-red"
+				action="#{clienteBean.excluirContato()}" />
+			<p:commandButton 
+				id="btCancelar1"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogContatoExcluir').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+	<p:confirmDialog id="dialoConfirmExclusaoAnexo"
+		widgetVar="dialoConfirmExclusaoAnexo" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Excluir Anexo"
+		message="Exclusão de anexo">
+		<center>
+			<p:commandButton 
+				id="btnConfirmExclusaoAnexo" 
+				update="@form"
+				process="@this, tabelaListaAnexoSelecionado"
+				value="Ok"
+				title="Salvar OK" 
+				styleClass="btn btn-red"
+				oncomplete="PF('dialoConfirmExclusaoAnexo').hide()"
+				actionListener="#{clienteBean.excluirAnexo()}" />
+			<p:commandButton 
+				id="btnCancelarExclusaoAnexo"
+				styleClass="btn btn-blue" 
+				value="Cancelar"
+				title="Cancelar excluir" 
+				type="button"
+				onclick="PF('dialoConfirmExclusaoAnexo').hide()" />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+	<p:confirmDialog id="dialoTelContato"
+		widgetVar="dialoTelContato" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Telefone Inválido"
+		message="Digite o DD + numero Ex: Fixo 71 3999-9999 ou Celular 71 99999-9999">
+		<center>
+			<p:commandButton id="btncancelaTel"
+				styleClass="btn btn-red"
+				value="OK"
+				title="cancela a ação" 
+				type="button"
+				onclick="PF('dialoTelContato').hide()" />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG EXCLUIR ANEXO-->
+	<p:confirmDialog id="dialoCpfJaCadastrado"
+		widgetVar="dialoCpfJaCadastrado" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Cliente já Cadastrado" 
+		message="Esse CPF/CNPJ já foi cadastrado. Favor digite outro número">
+		<center>
+			<p:commandButton id="btncancelaCpf"
+				styleClass="btn btn-red"
+				value="OK"
+				title="cancela a ação" 
+				type="button"
+				onclick="PF('dialoCpfJaCadastrado').hide()" />
+		</center>
+	</p:confirmDialog>
+	
+	
+	<!-- CHAMAR CONFIRM CLIENTE INATIVO-->
+	<p:confirmDialog id="dialoCpfJaCadastradoInativo"
+		widgetVar="dialoCpfJaCadastradoInativo" 
+		closeOnEscape="true"
+		severity="alert" 
+		header="Cliente Inativo" 
+		message="Esse CPF/CNPJ já possui cadastro no sistema. Deseja ativar?">
+		<center>
+			<p:commandButton 
+				value="Ativar_"
+				title="Ativar Cliente" 
+				actionListener="#{clienteBean.ativarCliente()}"
+				styleClass="btn btn-green"
+				ajax="true"
+				update="@form" />
+				
+			<p:commandButton
+				styleClass="btn btn-red"
+				value="Cancelar"
+				title="cancela ação" 
+				type="button"
+				onclick="PF('dialoCpfJaCadastradoInativo').hide()" />
+				
+		</center>
+	</p:confirmDialog>
+<style>
+	.ui-state-disabled, .ui-widget-content .ui-state-disabled, 
+		.ui-widget-header .ui-state-disabled {
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+	
+	.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-trigger, 
+		.ui-selectonemenu.ui-state-disabled .ui-selectonemenu-label{
+			background-color: whitesmoke !important;
+			opacity: 0.85 !important;
+	}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</html>

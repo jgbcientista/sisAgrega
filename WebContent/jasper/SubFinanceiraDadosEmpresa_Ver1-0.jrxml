@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Generico2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34229ef4-dda5-41e2-a0ad-0f3497b4b607">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="174"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="N_PROPOSTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     tb_custo_execucao.`id` AS id,
+     tb_custo_execucao.`descricao` AS descricao,
+     tb_custo_execucao.`observacoes` AS observacoes,
+     tb_custo_execucao.`proposta` AS proposta,
+     tb_custo_execucao.`quantidade` AS quantidade,
+     tb_custo_execucao.`valorTotal` AS valorTotal,
+     tb_custo_execucao.`valorUnitario` AS valorUnitario,
+     tb_custo_execucao.`propostaId` AS propostaId
+FROM
+     `tb_custo_execucao` tb_custo_execucao
+WHERE
+ tb_custo_execucao.`propostaId` = 1]]>
+	</queryString>
+	<field name="proposta.numeroProposta" class="java.lang.String"/>
+	<field name="proposta.numeroRevisao" class="java.lang.String"/>
+	<field name="proposta.objPrincFinc" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band/>
+	</title>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band height="651" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="12" y="88" width="443" height="15" uuid="37ce9d52-a970-41b2-931d-82cea66461b6"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[2 - DADOS DA EMPRESA - PROPOSTA FINANCEIRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="110" width="115" height="15" uuid="329c5939-7f69-4b06-81dc-ed7a3cdb6365"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COLETA DE PREÇO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="166" width="38" height="15" uuid="813d32d8-de60-4a49-97d3-7da4198e578f"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="180" width="60" height="15" uuid="c23a35f2-9806-4748-9e55-81c63923d70a"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="49" y="166" width="118" height="15" uuid="7cc6e691-dea8-4702-841b-80be2d440e62"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ 09.220.626/0001-88]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="71" y="180" width="449" height="15" uuid="64fac44f-1636-466c-ba26-274a23980a58"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Rua Dr. José Peroba- Edf. Elite Comercial, 325, Sala 1403 –CEP: 41770-235]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="8" width="124" height="14" uuid="1a8259bb-4dcd-406c-93d9-cfad2af60437"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Proposta Financeira:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="8" width="317" height="14" uuid="5b8196d4-abc9-4d15-9f38-2dacb8c6e679"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.numeroProposta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="39" width="443" height="15" uuid="7e182956-7254-4bd6-b576-29373d411256"/>
+				<box leftPadding="0"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[1 - OBJETIVO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="13" y="60" width="527" height="16" uuid="4dac8bd9-f48f-4119-b237-5674e3ecc16e"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proposta.objPrincFinc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="124" width="304" height="15" uuid="d367d187-5e51-474c-988c-bdf35a1061cf"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA LIMITE PARA APRESENTAÇÃO DAS PROPOSTAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="138" width="70" height="15" uuid="5d1ecbce-7f65-488a-8284-f5e88ae9a755"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBJETIVO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="152" width="87" height="15" uuid="57c5ee31-dfba-441c-851c-049b0ee5b82b"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROPONENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="194" width="37" height="15" uuid="73405955-01b9-4548-8a29-db94407e2da8"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FONE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="208" width="37" height="15" uuid="2d97a390-f3dc-4f51-854a-ed9bd7d6e3a6"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FAX:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="222" width="48" height="15" uuid="ceecfe2b-121a-4a8a-9822-eb21c57f857b"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MAIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="264" width="229" height="15" uuid="63608a9e-babd-4917-8f7d-ed24e5dfecf1"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INDICAÇÃO DO REPRESENTANTE LEGAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="250" width="400" height="15" uuid="d5b8bb10-afc4-4cdc-9f5f-e5357cb9b6f3"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A EMPRESA ESTA REGISTRADA POR ESTATUTO OU CONTRATO SOCIAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="236" width="145" height="15" uuid="67a6cbef-2825-4cd8-8d85-70b393e2f87c"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESSOA PARA CONTATO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="278" width="47" height="15" uuid="e5e215b4-0234-423c-a86a-5b21f260c437"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº CPF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="292" width="42" height="15" uuid="b0917d24-b089-43c3-9468-6a65760b27c3"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº RG:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="306" width="86" height="15" uuid="82bc535a-466f-48c9-b9b7-46046091ba1c"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO CIVIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="12" y="320" width="99" height="15" uuid="a32b096e-c0bd-4d26-ac19-d6a5e8dcc2b3"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NACIONALIDADE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="315" y="124" width="205" height="15" uuid="61989836-d375-4e93-8c1b-990538c31f20"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="81" y="138" width="439" height="15" uuid="8375124d-9bed-4a98-8199-4fe026bc6878"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="98" y="152" width="224" height="15" uuid="c66f1cfc-6371-43b8-b75d-3e7977361bfa"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[AGREGA CONSULTORES LTDA.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="49" y="194" width="471" height="15" uuid="10c7dfa4-e052-4f38-b58a-f7faa3e18e36"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[(71) 3106-0126  /  98638-1980  /  99161-0802]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="47" y="208" width="473" height="15" uuid="0b5230e8-5b4c-404d-97ae-d5fbc030ba13"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[NSA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="59" y="222" width="461" height="15" forecolor="#0033CC" uuid="5274c3b7-745c-4459-b400-c17503bce055"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[adeliaguimaraes@agregaconsultores.com.br, carlospina@agregaconsultores.com.br]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="156" y="236" width="364" height="15" uuid="78722100-4f23-4b17-84fa-025fc6ed8b5c"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia S. Guimarães (Diretora Técnica Executiva)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="412" y="250" width="108" height="15" uuid="cf0cd159-73c1-4160-b3bc-9dc8a043a42e"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Contrato Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="240" y="264" width="280" height="15" uuid="b83377a7-1d98-4490-9118-8a41cda3fd78"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Maria Adélia da Silva Guimarães]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="58" y="278" width="118" height="15" uuid="66e915e8-9eef-4690-a3fb-f09b6c7cc30f"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[095.718.925-72]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="53" y="292" width="123" height="15" uuid="1880433e-9c96-43f2-9daa-c31a0f1a3fee"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[0084507144 - SSP/BA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="97" y="306" width="123" height="15" uuid="c550eca2-0ec9-4f32-adfd-ce5e12640e94"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Divorciada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="110" y="320" width="123" height="15" uuid="922501cd-949c-4af1-a62a-0a14a95e5c25"/>
+				<box leftPadding="2"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Brasileira]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

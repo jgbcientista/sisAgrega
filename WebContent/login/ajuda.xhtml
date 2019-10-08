@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/pages/templates/template.xhtml" 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="principal">
+    
+	<div class="container">
+		<div class="row-fluid main">
+			<div class="span12 content">
+					<div class="titulo"><h:outputLabel value="#{msgs['titulo.ajuda']}"/></div>
+					
+					<div id="helpDiv">
+						<div align="left">
+							<a href="#item1">&#62;&#62; Item 1</a> 
+							<br />
+							<a href="#item2">&#62;&#62; Item 2</a>
+						</div> 
+				
+						<a name="item1"/>
+						<h2 align="left">ITEM 1</h2>
+						<h5 align="left">Descrição da ajuda sobre o item 1</h5>
+						
+						<a name="item2"/>
+						<h2 align="left">ITEM 2</h2>
+						<h5 align="left">Descrição da ajuda sobre o item 2</h5>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>	
+</ui:composition>

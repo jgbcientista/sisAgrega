@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:jb="http://xmlns.jcp.org/jsf/html"
+	xmlns:o="http://omnifaces.org/ui">
+
+<p:panel id="painelContratoBusca" style="border: none;" rendered="#{!contratoBean.pesquisar}" >
+	<div style="border: 1px solid #a8a8a8; background: #FFF; border: none;" align="center">
+		<p:panel id="idPanelContratoConsulta" style="border: none;">
+			<p:fieldset legend="Filtro de Pesquisa" style="width: 97%;text-align: left;"  ><br/>	
+				<p:panelGrid id="painelContrato" columnClasses="rotulo, campo" styleClass="ui-noborder">
+					<p:row>
+						<p:column style="width:320px !important;">
+							<p:outputLabel value="Nome do Cliente:" for="idCliente" />
+							<p:inputText id="idCliente" 
+								style="width:320px !important;"
+								value="#{contratoBean.filtroNomeCliente}" 
+								title="Informe as iniciais ou nome completo do cliente">
+							</p:inputText>
+						</p:column>
+						
+						<p:column style="width:160px !important;">
+							<p:outputLabel value="Nº de Contrato:" for="contratoId" />
+							<p:inputText id="contratoId" 
+								style="width:160px !important;"
+								value="#{contratoBean.filtroNrContrato}" 
+								title="Informe o número do contrato">
+							</p:inputText>
+						</p:column>
+						
+						<p:column style="width:150px !important;">
+							<p:outputLabel value="Status: " />
+							<p:selectOneMenu  title="Pesquisar por status"
+								id="proposta" styleClass="ui-altera-selectMenu"
+								style="width:150px !important;"
+								value="#{contratoBean.filtroStatus}"  >
+								<f:selectItem itemLabel="- Selecione -" itemValue="" />
+								<f:selectItems value="#{contratoBean.comboStatusContrato}" var="item" itemLabel="#{item}" itemValue="#{item}" />
+							</p:selectOneMenu>
+						</p:column>
+						<p:column style="width:10% !important;">
+							<p:outputLabel value="Vigência"  title="Pesquisar por período de vigência" style="margin-top: -27px;"/>
+							<p:outputLabel value="Inicio" />
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data incial"
+								pattern="dd/MM/yyyy"
+								value="#{contratoBean.filtroDtIncial}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>	
+						
+						<p:column style="width:10% !important;">	
+							<p:outputLabel value="Fim" />
+							<p:calendar styleClass="componente-data-nova"
+								placeholder="Data final"
+								pattern="dd/MM/yyyy"
+								value="#{contratoBean.filtroDtFinal}">
+								<p:ajax event="dateSelect" />
+							</p:calendar>
+						</p:column>
+						<p:column>
+						<p:commandLink 
+						 	id="idAjuda" style="margin-bottom:-17px !important;"
+						 	title="Ajuda módulo Contrato"
+						 	immediate="true"
+						 	ajax="false"
+						 	update="@form">
+							<b class="icone-splash ico-ajuda"></b>
+						</p:commandLink>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:fieldset><br/>	
+		
+		<div align="right">			
+			<p:commandButton 
+				imediate ="true"
+				title="Pesquisar contratos"
+				id="idBtPesquisar" 
+				value="Pesquisar"
+				styleClass="btn btn-yellow"
+				action="#{contratoBean.filtrarContratos()}" 
+				update="@form">
+			</p:commandButton>
+			
+		</div> <br />
+		<p:dataTable id="tableContratos" styleClass="header-tabelas"
+			var="contrato" 
+			lazy="true"
+			value="#{contratoBean.listContratos}"
+			rowKey="#{contrato.id}" 
+			emptyMessage="Nenhuma proposta cadastrada." 
+			rows="10" 
+			rendered="#{contratoBean.listContratos.size()>0}"
+			rowsPerPageTemplate="10,15,20" paginatorAlwaysVisible="true"
+			paginatorPosition="bottom" paginator="true"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
+			currentPageReportTemplate="[{startRecord} a {endRecord} de {totalRecords} registros] - [Página {currentPage} de {totalPages}]"
+			sortBy="#{contrato.dataAssinatura}" sortOrder="DESCENDING" >
+
+			<p:column headerText="Nº Contrato" width="15%">
+				<h:outputText value="#{contrato.nrContrato}" />
+			</p:column>
+			
+			<p:column headerText="Cliente" width="25%">
+				<h:outputText value="#{contratoBean.concatNome(contrato.proposta.cliente.nome)}"
+				title="#{contrato.proposta.cliente.nome}" />
+			</p:column>
+			
+			<p:column headerText="Assinatura" width="10%">
+				<h:outputText value="#{contrato.dataAssinatura}" >
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Pagamento" width="8%">
+				<h:outputText value="#{contrato.formaPagamento}" >
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Vigência do Contrato" width="10%">
+				<h:outputText value="#{contrato.vigenciaDataInicial}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText><h:outputText value="&nbsp;a&nbsp;"/>
+				<h:outputText value="#{contrato.vigenciaDataFinal}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Status" width="10%">
+				<h:outputText value="#{contrato.statusContrato}"/>
+			</p:column>
+			
+			<p:column headerText="Ação" width="12%">
+				<p:commandLink 
+				 	id="ver" 
+				 	title="Visualiza informações de contrato"
+				 	immediate="true"
+				 	ajax="false"
+				 	update="@form"
+				 	process="tableContratos"
+				 	action="#{contratoBean.visualizarContrato(contrato)}"
+					style="text-decoration:underline;" >
+					<b class="icone-splash ico-visualisar"></b>
+				</p:commandLink>
+				<p:commandLink 
+				 	id="edit" 
+				 	immediate="true"
+				 	title="Edita informações do contrato"
+				 	ajax="false"
+				 	update="@form"
+				 	process="tableContratos"
+				 	rendered="#{contrato.statusContrato != 'Vigente'? false : true}"
+				 	action="#{contratoBean.editContrato(contrato)}"
+					style="text-decoration:underline;" >
+					<b class="icone-splash ico-editar"></b>
+				</p:commandLink>
+				<p:commandLink 
+				 	id="idExcluir" 
+				 	immediate="true"
+				 		ajax="false"
+				 	update="@form"
+				 	process="tableContratos"
+				 	action="#{contratoBean.preExcluir(contrato)}"
+					title="Exclui o contrato"
+					style="text-decoration:underline;" >
+					<b class="icone-splash ico-excluir"></b>
+				</p:commandLink>
+			</p:column>
+		</p:dataTable>
+			<p:blockUI block="tableContratos" trigger="idBtPesquisar">
+				<p:graphicImage name="img/ajaxloadingbar.gif" />
+			</p:blockUI>
+			
+		</p:panel>
+	</div>
+</p:panel>
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogExcluir" 
+		widgetVar="dialogExcluir"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Tem certeza que deseja excluir esse Contrato?">
+		<center>
+			<p:commandButton 
+				id="bfOK" 
+				update="@form" 
+				process="@this"
+				value="Ok" 
+				styleClass="btn btn-red"
+				action="#{contratoBean.excluirContrato()}" />
+			<p:commandButton 
+				id="btCancelar"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogExcluir').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<!-- CHAMAR CONFIRM DIALOG DE CONFIRMACAO EXCLUIR-->
+	<p:confirmDialog 
+		id="dialogPreEditar" 
+		widgetVar="dialogPreEditar"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Essa contrato já está em vigência.Deseja realmente Editar?">
+		<center>
+			<p:commandButton 
+				id="idConfirma" 
+				update="@form" 
+				process="@this"
+				value="Confirmar" 
+				styleClass="btn btn-red"
+				action="#{contratoBean.editContrato()}" />
+			<p:commandButton 
+				id="btCancelarEdicao"
+				styleClass="btn btn-blue"
+				value="Cancelar" 
+				type="button"
+				onclick="PF('dialogPreEditar').hide()"  />
+		</center>
+	</p:confirmDialog>
+	
+	<p:confirmDialog 
+		id="AvisoPrecificacao" 
+		widgetVar="AvisoPrecificacao"
+		closeOnEscape="true" 
+		severity="alert"
+		header="Aviso"
+		message="Não existe nenhuma proposta finalizada.Favor crie uma ou finalize uma pendente!">
+		<center>
+			<p:commandButton 
+				id="idAvisoPrecificao"
+				styleClass="btn btn-red"
+				value="OK" 
+				type="button"
+				onclick="PF('AvisoPrecificacao').hide()"  />
+		</center>
+	</p:confirmDialog>
+</html>
